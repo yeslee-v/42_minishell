@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <errno.h>
-#include "../libft/includes/libft.h"
+#include "../libs/includes/libft.h"
 
 # define MAXSIZE 1024
 # define FALSE 0

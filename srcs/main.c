@@ -2,10 +2,10 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+char **g_env = NULL;
+
 void		show_prompt(void)
 {
-	static char	*curpath;
-
 	ft_putstr_fd(COLOR_BR_BLUE, STDOUT);
 	ft_putstr_fd("jaekpark's minishell", 1);
 	ft_putstr_fd(COLOR_WHITE, STDOUT);
@@ -43,6 +43,8 @@ int main(int ac, char **av, char **envp)
 	static char *input;
 	int ret;
 
+	(void)av;
+	g_env = envp;
 	ret = ac;
 	while(ret)
 	{
