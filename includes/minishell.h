@@ -9,6 +9,8 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
@@ -33,6 +35,12 @@ typedef struct	s_conf
 {
 	char		**env;
 	char		*cmd;
+	int			exit;
+	struct sigaction inter;
+	struct sigaction quit;
+
 } t_conf;
+
+void	print_error(char *msg);
 
 #endif
