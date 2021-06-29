@@ -37,7 +37,7 @@ EOC				=	"\033[0;0m"
 all:			$(NAME)
 
 $(LIBFT):
-				@make -C ./libft
+				@make -C ./libs
 
 $(NAME):		$(LIBFT) $(OBJS_DIR) $(OBJS_FILE)
 				@echo $(YELLOW) " - Compiling $@"

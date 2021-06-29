@@ -2,56 +2,38 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-char **g_env = NULL;
+t_conf		g_sh;
 
-void		show_prompt(void)
+void		test_print(char **envp)
 {
-	ft_putstr_fd(COLOR_BR_BLUE, STDOUT);
-	ft_putstr_fd("jaekpark's minishell", 1);
-	ft_putstr_fd(COLOR_WHITE, STDOUT);
-	ft_putstr_fd("$ ", STDOUT);
+	int i;
+
+	i = 0;
+	while (envp[i])
+	{
+		ft_putstr_fd(envp[i], 1);
+		ft_putstr_fd("\n",1);
+		i++;
+	}
 }
 
-int			get_command_line(char **input)
+void		print_prompt(t_conf *conf)
 {
-	int		ret;
-	char	*input2;
-	char	*tmp;
-
-	*input = ft_strdup("");
-	while (TRUE)
-	{
-		ret = get_next_line(STDIN, &input2);
-		tmp = ft_strjoin(*input, input2);
-		free(input2);
-		free(*input);
-		*input = tmp;
-		if (ret == 0)
-		{
-			ft_putstr_fd("  \b\b", STDOUT);
-			if (ft_strlen(*input) != 0)
-				continue;
-			ft_putstr_fd("exit\n", STDOUT);
-		}
-		break ;
-	}
-	return (ret);
+	if (!conf)
+	conf->cmd = readline(PROMPT);
 }
 
 int main(int ac, char **av, char **envp)
 {
-	static char *input;
 	int ret;
 
-	(void)av;
-	g_env = envp;
-	ret = ac;
+	ret = 1;
+	g_sh.env = envp;
+	test_print(g_sh.env);
 	while(ret)
 	{
-		show_prompt();
-		readline(input);
-		if (input != NULL)
-			free(input);
+		if ((signal(SIGQUIT, SIG_DFL)) = -1)
+			
+		print_prompt(&g_sh);
 	}
-
 }
