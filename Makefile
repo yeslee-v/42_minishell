@@ -1,9 +1,9 @@
 NAME = pipe
 
-HEADER = -I ./include
+HEADER = -I ./includes
 
 CC = gcc
-CFLAGES = -Wall -Wextra -Werror
+CFLAGES = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 LIBFT = ./libs/libft
 LIBFT_NAME = libft.a
@@ -11,7 +11,11 @@ LIBFT_NAME = libft.a
 RM = rm
 RMFLAGS = -f
 
-SRCS = ./srcs/pipe.c
+SRCS = ./srcs/pipe.c \
+	   ./srcs/print_error.c \
+	   ./srcs/set_cmd.c \
+	   ./srcs/redirect.c \
+	   ./srcs/run.c
 
 OBJS = $(SRCS:.c=.o)
 

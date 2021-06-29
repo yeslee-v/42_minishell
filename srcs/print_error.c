@@ -1,19 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yeslee <yeslee@student.42seoul.kr>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/25 17:02:15 by yeslee            #+#    #+#             */
-/*   Updated: 2021/06/25 17:02:17 by yeslee           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../includes/pipe.h"
 
-#include "../headers/pipex.h"
-
-void	ft_error_message(char *s)
+void	print_error(char *str)
 {
-	perror(s);
+	perror(str);
 	exit(1);
 }
