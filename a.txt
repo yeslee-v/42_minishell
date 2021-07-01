@@ -1,0 +1,8 @@
+Makefile
+a.txt
+includes
+libs
+minishell
+objs
+srcs
+tags

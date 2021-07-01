@@ -75,7 +75,7 @@ GREEN	libs/Makefile	/^GREEN			=	"\\033[1;32m"$/;"	m
 HEADER	.ref/1_minishell/Makefile	/^HEADER	=	-I.\/$/;"	m
 HEADER	.ref/minishell/Makefile	/^HEADER = minishell.h$/;"	m
 HEADER	.ref/minishell/libft/Makefile	/^HEADER = $(addsuffix .h, $(addprefix includes\/, libutils get_next_line ft_printf))$/;"	m
-HEADER_FLAG	Makefile	/^HEADER_FLAG		=	-I$(INCS_DIR) -I$(LIBFT_INCS)$/;"	m
+HEADER_FLAG	Makefile	/^HEADER_FLAG		=	-I$(INCS_DIR) -I$(LIBFT_INCS) -I\/Users\/jaekpark\/.brew\/opt\/readline\/include$/;"	m
 HEADER_FLAG	libs/Makefile	/^HEADER_FLAG		=	-I$(INCS_DIR)$/;"	m
 INCS	Makefile	/^INCS				=	minishell.h$/;"	m
 INCS	libs/Makefile	/^INCS			=	libft.h$/;"	m
@@ -94,7 +94,7 @@ LIBFT_H	.ref/minishell/libft/includes/libft.h	/^# define LIBFT_H$/;"	d
 LIBFT_H	libs/includes/libft.h	/^# define LIBFT_H$/;"	d
 LIBFT_INCS	Makefile	/^LIBFT_INCS		=	.\/libs\/includes\/libft.h$/;"	m
 LIBS	.ref/1_minishell/Makefile	/^LIBS	=	-L.\/Libft -lft$/;"	m
-LIB_FLAG	Makefile	/^LIB_FLAG		=	-lft -L$(LIBFT_DIR) -L\/usr\/include -lreadline$/;"	m
+LIB_FLAG	Makefile	/^LIB_FLAG		=	-lft -L$(LIBFT_DIR) -L\/Users\/jaekpark\/.brew\/opt\/readline\/lib -lreadline$/;"	m
 MAIN	.ref/minishell/Makefile	/^MAIN = minishell redir signal$/;"	m
 MALLOC_ERROR	.ref/1_minishell/minishell.h	/^# define MALLOC_ERROR /;"	d
 MAXSIZE	.ref/1_minishell/minishell.h	/^# define MAXSIZE	/;"	d
@@ -232,6 +232,7 @@ exec_process	.ref/1_minishell/execute/exec_process.c	/^void		exec_process(t_list
 exec_redir	.ref/1_minishell/redirection/exec_redir.c	/^void	exec_redir(t_cmd *cmd, char **cmdline)$/;"	f
 exit	.ref/minishell/includes/minishell.h	/^	int				exit;$/;"	m	struct:s_mini
 exit	includes/minishell.h	/^	int			exit;$/;"	m	struct:s_conf
+exit_shell	srcs/main.c	/^void	exit_shell(int num)$/;"	f
 exit_status	.ref/minishell/includes/minishell.h	/^	int				exit_status;$/;"	m	struct:s_sig
 expand_line_size	.ref/1_minishell/Libft/get_next_line.c	/^static int		expand_line_size(char **line, size_t *line_size)$/;"	f	file:
 expansions	.ref/minishell/srcs/parsing/expansions.c	/^char			*expansions(char *arg, t_env *env, int ret)$/;"	f
@@ -451,7 +452,7 @@ func_branch	.ref/minishell/libft/ft_printf/ft_printf.c	/^int		func_branch(const 
 g_envp	.ref/1_minishell/main.c	/^char	**g_envp = NULL;$/;"	v
 g_exit_status	.ref/1_minishell/main.c	/^int		g_exit_status = 0;$/;"	v
 g_parse_error	.ref/1_minishell/parser/parser.c	/^int	g_parse_error;$/;"	v
-g_sh	srcs/main.c	/^t_conf		g_sh;$/;"	v
+g_sh	srcs/main.c	/^t_conf	g_sh;$/;"	v
 g_sig	.ref/minishell/srcs/main/minishell.c	/^t_sig	g_sig;$/;"	v
 get_command_line	.ref/1_minishell/main.c	/^int			get_command_line(char **input)$/;"	f
 get_env_name	.ref/minishell/srcs/builtins/export.c	/^char		*get_env_name(char *dest, const char *src)$/;"	f
@@ -466,9 +467,7 @@ get_tokens	.ref/minishell/srcs/parsing/tokens.c	/^t_token	*get_tokens(char *line
 get_var_len	.ref/minishell/srcs/tools/expansions.c	/^int		get_var_len(const char *arg, int pos, t_env *env, int ret)$/;"	f
 get_var_value	.ref/minishell/srcs/tools/expansions.c	/^char	*get_var_value(const char *arg, int pos, t_env *env, int ret)$/;"	f
 go_to_path	.ref/minishell/srcs/builtins/cd.c	/^static int		go_to_path(int option, t_env *env)$/;"	f	file:
-handle_sigint	srcs/main.c	/^void	handle_sigint(int signum)$/;"	f
 handle_signal	.ref/1_minishell/utils/utils_signal.c	/^void		handle_signal(int signo)$/;"	f
-handle_sigquit	srcs/main.c	/^void	handle_sigquit(int signum)$/;"	f
 has_pipe	.ref/minishell/srcs/tools/type.c	/^int		has_pipe(t_token *token)$/;"	f
 has_redir	.ref/1_minishell/minishell.h	/^	int			has_redir;$/;"	m	struct:s_cmd
 has_redir_syntax_error	.ref/1_minishell/redirection/utils_redir.c	/^int		has_redir_syntax_error(char *str)$/;"	f
@@ -512,7 +511,7 @@ lstlast	.ref/1_minishell/minishell.h	/^	t_list		*lstlast;$/;"	m	struct:s_data
 magic_box	.ref/minishell/srcs/exec/bin.c	/^int			magic_box(char *path, char **args, t_env *env, t_mini *mini)$/;"	f
 main	.ref/1_minishell/main.c	/^int			main(int argc, char **argv, char **envp)$/;"	f
 main	.ref/minishell/srcs/main/minishell.c	/^int		main(int ac, char **av, char **env)$/;"	f
-main	srcs/main.c	/^int main(int ac, char **av, char **envp)$/;"	f
+main	srcs/main.c	/^int		main(int ac, char **av, char **envp)$/;"	f
 map_ft_memdel	.ref/minishell/libft/ft_lst/ft_lstmap.c	/^static t_list	*map_ft_memdel(t_list *start, void (*del)(void *))$/;"	f	file:
 mini_exit	.ref/minishell/srcs/builtins/exit.c	/^void	mini_exit(t_mini *mini, char **cmd)$/;"	f
 minipipe	.ref/minishell/srcs/main/redir.c	/^int		minipipe(t_mini *mini)$/;"	f
@@ -599,7 +598,7 @@ print_execute_err_2	.ref/1_minishell/errors/execute_err.c	/^int		print_execute_e
 print_exit_status	.ref/1_minishell/builtins/ft_echo.c	/^void		print_exit_status(void)$/;"	f
 print_export	.ref/1_minishell/builtins/ft_export.c	/^void		print_export(char **envs)$/;"	f
 print_identifier_err	.ref/1_minishell/errors/envv_err.c	/^void	print_identifier_err(char *token1, char *token2)$/;"	f
-print_prompt	srcs/main.c	/^void		print_prompt(t_conf *conf)$/;"	f
+print_prompt	srcs/main.c	/^int print_prompt(void)$/;"	f
 print_sorted_env	.ref/minishell/srcs/env/sort_env.c	/^void		print_sorted_env(t_env *env)$/;"	f
 put_buff_into_cmdline	.ref/1_minishell/parser/parser.c	/^void		put_buff_into_cmdline(t_data *data)$/;"	f
 quit	includes/minishell.h	/^	struct sigaction quit;$/;"	m	struct:s_conf	typeref:struct:s_conf::sigaction
@@ -639,6 +638,7 @@ set_quote	.ref/1_minishell/parser/parser.c	/^static void	set_quote(char *input, 
 set_signal	.ref/1_minishell/utils/utils_signal.c	/^void		set_signal(void)$/;"	f
 show_daegae	.ref/1_minishell/main.c	/^void		show_daegae(void)$/;"	f
 show_prompt	.ref/1_minishell/main.c	/^void		show_prompt(void)$/;"	f
+sig_handler	srcs/main.c	/^void sig_handler(int signum)$/;"	f
 sig_init	.ref/minishell/srcs/main/signal.c	/^void	sig_init(void)$/;"	f
 sig_int	.ref/minishell/srcs/main/signal.c	/^void	sig_int(int code)$/;"	f
 sig_quit	.ref/minishell/srcs/main/signal.c	/^void	sig_quit(int code)$/;"	f
@@ -671,7 +671,7 @@ t_redir	.ref/1_minishell/minishell.h	/^}				t_redir;$/;"	t	typeref:struct:s_redi
 t_sig	.ref/minishell/includes/minishell.h	/^}				t_sig;$/;"	t	typeref:struct:s_sig
 t_stack	libs/includes/libft.h	/^}					t_stack;$/;"	t	typeref:struct:s_stack
 t_token	.ref/minishell/includes/minishell.h	/^}				t_token;$/;"	t	typeref:struct:s_token
-test_print	srcs/main.c	/^void		test_print(char **envp)$/;"	f
+test_print	srcs/main.c	/^void	test_print(char **envp)$/;"	f
 top	libs/includes/libft.h	/^	t_node			*top;$/;"	m	struct:s_stack
 type	.ref/minishell/includes/minishell.h	/^	int				type;$/;"	m	struct:s_token
 type_arg	.ref/minishell/srcs/parsing/tokens.c	/^void	type_arg(t_token *token, int separator)$/;"	f
