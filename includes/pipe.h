@@ -17,6 +17,13 @@ typedef struct	s_pipe
 	char *const	*envp;
 }				t_pipe;
 
+typedef struct	s_parse
+{
+	char		*p_cmd;
+	int			opt;
+	char		*args;
+}				t_parse;
+
 typedef	struct	s_all
 {
 	int			**fd; 
@@ -24,6 +31,8 @@ typedef	struct	s_all
 	t_pipe		pipe;
 }				t_all;
 
+/*
+ * for multi-pipe
 int		main(int ac, char **av, char **path);
 void	print_error(char *str);
 void	split_path(const char *cmd_1, char **path, t_all *all);
@@ -32,5 +41,9 @@ void	connect_out(char *file);
 void	run_dup2(int std_fd, int *fd);
 void	close_fd(int flag, int *fd);
 void	run_execve(t_all *all);
+ *
+ */
+
+int		main(int ac, char **av);
 
 #endif
