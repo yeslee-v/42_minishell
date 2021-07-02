@@ -1,61 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/02 20:30:39 by jaekpark          #+#    #+#             */
+/*   Updated: 2021/07/02 20:46:06 by jaekpark         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
-#include <readline/readline.h>
 
 t_conf	g_sh;
-
-int  ft_isspace(int c)
-{
-	if ((char)c == ' ')
-		return (1);
-	else if ((char)c == '\t')
-		return (2);
-	else if ((char)c == '\v')
-		return (3);
-	else if ((char)c == '\n')
-		return (4);
-	else if ((char)c == '\f')
-		return (5);
-	else if ((char)c == '\r')
-		return (6);
-	return (0);
-}
-
-char *ft_strrdup(char *s, int st, int ed)
-{
-	int i;
-	char *ret;
-	int dst_len;
-	int src_len;
-
-	i = 0;
-	dst_len = ed - st + 1;
-	src_len = ft_strlen(s);
-	if (!s || dst_len > src_len)
-		return (NULL);
-	ret = malloc(sizeof(char) * dst_len + 1);
-	while (st <= ed)
-	{
-		ret[i] = s[st];
-		i++;
-		st++;
-	}
-	ret[i] = '\0';
-	return (ret);
-}
-
-int	nbr_length(int n)
-{
-	int	i = 0;
-
-	if (n <= 0)
-		i++;
-	while (n != 0)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
-}
 
 void	exit_shell(int num)
 {
@@ -63,133 +20,89 @@ void	exit_shell(int num)
 	exit(num);
 }
 
-void	test_print(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		ft_putstr_fd(envp[i], 1);
-		ft_putstr_fd("\n", 1);
-		i++;
-	}
-}
-
-int print_prompt(void)
+int		print_prompt(void)
 {
 	g_sh.cmd = readline(PROMPT);
 	add_history(g_sh.cmd);
 	return (1);
 }
 
-void sig_handler(int signum)
+void	sig_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("" , 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
 
-int ft_puta(int tc)
+void	marker(char *cmd)
 {
-	ft_putchar_fd(tc, 1);
-	return (0);
-}
+	int i;
+	char *ret;
+	int s_quote;
+	int e_quote;
+	int is_quote;
 
-
-void get_cursor_position(int *col, int *rows)
-{
-	char buf[255];
-	int ret = 0;
-	int i = 1;
-	int a = 0;
-	int temp = 0;
-
-	write(0, "\033[6n", 4);
-	ret = read(0, buf, 254);
-	buf[ret] = '\0';
-	while (buf[i])
+	i = -1;
+	is_quote = 0;
+	ret = ft_strdup(cmd);
+	ft_memset(ret, 0, ft_strlen(ret));
+	while (cmd[++i])
 	{
-		if (buf[i] >= '0' && buf[i] <= '9')
+		if (ft_isalnum(cmd[i]))
+			ret[i] = 'c';
+		if (is_quote == 0 && ((s_quote = ft_isquote(cmd[i])) >= 1))
 		{
-			if (a == 0)
-				*rows = ft_atoi(&buf[i]) - 1;
-			else
-			{
-				temp = ft_atoi(&buf[i]);
-				*col = temp - 1;
-			}
-			a++;
-			i += nbr_length(temp) - 1;
+			ret[i] = s_quote;
+			is_quote = s_quote;
 		}
-		i++;	
+		else if (is_quote == s_quote && ((e_quote = ft_isquote(cmd[i])) >= 1))
+		{
+			if (s_quote == e_quote)
+			{
+				ret[i] = e_quote;
+				is_quote = 0;
+			}
+			else
+				ret[i] = cmd[i];
+		}
+		else if (ft_isspace(cmd[i]))
+		{
+			if (is_quote > TRUE)
+				ret[i] = '2';
+			else if (is_quote == FALSE)
+				ret[i] = '1';
+		}
 	}
+	if (is_quote != 0)
+		printf("quote err\n");
+	g_sh.lex = ret;
 }
 
-void eof_handler(void)
-{
-	int col;
-	int rows;
-
-	col = 0;
-	rows = 0;
-	get_cursor_position(&col, &rows);
-	/*char *cm = tgetstr("cm", NULL);*/
-	/*char *s = tgoto(cm, col, rows);*/
-	/*tputs(s, 1, ft_puta);*/
-	printf("%d %d\n", col, rows);
-	exit(0);
-}
-
-/*t_token 	*make_token(char *token, char type)*/
-/*{*/
-	/*t_token *ret;*/
-
-	/*ret = malloc(sizeof(t_token));*/
-	/*ret->token*/
-/*}*/
-
-void	make_lst(t_lst *lst)
-{
-	if (lst == NULL)
-	{
-		lst = malloc(sizeof(t_lst));
-		lst->head = NULL;
-		lst->tail = NULL;
-	}
-}
+/*
+ *void	tokenizer(char *cmd)
+ *{
+ *    int i;
+ *    t_flag flag;
+ *
+ *    i = 0;
+ *    init_flag(&flag);
+ *    while (ft_isspace(cmd[i]))
+ *        i++;
+ *    while (cmd[i])
+ *    {
+ *        if ()
+ *    }
+ *
+ *}
+ */
 
 void	lexer(void)
 {
-	int i;
-	int space;
-	char *white;
-	char *tmp;
-
-	i = 0;
-	space = 0;
-	tmp = ft_strdup(g_sh.cmd);
-	ft_memset(tmp, 0, ft_strlen(tmp));
-	while (g_sh.cmd[i])
-	{
-		if ((ft_isalpha(g_sh.cmd[i])) == 1)
-			tmp[i] = 'c';
-		else if ((ft_isnum(g_sh.cmd[i])) == 1)
-			tmp[i] = 'n';
-		else if ((space = ft_isspace(g_sh.cmd[i])) >= 1)
-		{
-			white = ft_itoa(space);
-			tmp[i] = white[0];
-		}
-		else
-			tmp[i] = g_sh.cmd[i];
-		i++;
-	}
-	g_sh.lex = tmp;
+	
 }
 
 int		main(int ac, char **av, char **envp)
@@ -207,17 +120,14 @@ int		main(int ac, char **av, char **envp)
 		signal(SIGINT, sig_handler);
 		signal(SIGQUIT, SIG_IGN);
 		print_prompt();
-		if (g_sh.cmd == NULL)
-			eof_handler();
 		if ((ft_strcmp(g_sh.cmd, "exit")) == 0)
 		{
-			free(g_sh.cmd);
 			exit_shell(0);
 		}
 		add_history(g_sh.cmd);
 		rl_redisplay();
-		lexer();
-		printf("prompt = %s\nlexer = %s\n", g_sh.cmd, g_sh.lex);
+		marker(g_sh.cmd);
+		printf("cmd = %s\nlex = %s\n", g_sh.cmd, g_sh.lex);
 		free(g_sh.cmd);
 		free(g_sh.lex);
 	}
