@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekpark <jaekpark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/15 15:03:40 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/03 15:45:28 by jaekpark         ###   ########.fr       */
+/*   Created: 2021/07/03 15:35:59 by jaekpark          #+#    #+#             */
+/*   Updated: 2021/07/03 16:31:40 by jaekpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../includes/minishell.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new_lst)
+extern t_conf g_sh;
+
+void	free_lexer(t_lexer *lexer)
 {
-	if (lst && new_lst)
-	{
-		new_lst->next = *lst;
-		*lst = new_lst;
-	}
-	else
-		return ;
+	if (lexer->lex != NULL)
+		free(lexer->lex);
+	if (lexer != NULL)
+		free(lexer);
 }

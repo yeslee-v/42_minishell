@@ -1,7 +1,7 @@
 #Input header file name
 INCS				=	minishell.h
 #Input source files name
-SRCS				=	main.c error.c ft_utils.c init.c make_struct.c
+SRCS				=	main.c error.c ft_utils.c init.c make_struct.c free.c
 OBJS				=	$(patsubst %.c, %.o, $(SRCS))
 
 SRCS_DIR		=	./srcs/

@@ -16,10 +16,6 @@
 # include <termios.h>
 # include <unistd.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
 # define TRUE 1
 # define FALSE 0
 # define STDIN 0
@@ -36,6 +32,15 @@
 # define CYAN "\03[0;36m"
 # define WHITE "\033[0;37m"
 # define RESET "\033[0m"
+
+typedef struct		s_lexer
+{
+	char *lex;
+	int s_quote;
+	int	e_quote;
+	int is_quote;
+	int	err;
+}	t_lexer;
 
 typedef struct		s_flag
 {
@@ -82,7 +87,7 @@ typedef struct		s_conf
 {
 	char			**env;
 	char			*cmd;
-	char			*lex;
+	t_lexer			*lexer;
 	t_lst			*token;
 	t_lst			*syntax;
 	struct termios	term;
@@ -96,5 +101,6 @@ int					ft_isspace(int c);
 int					ft_isquote(char c);
 void				init_flag(t_flag *flag);
 void				init_lst(t_lst *lst);
-
+void				init_lexer(t_lexer *lexer);
+void				free_lexer(t_lexer *lexer);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 20:30:39 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/02 20:46:06 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/07/03 16:36:10 by jaekpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@ void	exit_shell(int num)
 	exit(num);
 }
 
-int		print_prompt(void)
-{
-	g_sh.cmd = readline(PROMPT);
-	add_history(g_sh.cmd);
-	return (1);
-}
-
 void	sig_handler(int signum)
 {
 	if (signum == SIGINT)
@@ -38,71 +31,77 @@ void	sig_handler(int signum)
 	}
 }
 
-void	marker(char *cmd)
+void	analyze_space(t_lexer *lexer, int i)
 {
-	int i;
-	char *ret;
-	int s_quote;
-	int e_quote;
-	int is_quote;
+	if (!lexer)
+		return ;
+	if (lexer->s_quote > TRUE)
+		lexer->lex[i] = 'T';
+	else if (lexer->s_quote == FALSE)
+		lexer->lex[i] = 'F';
+}
+
+void	analyze_quote_pair(t_lexer *lexer, char c, int i)
+{
+	if (lexer->s_quote == lexer->e_quote)
+	{
+		lexer->lex[i] = lexer->e_quote;
+		lexer->s_quote = 0;
+		lexer->e_quote = 0;
+	}
+	else
+		lexer->lex[i] = c;
+}
+
+void	lexer(char *cmd)
+{
+	int		i;
+	t_lexer	*lexer;
 
 	i = -1;
-	is_quote = 0;
-	ret = ft_strdup(cmd);
-	ft_memset(ret, 0, ft_strlen(ret));
+	lexer = malloc(sizeof(t_lexer));
+	init_lexer(lexer);
 	while (cmd[++i])
 	{
 		if (ft_isalnum(cmd[i]))
-			ret[i] = 'c';
-		if (is_quote == 0 && ((s_quote = ft_isquote(cmd[i])) >= 1))
-		{
-			ret[i] = s_quote;
-			is_quote = s_quote;
-		}
-		else if (is_quote == s_quote && ((e_quote = ft_isquote(cmd[i])) >= 1))
-		{
-			if (s_quote == e_quote)
-			{
-				ret[i] = e_quote;
-				is_quote = 0;
-			}
-			else
-				ret[i] = cmd[i];
-		}
+			lexer->lex[i] = 'c';
+		if (lexer->s_quote == 0 && ((lexer->s_quote = ft_isquote(cmd[i])) >= 1))
+			lexer->lex[i] = lexer->s_quote;
+		else if (lexer->s_quote && ((lexer->e_quote = ft_isquote(cmd[i])) >= 1))
+			analyze_quote_pair(lexer, cmd[i], i);
 		else if (ft_isspace(cmd[i]))
-		{
-			if (is_quote > TRUE)
-				ret[i] = '2';
-			else if (is_quote == FALSE)
-				ret[i] = '1';
-		}
+			analyze_space(lexer, i);
 	}
-	if (is_quote != 0)
-		printf("quote err\n");
-	g_sh.lex = ret;
+	if (lexer->s_quote != 0)
+		lexer->err = 1;
 }
 
-/*
- *void	tokenizer(char *cmd)
- *{
- *    int i;
- *    t_flag flag;
- *
- *    i = 0;
- *    init_flag(&flag);
- *    while (ft_isspace(cmd[i]))
- *        i++;
- *    while (cmd[i])
- *    {
- *        if ()
- *    }
- *
- *}
- */
-
-void	lexer(void)
+void	set_terminal(void)
 {
-	
+	tcgetattr(0, &g_sh.term);
+	g_sh.term.c_lflag &= ~ECHOCTL;
+	tcsetattr(0, TCSANOW, &g_sh.term);
+}
+
+void	set_signal(void)
+{
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	set_prompt(void)
+{
+	g_sh.cmd = readline(PROMPT);
+	add_history(g_sh.cmd);
+	rl_redisplay();
+	lexer(g_sh.cmd);
+	printf("cmd = %s\nlex = %s\n", g_sh.cmd, g_sh.lexer->lex);
+	if ((ft_strcmp(g_sh.cmd, "exit")) == 0)
+		exit_shell(0);
+	if (g_sh.lexer->err == 1)
+		printf("quote err\n");
+	free(g_sh.cmd);
+	free_lexer(g_sh.lexer);
 }
 
 int		main(int ac, char **av, char **envp)
@@ -112,23 +111,10 @@ int		main(int ac, char **av, char **envp)
 	(void)av;
 	ret = ac;
 	g_sh.env = envp;
-	tcgetattr(0, &g_sh.term);
-	g_sh.term.c_lflag &= ~ECHOCTL;
-	tcsetattr(0, TCSANOW, &g_sh.term);
+	set_terminal();
 	while (ret)
 	{
-		signal(SIGINT, sig_handler);
-		signal(SIGQUIT, SIG_IGN);
-		print_prompt();
-		if ((ft_strcmp(g_sh.cmd, "exit")) == 0)
-		{
-			exit_shell(0);
-		}
-		add_history(g_sh.cmd);
-		rl_redisplay();
-		marker(g_sh.cmd);
-		printf("cmd = %s\nlex = %s\n", g_sh.cmd, g_sh.lex);
-		free(g_sh.cmd);
-		free(g_sh.lex);
+		set_signal();
+		set_prompt();
 	}
 }

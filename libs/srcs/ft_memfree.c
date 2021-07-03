@@ -6,11 +6,11 @@
 /*   By: jaekpark <jaekpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 17:53:01 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/05/10 03:02:27 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/07/03 15:41:20 by jaekpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 int		ft_free_single(void *ptr)
 {
