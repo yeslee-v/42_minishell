@@ -5,10 +5,13 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <errno.h>
 # include "../libs/libft/libft.h"
 
-# define STDIN	0
-# define STDOUT 1
+# define STDIN		0
+# define STDOUT		1
+
+# define BUFFER_SIZE 256 // how to set buffer size
 
 typedef struct	s_pipe
 {
@@ -29,6 +32,7 @@ typedef	struct	s_all
 	int			**fd; 
 	pid_t		*pid;
 	t_pipe		pipe;
+	t_parse		parse;
 }				t_all;
 
 /*
@@ -44,6 +48,6 @@ void	run_execve(t_all *all);
  *
  */
 
-int		main(int ac, char **av);
+int		main(int ac, char **av, char **path);
 
 #endif
