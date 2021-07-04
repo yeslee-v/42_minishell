@@ -1,7 +1,7 @@
 #Input header file name
 INCS				=	minishell.h
 #Input source files name
-SRCS				=	main.c error.c ft_utils.c init.c make_struct.c free.c
+SRCS				=	main.c error.c ft_utils.c init.c make_struct.c free.c lexer.c tokenizer.c
 OBJS				=	$(patsubst %.c, %.o, $(SRCS))
 
 SRCS_DIR		=	./srcs/
@@ -18,7 +18,7 @@ LIBFT_INCS		=	./libs/includes/libft.h
 
 CC				=	gcc
 RM				=	rm -rf
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -fsanitize=address
 HEADER_FLAG		=	-I$(INCS_DIR) -I$(LIBFT_INCS) -I/Users/jaekpark/.brew/opt/readline/include
 LIB_FLAG		=	-lft -L$(LIBFT_DIR) -L/Users/jaekpark/.brew/opt/readline/lib -lreadline -lncurses
 NAME			=	minishell

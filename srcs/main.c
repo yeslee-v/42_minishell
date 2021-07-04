@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 20:30:39 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/03 16:36:10 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/07/04 19:16:32 by jaekpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,21 @@ void	exit_shell(int num)
 	exit(num);
 }
 
+void	print_token(t_lst *token)
+{
+	t_token	*temp;
+
+	temp = token->head;
+	while (temp)
+	{
+		printf("token = %s, type = %c, index = %d, st = %d, ed = %d\n",
+				temp->token,
+				temp->type,
+				temp->i, temp->st, temp->ed);
+		temp = temp->next;
+	}
+}
+
 void	sig_handler(int signum)
 {
 	if (signum == SIGINT)
@@ -29,51 +44,6 @@ void	sig_handler(int signum)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-}
-
-void	analyze_space(t_lexer *lexer, int i)
-{
-	if (!lexer)
-		return ;
-	if (lexer->s_quote > TRUE)
-		lexer->lex[i] = 'T';
-	else if (lexer->s_quote == FALSE)
-		lexer->lex[i] = 'F';
-}
-
-void	analyze_quote_pair(t_lexer *lexer, char c, int i)
-{
-	if (lexer->s_quote == lexer->e_quote)
-	{
-		lexer->lex[i] = lexer->e_quote;
-		lexer->s_quote = 0;
-		lexer->e_quote = 0;
-	}
-	else
-		lexer->lex[i] = c;
-}
-
-void	lexer(char *cmd)
-{
-	int		i;
-	t_lexer	*lexer;
-
-	i = -1;
-	lexer = malloc(sizeof(t_lexer));
-	init_lexer(lexer);
-	while (cmd[++i])
-	{
-		if (ft_isalnum(cmd[i]))
-			lexer->lex[i] = 'c';
-		if (lexer->s_quote == 0 && ((lexer->s_quote = ft_isquote(cmd[i])) >= 1))
-			lexer->lex[i] = lexer->s_quote;
-		else if (lexer->s_quote && ((lexer->e_quote = ft_isquote(cmd[i])) >= 1))
-			analyze_quote_pair(lexer, cmd[i], i);
-		else if (ft_isspace(cmd[i]))
-			analyze_space(lexer, i);
-	}
-	if (lexer->s_quote != 0)
-		lexer->err = 1;
 }
 
 void	set_terminal(void)
@@ -95,7 +65,9 @@ void	set_prompt(void)
 	add_history(g_sh.cmd);
 	rl_redisplay();
 	lexer(g_sh.cmd);
+	tokenizer(&g_sh, g_sh.lexer->lex);
 	printf("cmd = %s\nlex = %s\n", g_sh.cmd, g_sh.lexer->lex);
+	print_token(g_sh.token);
 	if ((ft_strcmp(g_sh.cmd, "exit")) == 0)
 		exit_shell(0);
 	if (g_sh.lexer->err == 1)
