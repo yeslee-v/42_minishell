@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/04 19:38:48 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/07/05 20:59:06 by jaekpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ static void	set_index(t_lst *token)
 			tmp->i = i;
 			i++;
 		}
-		else
+		else if (ft_strchr("AIOHP", tmp->type))
 		{
 			i = 0;
 			tmp->i = i;
+			i++;
 		}
 		tmp = tmp->next;
 	}

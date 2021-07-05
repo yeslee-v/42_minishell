@@ -41,78 +41,86 @@
 # define WHITE "\033[0;37m"
 # define RESET "\033[0m"
 
-typedef struct		s_lst
+typedef struct			s_lst
 {
-	void			*head;
-	void			*tail;
-}					t_lst;
+	void				*head;
+	void				*tail;
+}						t_lst;
 
-typedef struct		s_lexer
+typedef struct			s_lexer
 {
-	char			*lex;
-	int				s_quote;
-	int				e_quote;
-	int				is_quote;
-	int				err;
-}					t_lexer;
+	char				*lex;
+	int					s_quote;
+	int					e_quote;
+	int					is_quote;
+	int					err;
+}						t_lexer;
 
-typedef struct		s_token
+typedef struct			s_token
 {
-	char			*token;
-	char			type;
-	int				i;
-	int				st;
-	int				ed;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
+	char				*token;
+	char				type;
+	int					i;
+	int					st;
+	int					ed;
+	struct s_token		*next;
+	struct s_token		*prev;
+}						t_token;
 
-typedef struct		s_redir
+typedef struct			s_env
 {
-	char			type;
-	char			*target;
-	char			*arg;
-}					t_redir;
+	char				*key;
+	char				*value;
+	struct s_env		*next;
+	struct s_env		*prev;
+}						t_env;
 
-typedef struct		s_hdoc
+typedef struct			s_redir
 {
-	char			*delimiter;
-	char			*arg;
-}					t_hdoc;
+	char				type;
+	char				*target;
+	char				*arg;
+}						t_redir;
 
-typedef struct		s_syntax
+typedef struct			s_hdoc
 {
-	char			*cmd;
-	char			**arg;
-	t_redir			*redir;
-	t_hdoc			*hdoc;
-}					t_syntax;
+	char				*delimiter;
+	char				*arg;
+}						t_hdoc;
 
-typedef struct		s_pipe
+typedef struct			s_syntax
 {
-	t_syntax		*syntax;
-	struct s_pipe	*next;
-	struct s_pipe	*prev;
-}					t_pipe;
+	char				*cmd;
+	char				*arg;
+	t_redir				*redir;
+	t_hdoc				*hdoc;
+}						t_syntax;
 
-typedef struct		s_tool
+typedef struct			s_process
 {
-	int i;
-	int is_quote;
-	int st;
-	int ed;
-	t_lst *token;
-} t_tool;
+	t_syntax			*syntax;
+	struct s_process	*next;
+	struct s_process	*prev;
+}						t_process;
 
-typedef struct		s_conf
+typedef struct			s_tool
 {
-	char			**env;
-	char			*cmd;
-	t_lexer			*lexer;
-	t_lst			*token;
-	t_lst			*syntax;
-	struct termios	term;
-}					t_conf;
+	int					i;
+	int					is_quote;
+	int					st;
+	int					ed;
+	t_lst				*token;
+}						t_tool;
+
+typedef struct			s_conf
+{
+	char				*cmd;
+	t_lst				*env;
+	t_lexer				*lexer;
+	t_lst				*token;
+	t_lst				*syntax;
+	struct termios		term;
+}						t_conf;
 
 /*
  * - lexer
@@ -120,21 +128,22 @@ typedef struct		s_conf
  *analyze_quote
  *analyze_operator
  */
-void				lexer(char *cmd);
+void					lexer(char *cmd);
 /*
  *token
  */
-void				tokenizer(t_conf *conf, char *lex);
+void					tokenizer(t_conf *conf, char *lex);
 
-void				print_error(char *msg);
-void				make_div(t_lst *lst, int st, int ed);
-void				make_token(t_lst *lst, int st, int ed);
-char				*ft_strrdup(char *s, int st, int ed);
-int					ft_isspace(int c);
-int					ft_isquote(char c);
-void				init_lst(t_lst *lst);
-void				init_lexer(t_lexer *lexer);
-void				free_lexer(t_lexer *lexer);
-int					ft_isspec(char *cmd, int i);
-void				init_tool(t_tool *tool);
+void					print_error(char *msg);
+void					make_token(t_lst *lst, int st, int ed);
+void					make_env(t_lst *lst, char *key, char *value);
+char					*ft_strrdup(char *s, int st, int ed);
+int						ft_isspace(int c);
+int						ft_isquote(char c);
+void					init_lst(t_lst *lst);
+void					init_lexer(t_lexer *lexer);
+void					free_lexer(t_lexer *lexer);
+int						ft_isspec(char *cmd, int i);
+void					init_tool(t_tool *tool);
+char					*ft_strjoin_sp(char *s1, char *s2);
 #endif
