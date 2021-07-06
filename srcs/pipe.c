@@ -3,7 +3,7 @@
 void	alloc_fd(int args_cnt, t_all *all)
 {
 	int	i;
-	
+
 	i = -1;
 	if (!(all->fd = (int **)malloc(sizeof(int *) * (args_cnt - 3))))
 		print_error("malloc error"); // malloc invalid ?
@@ -33,16 +33,16 @@ void	ctrl_mid_cmd(int args_cnt, char **av, char **path, t_all *all)
 		{
 			split_path(av[i + 3], path, all);
 			if (i != 0)
-				run_dup2(0, all->fd[i - 1]);//std_in
-			run_dup2(1, all->fd[i]); //std_out
-			close_fd(1, all->fd[i]); //std_in
+				run_dup2(0, all->fd[i - 1]); // std_in
+			run_dup2(1, all->fd[i]);         // std_out
+			close_fd(1, all->fd[i]);         // std_in
 			run_execve(all);
 		}
 		else if (all->pid[i + 1] > 0) // parents
 		{
 			if (i != 0)
-				close_fd(1, all->fd[i - 1]); //std_in
-			close_fd(2, all->fd[i]); //std_out
+				close_fd(1, all->fd[i - 1]); // std_in
+			close_fd(2, all->fd[i]);         // std_out
 			set_wait();
 		}
 	}
@@ -51,17 +51,17 @@ void	ctrl_mid_cmd(int args_cnt, char **av, char **path, t_all *all)
 void	middle_proc(int args_cnt, char **av, char **path, t_all *all)
 {
 	split_path(av[2], path, all); // for execve
-	connect_in(av[1]); // infile open + dup2 + close
+	connect_in(av[1]);            // infile open + dup2 + close
 	alloc_fd(args_cnt, all);
 	ctrl_mid_cmd(args_cnt, av, path, all);
 }
 
-int			main(int ac, char **av, char **path)
+int		main(int ac, char **av, char **path)
 {
 	int		args_cnt;
-	int		mid_cmd_cnt; // cmds using while
 	t_all	all;
 
+	int mid_cmd_cnt; // cmds using while
 	args_cnt = ac - 1;
 	mid_cmd_cnt = args_cnt - 3;
 	if (!(all.pid = malloc(sizeof(pid_t) * args_cnt)))

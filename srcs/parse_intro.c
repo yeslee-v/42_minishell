@@ -4,6 +4,7 @@ void	parse_init(t_all *all)
 {
 	all->parse.p_cmd = NULL;
 	all->parse.opt = 0;
+	all->parse.u_flag = 0;
 	all->parse.args = NULL;
 }
 
@@ -20,7 +21,7 @@ t_env	*env_init(t_env *env)
 
 void	add_node_back(t_env **env, t_env *new) // **env == existing node
 {
-	t_env	*node;
+	t_env *node;
 
 	if (!(new) || !(*env))
 		return ;
@@ -28,7 +29,7 @@ void	add_node_back(t_env **env, t_env *new) // **env == existing node
 	while (node->next)
 		node = node->next;
 	node->next = new;
-	new->prev = node; 
+	new->prev = node;
 	new->next = NULL;
 }
 
@@ -59,6 +60,42 @@ void	remove_node(t_env **env, char *target)
 	return ;
 }
 
+int		exists_opt(int i, char **av)
+{
+	int	j;
+
+	if (av[i][0] != '-')
+		return (0) ;
+	else
+	{
+		j = 1;
+		while (av[i][j])
+		{
+			if (av[i][j] == 'n')
+				j++;
+			else
+				return (0) ;
+		}
+	}
+	return (j);
+}
+
+void	set_lower(char *cmd, t_all *all)
+{
+	int i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if ((cmd[i] >= 65) && (cmd[i] <= 90))
+		{
+			cmd[i] += 32;
+			all->parse.u_flag = 1;
+		}
+		i++;
+	}
+}
+
 int		main(int ac, char **av, char **path)
 {
 	int		i;
@@ -79,24 +116,40 @@ int		main(int ac, char **av, char **path)
 	parse_init(&all);
 	all.env = *env_init(&all.env);
 	all.parse.p_cmd = av[1];
+	set_lower(all.parse.p_cmd, &all);
 	if (!(ft_strncmp(all.parse.p_cmd, "echo", ft_strlen(all.parse.p_cmd)))) // set capital
 	{
-		if (!(ft_strncmp(av[2], "-n", ft_strlen(av[2]))))
+		i = 2;
+		if (!(all.parse.u_flag)) // all lower 
 		{
-			all.parse.opt = 1;
-			i = 2;
+			while (av[++i][0] == '-')
+			{
+				if (exists_opt(i, av))
+					all.parse.opt = 1;
+				else
+					break;
+			}
 		}
-		else
-			i = 1;
-		while (av[++i])
+		else if (!(ft_strncmp(av[2], "-n", ft_strlen(av[2]))))
+		{
+			if (ft_strncmp(av[3], "-n", ft_strlen(av[3])))
+				i++;
+		}
+		while (av[i])
+		{
 			printf("%s", av[i]);
+			i++;
+		}
 		if (!(all.parse.opt))
 			printf("\n");
-		// set environment variable : echo $PATH >> show PATH's value
+		// undo: input space when ac > 3 // from jaekpark
+		// undo: echo '$PATH' >> show PATH's value // from jaekpark
 	}
 	else if (!(ft_strncmp(all.parse.p_cmd, "cd", ft_strlen(all.parse.p_cmd))))
 	{
-		if (!(av[2])) // $HOME
+		if (all.parse.u_flag == 1)
+			return (0);
+		else if (!(av[2])) // $HOME
 		{
 			i = -1;
 			while (path[++i])
@@ -128,6 +181,8 @@ int		main(int ac, char **av, char **path)
 	}
 	else if (!(ft_strncmp(all.parse.p_cmd, "export", ft_strlen(all.parse.p_cmd))))
 	{
+		if (all.parse.u_flag == 1)
+			return (0);
 		if (!(av[2]))
 		{
 			e_flag = 1;
@@ -152,16 +207,18 @@ int		main(int ac, char **av, char **path)
 				}
 				path++;
 			}
-			//	add_node_back(all.env, new); // add new key=value
+			//	add_node_back(all.env, new); // add new key=value // not execute
 		}
 	}
 	else if (!(ft_strncmp(all.parse.p_cmd, "unset", ft_strlen(all.parse.p_cmd))))
 	{
+		if (all.parse.u_flag == 1)
+			return (0);
 		while (*path)
 		{
 			if (!(ft_strncmp(*path, av[2], 4)))
 			{
-			//	remove_node(all.env, target);
+				//	remove_node(all.env, target); // not execute
 				printf(">> %s\n", *path);
 			}
 			path++;
@@ -181,6 +238,8 @@ int		main(int ac, char **av, char **path)
 	}
 	else if (!(ft_strncmp(all.parse.p_cmd, "exit", ft_strlen(all.parse.p_cmd))))
 	{
+		if (all.parse.u_flag == 1)
+			return (0);
 		printf("exit\n");
 		printf("\n");
 		exit(0);
