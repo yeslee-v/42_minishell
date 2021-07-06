@@ -17,7 +17,8 @@ RMFLAGS = -f
 #	   ./srcs/redirect.c \
 #	   ./srcs/run.c \
 
-SRCS = ./srcs/parse_intro.c
+#SRCS = ./srcs/parse_intro.c
+SRCS = ./srcs/heredoc.c
 
 OBJS = $(SRCS:.c=.o)
 
