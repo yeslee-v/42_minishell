@@ -91,14 +91,15 @@ typedef struct			s_hdoc
 typedef struct			s_syntax
 {
 	char				*cmd;
-	char				*arg;
-	t_redir				*redir;
-	t_hdoc				*hdoc;
+	char				*arg_line;
+	char				**arg_word;
+	struct s_syntax		*next;
+	struct s_syntax		*prev;
 }						t_syntax;
 
 typedef struct			s_process
 {
-	t_syntax			*syntax;
+	t_lst				*syntax;
 	struct s_process	*next;
 	struct s_process	*prev;
 }						t_process;
@@ -112,13 +113,23 @@ typedef struct			s_tool
 	t_lst				*token;
 }						t_tool;
 
+typedef struct			s_parse
+{
+	int					start;
+	int					pipe;
+	char				*cmd;
+	char				*arg;
+	t_lst				*syntax;
+}						t_parse;
+
 typedef struct			s_conf
 {
 	char				*cmd;
+	char				**envp;
 	t_lst				*env;
 	t_lexer				*lexer;
 	t_lst				*token;
-	t_lst				*syntax;
+	t_lst				*process;
 	struct termios		term;
 }						t_conf;
 

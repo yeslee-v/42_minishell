@@ -18,7 +18,7 @@ LIBFT_INCS		=	./libs/includes/libft.h
 
 CC				=	gcc
 RM				=	rm -rf
-CFLAGS			=	-Wall -Wextra -Werror -fsanitize=address
+CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=address
 HEADER_FLAG		=	-I$(INCS_DIR) -I$(LIBFT_INCS) -I/Users/jaekpark/.brew/opt/readline/include
 LIB_FLAG		=	-lft -L$(LIBFT_DIR) -L/Users/jaekpark/.brew/opt/readline/lib -lreadline -lncurses
 NAME			=	minishell
