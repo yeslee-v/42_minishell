@@ -37,7 +37,7 @@ void	run_dup2(int std_fd, int *fd)
 	}
 }
 
-void	close_fd(int flag, int *fd)
+void	close_fd(int flag, int *fd) // have to change flags
 {
 	if (flag == 1)
 	{
