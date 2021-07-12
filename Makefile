@@ -17,8 +17,7 @@ RMFLAGS = -f
 #	   ./srcs/pipe/redirect.c \
 #	   ./srcs/pipe/run.c \
 
-SRCS = ./srcs/builtin/builtin.c \
-	   ./srcs/builtin/blt_echo.c \
+SRCS = ./srcs/builtin/blt_echo.c \
 	   ./srcs/builtin/blt_cd.c \
 	   ./srcs/builtin/blt_pwd.c \
 	   ./srcs/builtin/blt_export.c \

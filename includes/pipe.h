@@ -43,7 +43,7 @@ typedef struct		s_parse
 {
 	char			*p_cmd;
 	int				opt;
-	int				u_flag;
+	int				up_flag;
 	char			*args;
 }					t_parse;
 
