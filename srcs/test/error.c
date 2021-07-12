@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
+/*   By: jaekpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/03 15:35:59 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/12 15:10:39 by parkjaekw        ###   ########.fr       */
+/*   Created: 2021/06/29 14:53:13 by jaekpark          #+#    #+#             */
+/*   Updated: 2021/07/12 15:54:53 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
-extern t_conf g_sh;
-
-void	free_lexer(t_lexer *lexer)
+void	print_error(char *msg)
 {
-	if (lexer->lex != NULL)
-		free(lexer->lex);
-	if (lexer != NULL)
-		free(lexer);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
 }

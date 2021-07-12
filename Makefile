@@ -3,8 +3,11 @@ INTRA_ID			=	jaekpark
 #Input header file name
 INCS				=	minishell.h
 #Input source files name
-SRCS				=	main.c error.c ft_utils.c init.c make_struct.c free.c lexer.c tokenizer.c
-OBJS				=	$(patsubst %.c, %.o, $(SRCS))
+Y_SRCS				=	utils/error.c utils/ft_utils.c utils/init.c utils/make_struct.c utils/free.c parse/lexer.c parse/tokenizer.c 
+J_SRCS				=	main.c
+SRCS				=	$(Y_SRCS) $(J_SRCS)
+OBJS				=	$(SRCS:.c=.o)
+SRCS_SUB_DIR		=	$(addprefix $(OBJS_DIR), $(dir $(SRCS)))
 
 #Cluster Readline
 #READLINE		=	 /Users/$(INTRA_ID)/.brew/opt/readline
@@ -38,28 +41,28 @@ PURPLE			=	"\033[1;36m"
 WHITE			=	"\033[1;37m"
 EOC				=	"\033[0;0m"
 
-COMPILE			= 
 
 all:			$(NAME)
 
 $(LIBFT):
 				@make -C ./libs
 
-$(NAME):		$(LIBFT) $(OBJS_DIR) $(OBJS_FILE)
+$(NAME):		$(LIBFT) $(OBJS_DIR) $(OBJS_FILE) $(OBJS)
 				@clear
 				@echo $(GREEN)
-				$(CC) $(CFLAGS) $(LIB_FLAG) $(HEADER_FLAG) $(OBJS_FILE) -o $@
+				$(CC) $(CFLAGS) $(LIB_FLAG) $(HEADER_FLAG) $(OBJS) -o $@
 				@echo $(EOC)
 				@echo $(YELLOW) "`date +%y/%m/%d_%H:%M:%S`:: Compiling $@"
 				@echo $(GREEN) "`date +%y/%m/%d_%H:%M:%S`:: OK" $(EOC)
 
 $(OBJS_DIR) :
 					@mkdir -p $(OBJS_DIR)
+					@mkdir -p $(SRCS_SUB_DIR)
 
-$(OBJS_DIR)%.o :	$(SRCS_DIR)%.c $(INCS_FILE)
+.c.o :	$(INCS_FILE)
 					@clear
 					@echo $(BLUE)
-					$(CC) -c $(CFLAGS) $(HEADER_FLAG) $< -o $@
+					$(CC) -c $(CFLAGS) $(HEADER_FLAG) $<
 					@echo $(EOC)
 
 norm:			$(SRCS_FILE) $(INCS_FILE)

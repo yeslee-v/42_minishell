@@ -6,11 +6,11 @@
 /*   By: jaekpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 14:53:13 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/06/29 15:04:14 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/07/12 15:10:15 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	print_error(char *msg)
 {

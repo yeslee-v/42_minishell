@@ -6,12 +6,11 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 20:30:39 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/10 18:39:53 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/12 15:41:59 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <sys/fcntl.h>
 
 t_conf	g_sh;
 
