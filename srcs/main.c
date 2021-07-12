@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 20:30:39 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/07 18:44:41 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/10 18:39:53 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,11 +172,11 @@ void	init_parse(t_parse *flag, int pipe)
 	}
 }
 
-t_token	 *parser(t_lst *process, t_token *tok)
+t_token	*parser(t_lst *process, t_token *tok)
 {
-	char *cmd_t;
-	char *arg_t;
-	t_lst *syn;
+	char	*cmd_t;
+	char	*arg_t;
+	t_lst	*syn;
 
 	(void)process;
 	cmd_t = NULL;
@@ -210,7 +210,7 @@ t_token	 *parser(t_lst *process, t_token *tok)
 
 void	set_prompt(void)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	g_sh.cmd = readline(PROMPT);
 	add_history(g_sh.cmd);
@@ -219,7 +219,8 @@ void	set_prompt(void)
 	tokenizer(&g_sh, g_sh.lexer->lex);
 	g_sh.process = malloc(sizeof(t_lst));
 	init_lst(g_sh.process);
-	tmp = g_sh.token->head;;
+	tmp = g_sh.token->head;
+	;
 	while ((tmp = parser(g_sh.process, tmp)) != NULL)
 		;
 	if (tmp != NULL)
