@@ -1,4 +1,4 @@
-#include "../includes/pipe.h"
+#include "../../includes/minishell.h"
 
 void	alloc_fd(int args_cnt, t_all *all)
 {
@@ -56,7 +56,7 @@ void	middle_proc(int args_cnt, char **av, char **path, t_all *all)
 	ctrl_mid_cmd(args_cnt, av, path, all);
 }
 
-int		main(int ac, char **av, char **path)
+int	intro_pipe(int ac, char **av, char **path)
 {
 	int		args_cnt;
 	t_all	all;

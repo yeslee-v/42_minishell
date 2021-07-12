@@ -1,4 +1,4 @@
-#include "../../includes/pipe.h"
+#include "../../includes/minishell.h"
 
 void	run_env(char **path)
 {

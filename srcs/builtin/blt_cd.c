@@ -1,4 +1,4 @@
-#include "../../includes/pipe.h"
+#include "../../includes/minishell.h"
 
 void	run_cd(char **av, char **path, t_all *all)
 {
@@ -7,7 +7,7 @@ void	run_cd(char **av, char **path, t_all *all)
 	char	**dir;
 	char	buf[256];
 
-	if (all->parse.up_flag == 1)
+	if (all->blt.up_flag == 1)
 		return ;
 	else if (!(av[2])) // $HOME
 	{
