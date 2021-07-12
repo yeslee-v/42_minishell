@@ -6,7 +6,11 @@
 /*   By: jaekpark <jaekpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 20:58:26 by jaekpark          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/07/03 15:44:26 by jaekpark         ###   ########.fr       */
+=======
+/*   Updated: 2021/05/10 03:03:55 by jaekpark         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +87,19 @@ void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 t_list				*ft_lstnew(void *content);
+<<<<<<< HEAD
 void				ft_lstadd_front(t_list **lst, t_list *new_lst);
 int					ft_lstsize(t_stack *t);
 int					get_next_line(int fd, char **line);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **lst, t_list *new_lst);
+=======
+void				ft_lstadd_front(t_list **lst, t_list *new);
+int					ft_lstsize(t_stack *t);
+int					get_next_line(int fd, char **line);
+t_list				*ft_lstlast(t_list *lst);
+void				ft_lstadd_back(t_list **lst, t_list *new);
+>>>>>>> main
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
