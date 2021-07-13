@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yeslee <yeslee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/13 17:26:40 by yeslee            #+#    #+#             */
+/*   Updated: 2021/07/13 17:30:48 by yeslee           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
@@ -201,7 +213,7 @@ void					close_fd(int flag, int *fd);
 void					run_execve(t_all *all);
 
 /*
- * builtin functions
+ * builtin
  */
 int						intro_blt(int ac, char **av, char **path);
 void					run_echo(char **av, t_all *all);
@@ -215,8 +227,6 @@ void					run_unset(int ac, char **av, char **path, t_all *all);
 /*
  * heredoc
  */
-/*
- *int					main(int ac, char **av, char **path);
- */
+int						intro_hdoc(int ac, char **av, char **path);
 
 #endif
