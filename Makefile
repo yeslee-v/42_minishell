@@ -6,7 +6,7 @@
 #    By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/13 16:39:04 by parkjaekw         #+#    #+#              #
-#    Updated: 2021/07/13 17:02:23 by parkjaekw        ###   ########.fr        #
+#    Updated: 2021/07/13 20:08:20 by parkjaekw        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ INTRA_ID			=	jaekpark
 READLINE			=	/opt/homebrew/Cellar/readline/8.1
 INCS				=	minishell.h
 J_SRCS				=	main.c utils/error.c utils/ft_utils.c utils/init.c \
-						utils/make_struct.c utils/free.c parse/lexer.c parse/tokenizer.c
+						utils/make_struct.c utils/free.c parse/lexer.c parse/tokenizer.c \
+						utils/print.c setup/set.c parse/parser.c
 Y_SRCS				=	
 SRCS				=	$(Y_SRCS) $(J_SRCS)
 OBJS				= 	$(patsubst %.c, %.o, $(SRCS_FILE))
@@ -55,7 +56,7 @@ LIBFT_INCS			=	./libs/includes/libft.h
 #	Compile settings
 CC					=	gcc
 RM					=	rm -rf
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	-Wall -Wextra -Werror -g -fsanitize=address
 HEADER_FLAG			=	-I$(INCS_DIR) -I$(LIBFT_INCS) -I$(READLINE)/include
 LIB_FLAG			= 	-L$(LIBFT_DIR) -lft -L$(READLINE)/lib -lreadline -lncurses
 NAME				=	minishell

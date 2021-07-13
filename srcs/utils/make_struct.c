@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:37:36 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/12 15:10:31 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/13 19:12:35 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,57 @@
 
 extern t_conf g_sh;
 
-/*
- *void	make_syntax(t_lst *lst)
- */
+void	make_syntax(t_lst *lst, char *cmd, char *arg)
+{
+	t_syntax	*tmp;
+	t_syntax	*node;
+
+	node = malloc(sizeof(t_syntax));
+	node->cmd = ft_strdup(cmd);
+	node->arg_line = ft_strdup(arg);
+	node->arg_word = NULL;
+	node->next = NULL;
+	node->prev = NULL;
+	if (lst->head == NULL && lst->tail == NULL)
+	{
+		lst->head = node;
+		lst->tail = node;
+	}
+	else if (lst->head != NULL && lst->tail != NULL)
+	{
+		tmp = lst->tail;
+		node->prev = tmp;
+		tmp->next = node;
+		lst->tail = node;
+	}
+	if (cmd != NULL)
+		free(cmd);
+	if (arg != NULL)
+		free(arg);
+}
+
+void	save_process(t_lst *lst, t_lst *syntax)
+{
+	t_process	*tmp;
+	t_process	*node;
+
+	node = malloc(sizeof(t_process));
+	node->syntax = syntax;
+	node->next = NULL;
+	node->prev = NULL;
+	if (lst->head == NULL && lst->tail == NULL)
+	{
+		lst->head = node;
+		lst->tail = node;
+	}
+	else if (lst->head != NULL && lst->tail != NULL)
+	{
+		tmp = lst->tail;
+		node->prev = tmp;
+		tmp->next = node;
+		lst->tail = node;
+	}
+}
 
 void	make_token(t_lst *lst, int st, int ed)
 {
