@@ -6,11 +6,11 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 15:35:59 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/03 16:31:40 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/07/12 15:10:39 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 extern t_conf g_sh;
 
