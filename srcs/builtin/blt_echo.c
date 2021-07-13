@@ -1,4 +1,4 @@
-#include "../../includes/pipe.h"
+#include "../../includes/minishell.h"
 
 static int	exists_opt(int i, char **av)
 {
@@ -24,16 +24,16 @@ void		run_echo(char **av, t_all *all)
 {
 	int	i;
 
-	if (all->parse.opt)
+	if (all->blt.opt)
 		i = 2;
 	else
 		i = 1;
-	if (!(all->parse.up_flag)) // all lower
+	if (!(all->blt.up_flag)) // all lower
 	{
 		while (av[++i][0] == '-')
 		{
 			if (exists_opt(i, av))
-				all->parse.opt = 1;
+				all->blt.opt = 1;
 			else
 				break ;
 		}
@@ -51,7 +51,7 @@ void		run_echo(char **av, t_all *all)
 		printf("%s", av[i]);
 		i++;
 	}
-	if (!(all->parse.opt))
+	if (!(all->blt.opt))
 		printf("\n");
 	// undo: input space when ac > 3 // from jaekpark
 	// undo: echo '$PATH' >> show PATH's value // from jaekpark

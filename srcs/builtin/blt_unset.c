@@ -1,4 +1,4 @@
-#include "../../includes/pipe.h"
+#include "../../includes/minishell.h"
 
 /*
  *static void	remove_node(t_env **env, char *target)
@@ -31,7 +31,7 @@
 
 void		run_unset(int ac, char **av, char **path, t_all *all)
 {
-	if ((all->parse.up_flag == 1) || (ac == 2))
+	if ((all->blt.up_flag == 1) || (ac == 2))
 		return ;
 	while (*path)
 	{

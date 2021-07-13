@@ -1,4 +1,4 @@
-#include "../../includes/pipe.h"
+#include "../../includes/minishell.h"
 
 /*
  *static void	add_node_back(t_env **env, t_env *new) // **env == existing node
@@ -22,7 +22,7 @@ void		run_export(char **av, char **path, t_all *all)
 	char	**in_tmp;
 	char	**ex_tmp;
 
-	if (all->parse.up_flag == 1)
+	if (all->blt.up_flag == 1)
 		return ;
 	if (!(av[2]))
 	{

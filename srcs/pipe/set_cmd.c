@@ -1,4 +1,4 @@
-#include "../../includes/pipe.h"
+#include "../../includes/minishell.h"
 
 void		combine_cmd(const char *cmd_1, char **path, t_all *all)
 {

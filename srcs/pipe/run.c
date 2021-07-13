@@ -1,4 +1,4 @@
-#include "../includes/pipe.h"
+#include "../../includes/minishell.h"
 
 int		double_strlen(const char **str)
 {
