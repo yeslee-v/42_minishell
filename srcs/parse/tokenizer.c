@@ -6,11 +6,13 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/12 15:11:24 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/15 12:37:56 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern t_conf g_sh;
 
 static void	set_index(t_lst *token)
 {
@@ -68,7 +70,7 @@ static void	analyze_token(t_lst *token)
 	set_index(token);
 }
 
-void		tokenizer(t_conf *conf, char *lex)
+void		tokenizer(char *lex)
 {
 	t_tool	tool;
 
@@ -86,12 +88,11 @@ void		tokenizer(t_conf *conf, char *lex)
 				(tool.is_quote == 0 && lex[tool.st] != lex[tool.i + 1])))
 		{
 			tool.ed = tool.i;
-			make_token(tool.token, tool.st, tool.ed);
+			make_token(g_sh.token, tool.st, tool.ed);
 			tool.is_quote = 0;
 			tool.st = -1;
 			tool.ed = -1;
 		}
 	}
-	analyze_token(tool.token);
-	conf->token = tool.token;
+	analyze_token(g_sh.token);
 }

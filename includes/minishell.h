@@ -6,7 +6,7 @@
 /*   By: yeslee <yeslee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 17:26:40 by yeslee            #+#    #+#             */
-/*   Updated: 2021/07/13 19:42:22 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/15 20:15:31 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <curses.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <readline/history.h>
+# include <readline/readline.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -26,8 +28,6 @@
 # include <termcap.h>
 # include <termios.h>
 # include <unistd.h>
-# include <readline/history.h>
-# include <readline/readline.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -125,17 +125,7 @@ typedef struct			s_tool
 	int					is_quote;
 	int					st;
 	int					ed;
-	t_lst				*token;
 }						t_tool;
-
-typedef struct			s_parse
-{
-	int					start;
-	int					pipe;
-	char				*cmd;
-	char				*arg;
-	t_lst				*syntax;
-}						t_parse;
 
 typedef struct			s_conf
 {
@@ -177,18 +167,24 @@ typedef struct			s_all
 
 /*
  * - lexer
- *analyze_space
- *analyze_quote
- *analyze_operator
+ *	analyze_space
+ *	analyze_quote
+ *	analyze_operator
  */
 void					lexer(char *cmd);
-/*
- *token
- */
-void					tokenizer(t_conf *conf, char *lex);
 
 /*
- *parser
+ * - token
+ *   analyze_type
+ *   set_index
+ */
+void					tokenizer(char *lex);
+
+/*
+ * - parser
+ *   parse syntax
+ *   parse redir
+ *   parse process
  */
 t_token					*parser(t_lst *process, t_token *tok);
 
@@ -206,7 +202,7 @@ void					make_env(t_lst *lst, char *key, char *value);
 void					init_lst(t_lst *lst);
 void					init_lexer(t_lexer *lexer);
 void					init_tool(t_tool *tool);
-void					init_parse(t_parse *flag, int pipe);
+void					init_config(void);
 
 /*
  *utils
@@ -214,9 +210,19 @@ void					init_parse(t_parse *flag, int pipe);
 char					*ft_strrdup(char *s, int st, int ed);
 int						ft_isspace(int c);
 int						ft_isquote(char c);
-void					free_lexer(t_lexer *lexer);
 int						ft_isspec(char *cmd, int i);
 char					*ft_strjoin_sp(char *s1, char *s2);
+char					**ft_split_env(char *env);
+
+/*
+ *free
+ */
+void					free_conf(t_conf *conf);
+void					free_env(t_lst *env);
+void					free_syntax(t_lst *syntax);
+void					free_process(t_lst *process);
+void					free_lexer(t_lexer *lexer);
+void					free_token(t_lst *token);
 
 /*
  *print_utils
@@ -231,9 +237,17 @@ void					print_system(void);
 /*
  *set
  */
-void	set_env(char **envp);
-void	set_terminal(void);
-void	set_signal(void);
+void					set_env(char **envp);
+void					set_terminal(void);
+void					set_signal(void);
+void					set_prompt(void);
+void					set_process(void);
+
+/*
+ *exit
+ */
+void					exit_shell(int num);
+
 /*
  * multi-pipe
  */

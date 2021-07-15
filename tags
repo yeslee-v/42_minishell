@@ -120,7 +120,6 @@ BRKINT	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_mini
 BS0	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@termios.h	/^#define         BS0 /;"	d
 BS1	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@termios.h	/^#define         BS1 /;"	d
 BSDLY	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@termios.h	/^#define BSDLY /;"	d
-BUFFER_SIZE	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^# define BUFFER_SIZE /;"	d
 BUFFER_SIZE	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@includes@libft.h	/^#  define BUFFER_SIZE /;"	d
 BUFFER_SIZE	includes/pipe.h	/^# define BUFFER_SIZE /;"	d
 BUFFER_SIZE	libs/includes/libft.h	/^#  define BUFFER_SIZE /;"	d
@@ -187,7 +186,7 @@ CEOF	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minish
 CEOL	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@ttydefaults.h	/^#define CEOL /;"	d
 CEOT	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@ttydefaults.h	/^#define CEOT /;"	d
 CERASE	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@ttydefaults.h	/^#define CERASE /;"	d
-CFLAGS	Makefile	/^CFLAGS				=	-Wall -Wextra -Werror -g -fsanitize=address$/;"	m
+CFLAGS	Makefile	/^CFLAGS				=	-Wall -Wextra -Werror$/;"	m
 CFLAGS	libs/Makefile	/^CFLAGS			=	-Wall -Wextra -Werror$/;"	m
 CFLUSH	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@ttydefaults.h	/^#define CFLUSH /;"	d
 CIGNORE	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@termios.h	/^#define CIGNORE /;"	d
@@ -1033,7 +1032,6 @@ PDP_ENDIAN	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_
 PENDIN	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@termios.h	/^#define PENDIN /;"	d
 PIPE	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^# define PIPE /;"	d
 PIPE	includes/minishell.h	/^# define PIPE /;"	d
-PIPE_H	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^# define PIPE_H$/;"	d
 PIPE_H	includes/pipe.h	/^# define PIPE_H$/;"	d
 POLL_ERR	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@signal.h	/^#define POLL_ERR /;"	d
 POLL_HUP	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@signal.h	/^#define POLL_HUP /;"	d
@@ -1274,12 +1272,10 @@ STDERR	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minis
 STDERR	includes/minishell.h	/^# define STDERR /;"	d
 STDERR_FILENO	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@unistd.h	/^#define	STDERR_FILENO	/;"	d
 STDIN	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^# define STDIN /;"	d
-STDIN	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^# define STDIN /;"	d
 STDIN	includes/minishell.h	/^# define STDIN /;"	d
 STDIN	includes/pipe.h	/^# define STDIN /;"	d
 STDIN_FILENO	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@unistd.h	/^#define	 STDIN_FILENO	/;"	d
 STDOUT	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^# define STDOUT /;"	d
-STDOUT	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^# define STDOUT /;"	d
 STDOUT	includes/minishell.h	/^# define STDOUT /;"	d
 STDOUT	includes/pipe.h	/^# define STDOUT /;"	d
 STDOUT_FILENO	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@unistd.h	/^#define	STDOUT_FILENO	/;"	d
@@ -4570,24 +4566,13 @@ alloc_fd	srcs/pipe/pipe.c	/^void	alloc_fd(int args_cnt, t_all *all)$/;"	f
 alloca	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@alloca.h	/^#define	alloca(/;"	d
 alloca	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@alloca.h	/^#undef	alloca$/;"	d
 alt_scancode_esc	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define alt_scancode_esc /;"	d
-analyze_operator	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@lexer.c	/^static void	analyze_operator(char *lex, int ret, int *i)$/;"	f	file:
-analyze_operator	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@lexer.c	/^static void	analyze_operator(char *lex, int ret, int *i)$/;"	f	file:
 analyze_operator	srcs/parse/lexer.c	/^static void	analyze_operator(char *lex, int ret, int *i)$/;"	f	file:
-analyze_quote	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@lexer.c	/^static void	analyze_quote(t_lexer *lexer, char c, int i)$/;"	f	file:
-analyze_quote	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@lexer.c	/^static void	analyze_quote(t_lexer *lexer, char c, int i)$/;"	f	file:
 analyze_quote	srcs/parse/lexer.c	/^static void	analyze_quote(t_lexer *lexer, char c, int i)$/;"	f	file:
-analyze_space	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@lexer.c	/^static void	analyze_space(t_lexer *lexer, int i)$/;"	f	file:
-analyze_space	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@lexer.c	/^static void	analyze_space(t_lexer *lexer, int i)$/;"	f	file:
 analyze_space	srcs/parse/lexer.c	/^static void	analyze_space(t_lexer *lexer, int i)$/;"	f	file:
-analyze_token	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@tokenizer.c	/^static void	analyze_token(t_lst *token)$/;"	f	file:
-analyze_token	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@tokenizer.c	/^static void	analyze_token(t_lst *token)$/;"	f	file:
 analyze_token	srcs/parse/tokenizer.c	/^static void	analyze_token(t_lst *token)$/;"	f	file:
 arg	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*arg;$/;"	m	struct:s_hdoc
-arg	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*arg;$/;"	m	struct:s_parse
 arg	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*arg;$/;"	m	struct:s_redir
-arg	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	char			*arg;$/;"	m	struct:s_hdoc
 arg	includes/minishell.h	/^	char				*arg;$/;"	m	struct:s_hdoc
-arg	includes/minishell.h	/^	char				*arg;$/;"	m	struct:s_parse
 arg	includes/minishell.h	/^	char				*arg;$/;"	m	struct:s_redir
 arg	includes/pipe.h	/^	char			*arg;$/;"	m	struct:s_hdoc
 arg_line	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*arg_line;$/;"	m	struct:s_syntax
@@ -4595,7 +4580,6 @@ arg_line	includes/minishell.h	/^	char				*arg_line;$/;"	m	struct:s_syntax
 arg_word	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				**arg_word;$/;"	m	struct:s_syntax
 arg_word	includes/minishell.h	/^	char				**arg_word;$/;"	m	struct:s_syntax
 args	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*args;$/;"	m	struct:s_blt
-args	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	char			*args;$/;"	m	struct:s_parse
 args	includes/minishell.h	/^	char				*args;$/;"	m	struct:s_blt
 args	includes/pipe.h	/^	char			*args;$/;"	m	struct:s_parse
 arr_size	libs/srcs/ft_itoa.c	/^int			arr_size(int n)$/;"	f
@@ -4615,7 +4599,6 @@ attrset	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_min
 auto_left_margin	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define auto_left_margin /;"	d
 auto_right_margin	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define auto_right_margin /;"	d
 av	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char *const *av;$/;"	m	struct:s_pipe
-av	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	char *const		*av;$/;"	m	struct:s_pipe
 av	includes/minishell.h	/^	char *const *av;$/;"	m	struct:s_pipe
 av	includes/pipe.h	/^	char *const		*av;$/;"	m	struct:s_pipe
 back_color_erase	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define back_color_erase /;"	d
@@ -4710,12 +4693,9 @@ clr_eos	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_min
 clrtobot	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^#define clrtobot(/;"	d
 clrtoeol	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^#define clrtoeol(/;"	d
 cmd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*cmd;$/;"	m	struct:s_conf
-cmd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*cmd;$/;"	m	struct:s_parse
 cmd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*cmd;$/;"	m	struct:s_syntax
 cmd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	const char			*cmd[256];$/;"	m	struct:s_pipe
-cmd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	const char		*cmd[256];$/;"	m	struct:s_pipe
 cmd	includes/minishell.h	/^	char				*cmd;$/;"	m	struct:s_conf
-cmd	includes/minishell.h	/^	char				*cmd;$/;"	m	struct:s_parse
 cmd	includes/minishell.h	/^	char				*cmd;$/;"	m	struct:s_syntax
 cmd	includes/minishell.h	/^	const char			*cmd[256];$/;"	m	struct:s_pipe
 cmd	includes/pipe.h	/^	const char		*cmd[256];$/;"	m	struct:s_pipe
@@ -4725,7 +4705,6 @@ color_names	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42
 color_set	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^#define color_set(/;"	d
 column_address	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define column_address /;"	d
 columns	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define columns /;"	d
-combine_cmd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@pipe@set_cmd.c	/^void		combine_cmd(const char *cmd_1, char **path, t_all *all)$/;"	f
 combine_cmd	srcs/pipe/set_cmd.c	/^void		combine_cmd(const char *cmd_1, char **path, t_all *all)$/;"	f
 command_character	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define command_character /;"	d
 confstr	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@unistd.h	/^size_t	 confstr(int, char *, size_t) __DARWIN_ALIAS(confstr);$/;"	v
@@ -4769,7 +4748,6 @@ delete_character	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishe
 delete_line	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define delete_line /;"	d
 deleteln	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^#define deleteln(/;"	d
 delimiter	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*delimiter;$/;"	m	struct:s_hdoc
-delimiter	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	char			*delimiter;$/;"	m	struct:s_hdoc
 delimiter	includes/minishell.h	/^	char				*delimiter;$/;"	m	struct:s_hdoc
 delimiter	includes/pipe.h	/^	char			*delimiter;$/;"	m	struct:s_hdoc
 dest_tabs_magic_smso	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define dest_tabs_magic_smso /;"	d
@@ -4783,7 +4761,6 @@ div	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishe
 div_t	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@stdlib.h	/^} div_t;$/;"	t	typeref:struct:__anon1
 dot_horz_spacing	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define dot_horz_spacing /;"	d
 dot_vert_spacing	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define dot_vert_spacing /;"	d
-double_strlen	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@pipe@run.c	/^int		double_strlen(const char **str)$/;"	f
 double_strlen	srcs/pipe/run.c	/^int		double_strlen(const char **str)$/;"	f
 down_half_line	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define down_half_line /;"	d
 e_quote	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	int					e_quote;$/;"	m	struct:s_lexer
@@ -4833,13 +4810,11 @@ enter_vertical_hl_mode	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@m
 enter_xon_mode	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define enter_xon_mode /;"	d
 env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	t_env				env;$/;"	m	struct:s_all
 env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	t_lst				*env;$/;"	m	struct:s_conf
-env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	t_env			env;$/;"	m	struct:s_all
 env	includes/minishell.h	/^	t_env				env;$/;"	m	struct:s_all
 env	includes/minishell.h	/^	t_lst				*env;$/;"	m	struct:s_conf
 env	includes/pipe.h	/^	t_env			env;$/;"	m	struct:s_all
 envp	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				**envp;$/;"	m	struct:s_conf
 envp	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char *const *envp;$/;"	m	struct:s_pipe
-envp	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	char *const		*envp;$/;"	m	struct:s_pipe
 envp	includes/minishell.h	/^	char				**envp;$/;"	m	struct:s_conf
 envp	includes/minishell.h	/^	char *const *envp;$/;"	m	struct:s_pipe
 envp	includes/pipe.h	/^	char *const		*envp;$/;"	m	struct:s_pipe
@@ -4890,8 +4865,6 @@ fcntl	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minis
 fd	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^	    int fd;$/;"	m	struct:__anon11::__anon12::__anon13
 fd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	int					**fd;$/;"	m	struct:s_all
 fd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	int					fd[2];$/;"	m	struct:s_pipe
-fd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	int				**fd;$/;"	m	struct:s_all
-fd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	int				fd[2];$/;"	m	struct:s_pipe
 fd	includes/minishell.h	/^	int					**fd;$/;"	m	struct:s_all
 fd	includes/minishell.h	/^	int					fd[2];$/;"	m	struct:s_pipe
 fd	includes/pipe.h	/^	int				**fd;$/;"	m	struct:s_all
@@ -4930,9 +4903,14 @@ fpos_t	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_mini
 fpunchhole	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@fcntl.h	/^typedef struct fpunchhole {$/;"	s
 fpunchhole_t	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@fcntl.h	/^} fpunchhole_t;$/;"	t	typeref:struct:fpunchhole
 fputs	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@stdio.h	/^int	 fputs(const char * __restrict, FILE * __restrict) __DARWIN_ALIAS(fputs);$/;"	v
-free_lexer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@free.c	/^void	free_lexer(t_lexer *lexer)$/;"	f
-free_lexer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@free.c	/^void	free_lexer(t_lexer *lexer)$/;"	f
-free_lexer	srcs/utils/free.c	/^void	free_lexer(t_lexer *lexer)$/;"	f
+free_conf	srcs/utils/free.c	/^void			free_conf(t_conf *conf)$/;"	f
+free_double_char	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@set.c	/^void	free_double_char(char **str)$/;"	f
+free_double_char	srcs/utils/set.c	/^void	free_double_char(char **str)$/;"	f
+free_env	srcs/utils/free.c	/^void			free_env(t_lst *env)$/;"	f
+free_lexer	srcs/utils/free.c	/^void			free_lexer(t_lexer *lexer)$/;"	f
+free_process	srcs/utils/free.c	/^void			free_process(t_lst *process)$/;"	f
+free_syntax	srcs/utils/free.c	/^void			free_syntax(t_lst *syntax)$/;"	f
+free_token	srcs/utils/free.c	/^void			free_token(t_lst *token)$/;"	f
 freopen	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@stdio.h	/^                 FILE * __restrict) __DARWIN_ALIAS(freopen);$/;"	v
 from_status_line	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define from_status_line /;"	d
 fropen	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@stdio.h	/^#define	fropen(/;"	d
@@ -4969,7 +4947,6 @@ ft_atoi	libs/srcs/ft_atoi.c	/^int				ft_atoi(const char *str)$/;"	f
 ft_atol	libs/srcs/ft_atol.c	/^long long		ft_atol(char *str)$/;"	f
 ft_bzero	libs/srcs/ft_bzero.c	/^void				ft_bzero(void *ptr, size_t num)$/;"	f
 ft_calloc	libs/srcs/ft_calloc.c	/^void		*ft_calloc(size_t count, size_t size)$/;"	f
-ft_double_strlen	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@srcs@ft_strlen.c	/^size_t		ft_double_strlen(const char **str)$/;"	f
 ft_double_strlen	libs/srcs/ft_strlen.c	/^size_t		ft_double_strlen(const char **str)$/;"	f
 ft_free_double	libs/srcs/ft_memfree.c	/^int		ft_free_double(void **ptr)$/;"	f
 ft_free_single	libs/srcs/ft_memfree.c	/^int		ft_free_single(void *ptr)$/;"	f
@@ -4982,14 +4959,8 @@ ft_isascii	libs/srcs/ft_isascii.c	/^int	ft_isascii(int c)$/;"	f
 ft_isdigit	libs/srcs/ft_isdigit.c	/^int	ft_isdigit(int c)$/;"	f
 ft_isnum	libs/srcs/ft_isnum.c	/^int		ft_isnum(char c)$/;"	f
 ft_isprint	libs/srcs/ft_isprint.c	/^int	ft_isprint(int c)$/;"	f
-ft_isquote	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@ft_utils.c	/^int		ft_isquote(char c)$/;"	f
-ft_isquote	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@ft_utils.c	/^int		ft_isquote(char c)$/;"	f
 ft_isquote	srcs/utils/ft_utils.c	/^int		ft_isquote(char c)$/;"	f
-ft_isspace	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@ft_utils.c	/^int		ft_isspace(int c)$/;"	f
-ft_isspace	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@ft_utils.c	/^int		ft_isspace(int c)$/;"	f
 ft_isspace	srcs/utils/ft_utils.c	/^int		ft_isspace(int c)$/;"	f
-ft_isspec	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@ft_utils.c	/^int		ft_isspec(char *cmd, int i)$/;"	f
-ft_isspec	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@ft_utils.c	/^int		ft_isspec(char *cmd, int i)$/;"	f
 ft_isspec	srcs/utils/ft_utils.c	/^int		ft_isspec(char *cmd, int i)$/;"	f
 ft_itoa	libs/srcs/ft_itoa.c	/^char		*ft_itoa(int n)$/;"	f
 ft_lstadd_back	libs/srcs/ft_lstadd_back.c	/^void		ft_lstadd_back(t_list **lst, t_list *new_lst)$/;"	f
@@ -5017,16 +4988,12 @@ ft_putnbr_fd	libs/srcs/ft_putnbr_fd.c	/^void	ft_putnbr_fd(int n, int fd)$/;"	f
 ft_putstr_fd	libs/srcs/ft_putstr_fd.c	/^void	ft_putstr_fd(char *s, int fd)$/;"	f
 ft_split	libs/srcs/ft_split.c	/^char				**ft_split(char const *s, char c)$/;"	f
 ft_strchr	libs/srcs/ft_strchr.c	/^char	*ft_strchr(const char *s, int c)$/;"	f
-ft_strcmp	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@srcs@ft_strcmp.c	/^int		ft_strcmp(char *s1, char *s2)$/;"	f
 ft_strcmp	libs/srcs/ft_strcmp.c	/^int		ft_strcmp(char *s1, char *s2)$/;"	f
 ft_strdup	libs/srcs/ft_strdup.c	/^char		*ft_strdup(const char *s1)$/;"	f
 ft_strjoin	libs/srcs/ft_strjoin.c	/^char		*ft_strjoin(char *s1, char *s2)$/;"	f
-ft_strjoin_sp	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@ft_utils.c	/^char		*ft_strjoin_sp(char *s1, char *s2)$/;"	f
-ft_strjoin_sp	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@ft_utils.c	/^char		*ft_strjoin_sp(char *s1, char *s2)$/;"	f
 ft_strjoin_sp	srcs/utils/ft_utils.c	/^char		*ft_strjoin_sp(char *s1, char *s2)$/;"	f
 ft_strlcat	libs/srcs/ft_strlcat.c	/^size_t		ft_strlcat(char *dst, const char *src, size_t size)$/;"	f
 ft_strlcpy	libs/srcs/ft_strlcpy.c	/^size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)$/;"	f
-ft_strlen	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@srcs@ft_strlen.c	/^size_t		ft_strlen(const char *str)$/;"	f
 ft_strlen	libs/srcs/ft_strlen.c	/^size_t		ft_strlen(const char *str)$/;"	f
 ft_strmapi	libs/srcs/ft_strmapi.c	/^char				*ft_strmapi(char const *s, char (*f)(unsigned int, char))$/;"	f
 ft_strncmp	libs/srcs/ft_strncmp.c	/^size_t		ft_strncmp(const char *s1, const char *s2, size_t num)$/;"	f
@@ -5034,8 +5001,6 @@ ft_strnrcmp	libs/srcs/ft_strnrcmp.c	/^int		ft_strnrcmp(char *s1, char *s2, int c
 ft_strnstr	libs/srcs/ft_strnstr.c	/^char		*ft_strnstr(const char *haystack, const char *needle, size_t len)$/;"	f
 ft_strnum	libs/srcs/ft_isnum.c	/^int		ft_strnum(char *str)$/;"	f
 ft_strrchr	libs/srcs/ft_strrchr.c	/^char		*ft_strrchr(const char *s, int c)$/;"	f
-ft_strrdup	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@ft_utils.c	/^char	*ft_strrdup(char *s, int st, int ed)$/;"	f
-ft_strrdup	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@ft_utils.c	/^char	*ft_strrdup(char *s, int st, int ed)$/;"	f
 ft_strrdup	srcs/utils/ft_utils.c	/^char	*ft_strrdup(char *s, int st, int ed)$/;"	f
 ft_strtrim	libs/srcs/ft_strtrim.c	/^char		*ft_strtrim(char const *s1, char const *set)$/;"	f
 ft_substr	libs/srcs/ft_substr.c	/^char		*ft_substr(char const *s, unsigned int start, size_t len)$/;"	f
@@ -5096,11 +5061,8 @@ has_meta_key	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@4
 has_print_wheel	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define has_print_wheel /;"	d
 has_status_line	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define has_status_line /;"	d
 hdoc	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	t_hdoc				hdoc;$/;"	m	struct:s_all
-hdoc	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	t_hdoc			hdoc;$/;"	m	struct:s_all
 hdoc	includes/minishell.h	/^	t_hdoc				hdoc;$/;"	m	struct:s_all
 hdoc	includes/pipe.h	/^	t_hdoc			hdoc;$/;"	m	struct:s_all
-hdoc_init	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@heredoc.c	/^void		hdoc_init(t_all *all)$/;"	f
-hdoc_init	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@heredoc@heredoc.c	/^void		hdoc_init(t_all *all)$/;"	f
 hdoc_init	srcs/heredoc/heredoc.c	/^void		hdoc_init(t_all *all)$/;"	f
 head	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	void				*head;$/;"	m	struct:s_lst
 head	includes/minishell.h	/^	void				*head;$/;"	m	struct:s_lst
@@ -5131,23 +5093,16 @@ init_1string	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@4
 init_2string	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define init_2string /;"	d
 init_3string	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define init_3string /;"	d
 init_blt	srcs/builtin/init_blt.c	/^void	init_blt(t_all *all)$/;"	f
+init_config	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@main.c	/^void	init_config(void)$/;"	f
+init_config	srcs/main.c	/^void	init_config(void)$/;"	f
 init_env	srcs/builtin/init_blt.c	/^t_env *init_env(t_env *env) \/\/ be deleted when merge$/;"	f
 init_file	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define init_file /;"	d
-init_lexer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@init.c	/^void	init_lexer(t_lexer *lexer)$/;"	f
-init_lexer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@init.c	/^void	init_lexer(t_lexer *lexer)$/;"	f
 init_lexer	srcs/utils/init.c	/^void	init_lexer(t_lexer *lexer)$/;"	f
-init_lst	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@init.c	/^void	init_lst(t_lst *lst)$/;"	f
-init_lst	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@init.c	/^void	init_lst(t_lst *lst)$/;"	f
 init_lst	srcs/utils/init.c	/^void	init_lst(t_lst *lst)$/;"	f
-init_parse	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@init.c	/^void	init_parse(t_parse *flag, int pipe)$/;"	f
-init_parse	srcs/utils/init.c	/^void	init_parse(t_parse *flag, int pipe)$/;"	f
-init_parser	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@parse.c	/^void	init_parser(char *cmd, char *arg, t_lst *syn)$/;"	f
 init_prog	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define init_prog /;"	d
 init_syntax	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@parser.c	/^t_lst	*init_syntax(void)$/;"	f
 init_syntax	srcs/parse/parser.c	/^t_lst	*init_syntax(void)$/;"	f
 init_tabs	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define init_tabs /;"	d
-init_tool	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@init.c	/^void	init_tool(t_tool *tool)$/;"	f
-init_tool	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@init.c	/^void	init_tool(t_tool *tool)$/;"	f
 init_tool	srcs/utils/init.c	/^void	init_tool(t_tool *tool)$/;"	f
 initialize_color	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define initialize_color /;"	d
 initialize_pair	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define initialize_pair /;"	d
@@ -5206,7 +5161,6 @@ is_sorted	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_mi
 is_sorted	libs/includes/libft.h	/^	int				is_sorted;$/;"	m	struct:s_node
 is_syncok	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^#define is_syncok(/;"	d
 key	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*key;$/;"	m	struct:s_env
-key	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	char			*key;$/;"	m	struct:s_env
 key	includes/minishell.h	/^	char				*key;$/;"	m	struct:s_env
 key	includes/pipe.h	/^	char			*key;$/;"	m	struct:s_env
 key_a1	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define key_a1 /;"	d
@@ -5396,8 +5350,6 @@ length	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_mini
 lex	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*lex;$/;"	m	struct:s_lexer
 lex	includes/minishell.h	/^	char				*lex;$/;"	m	struct:s_lexer
 lexer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	t_lexer				*lexer;$/;"	m	struct:s_conf
-lexer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@lexer.c	/^void		lexer(char *cmd)$/;"	f
-lexer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@lexer.c	/^void		lexer(char *cmd)$/;"	f
 lexer	includes/minishell.h	/^	t_lexer				*lexer;$/;"	m	struct:s_conf
 lexer	srcs/parse/lexer.c	/^void		lexer(char *cmd)$/;"	f
 line	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@editline@readline.h	/^	const char	*line;$/;"	m	struct:_hist_entry
@@ -5416,21 +5368,14 @@ lv_error_message_size	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@mi
 lv_file_start	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@fcntl.h	/^	off_t           lv_file_start;$/;"	m	struct:fchecklv
 magic_cookie_glitch	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define magic_cookie_glitch /;"	d
 magic_cookie_glitch_ul	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define magic_cookie_glitch_ul /;"	d
-main	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@heredoc.c	/^int			main(int ac, char **av, char **path)$/;"	f
-main	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@heredoc@heredoc.c	/^int			main(int ac, char **av, char **path)$/;"	f
 main	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@main.c	/^int		main(int ac, char **av, char **envp)$/;"	f
 main	srcs/heredoc/heredoc.c	/^int			main(int ac, char **av, char **path)$/;"	f
 main	srcs/main.c	/^int		main(int ac, char **av, char **envp)$/;"	f
 main	srcs/pipe/pipex.c	/^int			main(int ac, char **av, char **path)$/;"	f
 major	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@types.h	/^#define major(/;"	d
 major	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@types.h	/^major(__uint32_t _x)$/;"	f
-make_env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@make_struct.c	/^void	make_env(t_lst *lst, char *key, char *value)$/;"	f
-make_env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@make_struct.c	/^void	make_env(t_lst *lst, char *key, char *value)$/;"	f
 make_env	srcs/utils/make_struct.c	/^void	make_env(t_lst *lst, char *key, char *value)$/;"	f
-make_syntax	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@make_struct.c	/^void	make_syntax(t_lst *lst, char *cmd, char *arg)$/;"	f
 make_syntax	srcs/utils/make_struct.c	/^void	make_syntax(t_lst *lst, char *cmd, char *arg)$/;"	f
-make_token	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@make_struct.c	/^void	make_token(t_lst *lst, int st, int ed)$/;"	f
-make_token	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@make_struct.c	/^void	make_token(t_lst *lst, int st, int ed)$/;"	f
 make_token	srcs/utils/make_struct.c	/^void	make_token(t_lst *lst, int st, int ed)$/;"	f
 makedev	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@types.h	/^#define makedev(/;"	d
 makedev	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@types.h	/^makedev(__uint32_t _major, __uint32_t _minor)$/;"	f
@@ -5561,7 +5506,6 @@ next	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishe
 next	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	struct s_process	*next;$/;"	m	struct:s_process	typeref:struct:s_process::s_process
 next	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	struct s_syntax		*next;$/;"	m	struct:s_syntax	typeref:struct:s_syntax::s_syntax
 next	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	struct s_token		*next;$/;"	m	struct:s_token	typeref:struct:s_token::s_token
-next	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	struct s_env	*next;$/;"	m	struct:s_env	typeref:struct:s_env::s_env
 next	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@includes@libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
 next	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@includes@libft.h	/^	struct s_node	*next;$/;"	m	struct:s_node	typeref:struct:s_node::s_node
 next	includes/minishell.h	/^	struct s_env		*next;$/;"	m	struct:s_env	typeref:struct:s_env::s_env
@@ -5589,7 +5533,6 @@ number_of_pins	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell
 off_t	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@_types@_off_t.h	/^typedef __darwin_off_t          off_t;$/;"	t
 open	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@fcntl.h	/^int     open(const char *, int, ...) __DARWIN_ALIAS_C(open);$/;"	v
 opt	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	int					opt;$/;"	m	struct:s_blt
-opt	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	int				opt;$/;"	m	struct:s_parse
 opt	includes/minishell.h	/^	int					opt;$/;"	m	struct:s_blt
 opt	includes/pipe.h	/^	int				opt;$/;"	m	struct:s_parse
 order_of_pins	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define order_of_pins /;"	d
@@ -5602,7 +5545,6 @@ output_res_line	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishel
 output_res_vert_inch	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define output_res_vert_inch /;"	d
 over_strike	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define over_strike /;"	d
 p_cmd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*p_cmd;$/;"	m	struct:s_blt
-p_cmd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	char			*p_cmd;$/;"	m	struct:s_parse
 p_cmd	includes/minishell.h	/^	char				*p_cmd;$/;"	m	struct:s_blt
 p_cmd	includes/pipe.h	/^	char			*p_cmd;$/;"	m	struct:s_parse
 pad_char	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define pad_char /;"	d
@@ -5621,29 +5563,21 @@ parm_right_micro	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishe
 parm_rindex	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define parm_rindex /;"	d
 parm_up_cursor	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define parm_up_cursor /;"	d
 parm_up_micro	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define parm_up_micro /;"	d
-parse	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	t_parse			parse;$/;"	m	struct:s_all
 parse	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@main.c	/^void	parse(void)$/;"	f
-parse	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse.c	/^int parse()$/;"	f
 parse	includes/pipe.h	/^	t_parse			parse;$/;"	m	struct:s_all
 parse	srcs/main.c	/^void	parse(void)$/;"	f
-parse_redir	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@parse.c	/^void	parse_redir(t_token *tok, t_lst *syn, char *cmd, char *arg)$/;"	f
-parse_redir	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@parser.c	/^void	parse_redir(t_token *tok, t_lst *syn, char *cmd, char *arg)$/;"	f
-parse_redir	srcs/parse/parser.c	/^void	parse_redir(t_token *tok, t_lst *syn, char *cmd, char *arg)$/;"	f
-parser	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@parse.c	/^t_token	*parser(t_lst *process, t_token *tok)$/;"	f
+parse_redir	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@parser.c	/^void	parse_redir(t_token *tok, t_lst *syn, char **cmd, char **arg)$/;"	f
+parse_redir	srcs/parse/parser.c	/^void	parse_redir(t_token *tok, t_lst *syn, char **cmd, char **arg)$/;"	f
 parser	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@parser.c	/^t_token	*parser(t_lst *process, t_token *tok)$/;"	f
 parser	srcs/parse/parser.c	/^t_token	*parser(t_lst *process, t_token *tok)$/;"	f
 pause	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@unistd.h	/^int	 pause(void) __DARWIN_ALIAS_C(pause);$/;"	v
 pc_term_options	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define pc_term_options /;"	d
 pdat	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^	struct pdat$/;"	s	struct:_win_st
 pid	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	pid_t				*pid;$/;"	m	struct:s_all
-pid	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	pid_t			*pid;$/;"	m	struct:s_all
 pid	includes/minishell.h	/^	pid_t				*pid;$/;"	m	struct:s_all
 pid	includes/pipe.h	/^	pid_t			*pid;$/;"	m	struct:s_all
 pid_t	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@_types@_pid_t.h	/^typedef __darwin_pid_t        pid_t;$/;"	t
-pipe	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	int					pipe;$/;"	m	struct:s_parse
 pipe	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	t_pipe				pipe;$/;"	m	struct:s_all
-pipe	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	t_pipe			pipe;$/;"	m	struct:s_all
-pipe	includes/minishell.h	/^	int					pipe;$/;"	m	struct:s_parse
 pipe	includes/minishell.h	/^	t_pipe				pipe;$/;"	m	struct:s_all
 pipe	includes/pipe.h	/^	t_pipe			pipe;$/;"	m	struct:s_all
 pkey_key	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define pkey_key /;"	d
@@ -5656,7 +5590,6 @@ prev	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishe
 prev	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	struct s_process	*prev;$/;"	m	struct:s_process	typeref:struct:s_process::s_process
 prev	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	struct s_syntax		*prev;$/;"	m	struct:s_syntax	typeref:struct:s_syntax::s_syntax
 prev	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	struct s_token		*prev;$/;"	m	struct:s_token	typeref:struct:s_token::s_token
-prev	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	struct s_env	*prev;$/;"	m	struct:s_env	typeref:struct:s_env::s_env
 prev	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@includes@libft.h	/^	struct s_node	*prev;$/;"	m	struct:s_node	typeref:struct:s_node::s_node
 prev	includes/minishell.h	/^	struct s_env		*prev;$/;"	m	struct:s_env	typeref:struct:s_env::s_env
 prev	includes/minishell.h	/^	struct s_process	*prev;$/;"	m	struct:s_process	typeref:struct:s_process::s_process
@@ -5664,22 +5597,14 @@ prev	includes/minishell.h	/^	struct s_syntax		*prev;$/;"	m	struct:s_syntax	typer
 prev	includes/minishell.h	/^	struct s_token		*prev;$/;"	m	struct:s_token	typeref:struct:s_token::s_token
 prev	includes/pipe.h	/^	struct s_env	*prev;$/;"	m	struct:s_env	typeref:struct:s_env::s_env
 prev	libs/includes/libft.h	/^	struct s_node	*prev;$/;"	m	struct:s_node	typeref:struct:s_node::s_node
-print_env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@print.c	/^void	print_env(t_lst *env)$/;"	f
 print_env	srcs/utils/print.c	/^void	print_env(t_lst *env)$/;"	f
-print_error	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@error.c	/^void	print_error(char *msg)$/;"	f
-print_error	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@print_error.c	/^void	print_error(char *str)$/;"	f
-print_error	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@error.c	/^void	print_error(char *msg)$/;"	f
 print_error	srcs/utils/error.c	/^void	print_error(char *msg)$/;"	f
 print_error	srcs/utils/print_error.c	/^void	print_error(char *str)$/;"	f
-print_process	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@print.c	/^void	print_process(t_lst *process)$/;"	f
 print_process	srcs/utils/print.c	/^void	print_process(t_lst *process)$/;"	f
 print_rate	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define print_rate /;"	d
 print_screen	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define print_screen /;"	d
-print_syntax	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@print.c	/^void	print_syntax(t_lst *syntax)$/;"	f
 print_syntax	srcs/utils/print.c	/^void	print_syntax(t_lst *syntax)$/;"	f
-print_system	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@print.c	/^void	print_system(void)$/;"	f
 print_system	srcs/utils/print.c	/^void	print_system(void)$/;"	f
-print_token	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@print.c	/^void	print_token(t_lst *token)$/;"	f
 print_token	srcs/utils/print.c	/^void	print_token(t_lst *token)$/;"	f
 proc_rlimit_control_wakeupmon	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@resource.h	/^struct proc_rlimit_control_wakeupmon {$/;"	s
 process	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	t_lst				*process;$/;"	m	struct:s_conf
@@ -5918,12 +5843,10 @@ ru_opaque	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_m
 ru_oublock	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@resource.h	/^	long    ru_oublock;             \/* block output operations (atomic) *\/$/;"	m	struct:rusage
 ru_stime	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@resource.h	/^	struct timeval ru_stime;        \/* system time used (PL) *\/$/;"	m	struct:rusage	typeref:struct:rusage::timeval
 ru_utime	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@resource.h	/^	struct timeval ru_utime;        \/* user time used (PL) *\/$/;"	m	struct:rusage	typeref:struct:rusage::timeval
-run_cd	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@builtin@blt_cd.c	/^void	run_cd(char **av, char **path, t_all *all)$/;"	f
 run_cd	srcs/builtin/blt_cd.c	/^void	run_cd(char **av, char **path, t_all *all)$/;"	f
 run_dup2	srcs/pipe/redirect.c	/^void	run_dup2(int std_fd, int *fd)$/;"	f
 run_echo	srcs/builtin/blt_echo.c	/^void		run_echo(char **av, t_all *all)$/;"	f
 run_env	srcs/builtin/blt_env.c	/^void	run_env(char **path)$/;"	f
-run_execve	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@pipe@run.c	/^void	run_execve(t_all *all)$/;"	f
 run_execve	srcs/pipe/run.c	/^void	run_execve(t_all *all)$/;"	f
 run_exit	srcs/builtin/blt_exit.c	/^void	run_exit(t_all *all)$/;"	f
 run_export	srcs/builtin/blt_export.c	/^void		run_export(char **av, char **path, t_all *all)$/;"	f
@@ -5940,7 +5863,6 @@ rusage_info_v3	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell
 rusage_info_v4	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@resource.h	/^struct rusage_info_v4 {$/;"	s
 rusage_info_v5	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@resource.h	/^struct rusage_info_v5 {$/;"	s
 s_all	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^typedef struct			s_all$/;"	s
-s_all	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^typedef struct		s_all$/;"	s
 s_all	includes/minishell.h	/^typedef struct			s_all$/;"	s
 s_all	includes/pipe.h	/^typedef struct		s_all$/;"	s
 s_blt	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^typedef struct			s_blt$/;"	s
@@ -5948,11 +5870,9 @@ s_blt	includes/minishell.h	/^typedef struct			s_blt$/;"	s
 s_conf	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^typedef struct			s_conf$/;"	s
 s_conf	includes/minishell.h	/^typedef struct			s_conf$/;"	s
 s_env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^typedef struct			s_env$/;"	s
-s_env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^typedef struct		s_env$/;"	s
 s_env	includes/minishell.h	/^typedef struct			s_env$/;"	s
 s_env	includes/pipe.h	/^typedef struct		s_env$/;"	s
 s_hdoc	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^typedef struct			s_hdoc$/;"	s
-s_hdoc	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^typedef struct		s_hdoc$/;"	s
 s_hdoc	includes/minishell.h	/^typedef struct			s_hdoc$/;"	s
 s_hdoc	includes/pipe.h	/^typedef struct		s_hdoc$/;"	s
 s_lexer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^typedef struct			s_lexer$/;"	s
@@ -5963,12 +5883,8 @@ s_lst	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minish
 s_lst	includes/minishell.h	/^typedef struct			s_lst$/;"	s
 s_node	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@includes@libft.h	/^typedef struct		s_node$/;"	s
 s_node	libs/includes/libft.h	/^typedef struct		s_node$/;"	s
-s_parse	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^typedef struct			s_parse$/;"	s
-s_parse	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^typedef struct		s_parse$/;"	s
-s_parse	includes/minishell.h	/^typedef struct			s_parse$/;"	s
 s_parse	includes/pipe.h	/^typedef struct		s_parse$/;"	s
 s_pipe	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^typedef struct			s_pipe$/;"	s
-s_pipe	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^typedef struct		s_pipe$/;"	s
 s_pipe	includes/minishell.h	/^typedef struct			s_pipe$/;"	s
 s_pipe	includes/pipe.h	/^typedef struct		s_pipe$/;"	s
 s_process	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^typedef struct			s_process$/;"	s
@@ -5993,7 +5909,6 @@ sa_mask	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_min
 sa_sigaction	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@signal.h	/^#define sa_sigaction /;"	d
 sa_tramp	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@signal.h	/^	void    (*sa_tramp)(void *, int, int, siginfo_t *, void *);$/;"	m	struct:__sigaction
 save_cursor	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define save_cursor /;"	d
-save_process	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@make_struct.c	/^void	save_process(t_lst *lst, t_lst *syntax)$/;"	f
 save_process	srcs/utils/make_struct.c	/^void	save_process(t_lst *lst, t_lst *syntax)$/;"	f
 saveterm	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^#define saveterm(/;"	d
 scancode_escape	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define scancode_escape /;"	d
@@ -6022,12 +5937,8 @@ set_color_pair	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell
 set_env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@utils@set.c	/^void	set_env(char **envp)$/;"	f
 set_env	srcs/setup/set.c	/^void	set_env(char **envp)$/;"	f
 set_env	srcs/utils/set.c	/^void	set_env(char **envp)$/;"	f
-set_first_fork	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@heredoc.c	/^static void	set_first_fork(av, path, &all);$/;"	v	file:
-set_first_fork	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@heredoc@heredoc.c	/^static void	set_first_fork(av, path, &all);$/;"	v	file:
 set_first_fork	srcs/heredoc/heredoc.c	/^static void	set_first_fork(av, path, &all);$/;"	v	file:
 set_foreground	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define set_foreground /;"	d
-set_index	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@tokenizer.c	/^static void	set_index(t_lst *token)$/;"	f	file:
-set_index	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@tokenizer.c	/^static void	set_index(t_lst *token)$/;"	f	file:
 set_index	srcs/parse/tokenizer.c	/^static void	set_index(t_lst *token)$/;"	f	file:
 set_left_margin	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define set_left_margin /;"	d
 set_left_margin_parm	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define set_left_margin_parm /;"	d
@@ -6049,8 +5960,6 @@ set_terminal	srcs/setup/set.c	/^void	set_terminal(void)$/;"	f
 set_terminal	srcs/utils/set.c	/^void	set_terminal(void)$/;"	f
 set_top_margin	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define set_top_margin /;"	d
 set_top_margin_parm	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define set_top_margin_parm /;"	d
-set_type	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@tokenizer.c	/^static void	set_type(t_lst *token)$/;"	f	file:
-set_type	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@tokenizer.c	/^static void	set_type(t_lst *token)$/;"	f	file:
 set_type	srcs/parse/tokenizer.c	/^static void	set_type(t_lst *token)$/;"	f	file:
 set_wait	srcs/pipe/pipe.c	/^void	set_wait(void)$/;"	f
 set_window	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define set_window /;"	d
@@ -6115,7 +6024,6 @@ split_env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_mi
 split_env	srcs/setup/set.c	/^char	**split_env(char *env)$/;"	f
 split_env	srcs/utils/set.c	/^char	**split_env(char *env)$/;"	f
 split_line	libs/srcs/ft_gnl.c	/^static int			split_line(char **backup, char **line, int cut_idx)$/;"	f	file:
-split_path	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@pipe@set_cmd.c	/^void		split_path(const char *cmd_1, char **path, t_all *all)$/;"	f
 split_path	srcs/pipe/set_cmd.c	/^void		split_path(const char *cmd_1, char **path, t_all *all)$/;"	f
 sprintf	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@secure@_stdio.h	/^#define sprintf(/;"	d
 sprintf	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@secure@_stdio.h	/^#undef sprintf$/;"	d
@@ -6129,8 +6037,6 @@ st	includes/minishell.h	/^	int					st;$/;"	m	struct:s_tool
 stack_t	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@_types@_sigaltstack.h	/^typedef _STRUCT_SIGALTSTACK     stack_t; \/* [???] signal stack *\/$/;"	t
 standend	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^#define standend(/;"	d
 standout	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^#define standout(/;"	d
-start	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	int					start;$/;"	m	struct:s_parse
-start	includes/minishell.h	/^	int					start;$/;"	m	struct:s_parse
 start_bit_image	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define start_bit_image /;"	d
 start_char_set_def	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define start_char_set_def /;"	d
 status_line_esc_ok	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define status_line_esc_ok /;"	d
@@ -6175,15 +6081,12 @@ sv_handler	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_
 sv_mask	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@signal.h	/^	int     sv_mask;                \/* signal mask to apply *\/$/;"	m	struct:sigvec
 sv_onstack	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@signal.h	/^#define sv_onstack /;"	d
 swblk_t	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@sys@types.h	/^typedef int32_t                 swblk_t;        \/* swap offset *\/$/;"	t
-syntax	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	t_lst				*syntax;$/;"	m	struct:s_parse
 syntax	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	t_lst				*syntax;$/;"	m	struct:s_process
-syntax	includes/minishell.h	/^	t_lst				*syntax;$/;"	m	struct:s_parse
 syntax	includes/minishell.h	/^	t_lst				*syntax;$/;"	m	struct:s_process
 syscall_arg_t	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@arm@types.h	/^typedef u_int32_t               syscall_arg_t;$/;"	t
 syscall_arg_t	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@arm@types.h	/^typedef u_int64_t               syscall_arg_t;$/;"	t
 system	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@stdlib.h	/^int	 system(const char *) __DARWIN_ALIAS_C(system);$/;"	v
 t_all	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^}						t_all;$/;"	t	typeref:struct:s_all
-t_all	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^}					t_all;$/;"	t	typeref:struct:s_all
 t_all	includes/minishell.h	/^}						t_all;$/;"	t	typeref:struct:s_all
 t_all	includes/pipe.h	/^}					t_all;$/;"	t	typeref:struct:s_all
 t_blt	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^}						t_blt;$/;"	t	typeref:struct:s_blt
@@ -6191,11 +6094,9 @@ t_blt	includes/minishell.h	/^}						t_blt;$/;"	t	typeref:struct:s_blt
 t_conf	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^}						t_conf;$/;"	t	typeref:struct:s_conf
 t_conf	includes/minishell.h	/^}						t_conf;$/;"	t	typeref:struct:s_conf
 t_env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^}						t_env;$/;"	t	typeref:struct:s_env
-t_env	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^}					t_env;$/;"	t	typeref:struct:s_env
 t_env	includes/minishell.h	/^}						t_env;$/;"	t	typeref:struct:s_env
 t_env	includes/pipe.h	/^}					t_env;$/;"	t	typeref:struct:s_env
 t_hdoc	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^}						t_hdoc;$/;"	t	typeref:struct:s_hdoc
-t_hdoc	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^}					t_hdoc;$/;"	t	typeref:struct:s_hdoc
 t_hdoc	includes/minishell.h	/^}						t_hdoc;$/;"	t	typeref:struct:s_hdoc
 t_hdoc	includes/pipe.h	/^}					t_hdoc;$/;"	t	typeref:struct:s_hdoc
 t_lexer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^}						t_lexer;$/;"	t	typeref:struct:s_lexer
@@ -6206,12 +6107,8 @@ t_lst	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minish
 t_lst	includes/minishell.h	/^}						t_lst;$/;"	t	typeref:struct:s_lst
 t_node	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@includes@libft.h	/^}					t_node;$/;"	t	typeref:struct:s_node
 t_node	libs/includes/libft.h	/^}					t_node;$/;"	t	typeref:struct:s_node
-t_parse	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^}						t_parse;$/;"	t	typeref:struct:s_parse
-t_parse	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^}					t_parse;$/;"	t	typeref:struct:s_parse
-t_parse	includes/minishell.h	/^}						t_parse;$/;"	t	typeref:struct:s_parse
 t_parse	includes/pipe.h	/^}					t_parse;$/;"	t	typeref:struct:s_parse
 t_pipe	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^}						t_pipe;$/;"	t	typeref:struct:s_pipe
-t_pipe	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^}					t_pipe;$/;"	t	typeref:struct:s_pipe
 t_pipe	includes/minishell.h	/^}						t_pipe;$/;"	t	typeref:struct:s_pipe
 t_pipe	includes/pipe.h	/^}					t_pipe;$/;"	t	typeref:struct:s_pipe
 t_process	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^}						t_process;$/;"	t	typeref:struct:s_process
@@ -6252,13 +6149,9 @@ timeout_msec	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@4
 to_status_line	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define to_status_line /;"	d
 token	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*token;$/;"	m	struct:s_token
 token	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	t_lst				*token;$/;"	m	struct:s_conf
-token	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	t_lst				*token;$/;"	m	struct:s_tool
 token	includes/minishell.h	/^	char				*token;$/;"	m	struct:s_token
 token	includes/minishell.h	/^	t_lst				*token;$/;"	m	struct:s_conf
-token	includes/minishell.h	/^	t_lst				*token;$/;"	m	struct:s_tool
-tokenizer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@parse@tokenizer.c	/^void		tokenizer(t_conf *conf, char *lex)$/;"	f
-tokenizer	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/srcs@tokenizer.c	/^void		tokenizer(t_conf *conf, char *lex)$/;"	f
-tokenizer	srcs/parse/tokenizer.c	/^void		tokenizer(t_conf *conf, char *lex)$/;"	f
+tokenizer	srcs/parse/tokenizer.c	/^void		tokenizer(char *lex)$/;"	f
 tone	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define tone /;"	d
 top	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@includes@libft.h	/^	t_node			*top;$/;"	m	struct:s_stack
 top	libs/includes/libft.h	/^	t_node			*top;$/;"	m	struct:s_stack
@@ -6312,7 +6205,6 @@ underline_char	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell
 unsetenv	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@stdlib.h	/^int	 unsetenv(const char *) __DARWIN_ALIAS(unsetenv);$/;"	v
 untouchwin	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^#define untouchwin(/;"	d
 up_flag	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	int					up_flag;$/;"	m	struct:s_blt
-up_flag	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	int				up_flag;$/;"	m	struct:s_parse
 up_flag	includes/minishell.h	/^	int					up_flag;$/;"	m	struct:s_blt
 up_flag	includes/pipe.h	/^	int				up_flag;$/;"	m	struct:s_parse
 up_half_line	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@term.h	/^#define up_half_line /;"	d
@@ -6347,7 +6239,6 @@ va_list	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_min
 val	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/libs@includes@libft.h	/^	int				val;$/;"	m	struct:s_node
 val	libs/includes/libft.h	/^	int				val;$/;"	m	struct:s_node
 value	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@minishell.h	/^	char				*value;$/;"	m	struct:s_env
-value	.ccls-cache/@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/includes@pipe.h	/^	char			*value;$/;"	m	struct:s_env
 value	includes/minishell.h	/^	char				*value;$/;"	m	struct:s_env
 value	includes/pipe.h	/^	char			*value;$/;"	m	struct:s_env
 vid_attr	.ccls-cache/@@Users@parkjaekwang@42cursus@inner_circles@minishell@42_minishell/@Library@Developer@CommandLineTools@SDKs@MacOSX11.3.sdk@usr@include@curses.h	/^#define vid_attr(/;"	d

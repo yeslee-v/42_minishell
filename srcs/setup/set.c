@@ -6,13 +6,22 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/13 19:30:56 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/15 20:16:00 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 extern t_conf g_sh;
+
+void	set_prompt(void)
+{
+	g_sh.cmd = readline(PROMPT);
+	if (ft_strcmp(g_sh.cmd, "exit") == 0)
+		exit_shell(0);
+	add_history(g_sh.cmd);
+	rl_redisplay();
+}
 
 void	sig_handler(int signum)
 {
@@ -38,33 +47,21 @@ void	set_signal(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-char	**split_env(char *env)
+void	set_process(void)
 {
-	char	**ret;
-	int		i;
+	t_token	*tmp;
 
-	i = -1;
-	if (!env)
-		return (NULL);
-	ret = malloc(sizeof(char *) * 3);
-	while (env[++i])
-	{
-		if (env[i] == '=' && env[i + 1] != '\0')
-		{
-			ret[0] = ft_strrdup(env, 0, i - 1);
-			ret[1] = ft_strrdup(env, i + 1, ft_strlen(env) - 1);
-			ret[2] = NULL;
-			break ;
-		}
-		else if (env[i] == '=' && env[i + 1] == '\0')
-		{
-			ret[0] = ft_strrdup(env, 0, i - 1);
-			ret[1] = NULL;
-			ret[2] = NULL;
-			break ;
-		}
-	}
-	return (ret);
+	tmp = NULL;
+	lexer(g_sh.cmd);
+	if (g_sh.lexer->err == 1)
+		exit_shell(0);
+	tokenizer(g_sh.lexer->lex);
+	tmp = g_sh.token->head;
+	while (tmp)
+		tmp = parser(g_sh.process, tmp);
+	if (tmp != NULL)
+		parser(g_sh.process, tmp);
+	print_system();
 }
 
 void	set_env(char **envp)
@@ -80,8 +77,9 @@ void	set_env(char **envp)
 	g_sh.envp = envp;
 	while (envp[++i])
 	{
-		tmp = split_env(envp[i]);
+		tmp = ft_split_env(envp[i]);
 		make_env(env, tmp[0], tmp[1]);
+		ft_free_double((void **)tmp);
 	}
 	g_sh.env = env;
 }

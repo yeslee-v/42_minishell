@@ -6,11 +6,13 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:17:44 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/12 15:11:03 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/15 12:31:03 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern t_conf g_sh;
 
 static void	analyze_space(t_lexer *lexer, int i)
 {
@@ -51,11 +53,12 @@ void		lexer(char *cmd)
 {
 	int		i;
 	int		ret;
-	t_lexer	*lexer;
+	t_lexer *lexer;
 
+	lexer = g_sh.lexer;
+	lexer->lex = ft_strdup(cmd);
+	ft_memset(lexer->lex, 0, ft_strlen(cmd));
 	i = -1;
-	lexer = malloc(sizeof(t_lexer));
-	init_lexer(lexer);
 	while (cmd[++i])
 	{
 		if (ft_isalnum(cmd[i]))
