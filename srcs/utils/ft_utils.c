@@ -2,7 +2,7 @@
 
 int		ft_isspec(char *cmd, int i)
 {
-	int last;
+	int	last;
 
 	last = 0;
 	if (cmd[i + 1] == '\0')
@@ -43,7 +43,7 @@ char	*ft_strrdup(char *s, int st, int ed)
 	return (ret);
 }
 
-char		*ft_strjoin_sp(char *s1, char *s2)
+char	*ft_strjoin_sp(char *s1, char *s2)
 {
 	char	*newstr;
 	int		i;
@@ -99,4 +99,33 @@ int		ft_isquote(char c)
 	else if (c == 39)
 		return (81);
 	return (0);
+}
+
+char	**ft_split_env(char *env)
+{
+	char	**ret;
+	int		i;
+
+	i = -1;
+	if (!env)
+		return (NULL);
+	ret = malloc(sizeof(char *) * 3);
+	while (env[++i])
+	{
+		if (env[i] == '=' && env[i + 1] != '\0')
+		{
+			ret[0] = ft_strrdup(env, 0, i - 1);
+			ret[1] = ft_strrdup(env, i + 1, ft_strlen(env) - 1);
+			ret[2] = NULL;
+			break ;
+		}
+		else if (env[i] == '=' && env[i + 1] == '\0')
+		{
+			ret[0] = ft_strrdup(env, 0, i - 1);
+			ret[1] = NULL;
+			ret[2] = NULL;
+			break ;
+		}
+	}
+	return (ret);
 }
