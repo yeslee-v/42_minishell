@@ -36,9 +36,6 @@ void	set_lower(char *cmd, t_all *all)
 }
 
 int		intro_blt_intro(int ac, char **av, char **path)
-/*
- *int			main(int ac, char **av, char **path)
- */
 {
 	t_all	all;
 
