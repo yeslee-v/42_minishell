@@ -6,7 +6,7 @@
 #    By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/13 16:39:04 by parkjaekw         #+#    #+#              #
-#    Updated: 2021/07/16 16:07:56 by parkjaekw        ###   ########.fr        #
+#    Updated: 2021/07/16 16:31:47 by yeslee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ INCS				=	minishell.h
 J_SRCS				=	main.c utils/error.c utils/ft_utils.c utils/init.c \
 						utils/make_struct.c utils/free.c parse/lexer.c parse/tokenizer.c \
 						utils/print.c setup/set.c parse/parser.c
-Y_SRCS				=	builtin/blt_cd.c builtin/blt_echo.c \
+Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
 						builtin/blt_env.c builtin/blt_exit.c builtin/blt_pwd.c \
 						builtin/blt_export.c builtin/blt_unset.c \
-						builtin/init_blt.c
+						heredoc/hdoc_main.c heredoc/heredoc.c
 SRCS				=	$(Y_SRCS) $(J_SRCS)
 OBJS				= 	$(patsubst %.c, %.o, $(SRCS_FILE))
 SRCS_DIR			=	./srcs/
