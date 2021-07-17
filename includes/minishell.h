@@ -6,7 +6,7 @@
 /*   By: yeslee <yeslee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 17:26:40 by yeslee            #+#    #+#             */
-/*   Updated: 2021/07/16 16:43:25 by yeslee           ###   ########.fr       */
+/*   Updated: 2021/07/17 18:04:42 by yeslee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +277,6 @@ void					run_unset(int ac, char **av, char **path, t_all *all);
  * heredoc
  */
 int						intro_hdoc();
-void					hdoc_init(t_hdoc *hdoc);
-void				run_hdoc(t_hdoc *hdoc);
+void				run_hdoc(t_hdoc *hdoc, t_syntax *stx);
 
 #endif

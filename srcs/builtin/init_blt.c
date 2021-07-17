@@ -35,32 +35,32 @@ void	set_lower(char *cmd, t_all *all)
 	}
 }
 
+void	set_builtin(t_all *all, int ac, char **av, char **path)
+{
+	if (!(ft_strncmp(all->blt.p_cmd, "echo", ft_strlen(all->blt.p_cmd))))
+		run_echo(av, all);
+	else if (!(ft_strncmp(all->blt.p_cmd, "cd", ft_strlen(all->blt.p_cmd))))
+		run_cd(av, path, all);
+	else if (!(ft_strncmp(all->blt.p_cmd, "pwd", ft_strlen(all->blt.p_cmd))))
+		run_pwd();
+	else if (!(ft_strncmp(all->blt.p_cmd, "export", ft_strlen(all->blt.p_cmd))))
+		run_export(av, path, all);
+	else if (!(ft_strncmp(all->blt.p_cmd, "unset", ft_strlen(all->blt.p_cmd))))
+		run_unset(ac, av, path, all);
+	else if (!(ft_strncmp(all->blt.p_cmd, "env", ft_strlen(all->blt.p_cmd))))
+		run_env(path);
+	else if (!(ft_strncmp(all->blt.p_cmd, "exit", ft_strlen(all->blt.p_cmd))))
+		run_exit(all);
+}
+
 int		intro_blt_intro(int ac, char **av, char **path)
 {
 	t_all	all;
 
-	if (ac == 1)
-	{
-		printf("args are noting\n");
-		exit(0);
-	}
 	init_blt(&all);
 	all.env = *init_env(&all.env);
 	all.blt.p_cmd = av[1];
 	set_lower(all.blt.p_cmd, &all);
-	if (!(ft_strncmp(all.blt.p_cmd, "echo", ft_strlen(all.blt.p_cmd)))) // set capital
-		run_echo(av, &all);
-	else if (!(ft_strncmp(all.blt.p_cmd, "cd", ft_strlen(all.blt.p_cmd))))
-		run_cd(av, path, &all);
-	else if (!(ft_strncmp(all.blt.p_cmd, "pwd", ft_strlen(all.blt.p_cmd)))) // set capital
-		run_pwd();
-	else if (!(ft_strncmp(all.blt.p_cmd, "export", ft_strlen(all.blt.p_cmd))))
-		run_export(av, path, &all);
-	else if (!(ft_strncmp(all.blt.p_cmd, "unset", ft_strlen(all.blt.p_cmd))))
-		run_unset(ac, av, path, &all);
-	else if (!(ft_strncmp(all.blt.p_cmd, "env", ft_strlen(all.blt.p_cmd)))) // set capital
-		run_env(path);
-	else if (!(ft_strncmp(all.blt.p_cmd, "exit", ft_strlen(all.blt.p_cmd))))
-		run_exit(&all);
+	set_builtin(&all, ac, av, path);
 	return (0);
 }

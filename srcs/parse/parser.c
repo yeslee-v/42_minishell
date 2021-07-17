@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 13:55:51 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/15 15:42:54 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/17 20:30:41 by yeslee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	parse_redir(t_token *tok, t_lst *syn, char **cmd, char **arg)
 {
 	make_syntax(syn, *cmd, *arg);
 	*cmd = ft_strdup(tok->token);
-	*arg = ft_strdup("");
+	*arg = NULL;
 	printf("redir arg add = %p\n", *arg);
 }
 

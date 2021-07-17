@@ -38,7 +38,7 @@ void		run_echo(char **av, t_all *all)
 				break ;
 		}
 	}
-	else if (!(ft_strncmp(av[2], "-n", ft_strlen(av[2]))))
+	else if (!(ft_strncmp(av[2], "-n", ft_strlen(av[2])))) // exists upper
 	{
 		if (ft_strncmp(av[3], "-n", ft_strlen(av[3])))
 			i++;
