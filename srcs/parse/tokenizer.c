@@ -6,22 +6,22 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/15 12:37:56 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/16 16:43:47 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
-static void	set_index(t_lst *token)
+static void		set_index(t_lst *token)
 {
 	int		i;
 	t_token	*tmp;
 
 	i = 0;
 	tmp = token->head;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->type == 'S')
 		{
@@ -41,12 +41,12 @@ static void	set_index(t_lst *token)
 	}
 }
 
-static void	set_type(t_lst *token)
+static void		set_type(t_lst *token)
 {
 	t_token	*tmp;
 
 	tmp = token->head;
-	while(tmp)
+	while (tmp)
 	{
 		if ((ft_strcmp(tmp->token, PIPE)) == 0)
 			tmp->type = 'P';
@@ -64,13 +64,13 @@ static void	set_type(t_lst *token)
 	}
 }
 
-static void	analyze_token(t_lst *token)
+static void		analyze_token(t_lst *token)
 {
 	set_type(token);
 	set_index(token);
 }
 
-void		tokenizer(char *lex)
+void			tokenizer(char *lex)
 {
 	t_tool	tool;
 

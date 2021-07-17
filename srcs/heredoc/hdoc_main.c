@@ -8,7 +8,6 @@ int	intro_hdoc()
 	pid_t	pid;
 	t_hdoc	hdoc;
 
-	printf("here >> %s\n", g_sh.process->qqw);
 	hdoc_init(&hdoc);
 	/*
 	 *hdoc.delimiter = av[1]; // will changed
