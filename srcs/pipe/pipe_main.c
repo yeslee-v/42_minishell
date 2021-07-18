@@ -1,7 +1,7 @@
 int			main(int ac, char **av, char **path)
 {
 	pid_t	pid;
-	t_pipe	pipe;
+	t_exec	pipe;
 	int		status;
 
 	if (ac != 5)

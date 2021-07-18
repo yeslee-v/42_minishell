@@ -6,13 +6,19 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 18:15:00 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/15 19:59:53 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/18 18:36:35 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 extern t_conf g_sh;
+
+void	init_pos(int *x, int *y)
+{
+	*x = 0;
+	*y = 0;
+}
 
 void	init_config(void)
 {
@@ -38,7 +44,7 @@ void	init_lexer(t_lexer *lexer)
 	lexer->s_quote = 0;
 	lexer->e_quote = 0;
 	lexer->err = 0;
-	g_sh.lexer = lexer;
+	lexer->lex = NULL;
 }
 
 void	init_lst(t_lst *lst)
