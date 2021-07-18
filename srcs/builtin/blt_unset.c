@@ -29,9 +29,9 @@
  *}
  */
 
-void		run_unset(int ac, char **av, char **path, t_all *all)
+void		run_unset(char **av, char **path, t_all *all)
 {
-	if ((all->blt.up_flag == 1) || (ac == 2))
+	if (all->blt.up_flag == 1) // + run 'unset' alone
 		return ;
 	while (*path)
 	{

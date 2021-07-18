@@ -56,7 +56,7 @@ void	middle_proc(int args_cnt, char **av, char **path, t_all *all)
 	ctrl_mid_cmd(args_cnt, av, path, all);
 }
 
-int	intro_pipe(int ac, char **av, char **path)
+int	d_pipe_intro(int ac, char **av, char **path)
 {
 	int		args_cnt;
 	t_all	all;

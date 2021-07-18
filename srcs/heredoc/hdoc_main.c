@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-t_conf	g_sh;
+extern t_conf	g_sh;
 
 void	first_fork(t_hdoc *hdoc, t_syntax *stx)
 {
@@ -20,7 +20,7 @@ void	first_fork(t_hdoc *hdoc, t_syntax *stx)
 		write(2, "fork error\n", 11);
 }
 
-int		intro_hdoc()
+int		hdoc_intro()
 {
 	t_hdoc		hdoc;
 	t_process	*proc;

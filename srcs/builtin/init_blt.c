@@ -1,66 +1,75 @@
 #include "../../includes/minishell.h"
 
-void	init_blt(t_all *all)
+extern t_conf	g_sh;
+
+void			init_blt(t_blt *blt)
 {
-	all->blt.p_cmd = NULL;
-	all->blt.opt = 0;
-	all->blt.up_flag = 0;
-	all->blt.args = NULL;
+	blt->p_cmd = NULL;
+	blt->opt = 0;
+	blt->up_flag = 0;
+	blt->args = NULL;
 }
 
-t_env *init_env(t_env *env) // be deleted when merge
+void			set_lower(t_blt *blt)
 {
-	if (!(env = malloc(sizeof(t_env))))
-		return (NULL);
-	env->key = NULL;
-	env->value = NULL;
-	env->next = NULL;
-	env->prev = NULL;
-	return (env);
-}
-
-void	set_lower(char *cmd, t_all *all)
-{
-	int	i;
+	int		i;
+	char	*cmd;
 
 	i = 0;
+	cmd = blt->p_cmd;
 	while (cmd[i])
 	{
 		if ((cmd[i] >= 65) && (cmd[i] <= 90))
 		{
 			cmd[i] += 32;
-			all->blt.up_flag = 1;
+			blt->up_flag = 1;
 		}
 		i++;
 	}
 }
 
-void	set_builtin(t_all *all, int ac, char **av, char **path)
+void			set_builtin(t_blt *blt, t_env *env)
 {
-	if (!(ft_strncmp(all->blt.p_cmd, "echo", ft_strlen(all->blt.p_cmd))))
-		run_echo(av, all);
-	else if (!(ft_strncmp(all->blt.p_cmd, "cd", ft_strlen(all->blt.p_cmd))))
-		run_cd(av, path, all);
-	else if (!(ft_strncmp(all->blt.p_cmd, "pwd", ft_strlen(all->blt.p_cmd))))
-		run_pwd();
-	else if (!(ft_strncmp(all->blt.p_cmd, "export", ft_strlen(all->blt.p_cmd))))
-		run_export(av, path, all);
-	else if (!(ft_strncmp(all->blt.p_cmd, "unset", ft_strlen(all->blt.p_cmd))))
-		run_unset(ac, av, path, all);
-	else if (!(ft_strncmp(all->blt.p_cmd, "env", ft_strlen(all->blt.p_cmd))))
-		run_env(path);
-	else if (!(ft_strncmp(all->blt.p_cmd, "exit", ft_strlen(all->blt.p_cmd))))
-		run_exit(all);
+	if (!(ft_strncmp(blt->p_cmd, "echo", ft_strlen(blt->p_cmd))))
+		run_echo(blt);
+	env = NULL;
+	/*
+	 *else if (!(ft_strncmp(blt->p_cmd, "cd", ft_strlen(blt->p_cmd))))
+	 *    run_cd(env, blt);
+	 *else if (!(ft_strncmp(blt->p_cmd, "pwd", ft_strlen(blt->p_cmd))))
+	 *    run_pwd();
+	 *else if (!(ft_strncmp(blt->p_cmd, "export", ft_strlen(blt->p_cmd))))
+	 *    run_export(env, blt);
+	 *else if (!(ft_strncmp(blt->p_cmd, "unset", ft_strlen(blt->p_cmd))))
+	 *    run_unset(env, blt);
+	 *else if (!(ft_strncmp(blt->p_cmd, "env", ft_strlen(blt->p_cmd))))
+	 *    run_env(env);
+	 *else if (!(ft_strncmp(blt->p_cmd, "exit", ft_strlen(blt->p_cmd))))
+	 *    run_exit(blt);
+	 */
 }
 
-int		intro_blt_intro(int ac, char **av, char **path)
+int				blt_intro()
 {
-	t_all	all;
+	t_blt		blt;
+	t_process	*proc;
+	t_syntax	*stx;
+	t_env		*env;
 
-	init_blt(&all);
-	all.env = *init_env(&all.env);
-	all.blt.p_cmd = av[1];
-	set_lower(all.blt.p_cmd, &all);
-	set_builtin(&all, ac, av, path);
+	init_blt(&blt);
+	env = g_sh.env->head;
+	proc = g_sh.process->head;
+	stx = proc->syntax->head;
+	/*
+		*while (env)
+		*{
+		*    printf("|%s|:|%s|\n", env->key, env->value);
+		*    env = env->next;
+		*}
+		*/
+	blt.p_cmd = stx->cmd;
+	blt.args = stx->arg_line;
+	set_lower(&blt);
+	set_builtin(&blt, env);
 	return (0);
 }

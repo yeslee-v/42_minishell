@@ -37,19 +37,19 @@ void	run_dup2(int std_fd, int *fd)
 	}
 }
 
-void	close_fd(int flag, int *fd) // have to change flags
+void	close_fd(int flag, int *fd)
 {
-	if (flag == 1)
+	if (flag == 0)
 	{
 		if (close(fd[0]) == -1)
 			print_error("close(fd[0])");
 	}
-	else if (flag == 2)
+	else if (flag == 1)
 	{
 		if (close(fd[1]) == -1)
 			print_error("close(fd[1]) error");
 	}
-	else if (flag == 3)
+	else if (flag == 2)
 	{
 		if (close(fd[0]) == -1)
 			print_error("close(fd[0]) error");
