@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yeslee <yeslee@student.42seoul.kr>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/13 17:26:40 by yeslee            #+#    #+#             */
-/*   Updated: 2021/07/18 17:35:16 by yeslee           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
@@ -201,12 +189,18 @@ void					make_token(t_lst *lst, int st, int ed);
 void					make_env(t_lst *lst, char *key, char *value);
 
 /*
+ *cursor
+ */
+void					get_cursor_pos(int *x, int *y);
+
+/*
  *init
  */
 void					init_lst(t_lst *lst);
 void					init_lexer(t_lexer *lexer);
 void					init_tool(t_tool *tool);
 void					init_config(void);
+void					init_pos(int *x, int *y);
 
 /*
  *utils
@@ -246,7 +240,7 @@ void					set_terminal(void);
 void					set_signal(void);
 void					set_prompt(void);
 void					set_process(void);
-
+void					set_term_cursor(void);
 /*
  *exit
  */
