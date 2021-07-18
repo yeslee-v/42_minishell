@@ -6,13 +6,13 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:17:44 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/15 12:31:03 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/16 16:51:56 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
 static void	analyze_space(t_lexer *lexer, int i)
 {
@@ -49,11 +49,11 @@ static void	analyze_operator(char *lex, int ret, int *i)
 		lex[*i] = 'i';
 }
 
-void		lexer(char *cmd)
+void	lexer(char *cmd)
 {
 	int		i;
 	int		ret;
-	t_lexer *lexer;
+	t_lexer	*lexer;
 
 	lexer = g_sh.lexer;
 	lexer->lex = ft_strdup(cmd);
@@ -66,8 +66,12 @@ void		lexer(char *cmd)
 		else if (lexer->s_quote == 0 &&
 					((lexer->s_quote = ft_isquote(cmd[i])) >= 1))
 			lexer->lex[i] = lexer->s_quote;
-		else if (lexer->s_quote && ((lexer->e_quote = ft_isquote(cmd[i])) >= 1))
-			analyze_quote(lexer, cmd[i], i);
+		else if (lexer->s_quote)
+		{
+			lexer->e_quote = ft_isquote(cmd[i]);
+			if (lexer->e_quote >= 1)
+				analyze_quote(lexer, cmd[i], i);
+		}
 		else if (ft_isspace(cmd[i]))
 			analyze_space(lexer, i);
 		else if (lexer->s_quote == 0 && (ret = ft_isspec(cmd, i)))
