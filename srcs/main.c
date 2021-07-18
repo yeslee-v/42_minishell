@@ -1,19 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/02 20:30:39 by jaekpark          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/07/18 16:22:16 by yeslee           ###   ########.fr       */
-=======
-/*   Updated: 2021/07/18 17:37:49 by parkjaekw        ###   ########.fr       */
->>>>>>> main
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/minishell.h"
 
 t_conf	g_sh;
@@ -74,8 +58,9 @@ int		main(int ac, char **av, char **envp)
 		 *}
 		 */
 		blt_intro();
-		printf("here\n");
-		hdoc_intro(); // segv
+		/*
+		 *hdoc_intro(); // segv
+		 */
 		free_conf(&g_sh);
 	}
 }

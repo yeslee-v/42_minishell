@@ -1,17 +1,17 @@
 #include "../../includes/minishell.h"
 
-int	exists_opt(int i, char **av)
+int		exists_opt(int i, char **tmp)
 {
 	int	j;
 
-	if (av[i][0] != '-')
+	j = 1;
+	if (tmp[i][j] == '-')
 		return (0);
 	else
 	{
-		j = 1;
-		while (av[i][j])
+		while (tmp[i][j])
 		{
-			if (av[i][j] == 'n')
+			if (tmp[i][j] == 'n')
 				j++;
 			else
 				return (0);
@@ -20,46 +20,37 @@ int	exists_opt(int i, char **av)
 	return (j);
 }
 
-void		run_echo(t_blt *blt)
+void	run_echo(t_blt *blt)
 {
-	/*
-	 *int	i;
-	 */
+	int		i;
+	char	**tmp;
 
-	char **args = ft_split(blt->args, ' ');
-	printf("opt >> |%s|\n", args[0]);
-	printf("opt >> |%s|\n", args[1]);
-	/*
-	 *if (blt->opt)
-	 *    i = 2;
-	 *else
-	 *    i = 1;
-	 *if (!(blt->up_flag)) // all lower
-	 *{
-	 *    while (av[++i][0] == '-')
-	 *    {
-	 *        if (exists_opt(i, av))
-	 *            all->blt.opt = 1;
-	 *        else
-	 *            break ;
-	 *    }
-	 *}
-	 *else if (!(ft_strncmp(av[2], "-n", ft_strlen(av[2])))) // exists upper
-	 *{
-	 *    if (ft_strncmp(av[3], "-n", ft_strlen(av[3])))
-	 *        i++;
-	 *}
-	 *if (i == 1)
-	 *    i++;
-	 *printf("here >> %d\n", i);
-	 *while (av[i])
-	 *{
-	 *    printf("%s", av[i]);
-	 *    i++;
-	 *}
-	 *if (!(all->blt.opt))
-	 *    printf("\n");
-	 */
-	// undo: input space when ac > 3 // from jaekpark
+	tmp = ft_split(blt->args, ' ');
+	i = 0;
+	if (!(blt->up_flag)) // all lower
+	{
+		while (tmp[i][0] == '-')
+		{
+			if (exists_opt(i, tmp))
+				blt->opt = 1;
+			else
+				break ;
+			i++;
+		}
+	}
+	else if (!(ft_strncmp(tmp[i], "-n", ft_strlen(tmp[i])))) // exists upper
+	{
+		blt->opt = 1;
+		i++;
+	}
+	while (tmp[i])
+	{
+		printf("%s", tmp[i]);
+		if (tmp[i + 1] != NULL)
+			printf(" ");
+		i++;
+	}
+	if (!(blt->opt))
+		printf("\n");
 	// undo: echo '$PATH' >> show PATH's value // from jaekpark
 }
