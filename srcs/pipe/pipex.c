@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-static void	ft_pid_not_zero(char **av, char **path, t_pipe *pipe)
+static void	ft_pid_not_zero(char **av, char **path, t_exec *pipe)
 {
 	int		status;
 
@@ -26,7 +26,7 @@ static void	ft_pid_not_zero(char **av, char **path, t_pipe *pipe)
 	run_execve(pipe);
 }
 
-static void	ft_pid_zero(char **av, char **path, t_pipe *pipe)
+static void	ft_pid_zero(char **av, char **path, t_exec *pipe)
 {
 	int		pid;
 

@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/15 20:16:00 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/18 18:34:16 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,47 @@
 
 extern t_conf g_sh;
 
+void	set_term_cursor(void)
+{
+	struct termios cursor;
+
+	tcgetattr(0, &cursor);
+	cursor.c_lflag &= ~(ICANON|ECHO);
+	tcsetattr(0, TCSANOW, &cursor);
+}
+
+int		print_tc(int tc)
+{
+	write(1, &tc, 1);
+	return (1);
+}
+
+void	handle_eof(void)
+{
+	int x;
+	int y;
+	char *cm;
+	char *ce;
+
+	x = 0;
+	y = 0;
+	get_cursor_pos(&x, &y);
+	tgetent(NULL, "xterm");
+	cm = tgetstr("cm", NULL);
+	ce = tgetstr("ce", NULL);
+	tputs(tgoto(cm, y + 11, x - 2), 1, print_tc);
+	printf("exit\n");
+	free_lexer(g_sh.lexer);
+	free_token(g_sh.token);
+	free_process(g_sh.process);
+	exit(0);
+}
+
 void	set_prompt(void)
 {
 	g_sh.cmd = readline(PROMPT);
+	if (g_sh.cmd == NULL)
+		handle_eof();
 	if (ft_strcmp(g_sh.cmd, "exit") == 0)
 		exit_shell(0);
 	add_history(g_sh.cmd);
