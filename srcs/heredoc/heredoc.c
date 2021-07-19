@@ -1,31 +1,31 @@
 #include "../../includes/minishell.h"
 
-void	hdoc_init(t_hdoc *hdoc)
-{
-	hdoc->delimiter = NULL;
-	hdoc->arg = NULL;
-}
+extern t_conf g_sh;
 
-void	run_hdoc(t_hdoc *hdoc)
+void	run_hdoc(t_hdoc *hdoc, t_syntax *stx)
 {
 	char	*line;
 	int		pid;
 	int		fd[2];
 	int		status;
 
-	char buf[100]; // by ji-kim
+	char buf[100];
 	pipe(fd);
 	pid = fork();
-	if (pid > 0) // cmd
+	if (pid > 0)
 	{
 		wait(&status);
 		if (!(WIFEXITED(status)))
 			exit(1);
 		close(fd[1]);
 		while (read(fd[0], &buf, 100))
+		{
 			printf("%s", buf); // execve vs builtin
+		}
+		close(fd[0]);
+		printf("cmd is |%s|\n", stx->cmd);
 	}
-	else if (pid == 0) // heredoc
+	else if (pid == 0)
 	{
 		close(fd[0]);
 		while (1)
@@ -33,13 +33,15 @@ void	run_hdoc(t_hdoc *hdoc)
 			line = readline("> ");
 			if (line)
 			{
-				if (!(ft_strncmp(line, hdoc->delimiter, ft_strlen(line)))) // add ctrl + d
+				if (!(ft_strncmp(line, hdoc->delimiter, ft_strlen(line)))) //ctrl+d
 					break ;
 				write(fd[1], line, ft_strlen(line));
 				write(fd[1], "\n", 1);
 				free(line);
 			}
 		}
+		close(fd[1]);
+		exit(0);
 	}
 	else
 	{

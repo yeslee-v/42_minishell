@@ -17,10 +17,10 @@ void	run_execve(t_all *all)
 {
 	int	i;
 
-	i = double_strlen(all->pipe.cmd);
+	i = double_strlen(all->exec.cmd);
 	while (--i >= 0)
 	{
-		execve(all->pipe.cmd[i], all->pipe.av, all->pipe.envp);
+		execve(all->exec.cmd[i], all->exec.av, all->exec.envp);
 	}
 	print_error("execve error");
 }

@@ -1,18 +1,12 @@
 #include "../../includes/minishell.h"
 
-t_conf	g_sh;
+extern t_conf	g_sh;
 
-int	intro_hdoc()
+void	first_fork(t_hdoc *hdoc, t_syntax *stx)
 {
 	int		status;
 	pid_t	pid;
-	t_hdoc	hdoc;
 
-	hdoc_init(&hdoc);
-	/*
-	 *hdoc.delimiter = av[1]; // will changed
-	 */
-	hdoc.delimiter = "hi"; // will changed
 	pid = fork();
 	if (pid > 0)
 	{
@@ -21,8 +15,20 @@ int	intro_hdoc()
 			exit(1);
 	}
 	else if (pid == 0)
-		run_hdoc(&hdoc);
+		run_hdoc(hdoc, stx);
 	else
 		write(2, "fork error\n", 11);
+}
+
+int		hdoc_intro()
+{
+	t_hdoc		hdoc;
+	t_process	*proc;
+	t_syntax	*stx;
+
+	proc = g_sh.process->head;
+	stx = proc->syntax->head;
+	hdoc.delimiter = stx->next->arg_line;
+	first_fork(&hdoc, stx);
 	return (0);
 }

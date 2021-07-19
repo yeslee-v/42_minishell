@@ -1,17 +1,17 @@
 #include "../../includes/minishell.h"
 
-static int	exists_opt(int i, char **av)
+int		exists_opt(int i, char **tmp)
 {
 	int	j;
 
-	if (av[i][0] != '-')
+	j = 1;
+	if (tmp[i][j] == '-')
 		return (0);
 	else
 	{
-		j = 1;
-		while (av[i][j])
+		while (tmp[i][j])
 		{
-			if (av[i][j] == 'n')
+			if (tmp[i][j] == 'n')
 				j++;
 			else
 				return (0);
@@ -20,39 +20,50 @@ static int	exists_opt(int i, char **av)
 	return (j);
 }
 
-void		run_echo(char **av, t_all *all)
+void	print_env_value(char *key, t_env *env)
 {
-	int	i;
-
-	if (all->blt.opt)
-		i = 2;
-	else
-		i = 1;
-	if (!(all->blt.up_flag)) // all lower
+	while (env)
 	{
-		while (av[++i][0] == '-')
+		if (!(ft_strncmp(key, env->key, ft_strlen(key))))
+			printf("%s", env->value);
+		env = env->next;
+	}
+}
+
+void	run_echo(t_blt *blt, t_env *env)
+{
+	int		i;
+	char	**tmp;
+
+	tmp = ft_split(blt->args, ' ');
+	i = 0;
+	if (!(blt->up_flag)) // all lower
+	{
+		while (tmp[i][0] == '-')
 		{
-			if (exists_opt(i, av))
-				all->blt.opt = 1;
+			if (exists_opt(i, tmp))
+				blt->opt = 1;
 			else
 				break ;
+			i++;
 		}
 	}
-	else if (!(ft_strncmp(av[2], "-n", ft_strlen(av[2]))))
+	else if (!(ft_strncmp(tmp[i], "-n", ft_strlen(tmp[i])))) // exists upper
 	{
-		if (ft_strncmp(av[3], "-n", ft_strlen(av[3])))
-			i++;
-	}
-	if (i == 1)
-		i++;
-	printf("here >> %d\n", i);
-	while (av[i])
-	{
-		printf("%s", av[i]);
+		blt->opt = 1;
 		i++;
 	}
-	if (!(all->blt.opt))
+	while (tmp[i])
+	{
+		if ((tmp[i][0] == '$') && (tmp[i][1] != '?'))
+			print_env_value((tmp[i] + 1), env);
+		else
+			printf("%s", tmp[i]);
+		if (tmp[i + 1] != NULL)
+			printf(" ");
+		i++;
+	}
+	if (!(blt->opt))
 		printf("\n");
-	// undo: input space when ac > 3 // from jaekpark
 	// undo: echo '$PATH' >> show PATH's value // from jaekpark
 }

@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-void		combine_cmd(const char *cmd_1, char **path, t_all *all)
+void	combine_cmd(const char *cmd_1, char **path, t_exec *exec)
 {
 	int		i;
 	char	**chunk;
@@ -11,16 +11,16 @@ void		combine_cmd(const char *cmd_1, char **path, t_all *all)
 	chunk = ft_split(cmd_1, ' ');
 	while (*path)
 	{
-		all->pipe.cmd[i] = ft_strjoin(*path, chunk[0]);
+		exec->cmd[i] = ft_strjoin(*path, chunk[0]);
 		i++;
 		path++;
 	}
-	all->pipe.cmd[i] = NULL;
-	all->pipe.av = (char *const *)chunk;
-	all->pipe.envp = NULL;
+	exec->cmd[i] = NULL;
+	exec->av = (char *const *)chunk;
+	exec->envp = NULL;
 }
 
-void		split_path(const char *cmd_1, char **path, t_all *all)
+void	split_path(const char *cmd_1, char **path, t_exec *exec)
 {
 	int		i;
 	char	**str;
@@ -30,8 +30,8 @@ void		split_path(const char *cmd_1, char **path, t_all *all)
 	str = NULL;
 	while (*path)
 	{
-		if ((**path == 'P') && (*(*path + 1) == 'A') && (*(*path + 2) == 'T')
-				&& (*(*path + 3) == 'H'))
+		if ((**path == 'P') && (*(*path + 1) == 'A') && (*(*path + 2) == 'T') &&
+			(*(*path + 3) == 'H'))
 		{
 			str = ft_split(*path, ':');
 			break ;
@@ -45,5 +45,5 @@ void		split_path(const char *cmd_1, char **path, t_all *all)
 	}
 	tmp[i] = NULL;
 	free(str);
-	combine_cmd(cmd_1, tmp, all);
+	combine_cmd(cmd_1, tmp, exec);
 }

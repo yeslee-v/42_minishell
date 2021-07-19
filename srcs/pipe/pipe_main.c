@@ -1,7 +1,13 @@
-int			main(int ac, char **av, char **path)
+#include "../../includes/minishell.h"
+
+int		s_pipe_intro(int ac, char **av, char **path)
 {
 	pid_t	pid;
+<<<<<<< HEAD
+	t_exec	exec;
+=======
 	t_exec	pipe;
+>>>>>>> main
 	int		status;
 
 	if (ac != 5)
@@ -14,7 +20,7 @@ int			main(int ac, char **av, char **path)
 			exit(1);
 	}
 	else if (pid == 0)
-		ft_pid_zero(av, path, &pipe);
+		child_proc(av, path, &exec);
 	else
 		print_error("fork error");
 	return (0);
