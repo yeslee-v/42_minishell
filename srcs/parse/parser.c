@@ -2,10 +2,7 @@
 
 void	parse_redir(t_token *tok, t_lst *syn, char **cmd, char **arg)
 {
-	make_syntax(syn, *cmd, *arg);
-	*cmd = ft_strdup(tok->token);
-	*arg = NULL;
-	printf("redir arg add = %p\n", *arg);
+printf("redir arg add = %p\n", *arg);
 }
 
 t_lst	*init_syntax(void)
@@ -22,9 +19,15 @@ t_token	*parse_token(t_token *tok, t_lst *syn, char **cmd_t, char **arg_t)
 	if (tok->i == 0 && tok->type == 'S')
 		*cmd_t = ft_strdup(tok->token);
 	else if (tok->i >= 1 && tok->type == 'S')
+	{
 		*arg_t = ft_strjoin_sp(*arg_t, tok->token);
+	}
 	else if (tok->i == 0 && (ft_strchr("OIAH", tok->type)))
-		parse_redir(tok, syn, cmd_t, arg_t);
+	{
+		make_syntax(syn, *cmd_t, *arg_t);
+		*cmd_t = ft_strdup(tok->token);
+		*arg_t = NULL;
+	}
 	tok = tok->next;
 	return (tok);
 }

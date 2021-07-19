@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/16 16:43:47 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/19 17:57:29 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void		set_type(t_lst *token)
 	tmp = token->head;
 	while (tmp)
 	{
-		if ((ft_strcmp(tmp->token, PIPE)) == 0)
+		if (((ft_strcmp(tmp->token, PIPE)) == 0) && tmp != token->head)
 			tmp->type = 'P';
 		else if ((ft_strcmp(tmp->token, O_REDIR)) == 0)
 			tmp->type = 'O';

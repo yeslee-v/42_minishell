@@ -57,7 +57,7 @@ int		main(int ac, char **av, char **envp)
 		 *    env = env->next;
 		 *}
 		 */
-		blt_intro();
+		/*blt_intro();*/
 		/*
 		 *hdoc_intro(); // segv
 		 */
