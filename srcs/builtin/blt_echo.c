@@ -22,12 +22,48 @@ int		exists_opt(int i, char **tmp)
 
 void	print_env_value(char *key, t_env *env)
 {
+	printf("key is %s\n", key);
 	while (env)
 	{
-		if (!(ft_strncmp(key, env->key, ft_strlen(key))))
+		if (!(ft_strncmp(key, env->key, ft_strlen(env->key))))
 			printf("%s", env->value);
 		env = env->next;
 	}
+}
+
+void	is_env(char *tmp, t_env *env)
+{
+	if (ft_strchr(tmp, '$') && !(ft_strchr(tmp, '?')))
+		print_env_value((tmp + 1), env);
+	else
+		printf("%s", tmp);
+}
+
+void	do_echo(int i, char **tmp, t_blt *blt, t_env *env)
+{
+	char	*d_tmp;
+	char	*s_tmp;
+
+	while (tmp[i])
+	{
+		if (ft_strchr(tmp[i], '"'))
+		{
+			d_tmp = ft_strtrim(tmp[i], "\"");
+			is_env(d_tmp, env);
+		}
+		else if (ft_strchr(tmp[i], '\''))
+		{
+			s_tmp = ft_strtrim(tmp[i], "'");
+			printf("%s", s_tmp);
+		}
+		else
+			is_env(tmp[i], env);
+		if (tmp[i + 1] != NULL)
+			printf(" ");
+		i++;
+	}
+	if (!(blt->opt))
+		printf("\n");
 }
 
 void	run_echo(t_blt *blt, t_env *env)
@@ -35,9 +71,14 @@ void	run_echo(t_blt *blt, t_env *env)
 	int		i;
 	char	**tmp;
 
+	if (blt->args == NULL)
+	{
+		printf("\n");
+		return ;
+	}
 	tmp = ft_split(blt->args, ' ');
 	i = 0;
-	if (!(blt->up_flag)) // all lower
+	if (!(blt->up_flag))
 	{
 		while (tmp[i][0] == '-')
 		{
@@ -48,22 +89,10 @@ void	run_echo(t_blt *blt, t_env *env)
 			i++;
 		}
 	}
-	else if (!(ft_strncmp(tmp[i], "-n", ft_strlen(tmp[i])))) // exists upper
+	else if (!(ft_strncmp(tmp[i], "-n", ft_strlen(tmp[i]))))
 	{
 		blt->opt = 1;
 		i++;
 	}
-	while (tmp[i])
-	{
-		if ((tmp[i][0] == '$') && (tmp[i][1] != '?'))
-			print_env_value((tmp[i] + 1), env);
-		else
-			printf("%s", tmp[i]);
-		if (tmp[i + 1] != NULL)
-			printf(" ");
-		i++;
-	}
-	if (!(blt->opt))
-		printf("\n");
-	// undo: echo '$PATH' >> show PATH's value // from jaekpark
+	do_echo(i, tmp, blt, env);
 }
