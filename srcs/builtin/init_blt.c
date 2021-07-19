@@ -32,10 +32,9 @@ void			set_builtin(t_blt *blt, t_env *env)
 {
 	if (!(ft_strncmp(blt->p_cmd, "echo", ft_strlen(blt->p_cmd))))
 		run_echo(blt, env);
-	env = NULL;
+	else if (!(ft_strncmp(blt->p_cmd, "cd", ft_strlen(blt->p_cmd))))
+		run_cd(blt, env);
 	/*
-	 *else if (!(ft_strncmp(blt->p_cmd, "cd", ft_strlen(blt->p_cmd))))
-	 *    run_cd(env, blt);
 	 *else if (!(ft_strncmp(blt->p_cmd, "pwd", ft_strlen(blt->p_cmd))))
 	 *    run_pwd();
 	 *else if (!(ft_strncmp(blt->p_cmd, "export", ft_strlen(blt->p_cmd))))

@@ -271,7 +271,9 @@ int						d_pipe_intro(int ac, char **av, char **path);
  */
 int						blt_intro();
 void					run_echo(t_blt *blt, t_env *env);
-void					run_cd(char **av, char **path, t_all *all);
+void					print_env_value(char *key, t_env *env);
+
+void					run_cd(t_blt *blt, t_env *env);
 void					run_env(char **path);
 void					run_exit(t_all *all);
 void					run_export(char **av, char **path, t_all *all);

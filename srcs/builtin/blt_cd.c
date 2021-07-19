@@ -1,36 +1,39 @@
 #include "../../includes/minishell.h"
 
-void	run_cd(char **av, char **path, t_all *all)
+void	run_cd(t_blt *blt, t_env *env)
 {
-	int		i;
 	int		ret;
-	char	**dir;
-	char	buf[256];
+	char	buf[512];
+	char	*home_val;
 
-	if (all->blt.up_flag == 1)
+	if (blt->up_flag == 1)
 		return ;
-	else if (!(av[2])) // $HOME
+	else if (blt->args == NULL) // $HOME
 	{
-		i = -1;
-		while (path[++i])
+		while (env)
 		{
-			if (!(ft_strncmp(path[i], "HOME", 4)))
-			{
-				dir = ft_split(path[i], '=');
-				printf("%s\n", dir[1]);
-			}
+			if (!(ft_strncmp("HOME", env->key, 4)))
+				home_val = env->value;
+			env = env->next;
 		}
-	}
-	else
-	{
-		ret = chdir(av[2]);
+		ret = chdir(home_val);
 		if (ret == -1)
 			printf("%s\n", strerror(errno));
 		else if (!(ret))
 		{
-			printf("chdir >> %d\n", ret);
-			getcwd(buf, 0);
-			printf("path >> %s\n", buf); // will put pwd's value by ylee >> error
+			getcwd(buf, 512);
+			printf("getcwd is |%s|\n", buf);
+		}
+	}
+	else
+	{
+		ret = chdir(blt->args);
+		if (ret == -1)
+			printf("%s\n", strerror(errno));
+		else if (!(ret))
+		{
+			getcwd(buf, 512);
+			printf("path >> %s\n", buf);
 		}
 	}
 }
