@@ -22,7 +22,6 @@ int		exists_opt(int i, char **tmp)
 
 void	print_env_value(char *key, t_env *env)
 {
-	printf("key is %s\n", key);
 	while (env)
 	{
 		if (!(ft_strncmp(key, env->key, ft_strlen(env->key))))
@@ -50,11 +49,13 @@ void	do_echo(int i, char **tmp, t_blt *blt, t_env *env)
 		{
 			d_tmp = ft_strtrim(tmp[i], "\"");
 			is_env(d_tmp, env);
+			free(d_tmp);
 		}
 		else if (ft_strchr(tmp[i], '\''))
 		{
 			s_tmp = ft_strtrim(tmp[i], "'");
 			printf("%s", s_tmp);
+			free(s_tmp);
 		}
 		else
 			is_env(tmp[i], env);
@@ -95,4 +96,11 @@ void	run_echo(t_blt *blt, t_env *env)
 		i++;
 	}
 	do_echo(i, tmp, blt, env);
+	int j = 0;
+	while (tmp[j])
+	{
+		free(tmp[j]);
+		j++;
+	}
+	free(tmp);
 }
