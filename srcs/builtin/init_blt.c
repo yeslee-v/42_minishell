@@ -31,7 +31,7 @@ void			set_lower(t_blt *blt)
 void			set_builtin(t_blt *blt, t_env *env)
 {
 	if (!(ft_strncmp(blt->p_cmd, "echo", ft_strlen(blt->p_cmd))))
-		run_echo(blt);
+		run_echo(blt, env);
 	env = NULL;
 	/*
 	 *else if (!(ft_strncmp(blt->p_cmd, "cd", ft_strlen(blt->p_cmd))))

@@ -20,7 +20,17 @@ int		exists_opt(int i, char **tmp)
 	return (j);
 }
 
-void	run_echo(t_blt *blt)
+void	print_env_value(char *key, t_env *env)
+{
+	while (env)
+	{
+		if (!(ft_strncmp(key, env->key, ft_strlen(key))))
+			printf("%s", env->value);
+		env = env->next;
+	}
+}
+
+void	run_echo(t_blt *blt, t_env *env)
 {
 	int		i;
 	char	**tmp;
@@ -45,7 +55,10 @@ void	run_echo(t_blt *blt)
 	}
 	while (tmp[i])
 	{
-		printf("%s", tmp[i]);
+		if ((tmp[i][0] == '$') && (tmp[i][1] != '?'))
+			print_env_value((tmp[i] + 1), env);
+		else
+			printf("%s", tmp[i]);
 		if (tmp[i + 1] != NULL)
 			printf(" ");
 		i++;
