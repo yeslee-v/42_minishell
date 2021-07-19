@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:17:44 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/18 23:13:59 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/19 17:25:57 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,20 @@ void	analyze_command(t_lexer *lexer, char *cmd, int *i)
 		lexer->lex[*i] = 'c';
 }
 
-void	lexer(char *cmd)
+t_lexer	*lexer(char *cmd)
 {
 	int		i;
 	t_lexer	*lexer;
 
-	lexer = g_sh.lexer;
+	if (!cmd)
+		return (NULL);
+	lexer = malloc(sizeof(t_lexer));
 	lexer->lex = ft_strdup(cmd);
-	printf("lex = %s\n", lexer->lex);
 	ft_memset(lexer->lex, 0, ft_strlen(cmd));
 	i = -1;
 	while (cmd[++i])
 		analyze_command(lexer, cmd, &i);
 	if (lexer->s_quote != 0)
 		lexer->err = 1;
+	return (lexer);
 }

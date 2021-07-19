@@ -90,7 +90,7 @@ typedef struct			s_hdoc
 {
 	char					*delimiter;
 	char					*arg;
-}						t_hdoc;
+}	t_hdoc;
 
 typedef struct			s_syntax
 {
@@ -163,7 +163,7 @@ typedef struct			s_all
  *	analyze_quote
  *	analyze_operator
  */
-void					lexer(char *cmd);
+t_lexer					*lexer(char *cmd);
 
 /*
  * - token
@@ -192,7 +192,7 @@ void					make_env(t_lst *lst, char *key, char *value);
  *cursor
  */
 void					get_cursor_pos(int *x, int *y);
-
+char	**split_arg(char *arg);
 /*
  *init
  */

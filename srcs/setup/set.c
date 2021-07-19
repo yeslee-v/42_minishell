@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/18 18:34:16 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/19 17:26:42 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	set_process(void)
 	t_token	*tmp;
 
 	tmp = NULL;
-	lexer(g_sh.cmd);
+	g_sh.lexer = lexer(g_sh.cmd);
 	if (g_sh.lexer->err == 1)
 		exit_shell(0);
 	tokenizer(g_sh.lexer->lex);
