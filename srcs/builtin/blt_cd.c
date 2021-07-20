@@ -8,7 +8,19 @@ void	run_cd(t_blt *blt, t_env *env)
 
 	if (blt->up_flag == 1)
 		return ;
-	else if (blt->args == NULL) // $HOME
+	printf("\n========pwd======\n");
+	print_env_value("PWD", env);
+	printf("\n\n======oldpwd=======\n"); // not complete
+	ret = chdir(blt->args);
+	if (ret == -1)
+		printf("%s\n", strerror(errno));
+	else if (!(ret))
+	{
+		getcwd(buf, 512);
+		printf("oldpwd >> %s\n", buf);
+	}
+	print_env_value("OLDPWD", env);
+	if (!(blt->args)) // $HOME
 	{
 		while (env)
 		{
@@ -20,10 +32,7 @@ void	run_cd(t_blt *blt, t_env *env)
 		if (ret == -1)
 			printf("%s\n", strerror(errno));
 		else if (!(ret))
-		{
 			getcwd(buf, 512);
-			printf("getcwd is |%s|\n", buf);
-		}
 	}
 	else
 	{
@@ -31,9 +40,6 @@ void	run_cd(t_blt *blt, t_env *env)
 		if (ret == -1)
 			printf("%s\n", strerror(errno));
 		else if (!(ret))
-		{
 			getcwd(buf, 512);
-			printf("path >> %s\n", buf);
-		}
 	}
 }

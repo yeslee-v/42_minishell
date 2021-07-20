@@ -1,53 +1,45 @@
 #include "../../includes/minishell.h"
 
-/*
- *static void	add_node_back(t_env **env, t_env *new) // **env == existing node
- *{
- *    t_env *node;
- *
- *    if (!(new) || !(*env))
- *        return ;
- *    node = *env;
- *    while (node->next)
- *        node = node->next;
- *    node->next = new;
- *    new->prev = node;
- *    new->next = NULL;
- *}
- */
+extern t_conf	g_sh;
 
-void		run_export(char **av, char **path, t_all *all)
+static void		add_node_back(char *new_k, char *new_v, t_env *env)
 {
-	int		e_flag;
-	char	**in_tmp;
-	char	**ex_tmp;
+	t_env	*new;
+	t_env	*env_tmp;
 
-	if (all->blt.up_flag == 1)
+	new = malloc(sizeof(t_env));
+	if (!new)
+		printf("malloc error in add_node_back");
+	env_tmp = env;
+	new->key = new_k;
+	new->value = new_v;
+	while (env_tmp->next)
+		env_tmp = env_tmp->next;
+	env_tmp->next = new;
+}
+
+void			run_export(t_blt *blt, t_env *env)
+{
+	char	**tmp;
+	t_env	*env_tmp;
+
+	if (blt->up_flag == 1)
 		return ;
-	if (!(av[2]))
+	if (!(blt->args))
 	{
-		e_flag = 1;
-		while (*path) // call->env func
-		{
-			printf("declare -x %s\n", *path);
-			path++;
-		}
+		run_env(1, env);
+		return ;
 	}
-	else // lst_addback
+	tmp = ft_split(blt->args, '=');
+	env_tmp = env;
+	while (env_tmp)
 	{
-		in_tmp = ft_split(av[2], '=');
-		while (*path)
+		if (!(ft_strncmp(env_tmp->key, tmp[0], 4)))
 		{
-			ex_tmp = ft_split(*path, '=');
-			all->env.key = ex_tmp[0];
-			all->env.value = ex_tmp[1];
-			if (!(ft_strncmp(*path, in_tmp[0], 4))) // key is already exists
-			{
-				all->env.value = in_tmp[1];
-				return ;
-			}
-			path++;
+			env_tmp->value = tmp[1];
+			return ;
 		}
-		//	add_node_back(all->env, new); // add new key=value // not execute
+		env_tmp = env_tmp->next;
 	}
+	add_node_back(ft_strdup(tmp[0]), ft_strdup(tmp[1]), env);
 }
