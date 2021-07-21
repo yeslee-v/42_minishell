@@ -287,8 +287,8 @@ int						d_pipe_intro(int ac, char **av, char **path);
 int						blt_intro();
 void					run_echo(t_blt *blt, t_env *env);
 void					run_cd(t_blt *blt, t_env *env, t_lst *envl);
-void					run_env(int xprt_flag, t_env *env);
-void					run_export(t_blt *blt, t_env *env, t_lst *envl);
+void					run_env(int xprt_flag, t_lst *envl);
+void					run_export(t_blt *blt, t_lst *envl);
 void					run_pwd(t_lst *envl);
 void					run_unset(char **all_env, t_blt *blt, t_env *env, t_lst *envl);
 

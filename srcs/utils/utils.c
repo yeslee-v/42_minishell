@@ -45,7 +45,9 @@ void	delete_env_node(char *key, t_lst *env)
 	prev = NULL;
 	next = NULL;
 	node = search_env_node(key, env);
-	if (node == env->head && node == env->tail)
+	if (!node)
+		return ;
+	else if (node == env->head && node == env->tail)
 	{
 		free_env_node(node);
 		node = NULL;
@@ -68,5 +70,6 @@ void	delete_env_node(char *key, t_lst *env)
 		next = node->next;
 		prev->next = next;
 		next->prev = prev;
+		free_env_node(node);
 	}
 }
