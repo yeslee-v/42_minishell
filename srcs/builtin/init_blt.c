@@ -28,18 +28,18 @@ void			set_lower(t_blt *blt)
 	}
 }
 
-void			set_builtin(char **all_env, t_blt *blt, t_env *env)
+void			set_builtin(char **all_env, t_blt *blt, t_env *env, t_lst *envl)
 {
 	if (!(ft_strncmp(blt->p_cmd, "echo", ft_strlen(blt->p_cmd))))
 		run_echo(blt, env);
 	else if (!(ft_strncmp(blt->p_cmd, "cd", ft_strlen(blt->p_cmd))))
-		run_cd(blt, env);
+		run_cd(blt, env, envl);
 	else if (!(ft_strncmp(blt->p_cmd, "pwd", ft_strlen(blt->p_cmd))))
-		run_pwd();
+		run_pwd(envl);
 	else if (!(ft_strncmp(blt->p_cmd, "export", ft_strlen(blt->p_cmd))))
-		run_export(blt, env);
+		run_export(blt, env, envl);
 	else if (!(ft_strncmp(blt->p_cmd, "unset", ft_strlen(blt->p_cmd))))
-		run_unset(all_env, blt, env);
+		run_unset(all_env, blt, env, envl);
 	else if (!(ft_strncmp(blt->p_cmd, "env", ft_strlen(blt->p_cmd))))
 		run_env(0, env);
 }
@@ -50,6 +50,7 @@ int				blt_intro()
 	t_process	*proc;
 	t_syntax	*stx;
 	t_env		*env;
+	t_lst		*envl;
 	char		**all_env;
 
 	init_blt(&blt);
@@ -59,7 +60,8 @@ int				blt_intro()
 	stx = proc->syntax->head;
 	blt.p_cmd = stx->cmd;
 	blt.args = stx->arg_line;
+	envl = g_sh.env;
 	set_lower(&blt);
-	set_builtin(all_env, &blt, env);
+	set_builtin(all_env, &blt, env, envl);
 	return (0);
 }
