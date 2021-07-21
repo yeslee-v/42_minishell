@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/19 17:57:29 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/20 11:41:42 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,56 @@ static void		analyze_token(t_lst *token)
 	set_index(token);
 }
 
+void			check_last_token(void)
+{
+	int status;
+	pid_t	pid;
+	char	*line;
+	t_token	*node;
+	t_lexer	*tmp;
+
+	pid = fork();
+	printf("pid %d\n", pid);
+	if (pid > 0)
+	{
+		wait(&status);
+		if (!(WIFEXITED(status)))
+			exit(1);
+	}
+	if (pid == 0)
+	{
+		node = g_sh.token->tail;
+		if (!node)
+			return ;
+		else if (node->token)
+		{
+			if (node->token[0] == '|')
+			{
+				while (TRUE)
+				{
+					line = readline("> ");
+					if (ft_strlen(line) > 0)
+					{
+						g_sh.cmd = ft_strjoin_sp(g_sh.cmd, line);
+						tmp = lexer(g_sh.cmd);
+						free_lexer(g_sh.lexer);
+						g_sh.lexer = tmp;
+						free_token(g_sh.token);
+						g_sh.token = malloc(sizeof(t_lst));
+						init_lst(g_sh.token);
+						tokenizer(tmp->lex);
+						free(line);
+						break ;
+					}
+					rl_redisplay();
+					free(line);
+				}
+			}
+		}
+		exit(0);
+	}
+}
+
 void			tokenizer(char *lex)
 {
 	t_tool	tool;
@@ -95,4 +145,5 @@ void			tokenizer(char *lex)
 		}
 	}
 	analyze_token(g_sh.token);
+	check_last_token();
 }

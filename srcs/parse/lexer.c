@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:17:44 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/19 17:25:57 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/19 22:35:20 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	analyze_space(t_lexer *lexer, int i)
 static void	analyze_quote(t_lexer *lexer, char c, int i)
 {
 	(void)c;
+	printf("enter analyze_quote\n");
 	if (lexer->s_quote == lexer->e_quote)
 	{
 		lexer->lex[i] = lexer->e_quote;
@@ -105,6 +106,7 @@ t_lexer	*lexer(char *cmd)
 	if (!cmd)
 		return (NULL);
 	lexer = malloc(sizeof(t_lexer));
+	init_lexer(lexer);
 	lexer->lex = ft_strdup(cmd);
 	ft_memset(lexer->lex, 0, ft_strlen(cmd));
 	i = -1;

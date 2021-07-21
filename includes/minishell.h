@@ -1,59 +1,59 @@
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
-#include "../libs/includes/libft.h"
-#include <curses.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <readline/history.h>
-#include <readline/readline.h>
-#include <signal.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <term.h>
-#include <termcap.h>
-#include <termios.h>
-#include <unistd.h>
+# include "../libs/includes/libft.h"
+# include <curses.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <term.h>
+# include <termcap.h>
+# include <termios.h>
+# include <unistd.h>
 
-#define TRUE 1
-#define FALSE 0
-#define STDIN 0
-#define STDOUT 1
-#define STDERR 2
-#define QUOTE 81
-#define D_QUOTE 68
+# define TRUE 1
+# define FALSE 0
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
+# define QUOTE 81
+# define D_QUOTE 68
 
-#define BUF_SIZE 1
+# define BUF_SIZE 1
 
-#define PIPE "|"
-#define O_REDIR ">"
-#define I_REDIR "<"
-#define A_REDIR ">>"
-#define HEREDOC "<<"
+# define PIPE "|"
+# define O_REDIR ">"
+# define I_REDIR "<"
+# define A_REDIR ">>"
+# define HEREDOC "<<"
 
-#define PROMPT "\033[1;32mBraveShell\033[0;31m$\033[0m "
-#define BLACK "\033[0;30m"
-#define RED "\033[0;31m"
-#define GREEN "\033[0;32m"
-#define YELLOW "\033[0;33m"
-#define BLUE "\033[0;34m"
-#define PURPLE "\033[0;35m"
-#define CYAN "\03[0;36m"
-#define WHITE "\033[0;37m"
-#define RESET "\033[0m"
+# define PROMPT "\033[1;32mBraveShell\033[0;31m$\033[0m "
+# define BLACK "\033[0;30m"
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[0;34m"
+# define PURPLE "\033[0;35m"
+# define CYAN "\03[0;36m"
+# define WHITE "\033[0;37m"
+# define RESET "\033[0m"
 
 typedef struct			s_lst
 {
-	void					*head;
-	void					*tail;
+	void				*head;
+	void				*tail;
 }						t_lst;
 
 typedef struct			s_lexer
 {
-	char					*lex;
+	char				*lex;
 	int					s_quote;
 	int					e_quote;
 	int					is_quote;
@@ -62,50 +62,58 @@ typedef struct			s_lexer
 
 typedef struct			s_token
 {
-	char					*token;
-	char					type;
+	char				*token;
+	char				type;
 	int					i;
 	int					st;
 	int					ed;
-	struct s_token			*next;
-	struct s_token			*prev;
+	struct s_token		*next;
+	struct s_token		*prev;
 }						t_token;
+
+typedef struct			s_args
+{
+	char				*arg;
+	int					opt;
+	struct s_args		*next;
+	struct s_args		*prev;
+}						t_args;
 
 typedef struct			s_env
 {
-	char					*key;
-	char					*value;
-	struct s_env			*next;
-	struct s_env			*prev;
+	char				*key;
+	char				*value;
+	struct s_env		*next;
+	struct s_env		*prev;
 }						t_env;
 
 typedef struct			s_redir
 {
-	char					type;
-	char					*target;
-	char					*arg;
+	char				type;
+	char				*target;
+	char				*arg;
 }						t_redir;
 
 typedef struct			s_hdoc
 {
-	char					*delimiter;
-	char					*arg;
-}	t_hdoc;
+	char				*delimiter;
+	char				*arg;
+}						t_hdoc;
 
 typedef struct			s_syntax
 {
-	char					*cmd;
-	char					*arg_line;
-	char					**arg_word;
+	char				*cmd;
+	char				*arg_line;
+	char				**arg_word;
 	struct s_syntax		*next;
 	struct s_syntax		*prev;
 }						t_syntax;
 
 typedef struct			s_process
 {
-	t_lst					*syntax;
-	struct s_process		*next;
-	struct s_process		*prev;
+	t_lst				*syntax;
+	struct s_process	*next;
+	struct s_process	*prev;
 }						t_process;
 
 typedef struct			s_tool
@@ -118,13 +126,14 @@ typedef struct			s_tool
 
 typedef struct			s_conf
 {
-	char					*cmd;
-	char					**envp;
-	t_lst					*env;
+	char				*cmd;
+	char				**envp;
+	int					end_pipe;
+	t_lst				*env;
 	t_lexer				*lexer;
-	t_lst					*token;
-	t_lst					*process;
-	struct termios			term;
+	t_lst				*token;
+	t_lst				*process;
+	struct termios		term;
 }						t_conf;
 
 /*
@@ -132,7 +141,7 @@ typedef struct			s_conf
  */
 typedef struct			s_exec
 {
-	const char				*cmd[256];
+	const char			*cmd[256];
 	char *const *av;
 	char *const *envp;
 
@@ -141,20 +150,20 @@ typedef struct			s_exec
 
 typedef struct			s_blt
 {
-	char					*p_cmd;
+	char				*p_cmd;
 	int					opt;
 	int					up_flag;
-	char					*args;
+	char				*args;
 }						t_blt;
 
 typedef struct			s_all
 {
 	int					**fd;
-	pid_t					*pid;
-	t_env					env;
-	t_exec					exec;
-	t_hdoc					hdoc;
-	t_blt					blt;
+	pid_t				*pid;
+	t_env				env;
+	t_exec				exec;
+	t_hdoc				hdoc;
+	t_blt				blt;
 }						t_all;
 
 /*
@@ -192,7 +201,7 @@ void					make_env(t_lst *lst, char *key, char *value);
  *cursor
  */
 void					get_cursor_pos(int *x, int *y);
-char	**split_arg(char *arg);
+char					**split_arg(char *arg);
 /*
  *init
  */

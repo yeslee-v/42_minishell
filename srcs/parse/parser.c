@@ -1,9 +1,6 @@
 #include "../../includes/minishell.h"
 
-void	parse_redir(t_token *tok, t_lst *syn, char **cmd, char **arg)
-{
-printf("redir arg add = %p\n", *arg);
-}
+extern t_conf g_sh;
 
 t_lst	*init_syntax(void)
 {
