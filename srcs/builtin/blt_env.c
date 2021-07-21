@@ -2,11 +2,11 @@
 
 extern t_conf	g_sh;
 
-void			run_env(int xprt_flag, t_env *env)
+void			run_env(int xprt_flag, t_lst *envl)
 {
 	t_env *env_tmp;
 
-	env_tmp = env;
+	env_tmp = envl->head;
 	while (env_tmp)
 	{
 		if (xprt_flag == 1)

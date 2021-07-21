@@ -2,23 +2,24 @@
 
 extern t_conf	g_sh;
 
-static void		add_node_back(char *new_k, char *new_v, t_env *env)
+static void		add_node_back(char *new_k, char *new_v, t_lst *envl)
 {
+	t_env	*node;
 	t_env	*new;
-	t_env	*env_tmp;
 
 	new = malloc(sizeof(t_env));
 	if (!new)
 		printf("malloc error in add_node_back");
-	env_tmp = env;
+	node = envl->tail;
 	new->key = new_k;
 	new->value = new_v;
-	while (env_tmp->next)
-		env_tmp = env_tmp->next;
-	env_tmp->next = new;
+	new->next = NULL;
+	new->prev = node;
+	node->next = new;
+	envl->tail = new;
 }
 
-void			run_export(t_blt *blt, t_env *env, t_lst *envl)
+void			run_export(t_blt *blt, t_lst *envl)
 {
 	char	**tmp;
 	t_env	*xst_key;
@@ -27,11 +28,11 @@ void			run_export(t_blt *blt, t_env *env, t_lst *envl)
 		return ;
 	if (!(blt->args))
 	{
-		run_env(1, env);
+		run_env(1, envl);
 		return ;
 	}
 	tmp = ft_split(blt->args, '=');
 	xst_key = change_env_value(tmp[0], tmp[1], envl);
 	if (!xst_key)
-		add_node_back(ft_strdup(tmp[0]), ft_strdup(tmp[1]), env);
+		add_node_back(ft_strdup(tmp[0]), ft_strdup(tmp[1]), envl);
 }

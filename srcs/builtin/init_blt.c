@@ -37,11 +37,11 @@ void			set_builtin(char **all_env, t_blt *blt, t_env *env, t_lst *envl)
 	else if (!(ft_strncmp(blt->p_cmd, "pwd", ft_strlen(blt->p_cmd))))
 		run_pwd(envl);
 	else if (!(ft_strncmp(blt->p_cmd, "export", ft_strlen(blt->p_cmd))))
-		run_export(blt, env, envl);
+		run_export(blt, envl);
 	else if (!(ft_strncmp(blt->p_cmd, "unset", ft_strlen(blt->p_cmd))))
 		run_unset(all_env, blt, env, envl);
 	else if (!(ft_strncmp(blt->p_cmd, "env", ft_strlen(blt->p_cmd))))
-		run_env(0, env);
+		run_env(0, envl);
 }
 
 int				blt_intro()
