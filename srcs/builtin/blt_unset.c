@@ -24,9 +24,10 @@ static void	remove_env(char *target, t_env *env)
 	return ;
 }
 
-void			run_unset(char **all_env, t_blt *blt, t_env *env)
+void			run_unset(char **all_env, t_blt *blt, t_env *env, t_lst *envl)
 {
-	if ((blt->up_flag == 1) || !(blt->args)) // + run 'unset' alone
+	(void)envl;
+	if ((blt->up_flag == 1) || !(blt->args))
 		return ;
 	while (*all_env)
 	{

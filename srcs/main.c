@@ -65,15 +65,7 @@ int		main(int ac, char **av, char **envp)
 		init_config();
 		set_prompt();
 		set_process();
-		/*
-		 *while (env)
-		 *{
-		 *    printf("|%s|:|%s|\n", env->key, env->value);
-		 *    env = env->next;
-		 *}
-		 */
-		/*blt_intro();*/
-/*blt_intro();*/
+		blt_intro();
 		/*
 		 *hdoc_intro(); // segv
 		 */
