@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:37:36 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/15 19:56:52 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/19 18:50:41 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void			make_syntax(t_lst *lst, char *cmd, char *arg)
 {
 	t_syntax	*node;
 
+	if (!cmd && !arg)
+		return ;
 	node = malloc(sizeof(t_syntax));
 	if (cmd != NULL)
 		node->cmd = ft_strdup(cmd);
