@@ -1,5 +1,7 @@
 #include "../../includes/minishell.h"
 
+extern t_conf g_sh;
+
 int		exists_opt(int i, char **tmp)
 {
 	int	j;
@@ -24,7 +26,8 @@ void	is_env(char *tmp, t_env *env)
 {
 	char *e_val;
 
-	e_val = print_env_value((tmp + 1), env);
+	(void)env;
+	e_val = search_env_value((tmp + 1), g_sh.env);
 	if (ft_strchr(tmp, '$') && !(ft_strchr(tmp, '?')))
 	{
 		if (!(e_val))

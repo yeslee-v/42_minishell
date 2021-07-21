@@ -1,21 +1,52 @@
 #include "../../includes/minishell.h"
 
-char	*search_env_key(char *key, t_env *env) // use oldpwd
+t_env	*search_env_node(char *key, t_lst *env)
 {
-	while (env)
+	t_env *node;
+	
+	if (!key || !env)
+		return (NULL);
+	node = env->head;
+	while (node)
 	{
-		if (!(ft_strncmp(key, env->key, ft_strlen(env->key))))
-			return (env->value);
-		env = env->next;
+		if ((ft_strcmp(key, node->key)) == 0)
+			return (node);
+		node = node->next;
+	}
+	return (NULL);
+}
+
+char	*search_env_value(char *key, t_lst *env) // use oldpwd
+{
+	t_env *node;
+
+	if (!key || !env)
+		return (NULL);
+	node = env->head;
+	while (node)
+	{
+		if ((ft_strcmp(key, node->key)) == 0)
+			return (node->value);
+		node = node->next;
 	}
 	return (NULL); // will make new list
 }
 
 // change value + return changed env list
 // if need new list for export, unset(..), make new list >> jaekpark
-t_env	*change_env_value(char *key, t_env *env)
+t_env	*change_env_value(char *key, char *new_value, t_lst *env)
 {
-	// value free + remalloc
-	search_env_key(key, env);
-	return (env);
+	char	*new;
+	t_env *target;
+	
+	if (!key || !env)
+		return (NULL);
+	target = search_env_node(key, env);
+	if (!target)
+		return (NULL);
+	if (target->value)
+		free(target->value);
+	new = ft_strdup(new_value);
+	target->value = new;
+	return (target);
 }

@@ -271,7 +271,13 @@ int						d_pipe_intro(int ac, char **av, char **path);
  */
 int						blt_intro();
 void					run_echo(t_blt *blt, t_env *env);
-char					*search_env_key(char *key, t_env *env);
+
+/*
+ *search_env
+ */
+t_env					*search_env_node(char *key, t_lst *env);
+char					*search_env_value(char *key, t_lst *env);
+t_env					*change_env_value(char *key, char *new_value, t_lst *env);
 
 void					run_cd(t_blt *blt, t_env *env);
 void					run_env(int xprt_flag, t_env *env);
