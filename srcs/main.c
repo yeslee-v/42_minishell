@@ -71,7 +71,8 @@ int		main(int ac, char **av, char **envp)
 		init_config();
 		set_prompt();
 		set_process();
-		blt_intro();
+		if (g_sh.process->head != NULL)
+			blt_intro();
 		/*
 		 *hdoc_intro(); // segv
 		 */

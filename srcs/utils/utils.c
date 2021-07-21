@@ -31,6 +31,7 @@ void	free_env_node(t_env *env)
 		free(env->key);
 	if (env->value)
 		free(env->value);
+	free(env);
 }
 
 void	delete_env_node(char *key, t_lst *env)
