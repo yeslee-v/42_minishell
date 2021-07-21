@@ -22,3 +22,51 @@ int		get_redir_fd(char *cmd)
 		return (-1);
 	return (fd);
 }
+
+void	free_env_node(t_env *env)
+{
+	if (!env)
+		return ;
+	if (env->key)
+		free(env->key);
+	if (env->value)
+		free(env->value);
+	free(env);
+}
+
+void	delete_env_node(char *key, t_lst *env)
+{
+	t_env *prev;
+	t_env *node;
+	t_env *next;
+
+	if (!env)
+		return ;
+	prev = NULL;
+	next = NULL;
+	node = search_env_node(key, env);
+	if (node == env->head && node == env->tail)
+	{
+		free_env_node(node);
+		node = NULL;
+		env->head = NULL;
+		env->tail = NULL;
+	}
+	else if (node == env->head && node != env->tail)
+	{
+		env->head = node->next;
+		free_env_node(node);
+	}
+	else if (node == env->tail)
+	{
+		env->tail = node->prev;
+		free_env_node(node);
+	}
+	else
+	{
+		prev = node->prev;
+		next = node->next;
+		prev->next = next;
+		next->prev = prev;
+	}
+}

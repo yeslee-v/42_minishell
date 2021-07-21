@@ -230,7 +230,7 @@ void					free_syntax(t_lst *syntax);
 void					free_process(t_lst *process);
 void					free_lexer(t_lexer *lexer);
 void					free_token(t_lst *token);
-
+void					free_env_node(t_env *env);
 /*
  *print_utils
  */
@@ -259,6 +259,7 @@ void					exit_shell(int num);
  *utils
  */
 int						get_redir_fd(char *cmd);
+void					delete_env_node(char *key, t_lst *env);
 
 /*
  *single-pipe
