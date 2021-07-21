@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/20 11:41:42 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/21 13:34:01 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,29 @@ static void		analyze_token(t_lst *token)
 
 void			check_last_token(void)
 {
-	int status;
+	int		status;
 	pid_t	pid;
+	int fd[2];
 	char	*line;
 	t_token	*node;
 	t_lexer	*tmp;
 
-	pid = fork();
-	printf("pid %d\n", pid);
-	if (pid > 0)
+	node = g_sh.token->tail;
+	if (!node)
+		return ;
+	else if (node->token)
 	{
-		wait(&status);
-		if (!(WIFEXITED(status)))
-			exit(1);
-	}
-	if (pid == 0)
-	{
-		node = g_sh.token->tail;
-		if (!node)
-			return ;
-		else if (node->token)
+		if (node->token[0] == '|')
 		{
-			if (node->token[0] == '|')
+			pid = fork();
+			printf("fork\n");
+			if (pid > 0)
+			{
+				waitpid(pid, &status, WUNTRACED);
+				if (!(WIFEXITED(status)))
+					exit(1);
+			}
+			if (pid == 0)
 			{
 				while (TRUE)
 				{
@@ -114,9 +115,9 @@ void			check_last_token(void)
 					rl_redisplay();
 					free(line);
 				}
+				exit(0);
 			}
 		}
-		exit(0);
 	}
 }
 

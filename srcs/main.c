@@ -58,7 +58,7 @@ int		main(int ac, char **av, char **envp)
 		 *}
 		 */
 		/*blt_intro();*/
-		blt_intro();
+/*blt_intro();*/
 		/*
 		 *hdoc_intro(); // segv
 		 */

@@ -24,7 +24,7 @@ void	is_env(char *tmp, t_env *env)
 {
 	char *e_val;
 
-	e_val = print_env_value((tmp + 1), env);
+	e_val = search_env_key((tmp + 1), env);
 	if (ft_strchr(tmp, '$') && !(ft_strchr(tmp, '?')))
 	{
 		if (!(e_val))
