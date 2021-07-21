@@ -6,7 +6,7 @@
 #    By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/13 16:39:04 by parkjaekw         #+#    #+#              #
-#    Updated: 2021/07/21 14:30:17 by parkjaekw        ###   ########.fr        #
+#    Updated: 2021/07/21 17:51:07 by parkjaekw        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ READLINE			=	/opt/homebrew/Cellar/readline/8.1
 INCS				=	minishell.h
 J_SRCS				=	main.c utils/error.c utils/ft_utils.c utils/init.c \
 						utils/make_struct.c utils/free.c parse/lexer.c parse/tokenizer.c \
-						utils/print.c setup/set.c parse/parser.c
+						utils/print.c setup/set.c parse/parser.c utils/utils.c
 Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
 						builtin/blt_env.c builtin/blt_exit.c builtin/blt_pwd.c \
 						builtin/blt_export.c builtin/blt_unset.c \

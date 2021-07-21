@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/18 18:34:16 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/19 22:25:15 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,34 @@ void	handle_eof(void)
 	exit(0);
 }
 
+void	check_input_syntax(char *cmd)
+{
+	int i;
+	int pipe;
+
+	if (!cmd)
+		return ;
+	i = -1;
+	pipe = 0;
+	while (cmd[++i])
+	{
+		if (cmd[i] == '|')
+			pipe = 1;
+		else if (!ft_isspace(cmd[i]))
+			pipe = 0;
+	}
+	if (pipe == 1)
+		printf("this cmd end pipe\n");
+}
+
 void	set_prompt(void)
 {
 	g_sh.cmd = readline(PROMPT);
+	check_input_syntax(g_sh.cmd);
 	if (g_sh.cmd == NULL)
 		handle_eof();
 	if (ft_strcmp(g_sh.cmd, "exit") == 0)
-		exit_shell(0);
-	add_history(g_sh.cmd);
-	rl_redisplay();
+		exit_shell(1);
 }
 
 void	sig_handler(int signum)
@@ -90,10 +109,12 @@ void	set_process(void)
 	t_token	*tmp;
 
 	tmp = NULL;
-	lexer(g_sh.cmd);
+	g_sh.lexer = lexer(g_sh.cmd);
 	if (g_sh.lexer->err == 1)
 		exit_shell(0);
 	tokenizer(g_sh.lexer->lex);
+	add_history(g_sh.cmd);
+	rl_redisplay();
 	tmp = g_sh.token->head;
 	while (tmp)
 		tmp = parser(g_sh.process, tmp);

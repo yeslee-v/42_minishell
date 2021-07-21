@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 18:15:00 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/18 18:36:35 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/19 17:26:18 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ void	init_pos(int *x, int *y)
 
 void	init_config(void)
 {
-	g_sh.lexer = malloc(sizeof(t_lexer));
+	g_sh.lexer = NULL;
 	g_sh.process = malloc(sizeof(t_lst));
 	g_sh.token = malloc(sizeof(t_lst));
 	init_lst(g_sh.process);
 	init_lst(g_sh.token);
-	init_lexer(g_sh.lexer);
 }
 
 void	init_tool(t_tool *tool)

@@ -34,6 +34,15 @@ void	get_cursor_pos(int *x, int *y)
 	}
 }
 
+void		print_test_redir_fd(void)
+{
+	printf("test case 1 = %s, fd = %d\n", "1234>>", get_redir_fd("1234>>"));
+	printf("test case 2 = %s, fd = %d\n", "12>", get_redir_fd("12>"));
+	printf("test case 3 = %s, fd = %d\n", "255<", get_redir_fd("255<"));
+	printf("test case 4 = %s, fd = %d\n", "32<<", get_redir_fd("32<<"));
+	printf("test case 5 = %s, fd = %d\n", "0>", get_redir_fd("0>"));
+}
+
 int		main(int ac, char **av, char **envp)
 {
 	int		ret;
@@ -48,6 +57,7 @@ int		main(int ac, char **av, char **envp)
 	printf("before env change key = %s, value = %s\n", tmp->key, tmp->value);
 	tmp = change_env_value("USER", "MR. GOOD", g_sh.env);
 	printf("after env change key = %s, value = %s\n", tmp->key, tmp->value);
+	print_test_redir_fd();
 	set_terminal();
 	while (ret)
 	{
@@ -55,7 +65,15 @@ int		main(int ac, char **av, char **envp)
 		init_config();
 		set_prompt();
 		set_process();
-		blt_intro();
+		/*
+		 *while (env)
+		 *{
+		 *    printf("|%s|:|%s|\n", env->key, env->value);
+		 *    env = env->next;
+		 *}
+		 */
+		/*blt_intro();*/
+/*blt_intro();*/
 		/*
 		 *hdoc_intro(); // segv
 		 */
