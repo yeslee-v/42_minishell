@@ -57,11 +57,13 @@ void	delete_env_node(char *key, t_lst *env)
 	else if (node == env->head && node != env->tail)
 	{
 		env->head = node->next;
+		node->next->prev = NULL;
 		free_env_node(node);
 	}
-	else if (node == env->tail)
+	else if (node != env->head && node == env->tail)
 	{
 		env->tail = node->prev;
+		node->prev->next = NULL;
 		free_env_node(node);
 	}
 	else
