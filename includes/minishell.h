@@ -256,6 +256,11 @@ void					set_term_cursor(void);
 void					exit_shell(int num);
 
 /*
+ *utils
+ */
+int						get_redir_fd(char *cmd);
+
+/*
  *single-pipe
  */
 int						s_pipe_intro(int ac, char **av, char **path);

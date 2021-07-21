@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/21 13:34:01 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/21 17:24:53 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,16 @@ static void		set_type(t_lst *token)
 	{
 		if (((ft_strcmp(tmp->token, PIPE)) == 0) && tmp != token->head)
 			tmp->type = 'P';
-		else if ((ft_strcmp(tmp->token, O_REDIR)) == 0)
-			tmp->type = 'O';
-		else if ((ft_strcmp(tmp->token, I_REDIR)) == 0)
-			tmp->type = 'I';
-		else if ((ft_strcmp(tmp->token, A_REDIR)) == 0)
+		else if (g_sh.lexer->lex[tmp->st] == 'R')
+		{
+			if (g_sh.cmd[tmp->ed] == '<')
+				tmp->type = 'I';
+			else if (g_sh.cmd[tmp->ed] == '>')
+				tmp->type = 'O';
+		}
+		else if (g_sh.lexer->lex[tmp->st] == 'A')
 			tmp->type = 'A';
-		else if ((ft_strcmp(tmp->token, HEREDOC)) == 0)
+		else if (g_sh.lexer->lex[tmp->st] == 'H')
 			tmp->type = 'H';
 		else
 			tmp->type = 'S';
@@ -70,56 +73,57 @@ static void		analyze_token(t_lst *token)
 	set_index(token);
 }
 
-void			check_last_token(void)
-{
-	int		status;
-	pid_t	pid;
-	int fd[2];
-	char	*line;
-	t_token	*node;
-	t_lexer	*tmp;
+/*void			check_last_token(void)*/
+/*{*/
+	/*int		status;*/
+	/*pid_t	pid;*/
+	/*int fd[2];*/
+	/*char	*line;*/
+	/*t_token	*node;*/
+	/*t_lexer	*tmp;*/
 
-	node = g_sh.token->tail;
-	if (!node)
-		return ;
-	else if (node->token)
-	{
-		if (node->token[0] == '|')
-		{
-			pid = fork();
-			printf("fork\n");
-			if (pid > 0)
-			{
-				waitpid(pid, &status, WUNTRACED);
-				if (!(WIFEXITED(status)))
-					exit(1);
-			}
-			if (pid == 0)
-			{
-				while (TRUE)
-				{
-					line = readline("> ");
-					if (ft_strlen(line) > 0)
-					{
-						g_sh.cmd = ft_strjoin_sp(g_sh.cmd, line);
-						tmp = lexer(g_sh.cmd);
-						free_lexer(g_sh.lexer);
-						g_sh.lexer = tmp;
-						free_token(g_sh.token);
-						g_sh.token = malloc(sizeof(t_lst));
-						init_lst(g_sh.token);
-						tokenizer(tmp->lex);
-						free(line);
-						break ;
-					}
-					rl_redisplay();
-					free(line);
-				}
-				exit(0);
-			}
-		}
-	}
-}
+	/*(void)fd;*/
+	/*node = g_sh.token->tail;*/
+	/*if (!node)*/
+		/*return ;*/
+	/*else if (node->token)*/
+	/*{*/
+		/*if (node->token[0] == '|')*/
+		/*{*/
+			/*pid = fork();*/
+			/*printf("fork\n");*/
+			/*if (pid > 0)*/
+			/*{*/
+				/*waitpid(pid, &status, WUNTRACED);*/
+				/*if (!(WIFEXITED(status)))*/
+					/*exit(1);*/
+			/*}*/
+			/*if (pid == 0)*/
+			/*{*/
+				/*while (TRUE)*/
+				/*{*/
+					/*line = readline("> ");*/
+					/*if (ft_strlen(line) > 0)*/
+					/*{*/
+						/*g_sh.cmd = ft_strjoin_sp(g_sh.cmd, line);*/
+						/*tmp = lexer(g_sh.cmd);*/
+						/*free_lexer(g_sh.lexer);*/
+						/*g_sh.lexer = tmp;*/
+						/*free_token(g_sh.token);*/
+						/*g_sh.token = malloc(sizeof(t_lst));*/
+						/*init_lst(g_sh.token);*/
+						/*tokenizer(tmp->lex);*/
+						/*free(line);*/
+						/*break ;*/
+					/*}*/
+					/*rl_redisplay();*/
+					/*free(line);*/
+				/*}*/
+				/*exit(0);*/
+			/*}*/
+		/*}*/
+	/*}*/
+/*}*/
 
 void			tokenizer(char *lex)
 {
@@ -146,5 +150,5 @@ void			tokenizer(char *lex)
 		}
 	}
 	analyze_token(g_sh.token);
-	check_last_token();
+	/*check_last_token();*/
 }
