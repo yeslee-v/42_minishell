@@ -57,7 +57,13 @@ int		main(int ac, char **av, char **envp)
 	printf("before env change key = %s, value = %s\n", tmp->key, tmp->value);
 	tmp = change_env_value("USER", "MR. GOOD", g_sh.env);
 	printf("after env change key = %s, value = %s\n", tmp->key, tmp->value);
-	print_test_redir_fd();
+	printf("before delete\n");
+	print_env(g_sh.env);
+	printf("-----------------------\n");
+	printf(BLUE"after delete USER env node\n");
+	delete_env_node("USER", g_sh.env);
+	print_env(g_sh.env);
+	printf(RESET);
 	set_terminal();
 	while (ret)
 	{
