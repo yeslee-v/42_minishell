@@ -9,6 +9,7 @@ void	run_cd(t_blt *blt, t_env *env)
 	char	*oldpwd_val;
 	t_env	*env_tmp;
 
+	(void)oldpwd_val;
 	if (blt->up_flag == 1)
 		return ;
 	// set oldpwd using search_env_key

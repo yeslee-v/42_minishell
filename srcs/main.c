@@ -37,12 +37,17 @@ void	get_cursor_pos(int *x, int *y)
 int		main(int ac, char **av, char **envp)
 {
 	int		ret;
+	t_env	*tmp;
 
 	if (!ac || !av)
 		return (-1);
 	ret = ac;
 	g_sh.envp = envp;
 	set_env(envp);
+	tmp = search_env_node("USER", g_sh.env);
+	printf("before env change key = %s, value = %s\n", tmp->key, tmp->value);
+	tmp = change_env_value("USER", "MR. GOOD", g_sh.env);
+	printf("after env change key = %s, value = %s\n", tmp->key, tmp->value);
 	set_terminal();
 	while (ret)
 	{
