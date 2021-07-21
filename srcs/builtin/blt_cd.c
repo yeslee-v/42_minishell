@@ -1,36 +1,38 @@
 #include "../../includes/minishell.h"
+#include <unistd.h>
 
-void	run_cd(char **av, char **path, t_all *all)
+void	run_cd(t_blt *blt, t_env *env)
 {
-	int		i;
 	int		ret;
-	char	**dir;
-	char	buf[256];
+	char	buf[512];
+	char	*home_val;
+	char	*oldpwd_val;
+	t_env	*env_tmp;
 
-	if (all->blt.up_flag == 1)
+	if (blt->up_flag == 1)
 		return ;
-	else if (!(av[2])) // $HOME
+	// set oldpwd using search_env_key
+	env_tmp = env;
+	if (!(blt->args)) // $HOME
 	{
-		i = -1;
-		while (path[++i])
+		while (env_tmp)
 		{
-			if (!(ft_strncmp(path[i], "HOME", 4)))
-			{
-				dir = ft_split(path[i], '=');
-				printf("%s\n", dir[1]);
-			}
+			if (!(ft_strncmp("HOME", env_tmp->key, 4)))
+				home_val = env_tmp->value;
+			env_tmp = env_tmp->next;
 		}
-	}
-	else
-	{
-		ret = chdir(av[2]);
+		ret = chdir(home_val);
 		if (ret == -1)
 			printf("%s\n", strerror(errno));
 		else if (!(ret))
-		{
-			printf("chdir >> %d\n", ret);
-			getcwd(buf, 0);
-			printf("path >> %s\n", buf); // will put pwd's value by ylee >> error
-		}
+			getcwd(buf, 512);
+	}
+	else // absolute or relative
+	{
+		ret = chdir(blt->args);
+		if (ret == -1)
+			printf("%s\n", strerror(errno));
+		else if (!(ret))
+			getcwd(buf, 512);
 	}
 }

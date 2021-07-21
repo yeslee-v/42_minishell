@@ -1,8 +1,8 @@
 #include "../../includes/minishell.h"
 
-void	run_exit(t_all *all)
+void	run_exit(t_blt *blt)
 {
-	if (all->blt.up_flag == 1)
+	if (blt->up_flag == 1)
 		return ;
 	printf("exit\n");
 	printf("\n");

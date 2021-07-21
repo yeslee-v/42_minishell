@@ -1,45 +1,37 @@
 #include "../../includes/minishell.h"
 
-/*
- *static void	remove_node(t_env **env, char *target)
- *{
- *    t_env	*node;
- *
- *    if (!(target))
- *        return ;
- *    node = *env;
- *    if (!(ft_strncmp(node->key, target, ft_strlen(node->key)))) // head
- *    {
- *        node->next->prev = NULL;
- *        return ;
- *    }
- *    while (node->next) // middle
- *    {
- *        if (!(ft_strncmp(node->key, target, ft_strlen(node->key))))
- *        {
- *            node->prev->next = node->next;
- *            node->next->prev = node->prev;
- *            return ;
- *        }
- *        node = node->next;
- *    }
- *    if (!(ft_strncmp(node->key, target, ft_strlen(node->key)))) // tail
- *        node->prev->next = NULL;
- *    return ;
- *}
- */
+extern t_conf	g_sh;
 
-void		run_unset(char **av, char **path, t_all *all)
+static void	remove_env(char *target, t_env *env)
 {
-	if (all->blt.up_flag == 1) // + run 'unset' alone
-		return ;
-	while (*path)
+	if (!(ft_strncmp(env->key, target, ft_strlen(env->key)))) // head
 	{
-		if (!(ft_strncmp(*path, av[2], 4)))
+		env->next->prev = NULL;
+		return ;
+	}
+	while (env->next) // middle
+	{
+		if (!(ft_strncmp(env->key, target, ft_strlen(env->key))))
 		{
-			//	remove_node(all.env, target); // not execute
-			printf(">> %s\n", *path);
+			env->prev->next = env->next;
+			env->next->prev = env->prev;
+			return ;
 		}
-		path++;
+		env = env->next;
+	}
+	if (!(ft_strncmp(env->key, target, ft_strlen(env->key)))) // tail
+		env->prev->next = NULL;
+	return ;
+}
+
+void			run_unset(char **all_env, t_blt *blt, t_env *env)
+{
+	if ((blt->up_flag == 1) || !(blt->args)) // + run 'unset' alone
+		return ;
+	while (*all_env)
+	{
+		if (!(ft_strncmp(*all_env, blt->args, 4)))
+			remove_env(blt->args, env);
+		all_env++;
 	}
 }

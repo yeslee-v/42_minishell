@@ -280,12 +280,13 @@ int						d_pipe_intro(int ac, char **av, char **path);
  */
 int						blt_intro();
 void					run_echo(t_blt *blt, t_env *env);
-void					run_cd(char **av, char **path, t_all *all);
-void					run_env(char **path);
-void					run_exit(t_all *all);
-void					run_export(char **av, char **path, t_all *all);
+char					*search_env_key(char *key, t_env *env);
+
+void					run_cd(t_blt *blt, t_env *env);
+void					run_env(int xprt_flag, t_env *env);
+void					run_export(t_blt *blt, t_env *env);
 void					run_pwd();
-void					run_unset(char **av, char **path, t_all *all);
+void					run_unset(char **all_env, t_blt *blt, t_env *env);
 
 /*
  * heredoc
