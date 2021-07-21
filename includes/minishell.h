@@ -271,19 +271,19 @@ int						d_pipe_intro(int ac, char **av, char **path);
  */
 int						blt_intro();
 void					run_echo(t_blt *blt, t_env *env);
+void					run_cd(t_blt *blt, t_env *env, t_lst *envl);
+void					run_env(int xprt_flag, t_env *env);
+void					run_export(t_blt *blt, t_env *env);
+void					run_pwd(t_lst *envl);
+void					run_unset(char **all_env, t_blt *blt, t_env *env);
 
 /*
  *search_env
  */
+void					change_env_lst(char *bfore_key, char *after_key, t_lst *env);
 t_env					*search_env_node(char *key, t_lst *env);
 char					*search_env_value(char *key, t_lst *env);
 t_env					*change_env_value(char *key, char *new_value, t_lst *env);
-
-void					run_cd(t_blt *blt, t_env *env);
-void					run_env(int xprt_flag, t_env *env);
-void					run_export(t_blt *blt, t_env *env);
-void					run_pwd();
-void					run_unset(char **all_env, t_blt *blt, t_env *env);
 
 /*
  * heredoc

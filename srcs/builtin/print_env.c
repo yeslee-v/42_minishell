@@ -2,8 +2,8 @@
 
 t_env	*search_env_node(char *key, t_lst *env)
 {
-	t_env *node;
-	
+	t_env	*node;
+
 	if (!key || !env)
 		return (NULL);
 	node = env->head;
@@ -16,9 +16,9 @@ t_env	*search_env_node(char *key, t_lst *env)
 	return (NULL);
 }
 
-char	*search_env_value(char *key, t_lst *env) // use oldpwd
+char *search_env_value(char *key, t_lst *env)
 {
-	t_env *node;
+	t_env	*node;
 
 	if (!key || !env)
 		return (NULL);
@@ -29,16 +29,14 @@ char	*search_env_value(char *key, t_lst *env) // use oldpwd
 			return (node->value);
 		node = node->next;
 	}
-	return (NULL); // will make new list
+	return (NULL);
 }
 
-// change value + return changed env list
-// if need new list for export, unset(..), make new list >> jaekpark
 t_env	*change_env_value(char *key, char *new_value, t_lst *env)
 {
 	char	*new;
-	t_env *target;
-	
+	t_env	*target;
+
 	if (!key || !env)
 		return (NULL);
 	target = search_env_node(key, env);
@@ -49,4 +47,12 @@ t_env	*change_env_value(char *key, char *new_value, t_lst *env)
 	new = ft_strdup(new_value);
 	target->value = new;
 	return (target);
+}
+
+void	change_env_lst(char *bfore_key, char *after_key, t_lst *envl)
+{
+	char	*old_val;
+
+	old_val = search_env_value(bfore_key, envl);
+	change_env_value(after_key, old_val, envl);
 }
