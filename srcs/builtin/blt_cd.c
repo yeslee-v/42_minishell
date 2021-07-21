@@ -1,32 +1,25 @@
 #include "../../includes/minishell.h"
+#include <unistd.h>
 
 void	run_cd(t_blt *blt, t_env *env)
 {
 	int		ret;
 	char	buf[512];
 	char	*home_val;
+	char	*oldpwd_val;
+	t_env	*env_tmp;
 
 	if (blt->up_flag == 1)
 		return ;
-	printf("\n========pwd======\n");
-	print_env_value("PWD", env);
-	printf("\n\n======oldpwd=======\n"); // not complete
-	ret = chdir(blt->args);
-	if (ret == -1)
-		printf("%s\n", strerror(errno));
-	else if (!(ret))
-	{
-		getcwd(buf, 512);
-		printf("oldpwd >> %s\n", buf);
-	}
-	print_env_value("OLDPWD", env);
+	// set oldpwd using search_env_key
+	env_tmp = env;
 	if (!(blt->args)) // $HOME
 	{
-		while (env)
+		while (env_tmp)
 		{
-			if (!(ft_strncmp("HOME", env->key, 4)))
-				home_val = env->value;
-			env = env->next;
+			if (!(ft_strncmp("HOME", env_tmp->key, 4)))
+				home_val = env_tmp->value;
+			env_tmp = env_tmp->next;
 		}
 		ret = chdir(home_val);
 		if (ret == -1)
@@ -34,7 +27,7 @@ void	run_cd(t_blt *blt, t_env *env)
 		else if (!(ret))
 			getcwd(buf, 512);
 	}
-	else
+	else // absolute or relative
 	{
 		ret = chdir(blt->args);
 		if (ret == -1)

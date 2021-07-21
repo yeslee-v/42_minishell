@@ -6,4 +6,5 @@ void	run_pwd()
 
 	cwd = getcwd(NULL, 0);
 	printf("%s\n", cwd);
+	free(cwd);
 }
