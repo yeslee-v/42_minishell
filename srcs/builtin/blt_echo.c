@@ -20,20 +20,19 @@ int		exists_opt(int i, char **tmp)
 	return (j);
 }
 
-void	print_env_value(char *key, t_env *env)
-{
-	while (env)
-	{
-		if (!(ft_strncmp(key, env->key, ft_strlen(env->key))))
-			printf("%s", env->value);
-		env = env->next;
-	}
-}
-
 void	is_env(char *tmp, t_env *env)
 {
+	char *e_val;
+
+	e_val = print_env_value((tmp + 1), env);
 	if (ft_strchr(tmp, '$') && !(ft_strchr(tmp, '?')))
-		print_env_value((tmp + 1), env);
+	{
+		if (!(e_val))
+			return ;
+		else
+			printf("%s", e_val);
+
+	}
 	else
 		printf("%s", tmp);
 }

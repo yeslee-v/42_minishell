@@ -28,24 +28,20 @@ void			set_lower(t_blt *blt)
 	}
 }
 
-void			set_builtin(t_blt *blt, t_env *env)
+void			set_builtin(char **all_env, t_blt *blt, t_env *env)
 {
 	if (!(ft_strncmp(blt->p_cmd, "echo", ft_strlen(blt->p_cmd))))
 		run_echo(blt, env);
 	else if (!(ft_strncmp(blt->p_cmd, "cd", ft_strlen(blt->p_cmd))))
 		run_cd(blt, env);
-	/*
-	 *else if (!(ft_strncmp(blt->p_cmd, "pwd", ft_strlen(blt->p_cmd))))
-	 *    run_pwd();
-	 *else if (!(ft_strncmp(blt->p_cmd, "export", ft_strlen(blt->p_cmd))))
-	 *    run_export(env, blt);
-	 *else if (!(ft_strncmp(blt->p_cmd, "unset", ft_strlen(blt->p_cmd))))
-	 *    run_unset(env, blt);
-	 *else if (!(ft_strncmp(blt->p_cmd, "env", ft_strlen(blt->p_cmd))))
-	 *    run_env(env);
-	 *else if (!(ft_strncmp(blt->p_cmd, "exit", ft_strlen(blt->p_cmd))))
-	 *    run_exit(blt);
-	 */
+	else if (!(ft_strncmp(blt->p_cmd, "pwd", ft_strlen(blt->p_cmd))))
+		run_pwd();
+	else if (!(ft_strncmp(blt->p_cmd, "export", ft_strlen(blt->p_cmd))))
+		run_export(blt, env);
+	else if (!(ft_strncmp(blt->p_cmd, "unset", ft_strlen(blt->p_cmd))))
+		run_unset(all_env, blt, env);
+	else if (!(ft_strncmp(blt->p_cmd, "env", ft_strlen(blt->p_cmd))))
+		run_env(0, env);
 }
 
 int				blt_intro()
@@ -54,21 +50,16 @@ int				blt_intro()
 	t_process	*proc;
 	t_syntax	*stx;
 	t_env		*env;
+	char		**all_env;
 
 	init_blt(&blt);
+	all_env = g_sh.envp;
 	env = g_sh.env->head;
 	proc = g_sh.process->head;
 	stx = proc->syntax->head;
-	/*
-		*while (env)
-		*{
-		*    printf("|%s|:|%s|\n", env->key, env->value);
-		*    env = env->next;
-		*}
-		*/
 	blt.p_cmd = stx->cmd;
 	blt.args = stx->arg_line;
 	set_lower(&blt);
-	set_builtin(&blt, env);
+	set_builtin(all_env, &blt, env);
 	return (0);
 }

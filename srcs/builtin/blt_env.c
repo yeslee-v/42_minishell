@@ -1,16 +1,18 @@
 #include "../../includes/minishell.h"
 
-void	run_env(char **path)
-{
-	int	e_flag;
+extern t_conf	g_sh;
 
-	e_flag = 0;
-	while (*path)
+void			run_env(int xprt_flag, t_env *env)
+{
+	t_env *env_tmp;
+
+	env_tmp = env;
+	while (env_tmp)
 	{
-		if (e_flag == 1)
-			printf("declare -x %s\n", *path);
+		if (xprt_flag == 1)
+			printf("declare -x %s=\"%s\"\n", env_tmp->key, env_tmp->value);
 		else
-			printf("%s\n", *path);
-		path++;
+			printf("%s=%s\n", env_tmp->key, env_tmp->value);
+		env_tmp = env_tmp->next;
 	}
 }
