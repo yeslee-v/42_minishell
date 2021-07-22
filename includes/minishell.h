@@ -129,6 +129,7 @@ typedef struct			s_conf
 	char				*cmd;
 	char				**envp;
 	int					end_pipe;
+	int					exit_status;
 	t_lst				*env;
 	t_lexer				*lexer;
 	t_lst				*token;
@@ -258,6 +259,7 @@ void					exit_shell(int num);
  */
 int						get_redir_fd(char *cmd);
 void					delete_env_node(char *key, t_lst *env);
+int						get_process_count(void);
 
 /*
  *single-pipe

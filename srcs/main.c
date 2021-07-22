@@ -71,6 +71,7 @@ int		main(int ac, char **av, char **envp)
 		init_config();
 		set_prompt();
 		set_process();
+		printf("process count(=pipe count) = %d\n", get_process_count());
 		if (g_sh.process->head != NULL)
 		{
 			blt_intro();
