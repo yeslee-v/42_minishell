@@ -9,8 +9,8 @@ void	parents_proc(char **av, char **path, t_exec *exec)
 		exit(1);
 	split_path(av[3], path, exec);
 	connect_out(av[4]);
-	run_dup2(0, exec);
-	close_fd(2, exec);
+	run_dup2(0, exec->fd);
+	close_fd(2, exec->fd);
 	run_execve(exec);
 }
 
@@ -26,8 +26,8 @@ void	child_proc(char **av, char **path, t_exec *exec)
 	{
 		split_path(av[2], path, exec);
 		connect_in(av[1]);
-		run_dup2(1, exec);
-		close_fd(2, exec);
+		run_dup2(1, exec->fd);
+		close_fd(2, exec->fd);
 		run_execve(exec);
 	}
 	else

@@ -28,9 +28,9 @@ void			set_lower(t_blt *blt)
 	}
 }
 
-int			set_builtin(char **all_env, t_blt *blt, t_env *env, t_lst *envl)
+int				set_builtin(char **all_env, t_blt *blt, t_env *env, t_lst *envl)
 {
-	int ret;
+	int	ret;
 
 	ret = 1;
 	if (!(ft_strncmp(blt->p_cmd, "echo", ft_strlen(blt->p_cmd))))
@@ -57,8 +57,10 @@ int				blt_intro()
 	t_syntax	*stx;
 	t_env		*env;
 	t_lst		*envl;
+	t_exec		exec;
 	int			ret;
 	char		**all_env;
+	char		*path;
 
 	init_blt(&blt);
 	all_env = g_sh.envp;
@@ -70,5 +72,11 @@ int				blt_intro()
 	envl = g_sh.env;
 	set_lower(&blt);
 	ret = set_builtin(all_env, &blt, env, envl);
+	path = search_env_value("PATH", envl);
+	if (!ret)
+	{
+		split_path(blt.p_cmd, &path, &exec);
+		run_execve(&exec);
+	}
 	return (ret);
 }

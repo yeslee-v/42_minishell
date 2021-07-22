@@ -158,12 +158,10 @@ typedef struct			s_blt
 
 typedef struct			s_all
 {
-	int					**fd;
+	int					**fd; /// multi_pipe
 	pid_t				*pid;
 	t_env				env;
 	t_exec				exec;
-	t_hdoc				hdoc;
-	t_blt				blt;
 }						t_all;
 
 /*
@@ -274,7 +272,7 @@ void					connect_in(char *file);
 void					connect_out(char *file);
 void					run_dup2(int std_fd, int *fd);
 void					close_fd(int flag, int *fd);
-void					run_execve(t_all *all);
+void					run_execve(t_exec *exec);
 
 /*
  * multi-pipe

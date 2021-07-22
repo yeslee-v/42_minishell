@@ -31,12 +31,12 @@ void	ctrl_mid_cmd(int args_cnt, char **av, char **path, t_all *all)
 		all->pid[i + 1] = fork();
 		if (all->pid[i + 1] == 0) // child
 		{
-			split_path(av[i + 3], path, all);
+			split_path(av[i + 3], path, &all->exec);
 			if (i != 0)
 				run_dup2(0, all->fd[i - 1]); // std_in
 			run_dup2(1, all->fd[i]);         // std_out
 			close_fd(1, all->fd[i]);         // std_in
-			run_execve(all);
+			run_execve(&all->exec);
 		}
 		else if (all->pid[i + 1] > 0) // parents
 		{
@@ -50,7 +50,7 @@ void	ctrl_mid_cmd(int args_cnt, char **av, char **path, t_all *all)
 
 void	middle_proc(int args_cnt, char **av, char **path, t_all *all)
 {
-	split_path(av[2], path, all); // for execve
+	split_path(av[2], path, &all->exec); // for execve
 	connect_in(av[1]);            // infile open + dup2 + close
 	alloc_fd(args_cnt, all);
 	ctrl_mid_cmd(args_cnt, av, path, all);
@@ -73,9 +73,9 @@ int	d_pipe_intro(int ac, char **av, char **path)
 	{
 		middle_proc(args_cnt, av, path, &all);
 		run_dup2(0, all.fd[mid_cmd_cnt - 1]);
-		split_path(av[args_cnt - 1], path, &all);
+		split_path(av[args_cnt - 1], path, &all.exec);
 		connect_out(av[args_cnt]);
-		run_execve(&all);
+		run_execve(&all.exec);
 	}
 	else
 		print_error("fork error");

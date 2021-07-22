@@ -3,11 +3,7 @@
 int		s_pipe_intro(int ac, char **av, char **path)
 {
 	pid_t	pid;
-<<<<<<< HEAD
 	t_exec	exec;
-=======
-	t_exec	pipe;
->>>>>>> main
 	int		status;
 
 	if (ac != 5)

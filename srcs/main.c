@@ -74,7 +74,7 @@ int		main(int ac, char **av, char **envp)
 		if (g_sh.process->head != NULL)
 		{
 			blt_intro();
-			hdoc_intro(); // segv
+			hdoc_intro();
 		}
 		free_conf(&g_sh);
 	}

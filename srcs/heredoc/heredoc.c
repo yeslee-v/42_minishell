@@ -9,6 +9,7 @@ void	run_hdoc(t_hdoc *hdoc, t_syntax *stx)
 	int		fd[2];
 	int		status;
 
+	printf("cmd is %s\n", stx->cmd);
 	char buf[100];
 	pipe(fd);
 	pid = fork();
@@ -19,9 +20,7 @@ void	run_hdoc(t_hdoc *hdoc, t_syntax *stx)
 			exit(1);
 		close(fd[1]);
 		while (read(fd[0], &buf, 100))
-		{
-			printf("%s", buf); // execve vs builtin
-		}
+			blt_intro();
 		close(fd[0]);
 	}
 	else if (pid == 0)
