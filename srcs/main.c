@@ -4,9 +4,9 @@ t_conf	g_sh;
 
 void	get_cursor_pos(int *x, int *y)
 {
-	int ret;
-	int	flag;
-	char ch;
+	int		ret;
+	int		flag;
+	char	ch;
 
 	flag = 0;
 	init_pos(x, y);
@@ -34,7 +34,7 @@ void	get_cursor_pos(int *x, int *y)
 	}
 }
 
-void		print_test_redir_fd(void)
+void	print_test_redir_fd(void)
 {
 	printf("test case 1 = %s, fd = %d\n", "1234>>", get_redir_fd("1234>>"));
 	printf("test case 2 = %s, fd = %d\n", "12>", get_redir_fd("12>"));
@@ -60,7 +60,7 @@ int		main(int ac, char **av, char **envp)
 	printf("before delete\n");
 	print_env(g_sh.env);
 	printf("-----------------------\n");
-	printf(BLUE"after delete USER env node\n");
+	printf(BLUE "after delete USER env node\n");
 	delete_env_node("USER", g_sh.env);
 	print_env(g_sh.env);
 	printf(RESET);
@@ -72,10 +72,10 @@ int		main(int ac, char **av, char **envp)
 		set_prompt();
 		set_process();
 		if (g_sh.process->head != NULL)
+		{
 			blt_intro();
-		/*
-		 *hdoc_intro(); // segv
-		 */
+			hdoc_intro(); // segv
+		}
 		free_conf(&g_sh);
 	}
 	system("leaks checker");

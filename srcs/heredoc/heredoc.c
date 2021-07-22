@@ -23,7 +23,6 @@ void	run_hdoc(t_hdoc *hdoc, t_syntax *stx)
 			printf("%s", buf); // execve vs builtin
 		}
 		close(fd[0]);
-		printf("cmd is |%s|\n", stx->cmd);
 	}
 	else if (pid == 0)
 	{
