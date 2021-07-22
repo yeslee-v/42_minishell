@@ -1,9 +1,11 @@
 #include "../../includes/minishell.h"
 
+extern t_conf g_sh;
+
 int		get_redir_fd(char *cmd)
 {
-	int i;
-	int fd;
+	int	i;
+	int	fd;
 
 	i = -1;
 	fd = 0;
@@ -16,7 +18,6 @@ int		get_redir_fd(char *cmd)
 			fd = (fd * 10) + (cmd[i] - '0');
 		else
 			break ;
-
 	}
 	if (fd > 255 || fd < 0)
 		return (-1);
@@ -36,9 +37,9 @@ void	free_env_node(t_env *env)
 
 void	delete_env_node(char *key, t_lst *env)
 {
-	t_env *prev;
-	t_env *node;
-	t_env *next;
+	t_env	*prev;
+	t_env	*node;
+	t_env	*next;
 
 	if (!env)
 		return ;
@@ -74,4 +75,21 @@ void	delete_env_node(char *key, t_lst *env)
 		next->prev = prev;
 		free_env_node(node);
 	}
+}
+
+int		get_process_count(void)
+{
+	int			cnt;
+	t_lst		*process;
+	t_process	*node;
+
+	cnt = 0;
+	process = g_sh.process;
+	node = process->head;
+	while (node)
+	{
+		cnt++;
+		node = node->next;
+	}
+	return (cnt);
 }
