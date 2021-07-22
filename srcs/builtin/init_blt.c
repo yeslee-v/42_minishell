@@ -28,8 +28,11 @@ void			set_lower(t_blt *blt)
 	}
 }
 
-void			set_builtin(char **all_env, t_blt *blt, t_env *env, t_lst *envl)
+int			set_builtin(char **all_env, t_blt *blt, t_env *env, t_lst *envl)
 {
+	int ret;
+
+	ret = 1;
 	if (!(ft_strncmp(blt->p_cmd, "echo", ft_strlen(blt->p_cmd))))
 		run_echo(blt, env);
 	else if (!(ft_strncmp(blt->p_cmd, "cd", ft_strlen(blt->p_cmd))))
@@ -42,6 +45,9 @@ void			set_builtin(char **all_env, t_blt *blt, t_env *env, t_lst *envl)
 		run_unset(all_env, blt, env, envl);
 	else if (!(ft_strncmp(blt->p_cmd, "env", ft_strlen(blt->p_cmd))))
 		run_env(0, envl);
+	else
+		ret = 0;
+	return (ret);
 }
 
 int				blt_intro()
@@ -51,6 +57,7 @@ int				blt_intro()
 	t_syntax	*stx;
 	t_env		*env;
 	t_lst		*envl;
+	int			ret;
 	char		**all_env;
 
 	init_blt(&blt);
@@ -62,6 +69,6 @@ int				blt_intro()
 	blt.args = stx->arg_line;
 	envl = g_sh.env;
 	set_lower(&blt);
-	set_builtin(all_env, &blt, env, envl);
-	return (0);
+	ret = set_builtin(all_env, &blt, env, envl);
+	return (ret);
 }
