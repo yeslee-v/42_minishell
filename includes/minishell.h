@@ -42,6 +42,13 @@
 # define S_OREDIR 5
 # define S_FD 6
 
+# define B_ECHO	1
+# define B_CD	2
+# define B_PWD	3	
+# define B_EXPORT 4
+# define B_UNSET 5
+# define B_ENV	6
+
 # define PROMPT "\033[1;32mBraveShell\033[0;31m$\033[0m "
 # define BLACK "\033[0;30m"
 # define RED "\033[0;31m"
@@ -176,12 +183,10 @@ typedef struct			s_blt
 
 typedef struct			s_all
 {
-	int					**fd;
+	int					**fd; /// multi_pipe
 	pid_t				*pid;
 	t_env				env;
 	t_exec				exec;
-	t_hdoc				hdoc;
-	t_blt				blt;
 }						t_all;
 
 /*
@@ -276,39 +281,50 @@ void					exit_shell(int num);
  *utils
  */
 int						get_redir_fd(char *cmd);
-//void					delete_env_node(char *key, t_lst *env);
+void					delete_env_node(char *key, t_lst *env);
 int						get_process_count(void);
+
+/*
+ *pipe
+ */
+void					pipe_intro(int proc_cnt);
 
 /*
  *single-pipe
  */
-int						s_pipe_intro(int ac, char **av, char **path);
+int						single_pipe(char **av, char **path);
 void					print_error(char *str);
 void					child_proc(char **av, char **path, t_exec *exec);
 void					parents_proc(char **av, char **path, t_exec *exec);
-void					split_path(const char *cmd_1, char **path, t_exec *exec);
+void					split_path(const char *cmd_1, char *path, t_exec *exec);
 void					combine_cmd(const char *cmd_1, char **path, t_exec *exec);
 void					connect_in(char *file);
 void					connect_out(char *file);
 void					run_dup2(int std_fd, int *fd);
 void					close_fd(int flag, int *fd);
-void					run_execve(t_all *all);
+void					run_execve(t_exec *exec);
 
 /*
  * multi-pipe
  */
-int						d_pipe_intro(int ac, char **av, char **path);
+int						multi_pipe(int ac, char **av, char **path);
+void					set_wait(void);
+void					middle_proc(int args_cnt, char **av, char **path, t_all *all);
+void					alloc_fd(int args_cnt, t_all *all);
+void					ctrl_mid_cmd(int args_cnt, char **av, char **path, t_all *all);
 
 /*
  * builtin
  */
-int						blt_intro();
-void					run_echo(t_blt *blt, t_env *env);
-void					run_cd(t_blt *blt, t_env *env, t_lst *envl);
+void					blt_intro(char *cmd, char *b_args);
+int						is_blt(char *cmd);
+void					not_blt(char *cmd, t_exec *exec, t_lst *envl);
+void					run_echo(char *b_args, t_blt *blt, t_env *env);
+void					run_cd(char *b_args, t_blt *blt, t_lst *envl);
 void					run_env(int xprt_flag, t_lst *envl);
-void					run_export(t_blt *blt, t_lst *envl);
+void					run_export(char *b_args, t_blt *blt, t_lst *envl);
 void					run_pwd(t_lst *envl);
-void					run_unset(char **all_env, t_blt *blt, t_env *env, t_lst *envl);
+void					run_unset(char *b_args, t_blt *blt, t_lst *envl);
 
 /*
  *search_env
@@ -322,6 +338,8 @@ t_env					*change_env_value(char *key, char *new_value, t_lst *env);
  * heredoc
  */
 int						hdoc_intro();
-//void					run_hdoc(t_hdoc *hdoc, t_syntax *stx);
+void					run_hdoc(t_hdoc *hdoc);
+//void					hdoc_parents(int fd[2], t_syntax *stx);
+void					hdoc_child(int fd[2], t_hdoc *hdoc);
 
 #endif

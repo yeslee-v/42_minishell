@@ -2,20 +2,21 @@
 
 extern t_conf	g_sh;
 
-void	first_fork(t_hdoc *hdoc, t_syntax *stx)
+void	first_fork(t_hdoc *hdoc)
 {
 	int		status;
 	pid_t	pid;
 
 	pid = fork();
+	(void)hdoc;
 	if (pid > 0)
 	{
 		wait(&status);
 		if (!(WIFEXITED(status)))
 			exit(1);
 	}
-	else if (pid == 0)
-		run_hdoc(hdoc, stx);
+	/*else if (pid == 0)*/
+		/*run_hdoc(hdoc);*/
 	else
 		write(2, "fork error\n", 11);
 }
@@ -24,11 +25,8 @@ int		hdoc_intro()
 {
 	t_hdoc		hdoc;
 	t_process	*proc;
-	t_syntax	*stx;
 
 	proc = g_sh.process->head;
-	stx = proc->syntax->head;
-	hdoc.delimiter = stx->next->arg_line;
-	first_fork(&hdoc, stx);
+	first_fork(&hdoc);
 	return (0);
 }

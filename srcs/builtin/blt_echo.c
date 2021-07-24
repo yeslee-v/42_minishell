@@ -45,6 +45,7 @@ void	do_echo(int i, char **tmp, t_blt *blt, t_env *env, int fd)
 	char	*d_tmp;
 	char	*s_tmp;
 // a.txt fd=3 
+	(void)fd;
 	while (tmp[i])
 	{
 		if (ft_strchr(tmp[i], '"'))
@@ -69,17 +70,17 @@ void	do_echo(int i, char **tmp, t_blt *blt, t_env *env, int fd)
 		printf("\n");
 }
 
-void	run_echo(t_blt *blt, t_env *env)
+void	run_echo(char *b_args, t_blt *blt, t_env *env)
 {
 	int		i;
 	char	**tmp;
 
-	if (blt->args == NULL)
+	if (b_args == NULL)
 	{
 		printf("\n");
 		return ;
 	}
-	tmp = ft_split(blt->args, ' ');
+	tmp = ft_split(b_args, ' ');
 	i = 0;
 	if (!(blt->up_flag))
 	{
@@ -97,7 +98,7 @@ void	run_echo(t_blt *blt, t_env *env)
 		blt->opt = 1;
 		i++;
 	}
-	do_echo(i, tmp, blt, env);
+	do_echo(i, tmp, blt, env, 1);
 	int j = 0;
 	while (tmp[j])
 	{
