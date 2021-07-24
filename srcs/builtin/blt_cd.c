@@ -1,10 +1,9 @@
 #include "../../includes/minishell.h"
 
-void	run_cd(t_blt *blt, t_env *env, t_lst *envl)
+void	run_cd(char *b_args, t_blt *blt, t_lst *envl)
 {
 	int		ret;
 	char	buf[512];
-	t_env	*env_tmp;
 	t_env	*home;
 	char	*home_pwd;
 	char	*abs_pwd;
@@ -12,8 +11,7 @@ void	run_cd(t_blt *blt, t_env *env, t_lst *envl)
 	if (blt->up_flag == 1)
 		return ;
 	change_env_lst("PWD", "OLDPWD", envl);
-	env_tmp = env;
-	if (!(blt->args) || (ft_strcmp("~", blt->args)) == 0)
+	if (!(b_args) || (ft_strcmp("~", b_args)) == 0)
 	{
 		change_env_lst("HOME", "PWD", envl);
 		home = search_env_node("HOME", envl);
@@ -25,13 +23,13 @@ void	run_cd(t_blt *blt, t_env *env, t_lst *envl)
 	}
 	else
 	{
-		if ((blt->args[0] == '~') && (blt->args[1] == '/'))
+		if ((b_args[0] == '~') && (b_args[1] == '/'))
 		{
 			home_pwd = search_env_value("HOME", envl);
-			abs_pwd = ft_strjoin(home_pwd, (blt->args + 1));
-			blt->args = abs_pwd;
+			abs_pwd = ft_strjoin(home_pwd, (b_args + 1));
+			b_args = abs_pwd;
 		}
-		ret = chdir(blt->args);
+		ret = chdir(b_args);
 		if (ret == -1)
 			printf("%s\n", strerror(errno));
 		else if (!(ret))

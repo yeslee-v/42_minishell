@@ -20,7 +20,7 @@ void	combine_cmd(const char *cmd_1, char **path, t_exec *exec)
 	exec->envp = NULL;
 }
 
-void	split_path(const char *cmd_1, char **path, t_exec *exec)
+void	split_path(const char *cmd_1, char *path, t_exec *exec)
 {
 	int		i;
 	char	**str;
@@ -28,21 +28,9 @@ void	split_path(const char *cmd_1, char **path, t_exec *exec)
 
 	i = -1;
 	str = NULL;
-	while (*path)
-	{
-		if ((**path == 'P') && (*(*path + 1) == 'A') && (*(*path + 2) == 'T') &&
-			(*(*path + 3) == 'H'))
-		{
-			str = ft_split(*path, ':');
-			break ;
-		}
-		path++;
-	}
+	str = ft_split(path, ':');
 	while (str[++i])
-	{
 		tmp[i] = ft_strjoin(str[i], "/");
-		free(str[i]);
-	}
 	tmp[i] = NULL;
 	free(str);
 	combine_cmd(cmd_1, tmp, exec);

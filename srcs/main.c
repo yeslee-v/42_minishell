@@ -4,9 +4,9 @@ t_conf	g_sh;
 
 void	get_cursor_pos(int *x, int *y)
 {
-	int ret;
-	int	flag;
-	char ch;
+	int		ret;
+	int		flag;
+	char	ch;
 
 	flag = 0;
 	init_pos(x, y);
@@ -34,7 +34,7 @@ void	get_cursor_pos(int *x, int *y)
 	}
 }
 
-void		print_test_redir_fd(void)
+void	print_test_redir_fd(void)
 {
 	printf("test case 1 = %s, fd = %d\n", "1234>>", get_redir_fd("1234>>"));
 	printf("test case 2 = %s, fd = %d\n", "12>", get_redir_fd("12>"));
@@ -45,25 +45,33 @@ void		print_test_redir_fd(void)
 
 int		main(int ac, char **av, char **envp)
 {
-	int		ret;
-	t_env	*tmp;
+	int			ret;
+	t_blt		blt;
+	int			proc_cnt;
+	t_process	*proc;
+	t_syntax	*stx;
 
+	/*
+		*t_env		*tmp;
+		*/
 	if (!ac || !av)
 		return (-1);
 	ret = ac;
 	g_sh.envp = envp;
 	set_env(envp);
-	tmp = search_env_node("USER", g_sh.env);
-	printf("before env change key = %s, value = %s\n", tmp->key, tmp->value);
-	tmp = change_env_value("USER", "MR. GOOD", g_sh.env);
-	printf("after env change key = %s, value = %s\n", tmp->key, tmp->value);
-	printf("before delete\n");
-	print_env(g_sh.env);
-	printf("-----------------------\n");
-	printf(BLUE"after delete USER env node\n");
-	delete_env_node("USER", g_sh.env);
-	print_env(g_sh.env);
-	printf(RESET);
+	/*
+		*tmp = search_env_node("USER", g_sh.env);
+		*printf("before env change key = %s, value = %s\n", tmp->key, tmp->value);
+		*tmp = change_env_value("USER", "MR. GOOD", g_sh.env);
+		*printf("after env change key = %s, value = %s\n", tmp->key, tmp->value);
+		*printf("before delete\n");
+		*print_env(g_sh.env);
+		*printf("-----------------------\n");
+		*printf(BLUE "after delete USER env node\n");
+		*delete_env_node("USER", g_sh.env);
+		*print_env(g_sh.env);
+		*printf(RESET);
+		*/
 	set_terminal();
 	while (ret)
 	{
@@ -71,12 +79,25 @@ int		main(int ac, char **av, char **envp)
 		init_config();
 		set_prompt();
 		set_process();
-		printf("process count(=pipe count) = %d\n", get_process_count());
-		if (g_sh.process->head != NULL)
-			blt_intro();
-		/*
-		 *hdoc_intro(); // segv
-		 */
+		proc_cnt = get_process_count();
+		proc = g_sh.process->head;
+		stx = proc->syntax->head;
+		blt.p_cmd = stx->cmd;
+		blt.args = stx->arg_line;
+		if (proc_cnt)
+		{
+			/*
+				*if (proc_cnt == 1)
+				*/
+			/*
+				*blt_intro(blt.p_cmd, blt.args);
+				*/
+			/*
+				*else
+				*    pipe_intro(proc_cnt);
+				*/
+			hdoc_intro();
+		}
 		free_conf(&g_sh);
 	}
 	system("leaks checker");
