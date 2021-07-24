@@ -55,29 +55,3 @@ void	middle_proc(int args_cnt, char **av, char **path, t_all *all)
 	alloc_fd(args_cnt, all);
 	ctrl_mid_cmd(args_cnt, av, path, all);
 }
-
-int	d_pipe_intro(int ac, char **av, char **path)
-{
-	int		args_cnt;
-	t_all	all;
-
-	int mid_cmd_cnt; // cmds using while
-	args_cnt = ac - 1;
-	mid_cmd_cnt = args_cnt - 3;
-	if (!(all.pid = malloc(sizeof(pid_t) * args_cnt)))
-		return (0);
-	all.pid[0] = fork();
-	if (all.pid[0] > 0) // grand
-		set_wait();
-	else if (all.pid[0] == 0) // parents or child
-	{
-		middle_proc(args_cnt, av, path, &all);
-		run_dup2(0, all.fd[mid_cmd_cnt - 1]);
-		split_path(av[args_cnt - 1], path, &all.exec);
-		connect_out(av[args_cnt]);
-		run_execve(&all.exec);
-	}
-	else
-		print_error("fork error");
-	return (0);
-}

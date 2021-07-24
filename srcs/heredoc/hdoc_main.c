@@ -28,7 +28,10 @@ int		hdoc_intro()
 
 	proc = g_sh.process->head;
 	stx = proc->syntax->head;
-	hdoc.delimiter = stx->next->arg_line;
+	if (stx->next)
+		hdoc.delimiter = stx->next->arg_line; // cat << eof
+	else
+		hdoc.delimiter = stx->arg_line; // << eof
 	first_fork(&hdoc, stx);
 	return (0);
 }
