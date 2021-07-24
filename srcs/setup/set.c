@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/19 22:25:15 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/24 17:47:35 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,19 +107,24 @@ void	set_signal(void)
 void	set_process(void)
 {
 	t_token	*tmp;
+	int	ret;
 
+	ret = 0;
 	tmp = NULL;
 	g_sh.lexer = lexer(g_sh.cmd);
 	if (g_sh.lexer->err == 1)
 		exit_shell(0);
-	tokenizer(g_sh.lexer->lex);
+	ret = tokenizer(g_sh.lexer->lex);
 	add_history(g_sh.cmd);
 	rl_redisplay();
+	print_token(g_sh.token);
+	if (ret == -1)
+		return ;
 	tmp = g_sh.token->head;
 	while (tmp)
-		tmp = parser(g_sh.process, tmp);
+		tmp = parser(tmp);
 	if (tmp != NULL)
-		parser(g_sh.process, tmp);
+		parser(tmp);
 	print_system();
 }
 

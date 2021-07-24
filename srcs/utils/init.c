@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 18:15:00 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/19 17:26:18 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/23 12:59:09 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void	init_tool(t_tool *tool)
 	tool->is_quote = 0;
 	tool->st = -1;
 	tool->ed = -1;
+	tool->a_redir = 0;
+	tool->redir = 0;
+	tool->pipe = 0;
+	tool->heredoc = 0;
 }
 
 void	init_lexer(t_lexer *lexer)

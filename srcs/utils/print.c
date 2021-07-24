@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 18:54:05 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/21 17:54:20 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/24 18:19:36 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,50 @@ void	print_env(t_lst *env)
 	}
 }
 
-void	print_syntax(t_lst *syntax)
+void	print_cmd(t_cmd *node)
 {
-	t_syntax	*tmp;
+	if (!node)
+		printf("커맨드가 존재하지 않습니다.\n");
+	printf("> shell command\n");
+	printf("[cmd] = %s\n[arg] = %s\n\n", node->cmd, node->arg_line);
+}
 
-	tmp = syntax->head;
-	while (tmp)
+void	print_redir(t_lst *redir)
+{
+	int i;
+	t_redir *node;
+
+	i = 0;
+	node = redir->head;
+	printf("> redirect list\n");
+	if (!node)
+	printf("노드가 없습니다.\n");
+	while (node)
 	{
-		printf("cmd = %s, arg = %s\n", tmp->cmd, tmp->arg_line);
-		tmp = tmp->next;
+		printf("(redir node %d)\n", i);
+		printf("[type] = %c\n[target_file_name] = %s\n[from_fd] = %d\n\n", node->type, node->file, node->pre_fd);
+		node = node->next;
+		i++;
+	}
+}
+
+void	print_hdoc(t_lst *hdoc)
+{
+	int i;
+	t_hdoc *node;
+
+	i = 0;
+	node = hdoc->head;
+	printf("> hdoc list\n");
+	if (!node)
+		printf("노드가 없습니다.\n");
+	while (node)
+	while (node)
+	{
+		printf("(hdoc node %d)\n", i);
+		printf("[delimiter] = %s\n[pre_fd] = %d\n\n", node->delimiter, node->pre_fd);
+		node = node->next;
+		i++;
 	}
 }
 
@@ -79,11 +114,16 @@ void	print_process(t_lst *process)
 
 	i = 0;
 	tmp = process->head;
+	printf("> origin command");
+	printf("%s\n\n", g_sh.cmd);
 	while (tmp)
 	{
-		printf("process no.%d\n", i);
-		printf("next = %p\n", tmp->next);
-		print_syntax(tmp->syntax);
+		printf("\n[pipe no %d]\n", i);
+		printf("-------------------------\n");
+		printf("\n");
+		print_cmd(tmp->cmd);
+		print_redir(tmp->redir);
+		print_hdoc(tmp->hdoc);
 		i++;
 		tmp = tmp->next;
 	}

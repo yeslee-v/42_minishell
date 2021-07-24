@@ -34,6 +34,14 @@
 # define A_REDIR ">>"
 # define HEREDOC "<<"
 
+# define S_CMD 0
+# define S_ARG 1
+# define S_HDOC 2
+# define S_AREDIR 3
+# define S_IREDIR 4
+# define S_OREDIR 5
+# define S_FD 6
+
 # define PROMPT "\033[1;32mBraveShell\033[0;31m$\033[0m "
 # define BLACK "\033[0;30m"
 # define RED "\033[0;31m"
@@ -64,6 +72,7 @@ typedef struct			s_token
 {
 	char				*token;
 	char				type;
+	int					syntax;
 	int					i;
 	int					st;
 	int					ed;
@@ -89,29 +98,33 @@ typedef struct			s_env
 
 typedef struct			s_redir
 {
+	int					pre_fd;
 	char				type;
-	char				*target;
-	char				*arg;
+	char				*file;
+	struct s_redir *next;
+	struct s_redir *prev;
 }						t_redir;
 
 typedef struct			s_hdoc
 {
+	int					pre_fd;
 	char				*delimiter;
-	char				*arg;
+	struct s_hdoc *next;
+	struct s_hdoc *prev;
 }						t_hdoc;
 
-typedef struct			s_syntax
+typedef struct			s_cmd
 {
 	char				*cmd;
 	char				*arg_line;
 	char				**arg_word;
-	struct s_syntax		*next;
-	struct s_syntax		*prev;
-}						t_syntax;
+}						t_cmd;
 
 typedef struct			s_process
 {
-	t_lst				*syntax;
+	t_cmd				*cmd;
+	t_lst				*hdoc;
+	t_lst				*redir;
 	struct s_process	*next;
 	struct s_process	*prev;
 }						t_process;
@@ -122,6 +135,10 @@ typedef struct			s_tool
 	int					is_quote;
 	int					st;
 	int					ed;
+	int					pipe;
+	int					redir;
+	int					a_redir;
+	int					heredoc;
 }						t_tool;
 
 typedef struct			s_conf
@@ -180,7 +197,7 @@ t_lexer					*lexer(char *cmd);
  *   analyze_type
  *   set_index
  */
-void					tokenizer(char *lex);
+int					tokenizer(char *lex);
 
 /*
  * - parser
@@ -188,13 +205,12 @@ void					tokenizer(char *lex);
  *   parse redir
  *   parse process
  */
-t_token					*parser(t_lst *process, t_token *tok);
+t_token					*parser(t_token *tok);
 
 /*
  *make_struct
  */
-void					save_process(t_lst *lst, t_lst *syntax);
-void					make_syntax(t_lst *lst, char *cmd, char *arg);
+void					save_process(t_cmd *cmd, t_lst *redir, t_lst *hdoc);
 void					make_token(t_lst *lst, int st, int ed);
 void					make_env(t_lst *lst, char *key, char *value);
 
@@ -260,7 +276,7 @@ void					exit_shell(int num);
  *utils
  */
 int						get_redir_fd(char *cmd);
-void					delete_env_node(char *key, t_lst *env);
+//void					delete_env_node(char *key, t_lst *env);
 int						get_process_count(void);
 
 /*
@@ -306,6 +322,6 @@ t_env					*change_env_value(char *key, char *new_value, t_lst *env);
  * heredoc
  */
 int						hdoc_intro();
-void					run_hdoc(t_hdoc *hdoc, t_syntax *stx);
+//void					run_hdoc(t_hdoc *hdoc, t_syntax *stx);
 
 #endif

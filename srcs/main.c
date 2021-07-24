@@ -46,24 +46,12 @@ void		print_test_redir_fd(void)
 int		main(int ac, char **av, char **envp)
 {
 	int		ret;
-	t_env	*tmp;
 
 	if (!ac || !av)
 		return (-1);
 	ret = ac;
 	g_sh.envp = envp;
 	set_env(envp);
-	tmp = search_env_node("USER", g_sh.env);
-	printf("before env change key = %s, value = %s\n", tmp->key, tmp->value);
-	tmp = change_env_value("USER", "MR. GOOD", g_sh.env);
-	printf("after env change key = %s, value = %s\n", tmp->key, tmp->value);
-	printf("before delete\n");
-	print_env(g_sh.env);
-	printf("-----------------------\n");
-	printf(BLUE"after delete USER env node\n");
-	delete_env_node("USER", g_sh.env);
-	print_env(g_sh.env);
-	printf(RESET);
 	set_terminal();
 	while (ret)
 	{
@@ -71,9 +59,8 @@ int		main(int ac, char **av, char **envp)
 		init_config();
 		set_prompt();
 		set_process();
-		printf("process count(=pipe count) = %d\n", get_process_count());
-		if (g_sh.process->head != NULL)
-			blt_intro();
+		/*if (g_sh.process->head != NULL)*/
+			/*blt_intro();*/
 		/*
 		 *hdoc_intro(); // segv
 		 */

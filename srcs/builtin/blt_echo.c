@@ -40,11 +40,11 @@ void	is_env(char *tmp, t_env *env)
 		printf("%s", tmp);
 }
 
-void	do_echo(int i, char **tmp, t_blt *blt, t_env *env)
+void	do_echo(int i, char **tmp, t_blt *blt, t_env *env, int fd)
 {
 	char	*d_tmp;
 	char	*s_tmp;
-
+// a.txt fd=3 
 	while (tmp[i])
 	{
 		if (ft_strchr(tmp[i], '"'))

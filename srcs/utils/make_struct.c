@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:37:36 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/19 18:50:41 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/24 17:58:21 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,69 +14,28 @@
 
 extern t_conf	g_sh;
 
-void			syntax_to_lst(t_lst *lst, t_syntax *node)
-{
-	t_syntax	*tmp;
-
-	if (lst->head == NULL && lst->tail == NULL)
-	{
-		lst->head = node;
-		lst->tail = node;
-	}
-	else if (lst->head != NULL && lst->tail != NULL)
-	{
-		tmp = lst->tail;
-		node->prev = tmp;
-		tmp->next = node;
-		lst->tail = node;
-	}
-}
-
-void			make_syntax(t_lst *lst, char *cmd, char *arg)
-{
-	t_syntax	*node;
-
-	if (!cmd && !arg)
-		return ;
-	node = malloc(sizeof(t_syntax));
-	if (cmd != NULL)
-		node->cmd = ft_strdup(cmd);
-	else
-		node->cmd = NULL;
-	if (arg != NULL)
-		node->arg_line = ft_strdup(arg);
-	else
-		node->arg_line = NULL;
-	node->arg_word = NULL;
-	node->next = NULL;
-	node->prev = NULL;
-	syntax_to_lst(lst, node);
-	if (cmd)
-		free(cmd);
-	if (arg)
-		free(arg);
-}
-
-void			save_process(t_lst *lst, t_lst *syntax)
+void			save_process(t_cmd *cmd, t_lst *redir, t_lst *hdoc)
 {
 	t_process	*tmp;
 	t_process	*node;
 
 	node = malloc(sizeof(t_process));
-	node->syntax = syntax;
+	node->cmd = cmd;
+	node->hdoc = hdoc;
+	node->redir = redir;
 	node->next = NULL;
 	node->prev = NULL;
-	if (lst->head == NULL && lst->tail == NULL)
+	if (g_sh.process->head == NULL && g_sh.process->tail == NULL)
 	{
-		lst->head = node;
-		lst->tail = node;
+		g_sh.process->head = node;
+		g_sh.process->tail = node;
 	}
-	else if (lst->head != NULL && lst->tail != NULL)
+	else if (g_sh.process->head != NULL && g_sh.process->tail != NULL)
 	{
-		tmp = lst->tail;
+		tmp = g_sh.process->tail;
 		node->prev = tmp;
 		tmp->next = node;
-		lst->tail = node;
+		g_sh.process->tail = node;
 	}
 }
 

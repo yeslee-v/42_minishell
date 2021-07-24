@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:17:44 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/21 17:18:16 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/24 22:20:41 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	analyze_space(t_lexer *lexer, int i)
 static void	analyze_quote(t_lexer *lexer, char c, int i)
 {
 	(void)c;
-	printf("enter analyze_quote\n");
 	if (lexer->s_quote == lexer->e_quote)
 	{
 		lexer->lex[i] = lexer->e_quote;
@@ -49,7 +48,7 @@ static void	analyze_quote(t_lexer *lexer, char c, int i)
 	 *2 == hdoc , 3 == append redir
 	 */
 
-int		check_fd(char *cmd, int i)
+int		check_precede_fd(char *cmd, int i)
 {
 	int start;
 
@@ -67,15 +66,44 @@ int		check_fd(char *cmd, int i)
 		else
 			break;
 	}
-	printf("i = %d\n", i);
 	if (start == 1 && i == -1)
 		return (1);
-	else if (start == 1 && i >= 0 && (ft_isspace(cmd[i])) == 1)
+	else if (start == 1 && i >= 0 && (ft_strchr(" <>", cmd[i])))
 		return (1);
 	return (0);
 }
 
-void		mark_fd(char *lex, char type, int i)
+int		check_follow_fd(char *cmd, int i)
+{
+	int size;
+	int start;
+
+	size = 0;
+	start = 0;
+	if (!cmd || cmd[i] != '&')
+		return (0);
+	size = ft_strlen(cmd);
+	if (i >= size)
+		return (0);
+	printf("ok\n");
+	if (cmd[i] == '&')
+		i++;
+	while (i < size)
+	{
+		if ((ft_isnum(cmd[i])) == 1)
+			start = 1;
+		else
+			break;
+		i++;
+	}
+	if (start == 1 && cmd[i] == '\0')
+		return (1);
+	else if (start == 1 && i < size && ft_strchr(" <>", cmd[i]))
+		return (1);
+	return (0);
+}
+
+void		mark_precede_fd(char *lex, char type, int i)
 {
 	if (!lex)
 		return ;
@@ -91,37 +119,80 @@ void		mark_fd(char *lex, char type, int i)
 	}
 }
 
+void		mark_follow_fd(char *lex, char type, int *i)
+{
+	int size;
+
+	size = ft_strlen(g_sh.cmd);
+	(*i)++;
+	if (*i >= size)
+		return ;
+	if (g_sh.cmd[*i] == '&')
+		lex[*i] = 'f';
+	printf("mark follow fd\n");
+	if (!lex)
+		return ;
+	if (g_sh.cmd[*i] == '&')
+		lex[(*i)++] = '&';
+	while (*i < size)
+	{
+		if ((ft_isnum(g_sh.cmd[*i])) == 1)
+			lex[*i] = type;
+		else
+			break ;
+		(*i)++;
+	}
+}
+
 static void	analyze_operator(char *lex, int ret, int *i)
 {
-	int fd_exist;
+	/*int	follow_fd;*/
 
-	fd_exist = 0;
+	/*follow_fd = 0;*/
 	if (ret == 1)
 		lex[*i] = 'P';
-	else if (ret == 2)
+	else if (ret == S_HDOC)
 	{
-		fd_exist = check_fd(g_sh.cmd, *i - 1);
-		if (fd_exist == 1)
-			mark_fd(lex, 'H', *i - 1);
+		/*precede_fd = check_precede_fd(g_sh.cmd, *i - 1);*/
+		/*if (precede_fd == 1)*/
+			/*mark_precede_fd(lex, 'F', *i - 1);*/
 		lex[*i] = 'H';
 		(*i)++;
 		lex[*i] = 'H';
+		/*
+		 *follow_fd = check_follow_fd(g_sh.cmd, *i + 1);
+		 *if (follow_fd == 1)
+		 *    mark_follow_fd(lex, 'F', i);
+		 */
 	}
-	else if(ret == 3)
+	else if(ret == S_AREDIR)
 	{
-		fd_exist = check_fd(g_sh.cmd, *i - 1);
-		if (fd_exist == 1)
-			mark_fd(lex, 'A', *i - 1);
+		/*precede_fd = check_precede_fd(g_sh.cmd, *i - 1);*/
+		/*if (precede_fd == 1)*/
+			/*mark_precede_fd(lex, 'F', *i - 1);*/
 		lex[*i] = 'A';
 		(*i)++;
 		lex[*i] = 'A';
+		/*
+		 *follow_fd = check_follow_fd(g_sh.cmd, *i + 1);
+		 *if (follow_fd == 1)
+		 *    mark_follow_fd(lex, 'F', i);
+		 */
 	}
-	else if (ret >= 4)
+	else if (ret >= S_IREDIR)
 	{
-		fd_exist = check_fd(g_sh.cmd, *i - 1);
-		if (fd_exist == 1)
-			mark_fd(lex, 'R', *i - 1);
-		lex[*i] = 'R';
+		/*precede_fd = check_precede_fd(g_sh.cmd, *i - 1);*/
+		/*if (precede_fd == 1)*/
+			/*mark_precede_fd(lex, 'F', *i - 1);*/
+		if (ret == S_IREDIR)
+			lex[*i] = 'I';
+		else if (ret == S_OREDIR)
+			lex[*i] = 'O';
+		/*
+		 *follow_fd = check_follow_fd(g_sh.cmd, *i + 1);
+		 *if (follow_fd == 1)
+		 *    mark_follow_fd(lex, 'F', i);
+		 */
 	}
 }
 

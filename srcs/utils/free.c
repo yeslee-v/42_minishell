@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 15:35:59 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/18 16:57:35 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/24 16:52:13 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,28 +77,6 @@ void			free_token(t_lst *token)
 	free(token);
 }
 
-void			free_syntax(t_lst *syntax)
-{
-	t_syntax	*node;
-	t_syntax	*tmp;
-
-	if (!syntax)
-		return ;
-	tmp = syntax->tail;
-	while (tmp)
-	{
-		node = tmp;
-		tmp = tmp->prev;
-		if (node->arg_line != NULL)
-			free(node->arg_line);
-		if (node->arg_word != NULL)
-			ft_free_double((void **)node->arg_word);
-		if (node->cmd != NULL)
-			free(node->cmd);
-		free(node);
-	}
-	free(syntax);
-}
 
 void			free_process(t_lst *process)
 {
@@ -112,9 +90,6 @@ void			free_process(t_lst *process)
 	{
 		node = tmp;
 		tmp = tmp->prev;
-		if (node->syntax != NULL)
-			free_syntax(node->syntax);
-		free(node);
 	}
 	free(process);
 }
