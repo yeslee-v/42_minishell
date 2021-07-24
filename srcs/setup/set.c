@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/25 03:13:06 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/25 05:31:42 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ void	set_process(void)
 		tmp = parser(tmp);
 	if (tmp != NULL)
 		parser(tmp);
-	print_system();
 }
 
 void	set_env(char **envp)

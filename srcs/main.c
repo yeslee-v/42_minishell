@@ -47,6 +47,7 @@ void	set_redirect(void)
 {
 	t_process *p;
 	t_redirect *o_redir;
+	t_redirect *i_redir;
 
 	p = g_sh.process->head;
 	while (p)
@@ -62,13 +63,24 @@ void	set_redirect(void)
 		}
 		p = p->next;
 	}
+	p = g_sh.process->head;
+	while (p)
+	{
+		i_redir = p->i_redir->head;
+		while (i_redir)
+		{
+			if (i_redir->type == 'I')
+				i_redir->fd = open(i_redir->arg, O_RDWR);
+			i_redir = i_redir->next;
+		}
+		p = p->next;
+	}
 }
 
 int		main(int ac, char **av, char **envp)
 {
 	int			ret;
 	int			proc_cnt;
-	int			o_fd;
 
 	/*
 		*t_env		*tmp;
@@ -86,6 +98,7 @@ int		main(int ac, char **av, char **envp)
 		set_prompt();
 		set_process();
 		set_redirect();
+		print_system();
 		proc_cnt = get_process_count();
 		if (proc_cnt)
 		{
