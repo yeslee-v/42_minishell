@@ -42,12 +42,12 @@
 # define S_OREDIR 5
 # define S_FD 6
 
-# define B_ECHO	1
-# define B_CD	2
-# define B_PWD	3	
+# define B_ECHO 1
+# define B_CD 2
+# define B_PWD 3
 # define B_EXPORT 4
 # define B_UNSET 5
-# define B_ENV	6
+# define B_ENV 6
 
 # define PROMPT "\033[1;32mBraveShell\033[0;31m$\033[0m "
 # define BLACK "\033[0;30m"
@@ -56,7 +56,7 @@
 # define YELLOW "\033[0;33m"
 # define BLUE "\033[0;34m"
 # define PURPLE "\033[0;35m"
-# define CYAN "\03[0;36m"
+# define CYAN "\033[0;36m"
 # define WHITE "\033[0;37m"
 # define RESET "\033[0m"
 
@@ -103,35 +103,30 @@ typedef struct			s_env
 	struct s_env		*prev;
 }						t_env;
 
-typedef struct			s_redir
+typedef struct			s_redirect
 {
-	int					pre_fd;
 	char				type;
-	char				*file;
-	struct s_redir *next;
-	struct s_redir *prev;
-}						t_redir;
-
-typedef struct			s_hdoc
-{
-	int					pre_fd;
-	char				*delimiter;
-	struct s_hdoc *next;
-	struct s_hdoc *prev;
-}						t_hdoc;
+	char				*arg;
+	int					fd;
+	struct s_redirect	*next;
+	struct s_redirect	*prev;
+}						t_redirect;
 
 typedef struct			s_cmd
 {
 	char				*cmd;
+	char				*bin;
 	char				*arg_line;
 	char				**arg_word;
+	int					builtin;
+	int					not_found;
 }						t_cmd;
 
 typedef struct			s_process
 {
 	t_cmd				*cmd;
-	t_lst				*hdoc;
-	t_lst				*redir;
+	t_lst				*i_redir;
+	t_lst				*o_redir;
 	struct s_process	*next;
 	struct s_process	*prev;
 }						t_process;
@@ -183,7 +178,7 @@ typedef struct			s_blt
 
 typedef struct			s_all
 {
-	int					**fd; /// multi_pipe
+	int **fd; /// multi_pipe
 	pid_t				*pid;
 	t_env				env;
 	t_exec				exec;
@@ -202,7 +197,7 @@ t_lexer					*lexer(char *cmd);
  *   analyze_type
  *   set_index
  */
-int					tokenizer(char *lex);
+int						tokenizer(char *lex);
 
 /*
  * - parser
@@ -338,8 +333,9 @@ t_env					*change_env_value(char *key, char *new_value, t_lst *env);
  * heredoc
  */
 int						hdoc_intro();
-void					run_hdoc(t_hdoc *hdoc);
-//void					hdoc_parents(int fd[2], t_syntax *stx);
-void					hdoc_child(int fd[2], t_hdoc *hdoc);
+//void					run_hdoc(t_ *hdoc);
+// void					hdoc_parents(int fd[2], t_syntax *stx);
+//void					hdoc_child(int fd[2], t_hdoc *hdoc);
 
+char	*unclosed_pipe(void);
 #endif

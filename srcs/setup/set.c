@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/24 17:47:35 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/25 03:13:06 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	set_process(void)
 {
 	t_token	*tmp;
 	int	ret;
+	char *new_cmd;
 
 	ret = 0;
 	tmp = NULL;
@@ -115,9 +116,24 @@ void	set_process(void)
 	if (g_sh.lexer->err == 1)
 		exit_shell(0);
 	ret = tokenizer(g_sh.lexer->lex);
+	if (ret == 2)
+	{
+		free_lexer(g_sh.lexer);
+		g_sh.lexer = NULL;
+		free_token(g_sh.token);
+		g_sh.token = NULL;
+		if (g_sh.token == NULL)
+		{
+			g_sh.token = malloc(sizeof(t_lst));
+			init_lst(g_sh.token);
+		}
+		new_cmd = unclosed_pipe();
+		g_sh.cmd = ft_strjoin_sp(g_sh.cmd, new_cmd);
+		g_sh.lexer = lexer(g_sh.cmd);
+		ret = tokenizer(g_sh.lexer->lex);
+	}
 	add_history(g_sh.cmd);
 	rl_redisplay();
-	print_token(g_sh.token);
 	if (ret == -1)
 		return ;
 	tmp = g_sh.token->head;

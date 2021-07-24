@@ -2,13 +2,13 @@
 
 extern t_conf	g_sh;
 
-void	first_fork(t_hdoc *hdoc)
+void	first_fork(t_lst *i_redir)
 {
 	int		status;
 	pid_t	pid;
 
 	pid = fork();
-	(void)hdoc;
+	(void)i_redir;
 	if (pid > 0)
 	{
 		wait(&status);
@@ -23,10 +23,8 @@ void	first_fork(t_hdoc *hdoc)
 
 int		hdoc_intro()
 {
-	t_hdoc		hdoc;
 	t_process	*proc;
 
 	proc = g_sh.process->head;
-	first_fork(&hdoc);
 	return (0);
 }

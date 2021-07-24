@@ -43,10 +43,32 @@ void	print_test_redir_fd(void)
 	printf("test case 5 = %s, fd = %d\n", "0>", get_redir_fd("0>"));
 }
 
+void	set_redirect(void)
+{
+	t_process *p;
+	t_redirect *o_redir;
+
+	p = g_sh.process->head;
+	while (p)
+	{
+		o_redir = p->o_redir->head;
+		while (o_redir)
+		{
+			if (o_redir->type == 'O')
+				o_redir->fd = open(o_redir->arg, O_RDWR | O_CREAT | O_TRUNC, 0644);
+			else if (o_redir->type == 'A')
+				o_redir->fd = open(o_redir->arg, O_RDWR | O_CREAT | O_APPEND, 0644);
+			o_redir = o_redir->next;
+		}
+		p = p->next;
+	}
+}
+
 int		main(int ac, char **av, char **envp)
 {
 	int			ret;
 	int			proc_cnt;
+	int			o_fd;
 
 	/*
 		*t_env		*tmp;
@@ -63,6 +85,7 @@ int		main(int ac, char **av, char **envp)
 		init_config();
 		set_prompt();
 		set_process();
+		set_redirect();
 		proc_cnt = get_process_count();
 		if (proc_cnt)
 		{

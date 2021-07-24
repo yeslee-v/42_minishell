@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 18:54:05 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/24 18:19:36 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/25 02:18:14 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,44 +64,30 @@ void	print_cmd(t_cmd *node)
 {
 	if (!node)
 		printf("커맨드가 존재하지 않습니다.\n");
-	printf("> shell command\n");
+	printf(CYAN"> shell command\n"RESET);
 	printf("[cmd] = %s\n[arg] = %s\n\n", node->cmd, node->arg_line);
+	printf("-------------------------------\n");
 }
 
-void	print_redir(t_lst *redir)
+void	print_redir(t_process *proc, t_lst *redir)
 {
 	int i;
-	t_redir *node;
+	t_redirect *node;
 
 	i = 0;
 	node = redir->head;
-	printf("> redirect list\n");
+	if (redir == proc->i_redir)
+		printf(RED"> input redirect list\n"RESET);
+	else if (redir == proc->o_redir)
+		printf(PURPLE"> output redirect list\n"RESET);
 	if (!node)
 	printf("노드가 없습니다.\n");
 	while (node)
 	{
-		printf("(redir node %d)\n", i);
-		printf("[type] = %c\n[target_file_name] = %s\n[from_fd] = %d\n\n", node->type, node->file, node->pre_fd);
-		node = node->next;
-		i++;
-	}
-}
-
-void	print_hdoc(t_lst *hdoc)
-{
-	int i;
-	t_hdoc *node;
-
-	i = 0;
-	node = hdoc->head;
-	printf("> hdoc list\n");
-	if (!node)
-		printf("노드가 없습니다.\n");
-	while (node)
-	while (node)
-	{
-		printf("(hdoc node %d)\n", i);
-		printf("[delimiter] = %s\n[pre_fd] = %d\n\n", node->delimiter, node->pre_fd);
+		printf("--------------------------------\n");
+		printf(YELLOW"(redir node %d)\n"RESET, i);
+		printf("[type] = %c\n[arg] = %s\n[fd] = %d\n", node->type, node->arg, node->fd);
+		printf("--------------------------------\n\n");
 		node = node->next;
 		i++;
 	}
@@ -114,16 +100,15 @@ void	print_process(t_lst *process)
 
 	i = 0;
 	tmp = process->head;
-	printf("> origin command");
-	printf("%s\n\n", g_sh.cmd);
+	printf("> origin command\n");
+	printf(GREEN"%s\n"RESET, g_sh.cmd);
 	while (tmp)
 	{
-		printf("\n[pipe no %d]\n", i);
-		printf("-------------------------\n");
+		printf(BLUE"\n[pipe no %d]\n"RESET, i);
 		printf("\n");
 		print_cmd(tmp->cmd);
-		print_redir(tmp->redir);
-		print_hdoc(tmp->hdoc);
+		print_redir(tmp, tmp->i_redir);
+		print_redir(tmp, tmp->o_redir);
 		i++;
 		tmp = tmp->next;
 	}

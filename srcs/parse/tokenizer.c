@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/24 16:42:40 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/25 03:01:53 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,6 @@ static void		set_index(t_lst *token)
 		}
 		else
 			tmp->i = i;
-		/*if (tmp->type == 'S')*/
-		/*{*/
-		/*tmp->i = i;*/
-		/*i++;*/
-		/*}*/
-		/*else if (ft_strchr("AIOHPF", tmp->type))*/
-		/*{*/
-		/*if (tmp->type == 'P')*/
-		/*i = -1;*/
-		/*else if (tmp->type == 'F')*/
-		/*i = -2;*/
-		/*else*/
-		/*i = 0;*/
-		/*tmp->i = i;*/
-		/*i++;*/
-		/*}*/
 		tmp = tmp->next;
 		i++;
 	}
@@ -112,6 +96,8 @@ int				check_unexpected_token(t_token *node)
 {
 	if (node->next == NULL)
 	{
+		if (node->type == 'P')
+			return (2);
 		printf("BraveShell: syntax error near unexpected token `newline'\n");
 		return (-1);
 	}
@@ -121,6 +107,7 @@ int				check_unexpected_token(t_token *node)
 		{
 			if (node->type == 'P' && ft_strchr("FHIOA", node->next->type))
 				return (1);
+			else if (node->type == 'P')
 			printf("BraveShell: syntax error near unexpected token `%s'\n",
 					node->next->token);
 			return (-1);
@@ -163,20 +150,20 @@ int				analyze_syntax(t_lst *token)
 	{
 		if (ft_strchr("AOIPH", tmp->type))
 			ret = check_unexpected_token(tmp);
-		if (ret == -1)
-			return (-1);
+		if (ret == -1 || ret == 2)
+			return (ret);
 		tmp = tmp->next;
 	}
 	tmp = token->head;
-	while (tmp)
-	{
-		if (tmp->type == 'F')
-			ret = check_fd_token(tmp);
-		if (ret == -1)
-			return (-1);
-		tmp = tmp->next;
-	}
-	tmp = token->head;
+	/*while (tmp)*/
+	/*{*/
+		/*if (tmp->type == 'F')*/
+			/*ret = check_fd_token(tmp);*/
+		/*if (ret == -1)*/
+			/*return (-1);*/
+		/*tmp = tmp->next;*/
+	/*}*/
+	/*tmp = token->head;*/
 	while (tmp)
 	{
 		if (tmp->type == 'S')
@@ -206,14 +193,59 @@ int				analyze_syntax(t_lst *token)
 			find_cmd = 0;
 		tmp = tmp->next;
 	}
-	printf("here\n");
-	return (1);
+	return (ret);
 }
 
 static void		analyze_token(t_lst *token)
 {
 	set_type(token);
 	set_index(token);
+}
+
+char	*unclosed_pipe(void)
+{
+	pid_t pid;
+	int	fd[2];
+	int status;
+	char	*ret;
+	char	*line;
+
+	pipe(fd);
+	ret = NULL;
+	line = NULL;
+	pid = fork();
+	if (pid > 0)
+	{
+		wait(&status);
+		if (!(WIFEXITED(status)))
+			exit(1);
+		close(fd[1]);
+		get_next_line(fd[0], &ret);
+		if (ret != NULL)
+			return (ret);
+	}
+	else if (pid == 0)
+	{
+		while (1)
+		{
+			line = readline("> ");
+			if (line[0] != '\0')
+			{
+				write(fd[1], line, ft_strlen(line));
+				write(fd[1], "\n", 1);
+				free(line);
+				exit(0);
+			}
+			if (line)
+				free(line);
+			rl_redisplay();
+		}
+	}
+	else
+	{
+		printf("fork error\n");
+	}
+	return (NULL);
 }
 
 /*

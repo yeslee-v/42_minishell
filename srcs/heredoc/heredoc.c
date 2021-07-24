@@ -31,7 +31,7 @@ void			hdoc_parents(int fd[2])
 	exit(0);
 }
 
-void			hdoc_child(int fd[2], t_hdoc *hdoc)
+void			hdoc_child(int fd[2], t_redirect *hdoc)
 {
 	char	*line;
 
@@ -41,7 +41,7 @@ void			hdoc_child(int fd[2], t_hdoc *hdoc)
 		line = readline("> ");
 		if (line)
 		{
-			if (!(ft_strcmp(line, hdoc->delimiter))) // ctrl+d
+			if (!(ft_strcmp(line, hdoc->arg))) // ctrl+d
 				break ;
 			write(fd[1], line, ft_strlen(line));
 			write(fd[1], "\n", 1);
@@ -52,7 +52,7 @@ void			hdoc_child(int fd[2], t_hdoc *hdoc)
 	exit(0);
 }
 
-void			run_hdoc(t_hdoc *hdoc)
+void			run_hdoc(t_redirect *hdoc)
 {
 	int	pid;
 	int	fd[2];

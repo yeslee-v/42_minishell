@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:37:36 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/24 17:58:21 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/25 01:47:39 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 extern t_conf	g_sh;
 
-void			save_process(t_cmd *cmd, t_lst *redir, t_lst *hdoc)
+void			save_process(t_cmd *cmd, t_lst *i_redir, t_lst *o_redir)
 {
 	t_process	*tmp;
 	t_process	*node;
 
 	node = malloc(sizeof(t_process));
 	node->cmd = cmd;
-	node->hdoc = hdoc;
-	node->redir = redir;
+	node->i_redir = i_redir;
+	node->o_redir = o_redir;
 	node->next = NULL;
 	node->prev = NULL;
 	if (g_sh.process->head == NULL && g_sh.process->tail == NULL)

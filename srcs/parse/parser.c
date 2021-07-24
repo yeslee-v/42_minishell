@@ -26,15 +26,15 @@ extern t_conf g_sh;
 	/*return (tok);*/
 /*}*/
 
-void	make_redir(t_lst *redir, char type, char *file, char *fd)
+void	make_redir(t_lst *redir, char type, char *arg)
 {
-	t_redir *node;
-	t_redir *tmp;
+	t_redirect *node;
+	t_redirect *tmp;
 
-	node = malloc(sizeof(t_redir));
+	node = malloc(sizeof(t_redirect));
 	node->type = type;
-	node->file = file;
-	node->pre_fd = ft_atoi(fd);
+	node->arg = ft_strdup(arg);
+	node->fd = -1;
 	node->prev = NULL;
 	node->next = NULL;
 	if (redir->head == NULL && redir->tail == NULL)
@@ -48,30 +48,6 @@ void	make_redir(t_lst *redir, char type, char *file, char *fd)
 		tmp->next = node;
 		node->prev = tmp;
 		redir->tail = node;
-	}
-}
-
-void	make_hdoc(t_lst *hdoc, char *delimiter, char *fd)
-{
-	t_hdoc *node;
-	t_hdoc *tmp;
-
-	node = malloc(sizeof(t_hdoc));
-	node->delimiter = ft_strdup(delimiter);
-	node->pre_fd = ft_atoi(fd);
-	node->next = NULL;
-	node->prev = NULL;
-	if (hdoc->head == NULL && hdoc->tail == NULL)
-	{
-		hdoc->head = node;
-		hdoc->tail = node;
-	}
-	else if (hdoc->head != NULL && hdoc->tail != NULL)
-	{
-		tmp = hdoc->tail;
-		tmp->next = node;
-		node->prev = tmp;
-		hdoc->tail = node;
 	}
 }
 
@@ -96,22 +72,25 @@ void	init_cmd(t_cmd *node)
 	node->arg_line = NULL;
 	node->arg_word = NULL;
 	node->cmd = NULL;
+	node->bin = NULL;
+	node->builtin = -1;
+	node->not_found = -1;
 }
 
 t_token *parser(t_token *tok)
 {
 	char *cmd;
 	char *arg;
-	t_lst *redir;
-	t_lst *hdoc;
+	t_lst *i_redir;
+	t_lst *o_redir;
 	t_cmd *node;
 
 	node = malloc(sizeof(t_cmd));
-	redir = malloc(sizeof(t_lst));
-	hdoc = malloc(sizeof(t_lst));
-	init_lst(redir);
+	i_redir = malloc(sizeof(t_lst));
+	o_redir = malloc(sizeof(t_lst));
+	init_lst(o_redir);
 	init_cmd(node);
-	init_lst(hdoc);
+	init_lst(i_redir);
 	cmd = NULL;
 	arg = NULL;
 	while (tok)
@@ -120,33 +99,21 @@ t_token *parser(t_token *tok)
 			cmd = ft_strdup(tok->token);
 		else if (tok->type == 'S')
 			arg = ft_strjoin_sp(arg, tok->token);
-		else if (ft_strchr("AIO", tok->type))
-		{
-			printf("redir parse\n");
-			if (tok->prev != NULL && tok->prev->type == 'F')
-				make_redir(redir, tok->type, tok->next->token, tok->prev->token);
-			else
-				make_redir(redir, tok->type, tok->next->token, "1");
-		}
-		else if (tok->type == 'H')
-		{
-			printf("parse hdoc\n");
-			if(tok->prev != NULL && tok->prev->type == 'F')
-				make_hdoc(hdoc, tok->next->token, tok->prev->token);
-			else
-				make_hdoc(hdoc, tok->next->token, "0");
-		}
+		else if (ft_strchr("AO", tok->type))
+			make_redir(o_redir, tok->type, tok->next->token);
+		else if (ft_strchr("HI", tok->type))
+			make_redir(i_redir, tok->type, tok->next->token);
 		else if (tok->type == 'P')
 		{
 			make_cmd(node, cmd, arg);
-			save_process(node, redir, hdoc);
+			save_process(node, i_redir, o_redir);
 			return (tok->next);
 		}
 		tok = tok->next;
 	}
 	if (cmd != NULL)
 		make_cmd(node, cmd, arg);
-	save_process(node, redir, hdoc);
+	save_process(node, i_redir, o_redir);
 	return (tok);
 }
 
