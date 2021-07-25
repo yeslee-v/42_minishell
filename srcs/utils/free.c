@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 15:35:59 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/24 16:52:13 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/25 14:21:50 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,38 @@ void			free_token(t_lst *token)
 	free(token);
 }
 
+void	free_cmd(t_cmd *node)
+{
+	if (!node)
+		return ;
+	if (node->cmd)
+		free(node->cmd);
+	if (node->arg_line)
+		free(node->arg_line);
+	if (node->arg_word)
+		ft_free_double((void **)node->arg_word);
+	free(node);
+}
+
+void	free_redirect(t_lst *redir)
+{
+	t_redirect *node;
+	t_redirect *tmp;
+
+	node = redir->head;
+	while (node)
+	{
+		if (node->arg)
+			free(node->arg);
+		if (node->buffer)
+			ft_free_double((void **)node->buffer);
+		tmp = node;
+		node = node->next;
+		free(tmp);
+		tmp = NULL;
+	}
+	free(redir);
+}
 
 void			free_process(t_lst *process)
 {
@@ -85,11 +117,19 @@ void			free_process(t_lst *process)
 
 	if (!process)
 		return ;
-	tmp = process->tail;
+	tmp = process->head;
 	while (tmp)
 	{
+		if (tmp->cmd)
+			free_cmd(tmp->cmd);
+		if (tmp->i_redir)
+			free_redirect(tmp->i_redir);
+		if (tmp->o_redir)
+			free_redirect(tmp->o_redir);
 		node = tmp;
-		tmp = tmp->prev;
+		tmp = tmp->next;
+		free(node);
+		node = NULL;
 	}
 	free(process);
 }

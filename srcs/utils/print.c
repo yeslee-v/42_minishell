@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 18:54:05 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/25 02:18:14 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/25 14:22:40 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,25 @@ void	print_env(t_lst *env)
 	}
 }
 
+void	print_double_str(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		printf("[arg][%d] = %s\n", i, str[i]);
+		i++;
+	}
+}
+
 void	print_cmd(t_cmd *node)
 {
 	if (!node)
 		printf("커맨드가 존재하지 않습니다.\n");
 	printf(CYAN"> shell command\n"RESET);
 	printf("[cmd] = %s\n[arg] = %s\n\n", node->cmd, node->arg_line);
+	print_double_str(node->arg_word);
 	printf("-------------------------------\n");
 }
 
@@ -87,6 +100,11 @@ void	print_redir(t_process *proc, t_lst *redir)
 		printf("--------------------------------\n");
 		printf(YELLOW"(redir node %d)\n"RESET, i);
 		printf("[type] = %c\n[arg] = %s\n[fd] = %d\n", node->type, node->arg, node->fd);
+		if (node->buffer != NULL)
+		{
+			printf("input buffer\n");
+			print_double_str(node->buffer);
+		}
 		printf("--------------------------------\n\n");
 		node = node->next;
 		i++;

@@ -45,10 +45,14 @@ void	print_test_redir_fd(void)
 
 void	set_redirect(void)
 {
+	char	*line;
+	char	**input_redir;
 	t_process *p;
 	t_redirect *o_redir;
 	t_redirect *i_redir;
 
+	line = NULL;
+	input_redir = NULL;
 	p = g_sh.process->head;
 	while (p)
 	{
@@ -70,10 +74,45 @@ void	set_redirect(void)
 		while (i_redir)
 		{
 			if (i_redir->type == 'I')
+			{
 				i_redir->fd = open(i_redir->arg, O_RDWR);
+				if (errno != 0)
+					printf("braveShell : %s: %s\n", i_redir->arg, strerror(errno));
+				else
+				{
+					while ((get_next_line(i_redir->fd, &line)) != 0)
+					{
+						input_redir = ft_double_strjoin(input_redir, line);
+						free(line);
+						line = NULL;
+					}
+					i_redir->buffer = input_redir;
+					close(i_redir->fd);
+					i_redir->fd = 0;
+				}
+			}	
 			i_redir = i_redir->next;
 		}
 		p = p->next;
+	}
+}
+
+void	set_heredoc(void)
+{
+	t_process *pipe;
+	t_redirect *input;
+
+	pipe = g_sh.process->head;
+	while (pipe)
+	{
+		input = pipe->i_redir->head;
+		while (input)
+		{
+			if (input->type == 'H')
+				input->buffer = exec_heredoc(input->arg);
+			input = input->next;
+		}
+		pipe = pipe->next;
 	}
 }
 
@@ -98,6 +137,7 @@ int		main(int ac, char **av, char **envp)
 		set_prompt();
 		set_process();
 		set_redirect();
+		set_heredoc();
 		print_system();
 		proc_cnt = get_process_count();
 		if (proc_cnt)

@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/25 03:01:53 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/25 13:28:51 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int				check_unexpected_token(t_token *node)
 		{
 			if (node->type == 'P' && ft_strchr("FHIOA", node->next->type))
 				return (1);
-			else if (node->type == 'P')
 			printf("BraveShell: syntax error near unexpected token `%s'\n",
 					node->next->token);
 			return (-1);

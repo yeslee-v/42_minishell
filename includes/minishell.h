@@ -108,6 +108,7 @@ typedef struct			s_redirect
 	char				type;
 	char				*arg;
 	int					fd;
+	char				**buffer;
 	struct s_redirect	*next;
 	struct s_redirect	*prev;
 }						t_redirect;
@@ -115,11 +116,8 @@ typedef struct			s_redirect
 typedef struct			s_cmd
 {
 	char				*cmd;
-	char				*bin;
 	char				*arg_line;
 	char				**arg_word;
-	int					builtin;
-	int					not_found;
 }						t_cmd;
 
 typedef struct			s_process
@@ -333,9 +331,12 @@ t_env					*change_env_value(char *key, char *new_value, t_lst *env);
  * heredoc
  */
 int						hdoc_intro();
-//void					run_hdoc(t_ *hdoc);
+char					**exec_heredoc(char *delimiter);
 // void					hdoc_parents(int fd[2], t_syntax *stx);
-//void					hdoc_child(int fd[2], t_hdoc *hdoc);
+// void					hdoc_child(int fd[2], t_hdoc *hdoc);
 
-char	*unclosed_pipe(void);
+char					*unclosed_pipe(void);
+char					**ft_double_strjoin(char **dst, char *src);
+int						ft_double_ptrlen(char **str);
+void					print_double_str(char **str);
 #endif
