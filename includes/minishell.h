@@ -34,12 +34,20 @@
 # define A_REDIR ">>"
 # define HEREDOC "<<"
 
-# define B_ECHO	1
-# define B_CD	2
-# define B_PWD	3	
+# define S_CMD 0
+# define S_ARG 1
+# define S_HDOC 2
+# define S_AREDIR 3
+# define S_IREDIR 4
+# define S_OREDIR 5
+# define S_FD 6
+
+# define B_ECHO 1
+# define B_CD 2
+# define B_PWD 3
 # define B_EXPORT 4
 # define B_UNSET 5
-# define B_ENV	6
+# define B_ENV 6
 
 # define PROMPT "\033[1;32mBraveShell\033[0;31m$\033[0m "
 # define BLACK "\033[0;30m"
@@ -48,7 +56,7 @@
 # define YELLOW "\033[0;33m"
 # define BLUE "\033[0;34m"
 # define PURPLE "\033[0;35m"
-# define CYAN "\03[0;36m"
+# define CYAN "\033[0;36m"
 # define WHITE "\033[0;37m"
 # define RESET "\033[0m"
 
@@ -71,6 +79,7 @@ typedef struct			s_token
 {
 	char				*token;
 	char				type;
+	int					syntax;
 	int					i;
 	int					st;
 	int					ed;
@@ -94,31 +103,28 @@ typedef struct			s_env
 	struct s_env		*prev;
 }						t_env;
 
-typedef struct			s_redir
+typedef struct			s_redirect
 {
 	char				type;
-	char				*target;
 	char				*arg;
-}						t_redir;
+	int					fd;
+	char				**buffer;
+	struct s_redirect	*next;
+	struct s_redirect	*prev;
+}						t_redirect;
 
-typedef struct			s_hdoc
-{
-	char				*delimiter;
-	char				*arg;
-}						t_hdoc;
-
-typedef struct			s_syntax
+typedef struct			s_cmd
 {
 	char				*cmd;
 	char				*arg_line;
 	char				**arg_word;
-	struct s_syntax		*next;
-	struct s_syntax		*prev;
-}						t_syntax;
+}						t_cmd;
 
 typedef struct			s_process
 {
-	t_lst				*syntax;
+	t_cmd				*cmd;
+	t_lst				*i_redir;
+	t_lst				*o_redir;
 	struct s_process	*next;
 	struct s_process	*prev;
 }						t_process;
@@ -129,6 +135,10 @@ typedef struct			s_tool
 	int					is_quote;
 	int					st;
 	int					ed;
+	int					pipe;
+	int					redir;
+	int					a_redir;
+	int					heredoc;
 }						t_tool;
 
 typedef struct			s_conf
@@ -166,7 +176,7 @@ typedef struct			s_blt
 
 typedef struct			s_all
 {
-	int					**fd; /// multi_pipe
+	int **fd; /// multi_pipe
 	pid_t				*pid;
 	t_env				env;
 	t_exec				exec;
@@ -185,7 +195,7 @@ t_lexer					*lexer(char *cmd);
  *   analyze_type
  *   set_index
  */
-void					tokenizer(char *lex);
+int						tokenizer(char *lex);
 
 /*
  * - parser
@@ -193,13 +203,12 @@ void					tokenizer(char *lex);
  *   parse redir
  *   parse process
  */
-t_token					*parser(t_lst *process, t_token *tok);
+t_token					*parser(t_token *tok);
 
 /*
  *make_struct
  */
-void					save_process(t_lst *lst, t_lst *syntax);
-void					make_syntax(t_lst *lst, char *cmd, char *arg);
+void					save_process(t_cmd *cmd, t_lst *redir, t_lst *hdoc);
 void					make_token(t_lst *lst, int st, int ed);
 void					make_env(t_lst *lst, char *key, char *value);
 
@@ -302,7 +311,7 @@ void					ctrl_mid_cmd(int args_cnt, char **av, char **path, t_all *all);
  */
 void					blt_intro(char *cmd, char *b_args);
 int						is_blt(char *cmd);
-void					not_blt(char *cmd, char *path, t_exec *exec);
+void					not_blt(char *cmd, t_exec *exec, t_lst *envl);
 void					run_echo(char *b_args, t_blt *blt, t_env *env);
 void					run_cd(char *b_args, t_blt *blt, t_lst *envl);
 void					run_env(int xprt_flag, t_lst *envl);
@@ -322,8 +331,12 @@ t_env					*change_env_value(char *key, char *new_value, t_lst *env);
  * heredoc
  */
 int						hdoc_intro();
-void					run_hdoc(t_hdoc *hdoc, t_syntax *stx);
-void					hdoc_parents(int fd[2], t_syntax *stx);
-void					hdoc_child(int fd[2], t_hdoc *hdoc);
+char					**exec_heredoc(char *delimiter);
+// void					hdoc_parents(int fd[2], t_syntax *stx);
+// void					hdoc_child(int fd[2], t_hdoc *hdoc);
 
+char					*unclosed_pipe(void);
+char					**ft_double_strjoin(char **dst, char *src);
+int						ft_double_ptrlen(char **str);
+void					print_double_str(char **str);
 #endif

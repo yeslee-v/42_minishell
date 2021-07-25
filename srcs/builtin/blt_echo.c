@@ -40,11 +40,12 @@ void	is_env(char *tmp, t_env *env)
 		printf("%s", tmp);
 }
 
-void	do_echo(int i, char **tmp, t_blt *blt, t_env *env)
+void	do_echo(int i, char **tmp, t_blt *blt, t_env *env, int fd)
 {
 	char	*d_tmp;
 	char	*s_tmp;
-
+// a.txt fd=3 
+	(void)fd;
 	while (tmp[i])
 	{
 		if (ft_strchr(tmp[i], '"'))
@@ -97,7 +98,7 @@ void	run_echo(char *b_args, t_blt *blt, t_env *env)
 		blt->opt = 1;
 		i++;
 	}
-	do_echo(i, tmp, blt, env);
+	do_echo(i, tmp, blt, env, 1);
 	int j = 0;
 	while (tmp[j])
 	{

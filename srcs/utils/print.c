@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 18:54:05 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/21 17:54:20 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/25 14:22:40 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,54 @@ void	print_env(t_lst *env)
 	}
 }
 
-void	print_syntax(t_lst *syntax)
+void	print_double_str(char **str)
 {
-	t_syntax	*tmp;
+	int i;
 
-	tmp = syntax->head;
-	while (tmp)
+	i = 0;
+	while (str[i])
 	{
-		printf("cmd = %s, arg = %s\n", tmp->cmd, tmp->arg_line);
-		tmp = tmp->next;
+		printf("[arg][%d] = %s\n", i, str[i]);
+		i++;
+	}
+}
+
+void	print_cmd(t_cmd *node)
+{
+	if (!node)
+		printf("커맨드가 존재하지 않습니다.\n");
+	printf(CYAN"> shell command\n"RESET);
+	printf("[cmd] = %s\n[arg] = %s\n\n", node->cmd, node->arg_line);
+	print_double_str(node->arg_word);
+	printf("-------------------------------\n");
+}
+
+void	print_redir(t_process *proc, t_lst *redir)
+{
+	int i;
+	t_redirect *node;
+
+	i = 0;
+	node = redir->head;
+	if (redir == proc->i_redir)
+		printf(RED"> input redirect list\n"RESET);
+	else if (redir == proc->o_redir)
+		printf(PURPLE"> output redirect list\n"RESET);
+	if (!node)
+	printf("노드가 없습니다.\n");
+	while (node)
+	{
+		printf("--------------------------------\n");
+		printf(YELLOW"(redir node %d)\n"RESET, i);
+		printf("[type] = %c\n[arg] = %s\n[fd] = %d\n", node->type, node->arg, node->fd);
+		if (node->buffer != NULL)
+		{
+			printf("input buffer\n");
+			print_double_str(node->buffer);
+		}
+		printf("--------------------------------\n\n");
+		node = node->next;
+		i++;
 	}
 }
 
@@ -79,11 +118,15 @@ void	print_process(t_lst *process)
 
 	i = 0;
 	tmp = process->head;
+	printf("> origin command\n");
+	printf(GREEN"%s\n"RESET, g_sh.cmd);
 	while (tmp)
 	{
-		printf("process no.%d\n", i);
-		printf("next = %p\n", tmp->next);
-		print_syntax(tmp->syntax);
+		printf(BLUE"\n[pipe no %d]\n"RESET, i);
+		printf("\n");
+		print_cmd(tmp->cmd);
+		print_redir(tmp, tmp->i_redir);
+		print_redir(tmp, tmp->o_redir);
 		i++;
 		tmp = tmp->next;
 	}

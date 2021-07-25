@@ -43,13 +43,83 @@ void	print_test_redir_fd(void)
 	printf("test case 5 = %s, fd = %d\n", "0>", get_redir_fd("0>"));
 }
 
+void	set_redirect(void)
+{
+	char	*line;
+	char	**input_redir;
+	t_process *p;
+	t_redirect *o_redir;
+	t_redirect *i_redir;
+
+	line = NULL;
+	input_redir = NULL;
+	p = g_sh.process->head;
+	while (p)
+	{
+		o_redir = p->o_redir->head;
+		while (o_redir)
+		{
+			if (o_redir->type == 'O')
+				o_redir->fd = open(o_redir->arg, O_RDWR | O_CREAT | O_TRUNC, 0644);
+			else if (o_redir->type == 'A')
+				o_redir->fd = open(o_redir->arg, O_RDWR | O_CREAT | O_APPEND, 0644);
+			o_redir = o_redir->next;
+		}
+		p = p->next;
+	}
+	p = g_sh.process->head;
+	while (p)
+	{
+		i_redir = p->i_redir->head;
+		while (i_redir)
+		{
+			if (i_redir->type == 'I')
+			{
+				i_redir->fd = open(i_redir->arg, O_RDWR);
+				if (errno != 0)
+					printf("braveShell : %s: %s\n", i_redir->arg, strerror(errno));
+				else
+				{
+					while ((get_next_line(i_redir->fd, &line)) != 0)
+					{
+						input_redir = ft_double_strjoin(input_redir, line);
+						free(line);
+						line = NULL;
+					}
+					i_redir->buffer = input_redir;
+					close(i_redir->fd);
+					i_redir->fd = 0;
+				}
+			}	
+			i_redir = i_redir->next;
+		}
+		p = p->next;
+	}
+}
+
+void	set_heredoc(void)
+{
+	t_process *pipe;
+	t_redirect *input;
+
+	pipe = g_sh.process->head;
+	while (pipe)
+	{
+		input = pipe->i_redir->head;
+		while (input)
+		{
+			if (input->type == 'H')
+				input->buffer = exec_heredoc(input->arg);
+			input = input->next;
+		}
+		pipe = pipe->next;
+	}
+}
+
 int		main(int ac, char **av, char **envp)
 {
 	int			ret;
-	t_blt		blt;
 	int			proc_cnt;
-	t_process	*proc;
-	t_syntax	*stx;
 
 	/*
 		*t_env		*tmp;
@@ -59,19 +129,6 @@ int		main(int ac, char **av, char **envp)
 	ret = ac;
 	g_sh.envp = envp;
 	set_env(envp);
-	/*
-		*tmp = search_env_node("USER", g_sh.env);
-		*printf("before env change key = %s, value = %s\n", tmp->key, tmp->value);
-		*tmp = change_env_value("USER", "MR. GOOD", g_sh.env);
-		*printf("after env change key = %s, value = %s\n", tmp->key, tmp->value);
-		*printf("before delete\n");
-		*print_env(g_sh.env);
-		*printf("-----------------------\n");
-		*printf(BLUE "after delete USER env node\n");
-		*delete_env_node("USER", g_sh.env);
-		*print_env(g_sh.env);
-		*printf(RESET);
-		*/
 	set_terminal();
 	while (ret)
 	{
@@ -79,11 +136,10 @@ int		main(int ac, char **av, char **envp)
 		init_config();
 		set_prompt();
 		set_process();
+		set_redirect();
+		set_heredoc();
+		print_system();
 		proc_cnt = get_process_count();
-		proc = g_sh.process->head;
-		stx = proc->syntax->head;
-		blt.p_cmd = stx->cmd;
-		blt.args = stx->arg_line;
 		if (proc_cnt)
 		{
 			/*
@@ -96,7 +152,6 @@ int		main(int ac, char **av, char **envp)
 				*else
 				*    pipe_intro(proc_cnt);
 				*/
-			hdoc_intro();
 		}
 		free_conf(&g_sh);
 	}

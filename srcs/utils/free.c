@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 15:35:59 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/18 16:57:35 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/25 14:21:50 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,27 +77,37 @@ void			free_token(t_lst *token)
 	free(token);
 }
 
-void			free_syntax(t_lst *syntax)
+void	free_cmd(t_cmd *node)
 {
-	t_syntax	*node;
-	t_syntax	*tmp;
-
-	if (!syntax)
+	if (!node)
 		return ;
-	tmp = syntax->tail;
-	while (tmp)
+	if (node->cmd)
+		free(node->cmd);
+	if (node->arg_line)
+		free(node->arg_line);
+	if (node->arg_word)
+		ft_free_double((void **)node->arg_word);
+	free(node);
+}
+
+void	free_redirect(t_lst *redir)
+{
+	t_redirect *node;
+	t_redirect *tmp;
+
+	node = redir->head;
+	while (node)
 	{
-		node = tmp;
-		tmp = tmp->prev;
-		if (node->arg_line != NULL)
-			free(node->arg_line);
-		if (node->arg_word != NULL)
-			ft_free_double((void **)node->arg_word);
-		if (node->cmd != NULL)
-			free(node->cmd);
-		free(node);
+		if (node->arg)
+			free(node->arg);
+		if (node->buffer)
+			ft_free_double((void **)node->buffer);
+		tmp = node;
+		node = node->next;
+		free(tmp);
+		tmp = NULL;
 	}
-	free(syntax);
+	free(redir);
 }
 
 void			free_process(t_lst *process)
@@ -107,14 +117,19 @@ void			free_process(t_lst *process)
 
 	if (!process)
 		return ;
-	tmp = process->tail;
+	tmp = process->head;
 	while (tmp)
 	{
+		if (tmp->cmd)
+			free_cmd(tmp->cmd);
+		if (tmp->i_redir)
+			free_redirect(tmp->i_redir);
+		if (tmp->o_redir)
+			free_redirect(tmp->o_redir);
 		node = tmp;
-		tmp = tmp->prev;
-		if (node->syntax != NULL)
-			free_syntax(node->syntax);
+		tmp = tmp->next;
 		free(node);
+		node = NULL;
 	}
 	free(process);
 }

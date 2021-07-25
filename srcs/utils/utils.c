@@ -9,18 +9,16 @@ int		get_redir_fd(char *cmd)
 
 	i = -1;
 	fd = 0;
-	if (!cmd || (ft_strlen(cmd)) >= 6)
+	if (!cmd)
 		return (-1);
+	if (cmd)
 	while (cmd[++i])
 	{
-		printf("%c\n", cmd[i]);
 		if ((ft_isnum(cmd[i])) == 1)
 			fd = (fd * 10) + (cmd[i] - '0');
 		else
 			break ;
 	}
-	if (fd > 255 || fd < 0)
-		return (-1);
 	return (fd);
 }
 

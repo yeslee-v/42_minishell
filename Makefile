@@ -1,16 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/07/13 16:39:04 by parkjaekw         #+#    #+#              #
-#    Updated: 2021/07/23 13:16:52 by yeslee           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
 #	INTRA_ID 	:	Input your intra ID.
 #	INCS		:	Header files.
 #	J_SRCS		:	Jaekpark's source files.
@@ -60,7 +47,7 @@ LIBFT_INCS			=	./libs/includes/libft.h
 #	Compile settings
 CC					=	gcc
 RM					=	rm -rf
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	-Wall -Wextra -Werror -g -fsanitize=address
 HEADER_FLAG			=	-I$(INCS_DIR) -I$(LIBFT_INCS) -I$(READLINE)/include
 LIB_FLAG			= 	-L$(LIBFT_DIR) -lft -L$(READLINE)/lib -lreadline -lncurses
 NAME				=	minishell
