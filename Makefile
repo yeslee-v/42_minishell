@@ -22,14 +22,17 @@
 INTRA_ID			=	jaekpark
 READLINE			=	/opt/homebrew/Cellar/readline/8.1
 INCS				=	minishell.h
-J_SRCS				=	main.c utils/error.c utils/ft_utils.c utils/init.c \
-						utils/make_struct.c utils/free.c parse/lexer.c parse/tokenizer.c \
-						utils/print.c setup/set.c parse/parser.c utils/utils.c redirection/redirect.c \
-						redirection/heredoc.c signal/signal.c terminal/config.c terminal/cursor.c
+J_SRCS				=	main.c \
+						utils/error.c utils/init.c utils/delete_env.c utils/split_env.c utils/utils.c \
+						utils/free_lst.c utils/free_struct.c utils/make_struct.c utils/print.c \
+						terminal/config.c terminal/cursor.c redirection/redirect.c redirection/heredoc.c \
+						parse/lexer.c parse/tokenizer.c parse/parser.c signal/signal.c setup/set.c \
+						ft_utils/ft_double_strjoin.c ft_utils/ft_is.c ft_utils/ft_strjoin_sp.c \
+						ft_utils/ft_strrdup.c
 Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
 						builtin/blt_env.c builtin/blt_exit.c builtin/blt_pwd.c \
 						builtin/blt_export.c builtin/blt_unset.c \
-						heredoc/hdoc_main.c builtin/print_env.c \
+						builtin/print_env.c \
 						pipe/pipe_main.c pipe/set_cmd.c pipe/run.c 						#pipe/single_pipe.c pipe/redirect.c pipe/multi_pipe.c
 SRCS				=	$(Y_SRCS) $(J_SRCS)
 OBJS				= 	$(patsubst %.c, %.o, $(SRCS_FILE))

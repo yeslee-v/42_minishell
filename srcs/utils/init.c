@@ -6,18 +6,19 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 18:15:00 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/26 20:57:35 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/26 22:28:54 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
-void	init_pos(int *x, int *y)
+void	init_cmd(t_cmd *node)
 {
-	*x = 0;
-	*y = 0;
+	node->arg_line = NULL;
+	node->arg_word = NULL;
+	node->cmd = NULL;
 }
 
 void	init_config(void)

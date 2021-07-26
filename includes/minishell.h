@@ -86,29 +86,37 @@ void	init_lst(t_lst *lst);
 void	init_lexer(t_lexer *lexer);
 void	init_tool(t_tool *tool);
 void	init_config(void);
-void	init_pos(int *x, int *y);
 void	init_cmd(t_cmd *node);
 
 /*
- *utils
+ *ft_utils
  */
 char	*ft_strrdup(char *s, int st, int ed);
+char	*ft_strjoin_sp(char *s1, char *s2);
+char	**split_env(char *env);
+
+/*
+ *ft_is
+ */
 int		ft_isspace(int c);
 int		ft_isquote(char c);
 int		ft_isspec(char *cmd, int i);
-char	*ft_strjoin_sp(char *s1, char *s2);
-char	**ft_split_env(char *env);
 
 /*
- *free
+ *free_list
  */
-void	free_conf(t_conf *conf);
 void	free_env(t_lst *env);
 void	free_syntax(t_lst *syntax);
 void	free_process(t_lst *process);
-void	free_lexer(t_lexer *lexer);
 void	free_token(t_lst *token);
+
+/*
+ *free_struct
+ */
 void	free_env_node(t_env *env);
+void	free_conf(t_conf *conf);
+void	free_lexer(t_lexer *lexer);
+void	free_cmd(t_cmd *node);
 /*
  *print_utils
  */
@@ -123,7 +131,6 @@ void	print_system(void);
  *set
  */
 void	set_env(char **envp);
-void	set_signal(void);
 void	set_prompt(void);
 void	set_process(void);
 /*
@@ -190,7 +197,6 @@ t_env	*change_env_value(char *key, char *new_value, t_lst *env);
 
 char	*unclosed_pipe(void);
 char	**ft_double_strjoin(char **dst, char *src);
-int		ft_double_ptrlen(char **str);
 void	print_double_str(char **str);
 
 #endif

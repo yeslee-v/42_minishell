@@ -6,13 +6,13 @@
 /*   By: jaekpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 14:53:13 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/26 20:56:23 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/26 21:30:24 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
 void	print_error(char *msg)
 {
@@ -29,4 +29,3 @@ void	exit_shell(int num)
 	printf("exit\n");
 	exit(num);
 }
-

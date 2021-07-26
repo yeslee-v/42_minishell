@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:37:36 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/26 21:02:00 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/26 21:57:11 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_conf	g_sh;
 
-void			save_process(t_cmd *cmd, t_lst *i_redir, t_lst *o_redir)
+void	save_process(t_cmd *cmd, t_lst *i_redir, t_lst *o_redir)
 {
 	t_process	*tmp;
 	t_process	*node;
@@ -39,7 +39,7 @@ void			save_process(t_cmd *cmd, t_lst *i_redir, t_lst *o_redir)
 	}
 }
 
-void			make_token(t_lst *lst, int st, int ed)
+void	make_token(t_lst *lst, int st, int ed)
 {
 	t_token	*tmp;
 	t_token	*node;
@@ -64,7 +64,7 @@ void			make_token(t_lst *lst, int st, int ed)
 	}
 }
 
-void			make_env(t_lst *lst, char *key, char *value)
+void	make_env(t_lst *lst, char *key, char *value)
 {
 	t_env	*tmp;
 	t_env	*node;
@@ -90,8 +90,8 @@ void			make_env(t_lst *lst, char *key, char *value)
 
 void	make_redir(t_lst *redir, char type, char *arg)
 {
-	t_redirect *node;
-	t_redirect *tmp;
+	t_redirect	*node;
+	t_redirect	*tmp;
 
 	node = malloc(sizeof(t_redirect));
 	node->type = type;

@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-int		print_tc(int tc)
+int	print_tc(int tc)
 {
 	write(1, &tc, 1);
 	return (1);
@@ -27,10 +27,10 @@ void	set_signal(void)
 
 void	handle_eof(void)
 {
-	int x;
-	int y;
-	char *cm;
-	char *ce;
+	int		x;
+	int		y;
+	char	*cm;
+	char	*ce;
 
 	x = 0;
 	y = 0;

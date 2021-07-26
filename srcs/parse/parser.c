@@ -1,68 +1,15 @@
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
-void	init_cmd(t_cmd *node)
+t_token			*parser(t_token *tok)
 {
-	node->arg_line = NULL;
-	node->arg_word = NULL;
-	node->cmd = NULL;
-}
-
-int		ft_double_ptrlen(char **str)
-{
-	int i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	**ft_double_strjoin(char **dst, char *src)
-{
-	char	**ret;
-	int size;
-	int i;
-
-	i = 0;
-	size = 0;
-	ret = NULL;
-	if (!dst)
-	{
-		ret = malloc(sizeof(char *) * 2);
-		ret[0] = ft_strdup(src);
-		ret[1] = NULL;
-		return (ret);
-	}
-	else if (dst)
-	{
-		size = ft_double_ptrlen(dst);
-		ret =  malloc(sizeof(char *) * (size + 2));
-		while (dst[i] != NULL)
-		{
-			ret[i] = ft_strdup(dst[i]);
-			i++;
-		}
-		ret[i] = ft_strdup(src);
-		ret[i + 1] = NULL;
-		ft_free_double((void **)dst);
-		dst = NULL;
-		return (ret);
-	}
-	return (ret);
-}
-
-t_token *parser(t_token *tok)
-{
-	char *cmd;
-	char *arg;
-	char **args;
-	t_lst *i_redir;
-	t_lst *o_redir;
-	t_cmd *node;
+	char	*cmd;
+	char	*arg;
+	char	**args;
+	t_lst	*i_redir;
+	t_lst	*o_redir;
+	t_cmd	*node;
 
 	node = malloc(sizeof(t_cmd));
 	i_redir = malloc(sizeof(t_lst));
@@ -102,4 +49,3 @@ t_token *parser(t_token *tok)
 	save_process(node, i_redir, o_redir);
 	return (tok);
 }
-

@@ -4,10 +4,10 @@ extern t_conf	g_sh;
 
 void	set_term_cursor(void)
 {
-	struct termios cursor;
+	struct termios	cursor;
 
 	tcgetattr(0, &cursor);
-	cursor.c_lflag &= ~(ICANON|ECHO);
+	cursor.c_lflag &= ~(ICANON | ECHO);
 	tcsetattr(0, TCSANOW, &cursor);
 }
 
@@ -23,4 +23,3 @@ void	set_terminal(void)
 	g_sh.term.c_lflag &= ~ECHOCTL;
 	tcsetattr(0, TCSANOW, &g_sh.term);
 }
-

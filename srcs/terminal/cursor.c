@@ -2,6 +2,12 @@
 
 extern t_conf	g_sh;
 
+static void	init_pos(int *x, int *y)
+{
+	*x = 0;
+	*y = 0;
+}
+
 int	get_cursor_pos(int *x, int *y)
 {
 	int		ret;
@@ -26,5 +32,3 @@ int	get_cursor_pos(int *x, int *y)
 	}
 	return (set_term_default(1));
 }
-
-
