@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
 /*
  *int		single_pipe(char **av, char *path)
@@ -23,46 +23,49 @@ extern t_conf g_sh;
  *        print_error("fork error");
  *    return (0);
  *}
- *
- *int		multi_pipe(char **av, char *path)
- *{
- *    int		args_cnt;
- *    t_all	all;
- *
- *    int mid_cmd_cnt; // cmds using while
- *    args_cnt = ac - 1;
- *    mid_cmd_cnt = args_cnt - 3;
- *    if (!(all.pid = malloc(sizeof(pid_t) * args_cnt)))
- *        return (0);
- *    all.pid[0] = fork();
- *    if (all.pid[0] > 0) // grand
- *        set_wait();
- *    else if (all.pid[0] == 0) // parents or child
- *    {
- *        middle_proc(args_cnt, av, path, &all);
- *        run_dup2(0, all.fd[mid_cmd_cnt - 1]);
- *        split_path(av[args_cnt - 1], path, &all.exec);
- *        connect_out(av[args_cnt]);
- *        run_execve(&all.exec);
- *    }
- *    else
- *        print_error("fork error");
- *    return (0);
- *}
  */
 
-void	pipe_intro(int proc_cnt)
+int				multi_pipe(int cnt, char *path)
 {
-	char *path;
-	t_lst *envl;
+	t_all	all;
+	int		mid_cmd_cnt;
+
+	cnt = get_process_count();
+	mid_cmd_cnt = cnt - 3;
+	printf("mid is %d\n", mid_cmd_cnt);
+	if (!(all.pid = malloc(sizeof(pid_t) * cnt)))
+		return (0);
+	path = NULL;
+	/*
+		*all.pid[0] = fork();
+		*if (all.pid[0] > 0) // grand
+		*    set_wait();
+		*else if (all.pid[0] == 0) // parents or child
+		*{
+		*    middle_proc(cnt, av, path, &all);
+		*    run_dup2(0, all.fd[mid_cmd_cnt - 1]);
+		*    split_path(av[cnt - 1], path, &all.exec);
+		*    connect_out(av[cnt]);
+		*    run_execve(&all.exec);
+		*}
+		*else
+		*    print_error("fork error");
+		*/
+	return (0);
+}
+
+void			pipe_intro(int proc_cnt)
+{
+	char	*path;
+	t_lst	*envl;
 
 	envl = g_sh.env;
 	path = search_env_value("PATH", envl);
-	proc_cnt = 0;
+	printf("proc_cnt is %d\n", proc_cnt);
 	/*
-	 *if (proc_cnt == 2)
-	 *    single_pipe(char **av, path);
-	 *else if (proc_cnt > 2)
-	 *    multi_pipe(char **av, path);
-	 */
+		*if (proc_cnt == 2)
+		*    single_pipe(path);
+		*else if (proc_cnt > 2)
+		*/
+	multi_pipe(proc_cnt, path);
 }

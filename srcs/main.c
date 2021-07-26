@@ -149,9 +149,9 @@ int		main(int ac, char **av, char **envp)
 				*blt_intro(blt.p_cmd, blt.args);
 				*/
 			/*
-				*else
-				*    pipe_intro(proc_cnt);
-				*/
+			 *else
+			 */
+				pipe_intro(proc_cnt);
 		}
 		free_conf(&g_sh);
 	}

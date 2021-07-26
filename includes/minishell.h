@@ -141,19 +141,6 @@ typedef struct			s_tool
 	int					heredoc;
 }						t_tool;
 
-typedef struct			s_conf
-{
-	char				*cmd;
-	char				**envp;
-	int					end_pipe;
-	int					exit_status;
-	t_lst				*env;
-	t_lexer				*lexer;
-	t_lst				*token;
-	t_lst				*process;
-	struct termios		term;
-}						t_conf;
-
 /*
  *for execve & pipe
  */
@@ -174,13 +161,27 @@ typedef struct			s_blt
 	char				*args;
 }						t_blt;
 
-typedef struct			s_all
+typedef struct			s_pipe
 {
-	int **fd; /// multi_pipe
+	int fd[2]; /// multi_pipe
 	pid_t				*pid;
 	t_env				env;
 	t_exec				exec;
-}						t_all;
+}						t_pipe;
+
+typedef struct			s_conf
+{
+	char				*cmd;
+	char				**envp;
+	int					end_pipe;
+	int					exit_status;
+	t_lst				*env;
+	t_lexer				*lexer;
+	t_lst				*token;
+	t_lst				*process;
+	struct termios		term;
+	t_pipe				pipe;
+}						t_conf;
 
 /*
  * - lexer
@@ -300,11 +301,13 @@ void					run_execve(t_exec *exec);
 /*
  * multi-pipe
  */
-int						multi_pipe(int ac, char **av, char **path);
-void					set_wait(void);
-void					middle_proc(int args_cnt, char **av, char **path, t_all *all);
-void					alloc_fd(int args_cnt, t_all *all);
-void					ctrl_mid_cmd(int args_cnt, char **av, char **path, t_all *all);
+/*
+ *int						multi_pipe(int cnt, char *path);
+ *void					set_wait(void);
+ *void					middle_proc(int cnt, char **av, char *path, t_all *all);
+ *void					alloc_fd(int cnt, t_all *all);
+ *void					ctrl_mid_cmd(int cnt, char *av, char *path, t_all *all);
+ */
 
 /*
  * builtin
