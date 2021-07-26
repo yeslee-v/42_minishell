@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-char			**exec_heredoc(char *delimiter)
+char			**exec_heredoc(char *delimiter, int hdoc_fd)
 {
 	pid_t pid;
 	char *line;
@@ -12,6 +12,8 @@ char			**exec_heredoc(char *delimiter)
 	int eof;
 	int status;
 
+	str = NULL;
+	line = NULL;
 	str = NULL;
 	eof = -1;
 	pipe(fd);
@@ -27,10 +29,18 @@ char			**exec_heredoc(char *delimiter)
 			eof = get_next_line(fd[0], &ret);
 			if (eof == -1)
 				printf("gnl error\n");
-			str = ft_double_strjoin(str, ret);
+			ret = ft_strjoin(ret, "\n");
+			if (eof != 0)
+			{
+				write(hdoc_fd, ret, ft_strlen(ret));
+				str = ft_double_strjoin(str, ret);
+			}
 			free(ret);
 			ret = NULL;
 		}
+		close(fd[0]);
+		if (line)
+			free(line);
 		if (eof == 0)
 			return (str);
 	}
@@ -41,11 +51,15 @@ char			**exec_heredoc(char *delimiter)
 			line = readline("> ");
 			if ((ft_strcmp(line, delimiter)) == 0)
 			{
+				close(fd[0]);
 				close(fd[1]);
 				exit(0);
 			}
-			write(fd[1], line, ft_strlen(line));
-			write(fd[1], "\n", 1);
+			if (line != NULL)
+			{
+				write(fd[1], line, ft_strlen(line));
+				write(fd[1], "\n", 1);
+			}
 			if (line)
 				free(line);
 		}

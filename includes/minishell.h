@@ -108,7 +108,6 @@ typedef struct			s_redirect
 	char				type;
 	char				*arg;
 	int					fd;
-	char				**buffer;
 	struct s_redirect	*next;
 	struct s_redirect	*prev;
 }						t_redirect;
@@ -206,6 +205,15 @@ int						tokenizer(char *lex);
 t_token					*parser(t_token *tok);
 
 /*
+ *redirect
+ */
+void	set_heredoc(void);
+void	set_input_redirect(void);
+void	set_output_redirect(void);
+void	set_redirect(void);
+void	exec_heredoc(char *delimiter, int hdoc_fd);
+
+/*
  *make_struct
  */
 void					save_process(t_cmd *cmd, t_lst *redir, t_lst *hdoc);
@@ -215,7 +223,7 @@ void					make_env(t_lst *lst, char *key, char *value);
 /*
  *cursor
  */
-void					get_cursor_pos(int *x, int *y);
+int					get_cursor_pos(int *x, int *y);
 char					**split_arg(char *arg);
 /*
  *init
@@ -331,7 +339,6 @@ t_env					*change_env_value(char *key, char *new_value, t_lst *env);
  * heredoc
  */
 int						hdoc_intro();
-char					**exec_heredoc(char *delimiter);
 // void					hdoc_parents(int fd[2], t_syntax *stx);
 // void					hdoc_child(int fd[2], t_hdoc *hdoc);
 

@@ -24,11 +24,12 @@ READLINE			=	/opt/homebrew/Cellar/readline/8.1
 INCS				=	minishell.h
 J_SRCS				=	main.c utils/error.c utils/ft_utils.c utils/init.c \
 						utils/make_struct.c utils/free.c parse/lexer.c parse/tokenizer.c \
-						utils/print.c setup/set.c parse/parser.c utils/utils.c
+						utils/print.c setup/set.c parse/parser.c utils/utils.c redirection/redirect.c \
+						redirection/heredoc.c
 Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
 						builtin/blt_env.c builtin/blt_exit.c builtin/blt_pwd.c \
 						builtin/blt_export.c builtin/blt_unset.c \
-						heredoc/hdoc_main.c heredoc/heredoc.c builtin/print_env.c \
+						heredoc/hdoc_main.c builtin/print_env.c \
 						pipe/pipe_main.c pipe/set_cmd.c pipe/run.c 						#pipe/single_pipe.c pipe/redirect.c pipe/multi_pipe.c
 SRCS				=	$(Y_SRCS) $(J_SRCS)
 OBJS				= 	$(patsubst %.c, %.o, $(SRCS_FILE))
@@ -47,10 +48,12 @@ LIBFT_INCS			=	./libs/includes/libft.h
 #	Compile settings
 CC					=	gcc
 RM					=	rm -rf
-CFLAGS				=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS				=	-Wall -Wextra -Werror
+DFLAGS				= 	-Wall -Wextra -Werror -g -fsanitize=address
 HEADER_FLAG			=	-I$(INCS_DIR) -I$(LIBFT_INCS) -I$(READLINE)/include
 LIB_FLAG			= 	-L$(LIBFT_DIR) -lft -L$(READLINE)/lib -lreadline -lncurses
 NAME				=	minishell
+DEBUG				=	minishell_debug
 
 #	Color settings
 BLACK			=	"\033[1;30m"
@@ -71,6 +74,8 @@ EOC				=	"\033[0;0m"
 
 all				:	$(NAME)
 
+debug			:	$(DEBUG)
+
 $(LIBFT)		:
 					@make -C ./libs
 
@@ -78,6 +83,14 @@ $(NAME)			:	$(LIBFT) $(OBJS_DIR) $(OBJS)
 					@clear
 					@echo $(GREEN)
 					$(CC) $(CFLAGS) $(LIB_FLAG) $(HEADER_FLAG) $(OBJS_FILE) -o $@
+					@echo $(EOC)
+					@echo $(YELLOW) "`date +%y/%m/%d_%H:%M:%S`:: Compiling $@"
+					@echo $(GREEN) "`date +%y/%m/%d_%H:%M:%S`:: OK" $(EOC)
+
+$(DEBUG)		:	$(LIBFT) $(OBJS_DIR) $(OBJS)
+					@clear
+					@echo $(PURPLE)
+					$(CC) $(DFLAGS) $(LIB_FLAG) $(HEADER_FLAG) $(OBJS_FILE) -o $@
 					@echo $(EOC)
 					@echo $(YELLOW) "`date +%y/%m/%d_%H:%M:%S`:: Compiling $@"
 					@echo $(GREEN) "`date +%y/%m/%d_%H:%M:%S`:: OK" $(EOC)
@@ -107,4 +120,4 @@ fclean			:
 
 re				:	fclean $(NAME)
 
-.PHONY:			all clean fclean re norm leaks
+.PHONY:			all clean fclean re norm leaks debug

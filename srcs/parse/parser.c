@@ -35,7 +35,6 @@ void	make_redir(t_lst *redir, char type, char *arg)
 	node->type = type;
 	node->arg = ft_strdup(arg);
 	node->fd = -1;
-	node->buffer = NULL;
 	node->prev = NULL;
 	node->next = NULL;
 	if (redir->head == NULL && redir->tail == NULL)
@@ -68,10 +67,8 @@ void	make_cmd(t_cmd *node, char *cmd, char *arg, char **args)
 		node->arg_word = NULL;
 	if (cmd)
 		free(cmd);
-	cmd = NULL;
 	if (arg)
 		free(arg);
-	arg = NULL;
 }
 
 void	init_cmd(t_cmd *node)
@@ -139,7 +136,7 @@ t_token *parser(t_token *tok)
 	node = malloc(sizeof(t_cmd));
 	i_redir = malloc(sizeof(t_lst));
 	o_redir = malloc(sizeof(t_lst));
-	args = NULL;
+	arg = NULL;
 	init_lst(o_redir);
 	init_cmd(node);
 	init_lst(i_redir);

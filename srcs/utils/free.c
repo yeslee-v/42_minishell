@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/03 15:35:59 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/25 14:21:50 by parkjaekw        ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/minishell.h"
 
 extern t_conf	g_sh;
@@ -100,8 +88,6 @@ void	free_redirect(t_lst *redir)
 	{
 		if (node->arg)
 			free(node->arg);
-		if (node->buffer)
-			ft_free_double((void **)node->buffer);
 		tmp = node;
 		node = node->next;
 		free(tmp);
