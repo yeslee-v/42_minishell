@@ -69,3 +69,54 @@
 					/*if (i_redir != p->i_redir->tail)*/
 						/*close(i_redir->fd);*/
 
+/*t_token	*parse_token(t_token *tok, t_lst *syn, char **cmd_t, char **arg_t)*/
+/*{*/
+	/*char *target;*/
+
+	/*target = NULL;*/
+	/*if (tok->type == 'C')*/
+		/**cmd_t = ft_strdup(tok->token);*/
+	/*else if (tok->type == 'S')*/
+		/**arg_t = ft_strjoin_sp(*arg_t, tok->token);*/
+	/*else if (tok->type == 'T')*/
+		/*target = ft_strdup(tok->token);*/
+	/*else if ((ft_strchr("OIAH", tok->type)))*/
+	/*{*/
+		/*make_syntax(syn, *cmd_t, *arg_t);*/
+		/**cmd_t = ft_strdup(tok->token);*/
+		/*if (target != NULL)*/
+			/*make_syntax(syn, *cmd_t, target);*/
+		/**arg_t = NULL;*/
+	/*}*/
+	/*tok = tok->next;*/
+	/*return (tok);*/
+/*}*/
+
+
+/*t_token	*parser(t_lst *process, t_token *tok)*/
+/*{*/
+	/*char	*cmd_t;*/
+	/*char	*arg_t;*/
+	/*t_lst	*syn;*/
+	/*t_token	*tmp;*/
+
+	/*cmd_t = NULL;*/
+	/*arg_t = NULL;*/
+	/*tmp = tok;*/
+	/*syn = malloc(sizeof(t_lst));*/
+	/*init_lst(syn);*/
+	/*while (tmp)*/
+	/*{*/
+		/*if (tmp->i == -1)*/
+		/*{*/
+			/*tmp = tmp->next;*/
+			/*break ;*/
+		/*}*/
+		/*else*/
+			/*tmp = parse_token(tmp, syn, &cmd_t, &arg_t);*/
+	/*}*/
+	/*if (cmd_t)*/
+		/*make_syntax(syn, cmd_t, arg_t);*/
+	/*save_process(process, syn);*/
+	/*return (tmp);*/
+/*}*/

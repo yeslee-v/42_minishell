@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:17:44 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/24 22:20:41 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/26 20:43:56 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,54 +146,27 @@ void		mark_follow_fd(char *lex, char type, int *i)
 
 static void	analyze_operator(char *lex, int ret, int *i)
 {
-	/*int	follow_fd;*/
-
-	/*follow_fd = 0;*/
 	if (ret == 1)
 		lex[*i] = 'P';
 	else if (ret == S_HDOC)
 	{
-		/*precede_fd = check_precede_fd(g_sh.cmd, *i - 1);*/
-		/*if (precede_fd == 1)*/
-			/*mark_precede_fd(lex, 'F', *i - 1);*/
 		lex[*i] = 'H';
 		(*i)++;
 		lex[*i] = 'H';
-		/*
-		 *follow_fd = check_follow_fd(g_sh.cmd, *i + 1);
-		 *if (follow_fd == 1)
-		 *    mark_follow_fd(lex, 'F', i);
-		 */
 	}
 	else if(ret == S_AREDIR)
 	{
-		/*precede_fd = check_precede_fd(g_sh.cmd, *i - 1);*/
-		/*if (precede_fd == 1)*/
-			/*mark_precede_fd(lex, 'F', *i - 1);*/
 		lex[*i] = 'A';
 		(*i)++;
 		lex[*i] = 'A';
-		/*
-		 *follow_fd = check_follow_fd(g_sh.cmd, *i + 1);
-		 *if (follow_fd == 1)
-		 *    mark_follow_fd(lex, 'F', i);
-		 */
 	}
 	else if (ret >= S_IREDIR)
 	{
-		/*precede_fd = check_precede_fd(g_sh.cmd, *i - 1);*/
-		/*if (precede_fd == 1)*/
-			/*mark_precede_fd(lex, 'F', *i - 1);*/
 		if (ret == S_IREDIR)
 			lex[*i] = 'I';
 		else if (ret == S_OREDIR)
 			lex[*i] = 'O';
-		/*
-		 *follow_fd = check_follow_fd(g_sh.cmd, *i + 1);
-		 *if (follow_fd == 1)
-		 *    mark_follow_fd(lex, 'F', i);
-		 */
-	}
+		}
 }
 
 void	analyze_command(t_lexer *lexer, char *cmd, int *i)

@@ -25,7 +25,7 @@ INCS				=	minishell.h
 J_SRCS				=	main.c utils/error.c utils/ft_utils.c utils/init.c \
 						utils/make_struct.c utils/free.c parse/lexer.c parse/tokenizer.c \
 						utils/print.c setup/set.c parse/parser.c utils/utils.c redirection/redirect.c \
-						redirection/heredoc.c
+						redirection/heredoc.c signal/signal.c terminal/config.c terminal/cursor.c
 Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
 						builtin/blt_env.c builtin/blt_exit.c builtin/blt_pwd.c \
 						builtin/blt_export.c builtin/blt_unset.c \
