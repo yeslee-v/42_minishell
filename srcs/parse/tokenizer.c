@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/26 22:35:26 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/27 01:55:34 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_conf	g_sh;
 
-static void		set_index(t_lst *token)
+static void	set_index(t_lst *token)
 {
 	int		i;
 	t_token	*tmp;
@@ -35,7 +35,7 @@ static void		set_index(t_lst *token)
 	}
 }
 
-static void		set_type(t_lst *token)
+static void	set_type(t_lst *token)
 {
 	t_token	*tmp;
 
@@ -63,7 +63,7 @@ static void		set_type(t_lst *token)
 	}
 }
 
-int				check_unexpected_token(t_token *node)
+int	check_unexpected_token(t_token *node)
 {
 	if (node->next == NULL)
 	{
@@ -78,34 +78,14 @@ int				check_unexpected_token(t_token *node)
 		{
 			if (node->type == 'P' && ft_strchr("FHIOA", node->next->type))
 				return (1);
-			printf("BraveShell: syntax error near unexpected token `%s'\n",
-					node->next->token);
+			printf(ERR_TOKEN" `%s'\n", node->next->token);
 			return (-1);
 		}
 	}
 	return (1);
 }
 
-int				check_fd_token(t_token *node)
-{
-	int	fd;
-
-	fd = ft_atoi(node->token);
-	if (fd == -1)
-	{
-		printf("BraveShell: file descriptor out of range: Bad file "
-				"descriptor\n");
-		return (-1);
-	}
-	else if (fd > 255)
-	{
-		printf("BraveShell: %d: Bad file descriptor\n", fd);
-		return (-1);
-	}
-	return (1);
-}
-
-int				analyze_syntax(t_lst *token)
+int	analyze_syntax(t_lst *token)
 {
 	int		find_cmd;
 	t_token	*tmp;
@@ -134,8 +114,7 @@ int				analyze_syntax(t_lst *token)
 				tmp->type = 'C';
 				find_cmd = 1;
 			}
-			else if (find_cmd == 0 &&
-						(tmp->prev != NULL && tmp->prev->type == 'T'))
+			else if (find_cmd == 0 && (tmp->prev != NULL && tmp->prev->type == 'T'))
 			{
 				tmp->type = 'C';
 				find_cmd = 1;
@@ -157,7 +136,7 @@ int				analyze_syntax(t_lst *token)
 	return (ret);
 }
 
-static void		analyze_token(t_lst *token)
+static void	analyze_token(t_lst *token)
 {
 	set_type(token);
 	set_index(token);
@@ -165,9 +144,9 @@ static void		analyze_token(t_lst *token)
 
 char	*unclosed_pipe(void)
 {
-	pid_t pid;
-	int	fd[2];
-	int status;
+	pid_t	pid;
+	int		fd[2];
+	int		status;
 	char	*ret;
 	char	*line;
 
@@ -209,7 +188,7 @@ char	*unclosed_pipe(void)
 	return (NULL);
 }
 
-int				tokenizer(char *lex)
+int	tokenizer(char *lex)
 {
 	t_tool	tool;
 
@@ -237,9 +216,7 @@ int				tokenizer(char *lex)
 			tool.st = -1;
 			tool.ed = -1;
 		}
-		else if (tool.st >= 0 &&
-					(lex[tool.i + 1] == 's' || lex[tool.i + 1] == '\0' ||
-					(tool.is_quote == 0 && lex[tool.st] != lex[tool.i + 1])))
+		else if (tool.st >= 0 && (lex[tool.i + 1] == 's' || lex[tool.i + 1] == '\0' || (tool.is_quote == 0 && lex[tool.st] != lex[tool.i + 1])))
 		{
 			tool.ed = tool.i;
 			make_token(g_sh.token, tool.st, tool.ed);

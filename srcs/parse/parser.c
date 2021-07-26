@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-t_token			*parser(t_token *tok)
+t_token	*parser(t_token *tok)
 {
 	char	*cmd;
 	char	*arg;

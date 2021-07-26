@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 18:54:05 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/26 20:21:48 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/27 02:03:28 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,8 @@ void	print_cmd(t_cmd *node)
 	if (!node)
 		printf("커맨드가 존재하지 않습니다.\n");
 	printf(CYAN"> shell command\n"RESET);
-	printf("node add %p\n", node);
 	printf("[cmd] = %s\n[arg] = %s\n\n", node->cmd, node->arg_line);
 	print_double_str(node->arg_word);
-	printf(" cmd add %p arg add %p arg_word %p argword[0] %p\n", node->cmd, node->arg_line, node->arg_word, node->arg_word[0]);
 	printf("-------------------------------\n");
 }
 
@@ -95,16 +93,13 @@ void	print_redir(t_process *proc, t_lst *redir)
 		printf(RED"> input redirect list\n"RESET);
 	else if (redir == proc->o_redir)
 		printf(PURPLE"> output redirect list\n"RESET);
-	printf("lst address = %p\n", redir);
 	if (!node)
 	printf("노드가 없습니다.\n");
 	while (node)
 	{
 		printf("--------------------------------\n");
 		printf(YELLOW"(redir node %d)\n"RESET, i);
-		printf("node addresss = %p\n", node);
 		printf("[type] = %c\n[arg] = %s\n[fd] = %d\n", node->type, node->arg, node->fd);
-		printf("arg add = %p\n", node->arg);
 		printf("--------------------------------\n\n");
 		node = node->next;
 		i++;
@@ -118,12 +113,10 @@ void	print_process(t_lst *process)
 
 	i = 0;
 	tmp = process->head;
-	printf("process add %p\n", process);
 	printf("> origin command\n");
 	printf(GREEN"%s\n"RESET, g_sh.cmd);
 	while (tmp)
 	{
-		printf("node add = %p\n", tmp);
 		printf(BLUE"\n[pipe no %d]\n"RESET, i);
 		printf("\n");
 		print_cmd(tmp->cmd);

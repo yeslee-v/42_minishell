@@ -248,6 +248,26 @@ int				analyze_append_redir(t_token *node)
 	return (cnt);
 }
 
+int	check_fd_token(t_token *node)
+{
+	int	fd;
+
+	fd = ft_atoi(node->token);
+	if (fd == -1)
+	{
+		printf("BraveShell: file descriptor out of range: Bad file "
+				"descriptor\n");
+		return (-1);
+	}
+	else if (fd > 255)
+	{
+		printf("BraveShell: %d: Bad file descriptor\n", fd);
+		return (-1);
+	}
+	return (1);
+}
+
+
 /*
  *int			check_last_token(void)
  *{

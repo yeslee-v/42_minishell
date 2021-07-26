@@ -42,4 +42,5 @@
 # define WHITE "\033[0;37m"
 # define RESET "\033[0m"
 
+# define ERR_TOKEN "BraveShell: syntax error near unexpected token"
 #endif
