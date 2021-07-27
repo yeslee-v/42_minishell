@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 18:15:00 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/26 22:28:54 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/27 10:58:36 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ extern t_conf	g_sh;
 
 void	init_cmd(t_cmd *node)
 {
-	node->arg_line = NULL;
-	node->arg_word = NULL;
+	node->arg = NULL;
+	node->args = NULL;
 	node->cmd = NULL;
 }
 

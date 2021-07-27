@@ -32,6 +32,9 @@ t_lexer	*lexer(char *cmd);
  *   set_index
  */
 int		tokenizer(char *lex);
+void	analyze_token(t_lst *token);
+int		analyze_syntax(t_lst *token);
+char	*unclosed_pipe(void);
 
 /*
  * - parser
@@ -73,7 +76,6 @@ void	save_process(t_cmd *cmd, t_lst *redir, t_lst *hdoc);
 void	make_token(t_lst *lst, int st, int ed);
 void	make_env(t_lst *lst, char *key, char *value);
 void	make_redir(t_lst *redir, char type, char *arg);
-void	make_cmd(t_cmd *node, char *cmd, char *arg, char **args);
 
 /*
  *cursor
@@ -126,6 +128,9 @@ void	print_env(t_lst *env);
 void	print_error(char *msg);
 void	print_token(t_lst *token);
 void	print_system(void);
+void	print_double_str(char **str);
+void	print_redir(t_process *proc, t_lst *redir);
+void	print_cmd(t_cmd *node);
 
 /*
  *set
@@ -197,6 +202,5 @@ t_env	*change_env_value(char *key, char *new_value, t_lst *env);
 
 char	*unclosed_pipe(void);
 char	**ft_double_strjoin(char **dst, char *src);
-void	print_double_str(char **str);
 
 #endif

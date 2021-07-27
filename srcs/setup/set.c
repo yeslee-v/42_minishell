@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/26 22:20:44 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/27 12:44:55 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	set_cmd_after_pipe(void)
 	}
 	new_cmd = unclosed_pipe();
 	g_sh.cmd = ft_strjoin_sp(g_sh.cmd, new_cmd);
+	free(new_cmd);
 	g_sh.lexer = lexer(g_sh.cmd);
 	ret = tokenizer(g_sh.lexer->lex);
 	return (ret);

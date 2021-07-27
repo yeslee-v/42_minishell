@@ -51,8 +51,8 @@ typedef struct			s_redirect
 typedef struct			s_cmd
 {
 	char				*cmd;
-	char				*arg_line;
-	char				**arg_word;
+	char				*arg;
+	char				**args;
 }						t_cmd;
 
 typedef struct			s_process

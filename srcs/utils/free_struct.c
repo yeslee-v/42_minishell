@@ -31,10 +31,10 @@ void	free_cmd(t_cmd *node)
 		return ;
 	if (node->cmd)
 		free(node->cmd);
-	if (node->arg_line)
-		free(node->arg_line);
-	if (node->arg_word)
-		ft_free_double((void **)node->arg_word);
+	if (node->arg)
+		free(node->arg);
+	if (node->args)
+		ft_free_double((void **)node->args);
 	free(node);
 }
 

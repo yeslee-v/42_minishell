@@ -2,50 +2,48 @@
 
 extern t_conf	g_sh;
 
-t_token	*parser(t_token *tok)
+t_token	*parse_token(t_token *tok, t_cmd *node, t_lst *i_redir, t_lst *o_redir)
 {
-	char	*cmd;
-	char	*arg;
-	char	**args;
+	if (tok->type == 'C')
+	{
+		node->cmd = ft_strdup(tok->token);
+		node->args = ft_double_strjoin(node->args, tok->token);
+	}
+	else if (tok->type == 'S')
+	{
+		node->arg = ft_strjoin_sp(node->arg, tok->token);
+		node->args = ft_double_strjoin(node->args, tok->token);
+	}
+	else if (ft_strchr("AO", tok->type))
+		make_redir(o_redir, tok->type, tok->next->token);
+	else if (ft_strchr("HI", tok->type))
+		make_redir(i_redir, tok->type, tok->next->token);
+	return (tok->next);
+}
+
+t_token	*parser(t_token *token)
+{
 	t_lst	*i_redir;
 	t_lst	*o_redir;
+	t_token	*tok;
 	t_cmd	*node;
 
+	tok = token;
 	node = malloc(sizeof(t_cmd));
 	i_redir = malloc(sizeof(t_lst));
 	o_redir = malloc(sizeof(t_lst));
-	arg = NULL;
 	init_lst(o_redir);
 	init_cmd(node);
 	init_lst(i_redir);
-	cmd = NULL;
-	arg = NULL;
 	while (tok)
 	{
-		if (tok->type == 'C')
+		tok = parse_token(tok, node, i_redir, o_redir);
+		if (tok && tok->type == 'P')
 		{
-			cmd = ft_strdup(tok->token);
-			args = ft_double_strjoin(args, tok->token);
-		}
-		else if (tok->type == 'S')
-		{
-			arg = ft_strjoin_sp(arg, tok->token);
-			args = ft_double_strjoin(args, tok->token);
-		}
-		else if (ft_strchr("AO", tok->type))
-			make_redir(o_redir, tok->type, tok->next->token);
-		else if (ft_strchr("HI", tok->type))
-			make_redir(i_redir, tok->type, tok->next->token);
-		else if (tok->type == 'P')
-		{
-			make_cmd(node, cmd, arg, args);
 			save_process(node, i_redir, o_redir);
 			return (tok->next);
 		}
-		tok = tok->next;
 	}
-	if (cmd != NULL)
-		make_cmd(node, cmd, arg, args);
 	save_process(node, i_redir, o_redir);
 	return (tok);
 }

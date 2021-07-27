@@ -14,7 +14,6 @@ int	main(int ac, char **av, char **envp)
 	set_terminal();
 	while (ret)
 	{
-		printf("sizeof g_sh = %ld\n", sizeof(g_sh));
 		set_signal();
 		init_config();
 		set_prompt();

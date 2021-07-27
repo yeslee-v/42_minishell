@@ -28,7 +28,8 @@ J_SRCS				=	main.c \
 						terminal/config.c terminal/cursor.c redirection/redirect.c redirection/heredoc.c \
 						parse/lexer.c parse/tokenizer.c parse/parser.c signal/signal.c setup/set.c \
 						ft_utils/ft_double_strjoin.c ft_utils/ft_is.c ft_utils/ft_strjoin_sp.c \
-						ft_utils/ft_strrdup.c
+						ft_utils/ft_strrdup.c parse/analyze_syntax.c parse/analyze_token.c parse/unclosed_pipe.c \
+						utils/print_utils.c
 Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
 						builtin/blt_env.c builtin/blt_exit.c builtin/blt_pwd.c \
 						builtin/blt_export.c builtin/blt_unset.c \
@@ -118,7 +119,7 @@ clean			:
 fclean			:
 					@make fclean -C $(LIBFT_DIR)
 					@echo $(YELLOW) "`date +%y/%m/%d_%H:%M:%S`:: fclean minishell" $(EOC)
-					@$(RM) $(NAME) $(OBJS_DIR) 
+					@$(RM) $(DEBUG) $(NAME) $(OBJS_DIR) 
 					@echo $(GREEN) "`date +%y/%m/%d_%H:%M:%S`:: OK" $(EOC)
 
 re				:	fclean $(NAME)

@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:37:36 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/26 21:57:11 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/27 10:59:34 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,24 +111,4 @@ void	make_redir(t_lst *redir, char type, char *arg)
 		node->prev = tmp;
 		redir->tail = node;
 	}
-}
-
-void	make_cmd(t_cmd *node, char *cmd, char *arg, char **args)
-{
-	if (cmd)
-		node->cmd = ft_strdup(cmd);
-	else
-		node->cmd = NULL;
-	if (arg)
-		node->arg_line = ft_strdup(arg);
-	else
-		node->arg_line = NULL;
-	if (args)
-		node->arg_word = args;
-	else
-		node->arg_word = NULL;
-	if (cmd)
-		free(cmd);
-	if (arg)
-		free(arg);
 }
