@@ -1,26 +1,34 @@
 #include "../../includes/minishell.h"
 
-void	combine_cmd(const char *cmd_1, char **path, t_exec *exec)
-{
-	int		i;
-	char	**chunk;
+extern t_conf	g_sh;
 
+void			combine_cmd(char *cmd, char **path)
+{
+	int			i;
+	t_process	*proc_lst;
+	t_cmd		*proc;
+
+	proc_lst = g_sh.process->head;
+	proc = proc_lst->cmd;
+	printf("args is %s\n", proc->args[0]);
 	i = 0;
-	if (!(ft_strlen(cmd_1)))
-		print_error("cmd_1 is not exists");
-	chunk = ft_split(cmd_1, ' ');
+	if (!(ft_strlen(cmd)))
+		print_error("cmd is not exists");
 	while (*path)
 	{
-		exec->cmd[i] = ft_strjoin(*path, chunk[0]);
+		g_sh.exec.cmd[i] = ft_strjoin(*path, cmd);
 		i++;
 		path++;
 	}
-	exec->cmd[i] = NULL;
-	exec->av = (char *const *)chunk;
-	exec->envp = NULL;
+	g_sh.exec.cmd[i] = NULL;
+	g_sh.exec.av = (char *const *)proc->args;
+	g_sh.exec.envp  NULL;
+	/*
+		*proc_lst = proc_lst->next;
+		*/
 }
 
-void	split_path(const char *cmd_1, char *path, t_exec *exec)
+void			split_path(char *cmd, char *path)
 {
 	int		i;
 	char	**str;
@@ -33,5 +41,5 @@ void	split_path(const char *cmd_1, char *path, t_exec *exec)
 		tmp[i] = ft_strjoin(str[i], "/");
 	tmp[i] = NULL;
 	free(str);
-	combine_cmd(cmd_1, tmp, exec);
+	combine_cmd(cmd, tmp);
 }

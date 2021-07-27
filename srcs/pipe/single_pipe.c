@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-void	parents_proc(char **av, char **path, t_exec *exec)
+void	parents_proc(char **av, char *path, t_exec *exec)
 {
 	int		status;
 
@@ -14,7 +14,7 @@ void	parents_proc(char **av, char **path, t_exec *exec)
 	run_execve(exec);
 }
 
-void	child_proc(char **av, char **path, t_exec *exec)
+void	child_proc(char **av, char *path, t_exec *exec)
 {
 	int		pid;
 
