@@ -2,7 +2,7 @@
 
 t_conf	g_sh;
 
-int	main(int ac, char **av, char **envp)
+int		main(int ac, char **av, char **envp)
 {
 	int	ret;
 	int	proc_cnt;
@@ -23,18 +23,7 @@ int	main(int ac, char **av, char **envp)
 		print_system();
 		proc_cnt = get_process_count();
 		if (proc_cnt)
-		{
-			/*
-				*if (proc_cnt == 1)
-				*/
-			/*
-				*blt_intro(blt.p_cmd, blt.args);
-				*/
-			/*
-			 *else
-			 */
-				intro(proc_cnt);
-		}
+			intro(proc_cnt);
 		free_conf(&g_sh);
 	}
 }

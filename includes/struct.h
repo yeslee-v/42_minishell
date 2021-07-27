@@ -76,18 +76,6 @@ typedef struct			s_tool
 	int					heredoc;
 }						t_tool;
 
-typedef struct			s_conf
-{
-	char				*cmd;
-	char				**envp;
-	int					exit_status;
-	t_lst				*env;
-	t_lexer				*lexer;
-	t_lst				*token;
-	t_lst				*process;
-	struct termios		term;
-}						t_conf;
-
 typedef struct			s_exec
 {
 	const char			*cmd[256];
@@ -104,12 +92,27 @@ typedef struct			s_blt
 	char				*args;
 }						t_blt;
 
-typedef struct			s_all
+typedef struct			s_pipe
 {
-	int **fd; /// multi_pipe
+	int fd[2]; /// multi_pipe
 	pid_t				*pid;
 	t_env				env;
 	t_exec				exec;
-}						t_all;
+}						t_pipe;
+
+
+typedef struct			s_conf
+{
+	char				*cmd;
+	char				**envp;
+	int					exit_status; // init -> 0
+	t_lst				*env;
+	t_lexer				*lexer;
+	t_lst				*token;
+	t_lst				*process;
+	struct termios		term;
+	t_pipe				pipe;
+	t_exec				exec;
+}						t_conf;
 
 #endif

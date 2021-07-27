@@ -1,5 +1,4 @@
 #include "../../includes/minishell.h"
-#include <sys/wait.h>
 
 extern t_conf	g_sh;
 
@@ -9,7 +8,7 @@ void			dup_close(int fd, int fd_std)
 	close(fd);
 }
 
-void intro(int cnt) // printing fds;
+void intro(int cnt)
 {
 	int			i;
 	int			status;
@@ -39,23 +38,25 @@ void intro(int cnt) // printing fds;
 			if (i > 0)
 				close(fd_prev);
 			fd_prev = g_sh.pipe.fd[0];
+			if (i == (cnt - 1))
+				close(g_sh.pipe.fd[0]);
 			close(g_sh.pipe.fd[1]);
 		}
 		else if (g_sh.pipe.pid[i] == 0)
 		{
-		printf("cmd is %s | arg is %s\n", proc->cmd, proc->arg_line);
 			if (i > 0)
 				dup_close(fd_prev, STDIN);
 			close(g_sh.pipe.fd[0]);
-			if (i < (cnt - 1)) // i = 1 -> STDOUT
+			if (i < (cnt - 1))
 				dup_close(g_sh.pipe.fd[1], STDOUT);
-			else // i == cnt - 1
+			else
 				dup_close(fd_backup[1], STDOUT);
-			// blt_intro(cmd); builtin vs execve
-			exit(0);
+			printf("proc is %s|%s\n", proc->cmd, proc->args[1]);
+			blt_intro(proc->cmd, proc->arg);
 		}
 		else
 			return ; // pid error
 		proc_lst = proc_lst->next;
 	}
+	dup2(fd_backup[0], 0);
 }
