@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:37:36 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/25 01:47:39 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/27 10:59:34 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_conf	g_sh;
 
-void			save_process(t_cmd *cmd, t_lst *i_redir, t_lst *o_redir)
+void	save_process(t_cmd *cmd, t_lst *i_redir, t_lst *o_redir)
 {
 	t_process	*tmp;
 	t_process	*node;
@@ -39,7 +39,7 @@ void			save_process(t_cmd *cmd, t_lst *i_redir, t_lst *o_redir)
 	}
 }
 
-void			make_token(t_lst *lst, int st, int ed)
+void	make_token(t_lst *lst, int st, int ed)
 {
 	t_token	*tmp;
 	t_token	*node;
@@ -64,7 +64,7 @@ void			make_token(t_lst *lst, int st, int ed)
 	}
 }
 
-void			make_env(t_lst *lst, char *key, char *value)
+void	make_env(t_lst *lst, char *key, char *value)
 {
 	t_env	*tmp;
 	t_env	*node;
@@ -85,5 +85,30 @@ void			make_env(t_lst *lst, char *key, char *value)
 		node->prev = tmp;
 		tmp->next = node;
 		lst->tail = node;
+	}
+}
+
+void	make_redir(t_lst *redir, char type, char *arg)
+{
+	t_redirect	*node;
+	t_redirect	*tmp;
+
+	node = malloc(sizeof(t_redirect));
+	node->type = type;
+	node->arg = ft_strdup(arg);
+	node->fd = -1;
+	node->prev = NULL;
+	node->next = NULL;
+	if (redir->head == NULL && redir->tail == NULL)
+	{
+		redir->head = node;
+		redir->tail = node;
+	}
+	else if (redir->head != NULL && redir->tail != NULL)
+	{
+		tmp = redir->tail;
+		tmp->next = node;
+		node->prev = tmp;
+		redir->tail = node;
 	}
 }

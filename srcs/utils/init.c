@@ -6,22 +6,24 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 18:15:00 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/23 12:59:09 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/27 10:58:36 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
-void	init_pos(int *x, int *y)
+void	init_cmd(t_cmd *node)
 {
-	*x = 0;
-	*y = 0;
+	node->arg = NULL;
+	node->args = NULL;
+	node->cmd = NULL;
 }
 
 void	init_config(void)
 {
+	g_sh.exit_status = 0;
 	g_sh.lexer = NULL;
 	g_sh.process = malloc(sizeof(t_lst));
 	g_sh.token = malloc(sizeof(t_lst));

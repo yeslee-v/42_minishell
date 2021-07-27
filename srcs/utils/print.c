@@ -6,26 +6,13 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 18:54:05 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/25 14:22:40 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/27 13:17:53 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
-
-void	print_system(void)
-{
-	printf("[lexical analysis]\n");
-	printf("cmd = %s\nlex = %s\n", g_sh.cmd, g_sh.lexer->lex);
-	printf("------------------\n");
-	printf("[tokenizing]\n");
-	print_token(g_sh.token);
-	printf("------------------\n");
-	printf("[parsing]\n");
-	print_process(g_sh.process);
-	printf("------------------\n");
-}
+extern t_conf	g_sh;
 
 void	print_token(t_lst *token)
 {
@@ -34,14 +21,11 @@ void	print_token(t_lst *token)
 	temp = token->head;
 	while (temp)
 	{
-		printf("token = %s, type = %c, index = %d, st = %d, ed = %d, next = "
-				"%p\n",
-				temp->token,
-				temp->type,
-				temp->i,
-				temp->st,
-				temp->ed,
-				temp->next);
+		printf("token = %s ", temp->token);
+		printf("type = %c ", temp->type);
+		printf("index = %d ", temp->i);
+		printf("st = %d ed = %d ", temp->st, temp->ed);
+		printf("next = %p\n", temp->next);
 		temp = temp->next;
 	}
 }
@@ -60,52 +44,33 @@ void	print_env(t_lst *env)
 	}
 }
 
-void	print_double_str(char **str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		printf("[arg][%d] = %s\n", i, str[i]);
-		i++;
-	}
-}
-
 void	print_cmd(t_cmd *node)
 {
 	if (!node)
 		printf("커맨드가 존재하지 않습니다.\n");
-	printf(CYAN"> shell command\n"RESET);
-	printf("[cmd] = %s\n[arg] = %s\n\n", node->cmd, node->arg_line);
-	print_double_str(node->arg_word);
-	printf("-------------------------------\n");
+	printf(GREEN"[cmd] = %s [arg] = %s\n\n"RESET, node->cmd, node->arg);
+	print_double_str(node->args);
+	printf("--------------------------------\n");
 }
 
 void	print_redir(t_process *proc, t_lst *redir)
 {
-	int i;
-	t_redirect *node;
+	int			i;
+	t_redirect	*node;
 
 	i = 0;
 	node = redir->head;
 	if (redir == proc->i_redir)
-		printf(RED"> input redirect list\n"RESET);
+		printf(RED"> INPUT redirect list\n"RESET);
 	else if (redir == proc->o_redir)
-		printf(PURPLE"> output redirect list\n"RESET);
+		printf(PURPLE"> OUTPUT redirect list\n"RESET);
 	if (!node)
-	printf("노드가 없습니다.\n");
+		printf("노드가 없습니다.\n");
 	while (node)
 	{
-		printf("--------------------------------\n");
-		printf(YELLOW"(redir node %d)\n"RESET, i);
-		printf("[type] = %c\n[arg] = %s\n[fd] = %d\n", node->type, node->arg, node->fd);
-		if (node->buffer != NULL)
-		{
-			printf("input buffer\n");
-			print_double_str(node->buffer);
-		}
-		printf("--------------------------------\n\n");
+		printf(YELLOW"(NODE %d) "RESET, i);
+		printf("[type] = %c [arg] = %s ", node->type, node->arg);
+		printf("[fd] = %d\n", node->fd);
 		node = node->next;
 		i++;
 	}
@@ -122,8 +87,8 @@ void	print_process(t_lst *process)
 	printf(GREEN"%s\n"RESET, g_sh.cmd);
 	while (tmp)
 	{
-		printf(BLUE"\n[pipe no %d]\n"RESET, i);
-		printf("\n");
+		printf(CYAN"---------------------------------------------\n"RESET);
+		printf(B_BLUE"[PIPE NO. %d]\n"RESET, i);
 		print_cmd(tmp->cmd);
 		print_redir(tmp, tmp->i_redir);
 		print_redir(tmp, tmp->o_redir);
@@ -131,4 +96,3 @@ void	print_process(t_lst *process)
 		tmp = tmp->next;
 	}
 }
-
