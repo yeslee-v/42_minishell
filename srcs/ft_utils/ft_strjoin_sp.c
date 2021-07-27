@@ -9,7 +9,7 @@ static char	*ret_str(char *s1, char *s2)
 	return (NULL);
 }
 
-char	*ft_strjoin_sp(char *s1, char *s2)
+char	*ft_strcjoin(char *s1, char *s2, char c)
 {
 	char	*newstr;
 	int		i;
@@ -28,7 +28,7 @@ char	*ft_strjoin_sp(char *s1, char *s2)
 	newstr = (char *)malloc(sizeof(char) * (s1_len + s2_len + 2));
 	while (s1[++i])
 		newstr[i] = s1[i];
-	newstr[i++] = ' ';
+	newstr[i++] = c;
 	while (s2[++j])
 		newstr[i++] = s2[j];
 	newstr[i] = '\0';

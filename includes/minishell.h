@@ -96,7 +96,7 @@ void	init_cmd(t_cmd *node);
  *ft_utils
  */
 char	*ft_strrdup(char *s, int st, int ed);
-char	*ft_strjoin_sp(char *s1, char *s2);
+char	*ft_strcjoin(char *s1, char *s2, char c);
 char	**split_env(char *env);
 
 /*
