@@ -6,13 +6,13 @@
 /*   By: jaekpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 14:53:13 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/19 22:26:48 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/26 21:30:24 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
 void	print_error(char *msg)
 {
@@ -22,10 +22,6 @@ void	print_error(char *msg)
 
 void	exit_shell(int num)
 {
-	if (num == 1)
-		printf("exit_shell\n");
-	else if (num == 0)
-		printf("quote error\n");
 	free(g_sh.cmd);
 	free_lexer(g_sh.lexer);
 	free_token(g_sh.token);
@@ -33,4 +29,3 @@ void	exit_shell(int num)
 	printf("exit\n");
 	exit(num);
 }
-
