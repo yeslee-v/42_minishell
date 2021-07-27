@@ -2,9 +2,10 @@
 
 t_conf	g_sh;
 
-int	main(int ac, char **av, char **envp)
+int		main(int ac, char **av, char **envp)
 {
 	int	ret;
+	int	proc_cnt;
 
 	if (!ac || !av)
 		return (-1);
@@ -19,6 +20,9 @@ int	main(int ac, char **av, char **envp)
 		set_process();
 		ret = set_redirect();
 		print_system();
+		proc_cnt = get_process_count();
+		if (proc_cnt)
+			intro(proc_cnt);
 		free_conf(&g_sh);
 	}
 }

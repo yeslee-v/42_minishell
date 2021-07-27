@@ -22,11 +22,10 @@ int		exists_opt(int i, char **tmp)
 	return (j);
 }
 
-void	is_env(char *tmp, t_env *env)
+void	is_env(char *tmp)
 {
 	char *e_val;
 
-	(void)env;
 	e_val = search_env_value((tmp + 1), g_sh.env);
 	if (ft_strchr(tmp, '$') && !(ft_strchr(tmp, '?')))
 	{
@@ -40,18 +39,17 @@ void	is_env(char *tmp, t_env *env)
 		printf("%s", tmp);
 }
 
-void	do_echo(int i, char **tmp, t_blt *blt, t_env *env, int fd)
+void	do_echo(int i, char **tmp, t_blt *blt)
 {
 	char	*d_tmp;
 	char	*s_tmp;
-// a.txt fd=3 
-	(void)fd;
+
 	while (tmp[i])
 	{
 		if (ft_strchr(tmp[i], '"'))
 		{
 			d_tmp = ft_strtrim(tmp[i], "\"");
-			is_env(d_tmp, env);
+			is_env(d_tmp);
 			free(d_tmp);
 		}
 		else if (ft_strchr(tmp[i], '\''))
@@ -61,7 +59,7 @@ void	do_echo(int i, char **tmp, t_blt *blt, t_env *env, int fd)
 			free(s_tmp);
 		}
 		else
-			is_env(tmp[i], env);
+			is_env(tmp[i]);
 		if (tmp[i + 1] != NULL)
 			printf(" ");
 		i++;
@@ -70,7 +68,7 @@ void	do_echo(int i, char **tmp, t_blt *blt, t_env *env, int fd)
 		printf("\n");
 }
 
-void	run_echo(char *b_args, t_blt *blt, t_env *env)
+void	run_echo(char *b_args, t_blt *blt)
 {
 	int		i;
 	char	**tmp;
@@ -98,7 +96,7 @@ void	run_echo(char *b_args, t_blt *blt, t_env *env)
 		blt->opt = 1;
 		i++;
 	}
-	do_echo(i, tmp, blt, env, 1);
+	do_echo(i, tmp, blt);
 	int j = 0;
 	while (tmp[j])
 	{

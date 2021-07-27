@@ -17,6 +17,8 @@
 # include <sys/wait.h>
 # include <term.h>
 # include <termcap.h>
+# include <termios.h>
+# include <unistd.h>
 
 /*
  * - lexer
@@ -153,7 +155,9 @@ int		get_process_count(void);
 /*
  *pipe
  */
-void	pipe_intro(int proc_cnt);
+void					intro(int cnt);
+void					dup_close(int fd, int fd_std);
+void					pipe_intro(int proc_cnt);
 
 /*
  *single-pipe
@@ -162,30 +166,32 @@ int		single_pipe(char **av, char **path);
 void	print_error(char *str);
 void	child_proc(char **av, char **path, t_exec *exec);
 void	parents_proc(char **av, char **path, t_exec *exec);
-void	split_path(const char *cmd_1, char *path, t_exec *exec);
-void	combine_cmd(const char *cmd_1, char **path, t_exec *exec);
+void	split_path(char *cmd, char *path);
+void	combine_cmd(char *cmd, char **path);
 void	connect_in(char *file);
 void	connect_out(char *file);
 void	run_dup2(int std_fd, int *fd);
 void	close_fd(int flag, int *fd);
-void	run_execve(t_exec *exec);
+void	run_execve();
 
 /*
  * multi-pipe
  */
-int		multi_pipe(int ac, char **av, char **path);
-void	set_wait(void);
-void	middle_proc(int args_cnt, char **av, char **path, t_all *all);
-void	alloc_fd(int args_cnt, t_all *all);
-void	ctrl_mid_cmd(int args_cnt, char **av, char **path, t_all *all);
+/*
+ *int						multi_pipe(int cnt, char *path);
+ *void					set_wait(void);
+ *void					middle_proc(int cnt, char **av, char *path, t_all *all);
+ *void					alloc_fd(int cnt, t_all *all);
+ *void					ctrl_mid_cmd(int cnt, char *av, char *path, t_all *all);
+ */
 
 /*
  * builtin
  */
 void	blt_intro(char *cmd, char *b_args);
 int		is_blt(char *cmd);
-void	not_blt(char *cmd, t_exec *exec, t_lst *envl);
-void	run_echo(char *b_args, t_blt *blt, t_env *env);
+void	not_blt(char *cmd, t_lst *envl);
+void	run_echo(char *b_args, t_blt *blt);
 void	run_cd(char *b_args, t_blt *blt, t_lst *envl);
 void	run_env(int xprt_flag, t_lst *envl);
 void	run_export(char *b_args, t_blt *blt, t_lst *envl);
