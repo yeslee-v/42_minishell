@@ -47,11 +47,11 @@ t_token	*parser(t_token *tok);
 /*
  *redirect
  */
-void	set_heredoc(void);
+int	set_heredoc(void);
 void	set_input_redirect(void);
 void	set_output_redirect(void);
-void	set_redirect(void);
-void	exec_heredoc(char *delimiter, int hdoc_fd);
+int	set_redirect(void);
+int	exec_heredoc(char *delimiter, int hdoc_fd);
 
 /*
  *terminal
@@ -64,7 +64,7 @@ int		set_term_default(int status);
 /*
  *signal
  */
-void	handle_eof(void);
+void	move_cursor(char *msg, int col, int row);
 int		print_tc(int tc);
 void	sig_handler(int signum);
 void	set_signal(void);

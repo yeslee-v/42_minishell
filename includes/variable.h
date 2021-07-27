@@ -31,6 +31,9 @@
 # define B_UNSET 5
 # define B_ENV 6
 
+# define READ 0
+# define WRITE 1
+
 # define PROMPT "\033[1;32mBraveShell\033[0;31m$\033[0m "
 # define BLACK "\033[0;30m"
 # define RED "\033[0;31m"
@@ -44,4 +47,6 @@
 # define RESET "\033[0m"
 
 # define ERR_TOKEN "BraveShell: syntax error near unexpected token"
+# define ERR_TOKEN_EOF "BraveShell: syntax error: unexpected end of file"
+
 #endif

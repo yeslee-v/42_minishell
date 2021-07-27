@@ -17,7 +17,8 @@ void	print_double_str(char **str)
 void	print_system(void)
 {
 	printf("[lexical analysis]\n");
-	printf("cmd = %s\nlex = %s\n", g_sh.cmd, g_sh.lexer->lex);
+	if (g_sh.cmd != NULL && g_sh.lexer != NULL)
+		printf("cmd = %s\nlex = %s\n", g_sh.cmd, g_sh.lexer->lex);
 	printf("------------------\n");
 	printf("[tokenizing]\n");
 	print_token(g_sh.token);

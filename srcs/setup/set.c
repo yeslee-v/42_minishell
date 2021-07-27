@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/27 12:44:55 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/27 18:02:08 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ static int	set_cmd_after_pipe(void)
 		init_lst(g_sh.token);
 	}
 	new_cmd = unclosed_pipe();
+	if (new_cmd == NULL)
+		return (-1);
+	printf("hell0\n");
 	g_sh.cmd = ft_strjoin_sp(g_sh.cmd, new_cmd);
 	free(new_cmd);
 	g_sh.lexer = lexer(g_sh.cmd);
@@ -42,7 +45,10 @@ void	set_prompt(void)
 {
 	g_sh.cmd = readline(PROMPT);
 	if (g_sh.cmd == NULL)
-		handle_eof();
+	{
+		move_cursor("exit", 11, 2);
+		exit(0);
+	}
 	if (ft_strcmp(g_sh.cmd, "exit") == 0)
 		exit_shell(1);
 }
