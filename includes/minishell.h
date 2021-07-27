@@ -120,7 +120,7 @@ typedef struct			s_cmd
 	char				**arg_word;
 }						t_cmd;
 
-typedef struct			s_process
+typedef struct			s_process // pipe unit
 {
 	t_cmd				*cmd;
 	t_lst				*i_redir;
@@ -281,6 +281,8 @@ int						get_process_count(void);
 /*
  *pipe
  */
+void					intro(int cnt);
+void					dup_close(int fd, int fd_std);
 void					pipe_intro(int proc_cnt);
 
 /*

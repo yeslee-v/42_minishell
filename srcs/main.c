@@ -151,7 +151,7 @@ int		main(int ac, char **av, char **envp)
 			/*
 			 *else
 			 */
-				pipe_intro(proc_cnt);
+				intro(proc_cnt);
 		}
 		free_conf(&g_sh);
 	}
