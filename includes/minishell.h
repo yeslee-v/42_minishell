@@ -62,7 +62,7 @@ void	analyze_cmd(void);
 void	parse_cmd(t_process *node, t_lst *env);
 void	get_redirect_file(t_lst *redir, t_cmd *tmp);
 char	*make_bin_with_path(t_cmd *node, t_lst *env);
-int	check_cmd_contain_path(t_cmd *node);
+int		check_cmd_contain_path(t_cmd *node);
 char	**split_env_value(char *key, char c, t_lst *env);
 void	make_cmd_with_path(t_cmd *node, char **path);
 char	*find_bin(char **path);
@@ -168,14 +168,9 @@ int		get_process_count(void);
 /*
  *pipe
  */
-void					intro(int cnt);
-void					dup_close(int fd, int fd_std);
-void					pipe_intro(int proc_cnt);
+void	intro(int cnt);
+void	dup_close(int fd, int fd_std);
 
-/*
- *single-pipe
- */
-int		single_pipe(char **av, char **path);
 void	print_error(char *str);
 void	child_proc(char **av, char **path);
 void	parents_proc(char **av, char **path);
@@ -197,13 +192,18 @@ void	run_execve();
  *void					alloc_fd(int cnt, t_all *all);
  *void					ctrl_mid_cmd(int cnt, char *av, char *path, t_all *all);
  */
+void	split_path(t_cmd *proc, char *path);
+void	combine_cmd(t_cmd *proc, char **path);
+void	run_execve(t_cmd *proc);
 
 /*
  * builtin
  */
-void	blt_intro(char *cmd, char *b_args);
+void	blt_intro(t_process *proc_lst);
+void	init_blt(t_blt *blt);
+void	set_lower(char *cmd, t_blt *blt);
 int		is_blt(char *cmd);
-void	not_blt(char *cmd, t_lst *envl);
+void	not_blt(t_cmd *proc, t_lst *envl);
 void	run_echo(char *b_args, t_blt *blt);
 void	run_cd(char *b_args, t_blt *blt, t_lst *envl);
 void	run_env(int xprt_flag, t_lst *envl);

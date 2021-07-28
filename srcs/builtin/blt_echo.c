@@ -1,8 +1,8 @@
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
-int		exists_opt(int i, char **tmp)
+int	exists_opt(int i, char **tmp)
 {
 	int	j;
 
@@ -24,7 +24,7 @@ int		exists_opt(int i, char **tmp)
 
 void	is_env(char *tmp)
 {
-	char *e_val;
+	char	*e_val;
 
 	e_val = search_env_value((tmp + 1), g_sh.env);
 	if (ft_strchr(tmp, '$') && !(ft_strchr(tmp, '?')))
@@ -33,7 +33,6 @@ void	is_env(char *tmp)
 			return ;
 		else
 			printf("%s", e_val);
-
 	}
 	else
 		printf("%s", tmp);
@@ -68,17 +67,10 @@ void	do_echo(int i, char **tmp, t_blt *blt)
 		printf("\n");
 }
 
-void	run_echo(char *b_args, t_blt *blt)
+int	is_up_flag(char **tmp, t_blt *blt)
 {
-	int		i;
-	char	**tmp;
+	int	i;
 
-	if (b_args == NULL)
-	{
-		printf("\n");
-		return ;
-	}
-	tmp = ft_split(b_args, ' ');
 	i = 0;
 	if (!(blt->up_flag))
 	{
@@ -96,12 +88,21 @@ void	run_echo(char *b_args, t_blt *blt)
 		blt->opt = 1;
 		i++;
 	}
-	do_echo(i, tmp, blt);
-	int j = 0;
-	while (tmp[j])
+	return (i);
+}
+
+void	run_echo(char *b_args, t_blt *blt)
+{
+	int		i;
+	char	**tmp;
+
+	if (b_args == NULL)
 	{
-		free(tmp[j]);
-		j++;
+		printf("\n");
+		return ;
 	}
-	free(tmp);
+	tmp = ft_split(b_args, ' ');
+	i = is_up_flag(tmp, blt);
+	do_echo(i, tmp, blt);
+	ft_free_double((void **)tmp);
 }
