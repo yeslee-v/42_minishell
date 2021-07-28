@@ -35,6 +35,12 @@ void	free_cmd(t_cmd *node)
 		free(node->arg);
 	if (node->args)
 		ft_free_double((void **)node->args);
+	if (node->bin)
+		free(node->bin);
+	if (node->input_redir)
+		free(node->input_redir);
+	if (node->output_redir)
+		free(node->output_redir);
 	free(node);
 }
 

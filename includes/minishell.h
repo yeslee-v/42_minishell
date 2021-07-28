@@ -56,6 +56,19 @@ int	set_redirect(void);
 int	exec_heredoc(char *delimiter, int hdoc_fd);
 
 /*
+ *analyze_command
+ */
+void	analyze_cmd(void);
+void	parse_cmd(t_process *node, t_lst *env);
+void	get_redirect_file(t_lst *redir, t_cmd *tmp);
+char	*make_bin_with_path(t_cmd *node, t_lst *env);
+int	check_cmd_contain_path(t_cmd *node);
+char	**split_env_value(char *key, char c, t_lst *env);
+void	make_cmd_with_path(t_cmd *node, char **path);
+char	*find_bin(char **path);
+
+
+/*
  *terminal
  */
 int		get_cursor_pos(int *x, int *y);

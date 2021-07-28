@@ -49,8 +49,25 @@ static void	set_type(t_lst *token)
 	}
 }
 
+static void	set_meta_character(t_lst *token)
+{
+	t_token *tmp;
+
+	tmp = token->head;
+	while (tmp)
+	{
+		if ((ft_strcmp(tmp->token, "~")) == 0)
+		{
+			free(tmp->token);
+			tmp->token = ft_strdup(search_env_value("HOME", g_sh.env));
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	analyze_token(t_lst *token)
 {
 	set_type(token);
 	set_index(token);
+	set_meta_character(token);
 }
