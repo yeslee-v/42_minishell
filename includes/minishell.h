@@ -168,42 +168,22 @@ int		get_process_count(void);
 /*
  *pipe
  */
-void					intro(int cnt);
-void					dup_close(int fd, int fd_std);
-void					pipe_intro(int proc_cnt);
+void	intro(int cnt);
+void	dup_close(int fd, int fd_std);
 
-/*
- *single-pipe
- */
-int		single_pipe(char **av, char **path);
 void	print_error(char *str);
-void	child_proc(char **av, char **path, t_exec *exec);
-void	parents_proc(char **av, char **path, t_exec *exec);
-void	split_path(char *cmd, char *path);
-void	combine_cmd(char *cmd, char **path);
-void	connect_in(char *file);
-void	connect_out(char *file);
-void	run_dup2(int std_fd, int *fd);
-void	close_fd(int flag, int *fd);
-void	run_execve();
-
-/*
- * multi-pipe
- */
-/*
- *int						multi_pipe(int cnt, char *path);
- *void					set_wait(void);
- *void					middle_proc(int cnt, char **av, char *path, t_all *all);
- *void					alloc_fd(int cnt, t_all *all);
- *void					ctrl_mid_cmd(int cnt, char *av, char *path, t_all *all);
- */
+void	split_path(t_cmd *proc, char *path);
+void	combine_cmd(t_cmd *proc, char **path);
+void	run_execve(t_cmd *proc);
 
 /*
  * builtin
  */
-void	blt_intro(char *cmd, char *b_args);
+void	blt_intro(t_process *proc_lst);
+void	init_blt(t_blt *blt);
+void	set_lower(char *cmd, t_blt *blt);
 int		is_blt(char *cmd);
-void	not_blt(char *cmd, t_lst *envl);
+void	not_blt(t_cmd *proc, t_lst *envl);
 void	run_echo(char *b_args, t_blt *blt);
 void	run_cd(char *b_args, t_blt *blt, t_lst *envl);
 void	run_env(int xprt_flag, t_lst *envl);

@@ -32,9 +32,9 @@ J_SRCS				=	main.c \
 						utils/print_utils.c parse/analyze_command.c parse/make_bin.c
 Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
 						builtin/blt_env.c builtin/blt_exit.c builtin/blt_pwd.c \
-						builtin/blt_export.c builtin/blt_unset.c \
-						builtin/print_env.c pipe/init_pipe.c pipe/set_cmd.c \
-						pipe/run.c
+						builtin/blt_export.c builtin/blt_unset.c pipe/run.c \
+						builtin/print_env.c pipe/init_pipe.c \
+						utils/blt_utils.c
 SRCS				=	$(Y_SRCS) $(J_SRCS)
 OBJS				= 	$(patsubst %.c, %.o, $(SRCS_FILE))
 SRCS_DIR			=	./srcs/
