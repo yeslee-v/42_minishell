@@ -49,11 +49,24 @@ t_token	*parser(t_token *tok);
 /*
  *redirect
  */
-void	set_heredoc(void);
+int	set_heredoc(void);
 void	set_input_redirect(void);
 void	set_output_redirect(void);
-void	set_redirect(void);
-void	exec_heredoc(char *delimiter, int hdoc_fd);
+int	set_redirect(void);
+int	exec_heredoc(char *delimiter, int hdoc_fd);
+
+/*
+ *analyze_command
+ */
+void	analyze_cmd(void);
+void	parse_cmd(t_process *node, t_lst *env);
+void	get_redirect_file(t_lst *redir, t_cmd *tmp);
+char	*make_bin_with_path(t_cmd *node, t_lst *env);
+int	check_cmd_contain_path(t_cmd *node);
+char	**split_env_value(char *key, char c, t_lst *env);
+void	make_cmd_with_path(t_cmd *node, char **path);
+char	*find_bin(char **path);
+
 
 /*
  *terminal
@@ -66,7 +79,7 @@ int		set_term_default(int status);
 /*
  *signal
  */
-void	handle_eof(void);
+void	move_cursor(char *msg, int col, int row);
 int		print_tc(int tc);
 void	sig_handler(int signum);
 void	set_signal(void);
@@ -96,7 +109,7 @@ void	init_cmd(t_cmd *node);
  *ft_utils
  */
 char	*ft_strrdup(char *s, int st, int ed);
-char	*ft_strjoin_sp(char *s1, char *s2);
+char	*ft_strcjoin(char *s1, char *s2, char c);
 char	**split_env(char *env);
 
 /*

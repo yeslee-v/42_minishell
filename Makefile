@@ -29,7 +29,7 @@ J_SRCS				=	main.c \
 						parse/lexer.c parse/tokenizer.c parse/parser.c signal/signal.c setup/set.c \
 						ft_utils/ft_double_strjoin.c ft_utils/ft_is.c ft_utils/ft_strjoin_sp.c \
 						ft_utils/ft_strrdup.c parse/analyze_syntax.c parse/analyze_token.c parse/unclosed_pipe.c \
-						utils/print_utils.c
+						utils/print_utils.c parse/analyze_command.c parse/make_bin.c
 Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
 						builtin/blt_env.c builtin/blt_exit.c builtin/blt_pwd.c \
 						builtin/blt_export.c builtin/blt_unset.c pipe/run.c \
