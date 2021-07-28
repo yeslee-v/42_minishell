@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 18:15:00 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/28 14:18:38 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/28 23:45:17 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	init_cmd(t_cmd *node)
 
 void	init_config(void)
 {
-	g_sh.exit_status = 0;
 	g_sh.lexer = NULL;
 	g_sh.process = malloc(sizeof(t_lst));
 	g_sh.token = malloc(sizeof(t_lst));
@@ -60,4 +59,14 @@ void	init_lst(t_lst *lst)
 {
 	lst->head = NULL;
 	lst->tail = NULL;
+}
+
+void	init_control(t_control *con)
+{
+	con->redir = malloc(sizeof(t_lst));
+	con->o_redir = malloc(sizeof(t_lst));
+	con->i_redir = malloc(sizeof(t_lst));
+	init_lst(con->redir);
+	init_lst(con->o_redir);
+	init_lst(con->i_redir);
 }
