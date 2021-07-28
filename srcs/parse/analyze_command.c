@@ -45,7 +45,9 @@ void	analyze_cmd(void)
 {
 	t_process	*node;
 
+	node = NULL;
 	if (!g_sh.process)
+		return ;
 	node = g_sh.process->head;
 	while (node)
 	{

@@ -177,8 +177,8 @@ void					pipe_intro(int proc_cnt);
  */
 int		single_pipe(char **av, char **path);
 void	print_error(char *str);
-void	child_proc(char **av, char **path, t_exec *exec);
-void	parents_proc(char **av, char **path, t_exec *exec);
+void	child_proc(char **av, char **path);
+void	parents_proc(char **av, char **path);
 void	split_path(char *cmd, char *path);
 void	combine_cmd(char *cmd, char **path);
 void	connect_in(char *file);
