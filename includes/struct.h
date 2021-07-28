@@ -51,8 +51,12 @@ typedef struct			s_redirect
 typedef struct			s_cmd
 {
 	char				*cmd;
+	char				*bin; // execve's first arg => ls -> bin/ls | not exist -> null -> cmd not found
 	char				*arg;
 	char				**args;
+	char				*input_redir; // exist -> open+dup2
+	char				*output_redir; // exist -> o_create + o_trunc
+	int					append; // 1 -> o_trunc x | 0 -> output_redir
 }						t_cmd;
 
 typedef struct			s_process
@@ -76,13 +80,15 @@ typedef struct			s_tool
 	int					heredoc;
 }						t_tool;
 
-typedef struct			s_exec
-{
-	const char			*cmd[256];
-	char *const *av;
-	char *const *envp;
-	int					fd[2];
-}						t_exec;
+/*
+ *typedef struct			s_exec
+ *{
+ *    const char			*cmd[256];
+ *    char *const *av;
+ *    char *const *envp;
+ *    int					fd[2];
+ *}						t_exec;
+ */
 
 typedef struct			s_blt
 {
@@ -97,7 +103,9 @@ typedef struct			s_pipe
 	int fd[2]; /// multi_pipe
 	pid_t				*pid;
 	t_env				env;
-	t_exec				exec;
+	/*
+	 *t_exec				exec;
+	 */
 }						t_pipe;
 
 
@@ -112,7 +120,9 @@ typedef struct			s_conf
 	t_lst				*process;
 	struct termios		term;
 	t_pipe				pipe;
-	t_exec				exec;
+	/*
+	 *t_exec				exec;
+	 */
 }						t_conf;
 
 #endif

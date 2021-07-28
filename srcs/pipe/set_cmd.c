@@ -2,21 +2,16 @@
 
 extern t_conf	g_sh;
 
-void			combine_cmd(char *cmd, char **path)
+void			combine_cmd(t_cmd *proc, char **path)
 {
 	int			i;
-	t_process	*proc_lst;
-	t_cmd		*proc;
-
-	proc_lst = g_sh.process->head;
-	proc = proc_lst->cmd;
-	printf("args is %s\n", proc->args[0]);
+	
 	i = 0;
-	if (!(ft_strlen(cmd)))
+	if (!(ft_strlen(proc->cmd)))
 		print_error("cmd is not exists");
 	while (*path)
 	{
-		g_sh.exec.cmd[i] = ft_strjoin(*path, cmd);
+		g_sh.exec.cmd[i] = ft_strjoin(*path, proc->cmd);
 		i++;
 		path++;
 	}
@@ -28,7 +23,7 @@ void			combine_cmd(char *cmd, char **path)
 		*/
 }
 
-void			split_path(char *cmd, char *path)
+void			split_path(t_cmd *proc, char *path)
 {
 	int		i;
 	char	**str;
@@ -41,5 +36,5 @@ void			split_path(char *cmd, char *path)
 		tmp[i] = ft_strjoin(str[i], "/");
 	tmp[i] = NULL;
 	free(str);
-	combine_cmd(cmd, tmp);
+	combine_cmd(proc, tmp);
 }
