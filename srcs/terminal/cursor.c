@@ -32,3 +32,25 @@ int	get_cursor_pos(int *x, int *y)
 	}
 	return (set_term_default(1));
 }
+
+void	move_cursor(char *msg, int col, int row)
+{
+	int		x;
+	int		y;
+	char	*cm;
+	char	*ce;
+
+	x = 0;
+	y = 0;
+	get_cursor_pos(&x, &y);
+	tgetent(NULL, "xterm");
+	cm = tgetstr("cm", NULL);
+	ce = tgetstr("ce", NULL);
+	tputs(tgoto(cm, y + col, x - row), 1, print_tc);
+	if (msg)
+		printf("%s\n", msg);
+	free_lexer(g_sh.lexer);
+	free_token(g_sh.token);
+	free_process(g_sh.process);
+	exit(0);
+}

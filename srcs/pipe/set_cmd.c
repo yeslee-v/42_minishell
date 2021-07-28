@@ -22,7 +22,7 @@ void			combine_cmd(char *cmd, char **path)
 	}
 	g_sh.exec.cmd[i] = NULL;
 	g_sh.exec.av = (char *const *)proc->args;
-	g_sh.exec.envp  NULL;
+	g_sh.exec.envp = NULL;
 	/*
 		*proc_lst = proc_lst->next;
 		*/

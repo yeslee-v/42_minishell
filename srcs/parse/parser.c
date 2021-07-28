@@ -11,7 +11,7 @@ t_token	*parse_token(t_token *tok, t_cmd *node, t_lst *i_redir, t_lst *o_redir)
 	}
 	else if (tok->type == 'S')
 	{
-		node->arg = ft_strjoin_sp(node->arg, tok->token);
+		node->arg = ft_strcjoin(node->arg, tok->token, ' ');
 		node->args = ft_double_strjoin(node->args, tok->token);
 	}
 	else if (ft_strchr("AO", tok->type))

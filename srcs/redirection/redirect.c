@@ -58,8 +58,15 @@ void	set_input_redirect(void)
 	}
 }
 
-void	set_heredoc(void)
+void	close_input_fd(t_redirect *input)
 {
+	close(input->fd);
+	input->fd = 0;
+}
+
+int	set_heredoc(void)
+{
+	int			ret;
 	t_process	*pipe;
 	t_redirect	*input;
 
@@ -72,22 +79,26 @@ void	set_heredoc(void)
 			if (input->type == 'H')
 			{
 				input->fd = open(".hdoc", O_RDWR | O_CREAT | O_TRUNC, 0644);
-				exec_heredoc(input->arg, input->fd);
+				ret = exec_heredoc(input->arg, input->fd);
 				if (input->fd > 0)
-				{
-					close(input->fd);
-					input->fd = 0;
-				}
+					close_input_fd(input);
+				if (ret == 1)
+					return (ret);
 			}
 			input = input->next;
 		}
 		pipe = pipe->next;
 	}
+	return (0);
 }
 
-void	set_redirect(void)
+int	set_redirect(void)
 {
+	int	ret;
+
+	ret = 0;
 	set_output_redirect();
 	set_input_redirect();
-	set_heredoc();
+	ret = set_heredoc();
+	return (ret);
 }
