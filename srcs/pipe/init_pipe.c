@@ -51,7 +51,6 @@ void intro(int cnt)
 				dup_close(g_sh.pipe.fd[1], STDOUT);
 			else
 				dup_close(fd_backup[1], STDOUT);
-			printf("proc is %s|%s\n", proc->cmd, proc->args[1]);
 			blt_intro(proc_lst);
 		}
 		else
