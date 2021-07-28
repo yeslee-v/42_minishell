@@ -51,22 +51,13 @@ typedef struct			s_redirect
 typedef struct			s_cmd
 {
 	char				*cmd;
-<<<<<<< HEAD
 	char				*bin; // execve's first arg => ls -> bin/ls | not exist -> null -> cmd not found
 	char				*arg;
 	char				**args;
 	char				*input_redir; // exist -> open+dup2
 	char				*output_redir; // exist -> o_create + o_trunc
 	int					append; // 1 -> o_trunc x | 0 -> output_redir
-=======
-	char				*bin;
-	char				*arg;
-	char				**args;
-	char				*input_redir;
-	char				*output_redir;
-	int					append;
 	char				dir[2048];
->>>>>>> main
 }						t_cmd;
 
 typedef struct			s_process

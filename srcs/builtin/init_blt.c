@@ -57,10 +57,7 @@ void	not_blt(t_cmd *proc, t_lst *envl)
 			exit(1);
 	}
 	else if (pid == 0)
-	{
-		split_path(proc, path);
-		run_execve();
-	}
+		run_execve(proc);
 }
 
 void	blt_intro(t_process *proc_lst)
