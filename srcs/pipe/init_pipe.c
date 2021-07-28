@@ -2,13 +2,13 @@
 
 extern t_conf	g_sh;
 
-void			dup_close(int fd, int fd_std)
+void	dup_close(int fd, int fd_std)
 {
 	dup2(fd, fd_std);
 	close(fd);
 }
 
-void intro(int cnt)
+void	pipe_intro(int cnt)
 {
 	int			i;
 	int			status;
@@ -19,7 +19,7 @@ void intro(int cnt)
 
 	g_sh.pipe.pid = malloc(sizeof(pid_t) * cnt);
 	if (!(g_sh.pipe.pid))
-		return ; // malloc error
+		return ;
 	fd_backup[0] = dup(0);
 	fd_backup[1] = dup(1);
 	i = -1;
@@ -34,7 +34,7 @@ void intro(int cnt)
 		{
 			wait(&status);
 			if (!(WIFEXITED(status)))
-				return ; // child error
+				return ;
 			if (i > 0)
 				close(fd_prev);
 			fd_prev = g_sh.pipe.fd[0];
@@ -54,7 +54,7 @@ void intro(int cnt)
 			blt_intro(proc_lst);
 		}
 		else
-			return ; // pid error
+			return ;
 		proc_lst = proc_lst->next;
 	}
 	dup2(fd_backup[0], 0);

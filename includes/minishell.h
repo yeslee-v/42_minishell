@@ -168,12 +168,9 @@ int		get_process_count(void);
 /*
  *pipe
  */
-void	intro(int cnt);
+void	pipe_intro(int cnt);
 void	dup_close(int fd, int fd_std);
-
 void	print_error(char *str);
-void	split_path(t_cmd *proc, char *path);
-void	combine_cmd(t_cmd *proc, char **path);
 void	run_execve(t_cmd *proc);
 
 /*
