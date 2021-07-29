@@ -34,6 +34,10 @@ int		main(int ac, char **av, char **envp)
 			proc_cnt = get_process_count();
 			if (proc_cnt)
 				pipe_intro(proc_cnt);
+			/*[>proc_cnt = get_process_count();<]*/
+			/*[>if (proc_cnt)<]*/
+				/*[>intro(proc_cnt);<]*/
+			/*[>printf("cnt = %d\n", proc_cnt);<]*/
 		}
 		print_system();
 		free_conf(&g_sh);

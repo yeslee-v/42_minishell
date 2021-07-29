@@ -47,8 +47,9 @@
 # define PURPLE "\033[0;35m"
 # define B_PURPLE "\033[1;35m"
 # define CYAN "\033[0;36m"
-# define B_CYAN "\033[1;35m"
+# define B_CYAN "\033[1;36m"
 # define WHITE "\033[0;37m"
+# define B_WHITE "\033[1;30m"
 # define RESET "\033[0m"
 
 # define ERR_TOKEN "BraveShell: syntax error near unexpected token"
