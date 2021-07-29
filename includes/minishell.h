@@ -59,6 +59,8 @@ int	set_all_redir_lst(t_process *pipe);
 void	close_redir_fd(t_redirect *redir);
 char *make_hdoc_file_name(int i);
 
+int	redir_init(t_cmd *proc);
+
 /*
  *analyze_command
  */
@@ -140,6 +142,7 @@ void	free_env_node(t_env *env);
 void	free_conf(t_conf *conf);
 void	free_lexer(t_lexer *lexer);
 void	free_cmd(t_cmd *node);
+
 /*
  *print_utils
  */

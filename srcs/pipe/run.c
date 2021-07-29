@@ -22,19 +22,29 @@ void	run_execve(t_cmd *proc)
 	printf("redir is %s|%s|%d\n", proc->input_redir, proc->output_redir, proc->append);
 	if (proc->input_redir)
 	{
+		printf("input is %s\n", proc->input_redir);
 		
 	}
 	if (proc->output_redir)
 	{
-
+		printf("output is %s\n", proc->output_redir);
 	}
 	if (proc->append)
 	{
+		printf("append is %d\n", proc->append);
+/*
+ *        if (!(proc->append))
+ *        {
+ *
+ *        }
+ *        else if (proc->append == 1)
+ *        {
+ *            // output_redir
+ *        }
+ */
 
 	}
 	ret = execve(proc->bin, (char *const *)proc->args, NULL);
-	if (ret == -1)
-		// error in cmd
-		// 어떤 에러로 끝났는지 state에 저장된다 -> $? 에도 활용할 수 있음
+	if (ret == -1) // error in cmd
 		print_error("execve error");
 }
