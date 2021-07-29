@@ -1,4 +1,5 @@
 #include "../../includes/minishell.h"
+#include <sys/wait.h>
 
 extern t_conf	g_sh;
 
@@ -54,9 +55,7 @@ void			not_blt(t_cmd *proc, t_lst *envl)
 	if (pid > 0)
 	{
 		wait(&status);
-		if (!(WIFEXITED(status)))
-			exit (1);
-		exit (0);
+		exit(WEXITSTATUS(status));
 	}
 	else if (pid == 0)
 	{

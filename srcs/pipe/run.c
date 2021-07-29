@@ -17,9 +17,6 @@ int		double_strlen(const char **str)
 
 void	run_execve(t_cmd *proc)
 {
-	int ret;
-
-	ret = execve(proc->bin, (char *const *)proc->args, NULL);
-	if (ret == -1) // error in cmd
-		print_error("execve error");
+	execve(proc->bin, (char *const *)proc->args, g_sh.envp);
+	exit(127);
 }
