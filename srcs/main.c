@@ -29,14 +29,14 @@ int		main(int ac, char **av, char **envp)
 		set_process();
 		ret = set_redirect(g_sh.process);
 		printf("ret = %d\n", ret);
-		/*if (ret != 1)*/
-		/*{*/
-			/*analyze_cmd();*/
+		if (ret != 1)
+		{
+			analyze_cmd();
 			/*[>proc_cnt = get_process_count();<]*/
 			/*[>if (proc_cnt)<]*/
 				/*[>intro(proc_cnt);<]*/
 			/*[>printf("cnt = %d\n", proc_cnt);<]*/
-		/*}*/
+		}
 		print_system();
 		free_conf(&g_sh);
 	}

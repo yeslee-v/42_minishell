@@ -10,7 +10,9 @@ void	get_redirect_file(t_lst *redir, t_cmd *tmp)
 	node = redir->tail;
 	if (node && node->arg)
 	{
-		if (ft_strchr("IH", node->type))
+		if (node->type == 'H')
+			tmp->input_redir = make_hdoc_file_name(tmp->i);
+		else if (node->type == 'I')
 			tmp->input_redir = ft_strdup(node->arg);
 		else if (ft_strchr("OA", node->type))
 		{
