@@ -39,7 +39,7 @@ int		main(int ac, char **av, char **envp)
 				/*[>intro(proc_cnt);<]*/
 			/*[>printf("cnt = %d\n", proc_cnt);<]*/
 		}
-		print_system();
+		/*print_system();*/
 		free_conf(&g_sh);
 	}
 }
