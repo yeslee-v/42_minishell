@@ -127,9 +127,11 @@ int	set_redirect(t_lst *process)
 		return (-1);
 	pipe = process->head;
 	ret.hdoc = set_heredoc(pipe);
+	g_sh.exit_status = ret.hdoc;
 	if (ret.hdoc == 1)
 		return (1);
 	ret.result = set_all_redir_lst(pipe);
+	g_sh.exit_status = ret.result;
 	if (ret.result == 1)
 		return (1);
 	return (ret.result);
