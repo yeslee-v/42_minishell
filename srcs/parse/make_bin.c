@@ -23,6 +23,7 @@ char	*find_bin(char **path)
 			return (ret);
 		}
 	}
+	ft_free_double((void **)path);
 	return (NULL);
 }
 
