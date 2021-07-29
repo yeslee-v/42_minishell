@@ -26,7 +26,6 @@ void			run_builtin(t_cmd *proc, t_blt *blt, t_lst *envl)
 {
 	int	num;
 
-	printf("cmd pid is %d\n", getpid());
 	redir_init(proc);
 	num = is_blt(proc->cmd);
 	if (num == B_ECHO)
