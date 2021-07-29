@@ -37,7 +37,7 @@ int	check_type(t_lst *token, t_token *tmp, int find_cmd)
 {
 	if (tmp == token->head)
 		return (1);
-	else if (find_cmd == 0 && (tmp->prev != NULL && tmp->prev->type == 'T'))
+	else if (find_cmd == 0 && (tmp->prev != NULL && ft_strchr("TD", tmp->prev->type)))
 		return (1);
 	else if (tmp->i == 0 && find_cmd == 0)
 		return (1);
