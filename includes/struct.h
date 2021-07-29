@@ -60,7 +60,7 @@ typedef struct			s_cmd
 {
 	int					i;
 	char				*cmd;
-	char				*bin; // execve's first arg => ls -> bin/ls | not exist -> null -> cmd not found
+	char				*bin; // null -> command not found
 	char				*arg;
 	char				**args;
 	char				*input_redir;

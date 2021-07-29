@@ -175,29 +175,9 @@ int		get_process_count(void);
 /*
  *pipe
  */
-void	intro(int cnt);
+void	pipe_intro(int cnt);
 void	dup_close(int fd, int fd_std);
-
 void	print_error(char *str);
-void	child_proc(char **av, char **path);
-void	parents_proc(char **av, char **path);
-void	connect_in(char *file);
-void	connect_out(char *file);
-void	run_dup2(int std_fd, int *fd);
-void	close_fd(int flag, int *fd);
-
-/*
- * multi-pipe
- */
-/*
- *int						multi_pipe(int cnt, char *path);
- *void					set_wait(void);
- *void					middle_proc(int cnt, char **av, char *path, t_all *all);
- *void					alloc_fd(int cnt, t_all *all);
- *void					ctrl_mid_cmd(int cnt, char *av, char *path, t_all *all);
- */
-void	split_path(t_cmd *proc, char *path);
-void	combine_cmd(t_cmd *proc, char **path);
 void	run_execve(t_cmd *proc);
 
 /*

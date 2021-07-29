@@ -39,7 +39,6 @@ void	run_builtin(t_cmd *proc, t_blt *blt, t_lst *envl)
 		run_unset(proc->arg, blt, envl);
 	else if (num == B_ENV)
 		run_env(0, envl);
-	exit (0);
 }
 
 void	not_blt(t_cmd *proc, t_lst *envl)
@@ -73,7 +72,13 @@ void	blt_intro(t_process *proc_lst)
 	set_lower(proc->cmd, &blt);
 	ret = is_blt(proc->cmd);
 	if (ret)
+	{
 		run_builtin(proc, &blt, envl);
+	int cnt = get_process_count();
+	if (cnt > 1)
+		exit (0);
+
+	}
 	else if (!ret)
 		not_blt(proc, envl);
 }

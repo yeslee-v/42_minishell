@@ -16,7 +16,7 @@ int	set_default_config(char **envp)
 int		main(int ac, char **av, char **envp)
 {
 	int	ret;
-	/*int	proc_cnt;*/
+	int	proc_cnt;
 
 	if (!ac || !av)
 		return (-1);
@@ -28,10 +28,12 @@ int		main(int ac, char **av, char **envp)
 		set_prompt();
 		set_process();
 		ret = set_redirect(g_sh.process);
-		printf("ret = %d\n", ret);
 		if (ret != 1)
 		{
 			analyze_cmd();
+			proc_cnt = get_process_count();
+			if (proc_cnt)
+				pipe_intro(proc_cnt);
 			/*[>proc_cnt = get_process_count();<]*/
 			/*[>if (proc_cnt)<]*/
 				/*[>intro(proc_cnt);<]*/
