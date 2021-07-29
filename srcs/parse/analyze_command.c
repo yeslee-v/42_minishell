@@ -11,14 +11,25 @@ void	get_redirect_file(t_lst *redir, t_cmd *tmp)
 	if (node && node->arg)
 	{
 		if (node->type == 'H')
+		{
 			tmp->input_redir = make_hdoc_file_name(tmp->i);
+			tmp->input_fd = open(tmp->input_redir, O_RDONLY);
+		}
 		else if (node->type == 'I')
+		{
 			tmp->input_redir = ft_strdup(node->arg);
+			tmp->input_fd = open(tmp->input_redir, O_RDONLY);
+		}
 		else if (ft_strchr("OA", node->type))
 		{
 			tmp->output_redir = ft_strdup(node->arg);
 			if (node->type == 'A')
+			{
 				tmp->append = 1;
+				tmp->output_fd = open(tmp->output_redir, O_RDWR | O_CREAT | O_APPEND, 0644);
+			}
+			else
+				tmp->output_fd = open(tmp->output_redir, O_RDWR | O_CREAT | O_TRUNC, 0644);
 		}
 	}
 }
