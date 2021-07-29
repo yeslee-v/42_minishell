@@ -5,7 +5,9 @@ extern t_conf	g_sh;
 void	dup_close(int fd, int fd_std)
 {
 	dup2(fd, fd_std);
-	close(fd);
+	/*
+	 *close(fd);
+	 */
 }
 
 void	pipe_intro(int cnt)
@@ -32,7 +34,6 @@ void	pipe_intro(int cnt)
 		g_sh.pipe.pid[i] = fork();
 		if (g_sh.pipe.pid[i] > 0)
 		{
-			printf("parents pid -> %d\n", getpid());
 			wait(&status);
 			if (!(WIFEXITED(status)))
 				return ;
@@ -45,7 +46,6 @@ void	pipe_intro(int cnt)
 		}
 		else if (g_sh.pipe.pid[i] == 0)
 		{
-			printf("child pid -> %d\n", getpid());
 			if (i > 0)
 				dup_close(fd_prev, STDIN);
 			close(g_sh.pipe.fd[0]);
