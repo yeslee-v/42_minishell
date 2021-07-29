@@ -19,6 +19,19 @@ void	run_execve(t_cmd *proc)
 {
 	int ret;
 
+	printf("redir is %s|%s|%d\n", proc->input_redir, proc->output_redir, proc->append);
+	if (proc->input_redir)
+	{
+		
+	}
+	if (proc->output_redir)
+	{
+
+	}
+	if (proc->append)
+	{
+
+	}
 	ret = execve(proc->bin, (char *const *)proc->args, NULL);
 	if (ret == -1)
 		// error in cmd

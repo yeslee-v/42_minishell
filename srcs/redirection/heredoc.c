@@ -46,6 +46,7 @@ void	receive_text(int fd[2], char *delimeter)
 	char	*line;
 
 	line = NULL;
+	close(fd[READ]);
 	while (1)
 	{
 		signal(SIGINT, hdoc_sig_handler);
@@ -54,7 +55,6 @@ void	receive_text(int fd[2], char *delimeter)
 		{
 			if (!line)
 				move_cursor(NULL, 1, 2);
-			close(fd[READ]);
 			close(fd[WRITE]);
 			exit(0);
 		}
@@ -66,6 +66,7 @@ void	receive_text(int fd[2], char *delimeter)
 		if (line)
 			free(line);
 	}
+	close(fd[WRITE]);
 }
 
 int	exec_heredoc(char *delimeter, int hdoc_fd)
@@ -86,5 +87,6 @@ int	exec_heredoc(char *delimeter, int hdoc_fd)
 		printf("fork error in second fork\n");
 		exit(0);
 	}
+	g_sh.exit_status = ret;
 	return (ret);
 }

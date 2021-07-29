@@ -4,6 +4,14 @@
 #include <unistd.h>
 #include <termios.h>
 
+typedef struct			s_status
+{
+	int hdoc;
+	int	input;
+	int output;
+	int	result;
+}	t_status;
+
 typedef struct			s_lst
 {
 	void				*head;
@@ -50,24 +58,16 @@ typedef struct			s_redirect
 
 typedef struct			s_cmd
 {
+	int					i;
 	char				*cmd;
-	char				*bin; // execve's first arg => ls -> bin/ls | not exist -> null -> cmd not found
+	char				*bin; // null -> command not found
 	char				*arg;
 	char				**args;
 	char				*input_redir; // exist -> open+dup2
 	char				*output_redir; // exist -> o_create + o_trunc
 	int					append; // 1 -> o_trunc x | 0 -> output_redir
 	char				dir[2048];
-}						t_cmd;
-
-typedef struct			s_process
-{
-	t_cmd				*cmd;
-	t_lst				*i_redir;
-	t_lst				*o_redir;
-	struct s_process	*next;
-	struct s_process	*prev;
-}						t_process;
+}	t_cmd;
 
 typedef struct			s_tool
 {
@@ -95,6 +95,22 @@ typedef struct			s_pipe
 	pid_t				*pid;
 	t_env				env;
 }						t_pipe;
+
+typedef struct			s_control
+{
+	t_lst *redir;
+	t_lst *i_redir;
+	t_lst *o_redir;
+}						t_control;
+
+typedef struct			s_process
+{
+	int					i;
+	t_cmd				*cmd;
+	t_control			*con;
+	struct s_process	*next;
+	struct s_process	*prev;
+}						t_process;
 
 typedef struct			s_conf
 {

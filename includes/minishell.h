@@ -49,11 +49,15 @@ t_token	*parser(t_token *tok);
 /*
  *redirect
  */
-int	set_heredoc(void);
-void	set_input_redirect(void);
-void	set_output_redirect(void);
-int	set_redirect(void);
+int	set_heredoc(t_process *pipe);
+int	set_input_redir_node(t_redirect *input);
+int	set_output_redir_node(t_redirect *out);
+int	print_redir_error(char *file, char *err_msg);
+int	set_redirect(t_lst *process);
 int	exec_heredoc(char *delimiter, int hdoc_fd);
+int	set_all_redir_lst(t_process *pipe);
+void	close_redir_fd(t_redirect *redir);
+char *make_hdoc_file_name(int i);
 
 /*
  *analyze_command
@@ -87,7 +91,7 @@ void	set_signal(void);
 /*
  *make_struct
  */
-void	save_process(t_cmd *cmd, t_lst *redir, t_lst *hdoc);
+void	save_process(t_cmd *cmd, t_control *con);
 void	make_token(t_lst *lst, int st, int ed);
 void	make_env(t_lst *lst, char *key, char *value);
 void	make_redir(t_lst *redir, char type, char *arg);
@@ -104,6 +108,8 @@ void	init_lexer(t_lexer *lexer);
 void	init_tool(t_tool *tool);
 void	init_config(void);
 void	init_cmd(t_cmd *node);
+void	init_control(t_control *con);
+void	init_status(t_status *node);
 
 /*
  *ft_utils
@@ -144,7 +150,8 @@ void	print_error(char *msg);
 void	print_token(t_lst *token);
 void	print_system(void);
 void	print_double_str(char **str);
-void	print_redir(t_process *proc, t_lst *redir);
+void	print_redir(t_control *con, t_lst *redir);
+void	print_control(t_control *con);
 void	print_cmd(t_cmd *node);
 
 /*

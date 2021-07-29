@@ -2,103 +2,135 @@
 
 extern t_conf	g_sh;
 
-void	set_output_redirect(void)
+void	close_redir_fd(t_redirect *redir)
 {
-	t_process	*pipe;
-	t_redirect	*out;
-
-	pipe = g_sh.process->head;
-	while (pipe)
-	{
-		out = pipe->o_redir->head;
-		while (out)
-		{
-			if (out->type == 'O')
-				out->fd = open(out->arg, O_RDWR | O_CREAT | O_TRUNC, 0644);
-			else if (out->type == 'A')
-				out->fd = open(out->arg, O_RDWR | O_CREAT | O_APPEND, 0644);
-			if (errno != 0)
-				printf("BraveShell : %s: %s\n", out->arg, strerror(errno));
-			if (out != pipe->o_redir->tail)
-			{
-				close(out->fd);
-				out->fd = 0;
-			}
-			out = out->next;
-		}
-		pipe = pipe->next;
-	}
+	close(redir->fd);
+	redir->fd = 0;
 }
 
-void	set_input_redirect(void)
+int	print_redir_error(char *file, char *err_msg)
 {
-	t_process	*pipe;
-	t_redirect	*input;
-
-	pipe = g_sh.process->head;
-	while (pipe)
-	{
-		input = pipe->i_redir->head;
-		while (input)
-		{
-			if (input->type == 'I')
-			{
-				input->fd = open(input->arg, O_RDWR);
-				if (errno != 0)
-					printf("braveShell : %s: %s\n", input->arg, strerror(errno));
-				if (input->fd > 0)
-				{
-					close(input->fd);
-					input->fd = 0;
-				}
-			}	
-			input = input->next;
-		}
-		pipe = pipe->next;
-	}
+	ft_putstr_fd("BraveShell : ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(err_msg, 2);
+	ft_putstr_fd("\n", 2);
+	return (1);
 }
 
-void	close_input_fd(t_redirect *input)
+int	set_output_redir_node(t_redirect *out)
 {
-	close(input->fd);
-	input->fd = 0;
+	if (out->type == 'O')
+		out->fd = open(out->arg, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	else if (out->type == 'A')
+		out->fd = open(out->arg, O_RDWR | O_CREAT | O_APPEND, 0644);
+	if (errno != 0)
+		return (print_redir_error(out->arg, strerror(errno)));
+	else
+		close_redir_fd(out);
+	return (0);
 }
 
-int	set_heredoc(void)
+int	set_input_redir_node(t_redirect *input)
 {
+	input->fd = open(input->arg, O_RDWR);
+	if (errno != 0)
+		return (print_redir_error(input->arg, strerror(errno)));
+	if (input->fd > 0)
+		close_redir_fd(input);
+	return (0);
+}
+
+char *make_hdoc_file_name(int i)
+{
+	char *hdoc;
+	char *num;
+
+	hdoc = ft_strdup(".hdoc");
+	num = ft_itoa(i);
+	hdoc = ft_strcjoin(hdoc, num, '_');
+	if (num)
+		free(num);
+	return (hdoc);
+}
+
+int	set_heredoc(t_process *pipe)
+{
+	char		*file;
 	int			ret;
-	t_process	*pipe;
-	t_redirect	*input;
+	t_redirect	*node;
 
-	pipe = g_sh.process->head;
 	while (pipe)
 	{
-		input = pipe->i_redir->head;
-		while (input)
+		file = make_hdoc_file_name(pipe->i);
+		node = pipe->con->redir->head;
+		while (node)
 		{
-			if (input->type == 'H')
+			if (node->type == 'H')
 			{
-				input->fd = open(".hdoc", O_RDWR | O_CREAT | O_TRUNC, 0644);
-				ret = exec_heredoc(input->arg, input->fd);
-				if (input->fd > 0)
-					close_input_fd(input);
+				node->fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
+				ret = exec_heredoc(node->arg, node->fd);
+				if (node->fd > 0)
+					close_redir_fd(node);
 				if (ret == 1)
+				{
+					free(file);
 					return (ret);
+				}
 			}
-			input = input->next;
+			node = node->next;
 		}
+		free(file);
 		pipe = pipe->next;
 	}
 	return (0);
 }
 
-int	set_redirect(void)
+int	set_all_redir_lst(t_process *pipe)
 {
-	int	ret;
+	int ret;
+	t_control *con;
+	t_redirect *node;
 
 	ret = 0;
-	set_output_redirect();
-	set_input_redirect();
-	ret = set_heredoc();
+	con = pipe->con;
+	node = con->redir->head;
+	if (!node)
+		return (0);
+	while (node && ret != 1)
+	{
+		if (ft_strchr("AO", node->type))
+			ret = set_output_redir_node(node);
+		else if (node->type == 'I')
+			ret = set_input_redir_node(node);
+		node = node->next;
+	}
 	return (ret);
+}
+
+void	init_status(t_status *node)
+{
+	node->hdoc = 0;
+	node->input = 0;
+	node->output = 0;
+	node->result = 0;
+}
+
+int	set_redirect(t_lst *process)
+{
+	t_status ret;
+	t_process *pipe;
+
+	pipe = NULL;
+	init_status(&ret);
+	if (!process->head)
+		return (-1);
+	pipe = process->head;
+	ret.hdoc = set_heredoc(pipe);
+	if (ret.hdoc == 1)
+		return (1);
+	ret.result = set_all_redir_lst(pipe);
+	if (ret.result == 1)
+		return (1);
+	return (ret.result);
 }

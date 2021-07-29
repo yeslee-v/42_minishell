@@ -32,6 +32,7 @@ void	pipe_intro(int cnt)
 		g_sh.pipe.pid[i] = fork();
 		if (g_sh.pipe.pid[i] > 0)
 		{
+			printf("parents pid -> %d\n", getpid());
 			wait(&status);
 			if (!(WIFEXITED(status)))
 				return ;
@@ -41,9 +42,12 @@ void	pipe_intro(int cnt)
 			if (i == (cnt - 1))
 				close(g_sh.pipe.fd[0]);
 			close(g_sh.pipe.fd[1]);
+			if (i == (cnt -1))
+				exit (0);
 		}
 		else if (g_sh.pipe.pid[i] == 0)
 		{
+			printf("child pid -> %d\n", getpid());
 			if (i > 0)
 				dup_close(fd_prev, STDIN);
 			close(g_sh.pipe.fd[0]);
