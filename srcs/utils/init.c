@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 18:15:00 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/28 23:45:17 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/29 18:08:07 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	init_cmd(t_cmd *node)
 	node->args = NULL;
 	node->cmd = NULL;
 	node->append = 0;
+	node->input_fd = -1;
+	node->output_fd = -1;
 	node->bin = NULL;
 	node->input_redir = NULL;
 	node->output_redir = NULL;

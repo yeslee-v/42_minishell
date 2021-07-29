@@ -63,6 +63,8 @@ typedef struct			s_cmd
 	char				*bin; // null -> command not found
 	char				*arg;
 	char				**args;
+	int					input_fd;
+	int					output_fd;
 	char				*input_redir;
 	char				*output_redir; 
 	int					append; // 1 -> o_trunc x | 0 -> output_redir
