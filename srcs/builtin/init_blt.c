@@ -74,10 +74,6 @@ void	blt_intro(t_process *proc_lst)
 	if (ret)
 	{
 		run_builtin(proc, &blt, envl);
-	int cnt = get_process_count();
-	if (cnt > 1)
-		exit (0);
-
 	}
 	else if (!ret)
 		not_blt(proc, envl);
