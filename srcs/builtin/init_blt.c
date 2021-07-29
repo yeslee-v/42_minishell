@@ -2,9 +2,9 @@
 
 extern t_conf	g_sh;
 
-int	is_blt(char *cmd)
+int				is_blt(char *cmd)
 {
-	int		ret;
+	int	ret;
 
 	ret = 0;
 	if (!(ft_strcmp(cmd, "echo")))
@@ -22,10 +22,12 @@ int	is_blt(char *cmd)
 	return (ret);
 }
 
-void	run_builtin(t_cmd *proc, t_blt *blt, t_lst *envl)
+void			run_builtin(t_cmd *proc, t_blt *blt, t_lst *envl)
 {
-	int		num;
+	int	num;
 
+	printf("cmd pid is %d\n", getpid());
+	redir_init(proc);
 	num = is_blt(proc->cmd);
 	if (num == B_ECHO)
 		run_echo(proc->arg, blt);
@@ -39,9 +41,10 @@ void	run_builtin(t_cmd *proc, t_blt *blt, t_lst *envl)
 		run_unset(proc->arg, blt, envl);
 	else if (num == B_ENV)
 		run_env(0, envl);
+	exit(0);
 }
 
-void	not_blt(t_cmd *proc, t_lst *envl)
+void			not_blt(t_cmd *proc, t_lst *envl)
 {
 	pid_t	pid;
 	int		status;
@@ -53,10 +56,14 @@ void	not_blt(t_cmd *proc, t_lst *envl)
 	{
 		wait(&status);
 		if (!(WIFEXITED(status)))
-			exit(1);
+			exit (1);
+		exit (0);
 	}
 	else if (pid == 0)
+	{
+		redir_init(proc);
 		run_execve(proc);
+	}
 }
 
 void	blt_intro(t_process *proc_lst)
@@ -72,13 +79,7 @@ void	blt_intro(t_process *proc_lst)
 	set_lower(proc->cmd, &blt);
 	ret = is_blt(proc->cmd);
 	if (ret)
-	{
 		run_builtin(proc, &blt, envl);
-	int cnt = get_process_count();
-	if (cnt > 1)
-		exit (0);
-
-	}
 	else if (!ret)
 		not_blt(proc, envl);
 }
