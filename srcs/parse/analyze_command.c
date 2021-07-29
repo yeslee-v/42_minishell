@@ -29,6 +29,7 @@ void	parse_cmd(t_process *node, t_lst *env)
 	if (!node || !env)
 		return ;
 	tmp = node->cmd;
+	tmp->i = node->i;
 	ret = check_cmd_contain_path(tmp);
 	if (ret == -1)
 		return ;
@@ -36,8 +37,8 @@ void	parse_cmd(t_process *node, t_lst *env)
 		tmp->bin = ft_strdup(tmp->cmd);
 	else
 		tmp->bin = make_bin_with_path(tmp, env);
-	get_redirect_file(node->o_redir, tmp);
-	get_redirect_file(node->i_redir, tmp);
+	get_redirect_file(node->con->o_redir, tmp);
+	get_redirect_file(node->con->i_redir, tmp);
 	getcwd(tmp->dir, 2048);
 }
 

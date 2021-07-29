@@ -61,6 +61,11 @@ static void	set_meta_character(t_lst *token)
 			free(tmp->token);
 			tmp->token = ft_strdup(search_env_value("HOME", g_sh.env));
 		}
+		else if ((ft_strcmp(tmp->token, "$?")) == 0)
+		{
+			free(tmp->token);
+			tmp->token = ft_strdup(ft_itoa(g_sh.exit_status));
+		}
 		tmp = tmp->next;
 	}
 }

@@ -86,5 +86,6 @@ int	exec_heredoc(char *delimeter, int hdoc_fd)
 		printf("fork error in second fork\n");
 		exit(0);
 	}
+	g_sh.exit_status = ret;
 	return (ret);
 }

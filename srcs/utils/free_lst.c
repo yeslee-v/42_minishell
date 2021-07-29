@@ -58,6 +58,19 @@ void	free_token(t_lst *token)
 	free(token);
 }
 
+void	free_control(t_control *con)
+{
+	if (!con)
+		return ;
+	if (con->redir)
+		free_redirect(con->redir);
+	if (con->o_redir)
+		free_redirect(con->o_redir);
+	if (con->i_redir)
+		free_redirect(con->i_redir);
+	free(con);
+}
+
 void	free_process(t_lst *process)
 {
 	t_process	*node;
@@ -70,10 +83,8 @@ void	free_process(t_lst *process)
 	{
 		if (tmp->cmd)
 			free_cmd(tmp->cmd);
-		if (tmp->i_redir)
-			free_redirect(tmp->i_redir);
-		if (tmp->o_redir)
-			free_redirect(tmp->o_redir);
+		if (tmp->con)
+			free_control(tmp->con);
 		node = tmp;
 		tmp = tmp->next;
 		free(node);

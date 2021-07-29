@@ -12,6 +12,7 @@ void	sig_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
+		g_sh.exit_status = 1;
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);

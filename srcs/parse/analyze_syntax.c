@@ -16,6 +16,7 @@ int	check_unexpected_token(t_token *node)
 		if (node->type == 'P')
 			return (2);
 		printf("BraveShell: syntax error near unexpected token `newline'\n");
+		g_sh.exit_status = ERRNO_UNEXPECTED_TOKEN;
 		return (-1);
 	}
 	else if (node->next != NULL)
@@ -25,6 +26,7 @@ int	check_unexpected_token(t_token *node)
 			if (node->type == 'P' && ft_strchr("FHIOA", node->next->type))
 				return (1);
 			printf(ERR_TOKEN" `%s'\n", node->next->token);
+			g_sh.exit_status = ERRNO_UNEXPECTED_TOKEN;
 			return (-1);
 		}
 	}

@@ -2,30 +2,41 @@
 
 t_conf	g_sh;
 
+int	set_default_config(char **envp)
+{
+	if (!envp)
+		return (0);
+	g_sh.envp = envp;
+	g_sh.exit_status = 0;
+	set_env(envp);
+	set_terminal();
+	return (1);
+}
+
 int		main(int ac, char **av, char **envp)
 {
 	int	ret;
-	int	proc_cnt;
+	/*int	proc_cnt;*/
 
 	if (!ac || !av)
 		return (-1);
-	g_sh.envp = envp;
-	set_env(envp);
-	set_terminal();
+	set_default_config(envp);
 	while (1)
 	{
 		set_signal();
 		init_config();
 		set_prompt();
 		set_process();
-		ret = set_redirect();
-		if (ret != 1)
-		{
-			analyze_cmd();
-			proc_cnt = get_process_count();
-			if (proc_cnt)
-				intro(proc_cnt);
-		}
+		ret = set_redirect(g_sh.process);
+		printf("ret = %d\n", ret);
+		/*if (ret != 1)*/
+		/*{*/
+			/*analyze_cmd();*/
+			/*[>proc_cnt = get_process_count();<]*/
+			/*[>if (proc_cnt)<]*/
+				/*[>intro(proc_cnt);<]*/
+			/*[>printf("cnt = %d\n", proc_cnt);<]*/
+		/*}*/
 		print_system();
 		free_conf(&g_sh);
 	}
