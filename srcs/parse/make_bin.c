@@ -8,6 +8,7 @@ char	*find_bin(char **path)
 
 	i = -1;
 	fd = 0;
+	ret = NULL;
 	if (!path)
 		return (NULL);
 	while (path[++i])

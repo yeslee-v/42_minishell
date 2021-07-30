@@ -76,6 +76,7 @@ void	blt_intro(t_process *proc_lst)
 	init_blt(&blt);
 	set_lower(proc->cmd, &blt);
 	ret = is_blt(proc->cmd);
+	printf("ret = %d\n", ret);
 	if (ret)
 		run_builtin(proc, &blt, envl);
 	else if (!ret)

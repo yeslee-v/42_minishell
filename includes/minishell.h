@@ -119,6 +119,7 @@ void	init_status(t_status *node);
 char	*ft_strrdup(char *s, int st, int ed);
 char	*ft_strcjoin(char *s1, char *s2, char c);
 char	**split_env(char *env);
+char	*ft_str_change(char *str, char *target, char *src);
 
 /*
  *ft_is
