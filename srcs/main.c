@@ -2,7 +2,7 @@
 
 t_conf	g_sh;
 
-int	set_default_config(char **envp)
+int		set_default_config(char **envp)
 {
 	if (!envp)
 		return (0);
@@ -15,25 +15,37 @@ int	set_default_config(char **envp)
 
 int		main(int ac, char **av, char **envp)
 {
-	int	ret;
-	int	proc_cnt;
+	int			ret;
+	int			proc_cnt;
+	t_blt		blt;
 
 	if (!ac || !av)
 		return (-1);
 	set_default_config(envp);
 	while (1)
 	{
+		printf("exit_status is %d\n", g_sh.exit_status);
 		set_signal();
 		init_config();
 		set_prompt();
 		set_process();
 		ret = set_redirect(g_sh.process);
+		t_process *proc_lst = g_sh.process->head;
+		t_cmd *proc = proc_lst->cmd;
 		if (ret != 1)
 		{
 			analyze_cmd();
 			proc_cnt = get_process_count();
-			if (proc_cnt)
+			if (proc_cnt == 1 && is_blt(proc->cmd))
+			{
+				init_blt(&blt);
+				run_builtin(proc, &blt);
+				if (g_sh.exit_status)
+					print_status(g_sh.exit_status, proc);
+			}
+			else
 				pipe_intro(proc_cnt);
+
 		}
 		/*
 		 *print_system();
@@ -43,7 +55,7 @@ int		main(int ac, char **av, char **envp)
 }
 
 /*
- *ret == 1 인 경우 heredoc에서 인터럽트 발생 -> 바로 메모리 해제하고 
+ *ret == 1 인 경우 heredoc에서 인터럽트 발생 -> 바로 메모리 해제하고
  *다시 프롬포트 함수로이동-> g_sh.exit_status = 1
  *ret != 1 인경우 정상 실행 빌트인 or EXEC program
  */
@@ -60,6 +72,6 @@ int		main(int ac, char **av, char **envp)
  *tmp->args = echo
  *            hi
  *tmp->input_redir = a.txt = open = fd = 3 dup2(3, 0);
- *tmp->output_redir = append.txt = is_append> tmp->append = 1; open("append.txt", O_RDWR | O_CREAT | O_APPEND, 0644); = 4 dup2(4, 1)
- *fd1[1]
+ *tmp->output_redir = append.txt = is_append> tmp->append = 1;
+ *open("append.txt", O_RDWR | O_CREAT | O_APPEND, 0644); = 4 dup2(4, 1) fd1[1]
  */

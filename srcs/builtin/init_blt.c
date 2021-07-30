@@ -23,42 +23,38 @@ int				is_blt(char *cmd)
 	return (ret);
 }
 
-void			run_builtin(t_cmd *proc, t_blt *blt, t_lst *envl)
+void			run_builtin(t_cmd *proc, t_blt *blt)
 {
 	int	num;
-	int	ret;
 
-	ret = 0;
 	redir_init(proc);
 	num = is_blt(proc->cmd);
 	if (num == B_ECHO)
 		run_echo(proc->arg, blt);
 	else if (num == B_CD)
-		run_cd(proc->arg, blt, envl);
+		run_cd(proc->arg, blt);
 	else if (num == B_PWD)
-		run_pwd(envl);
+		run_pwd();
 	else if (num == B_EXPORT)
-		run_export(proc->arg, blt, envl);
+		run_export(proc->arg, blt);
 	else if (num == B_UNSET)
-		run_unset(proc->arg, blt, envl);
+		run_unset(proc->arg, blt);
 	else if (num == B_ENV)
-		run_env(0, envl);
-	else
-		ret = 127;
-	exit(ret);
+		run_env(0);
 }
 
-void			not_blt(t_cmd *proc, t_lst *envl)
+void			not_blt(t_cmd *proc)
 {
 	pid_t	pid;
 	int		status;
 	char	*path;
 
-	path = search_env_value("PATH", envl);
+	path = search_env_value("PATH", g_sh.env);
 	pid = fork();
 	if (pid > 0)
 	{
 		wait(&status);
+		print_status(WEXITSTATUS(status), proc);
 		exit(WEXITSTATUS(status));
 	}
 	else if (pid == 0)
@@ -68,7 +64,7 @@ void			not_blt(t_cmd *proc, t_lst *envl)
 	}
 }
 
-void	blt_intro(t_process *proc_lst)
+int	blt_intro(t_process *proc_lst)
 {
 	t_blt	blt;
 	t_lst	*envl;
@@ -81,7 +77,8 @@ void	blt_intro(t_process *proc_lst)
 	set_lower(proc->cmd, &blt);
 	ret = is_blt(proc->cmd);
 	if (ret)
-		run_builtin(proc, &blt, envl);
+		run_builtin(proc, &blt);
 	else if (!ret)
-		not_blt(proc, envl);
+		not_blt(proc);
+	return (ret);
 }

@@ -55,6 +55,10 @@
 # define ERR_TOKEN "BraveShell: syntax error near unexpected token"
 # define ERR_TOKEN_EOF "BraveShell: syntax error: unexpected end of file"
 
+# define BS "Braveshell"
+# define CNF "command not found"
+# define NFD "No such file or directory"
+
 # define ERRNO_CMD_NOT_FOUND 127
 # define ERRNO_UNEXPECTED_TOKEN 258
 #endif

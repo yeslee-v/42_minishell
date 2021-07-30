@@ -102,6 +102,7 @@ void	make_redir(t_lst *redir, char type, char *arg);
  *cursor
  */
 char	**split_arg(char *arg);
+
 /*
  *init
  */
@@ -164,6 +165,7 @@ void	print_cmd(t_cmd *node);
 void	set_env(char **envp);
 void	set_prompt(void);
 void	set_process(void);
+
 /*
  *exit
  */
@@ -187,17 +189,18 @@ void	run_execve(t_cmd *proc);
 /*
  * builtin
  */
-void	blt_intro(t_process *proc_lst);
+int		blt_intro(t_process *proc_lst);
 void	init_blt(t_blt *blt);
 void	set_lower(char *cmd, t_blt *blt);
 int		is_blt(char *cmd);
-void	not_blt(t_cmd *proc, t_lst *envl);
+void	run_builtin(t_cmd *proc, t_blt *blt);
+void	not_blt(t_cmd *proc);
 void	run_echo(char *b_args, t_blt *blt);
-void	run_cd(char *b_args, t_blt *blt, t_lst *envl);
-void	run_env(int xprt_flag, t_lst *envl);
-void	run_export(char *b_args, t_blt *blt, t_lst *envl);
-void	run_pwd(t_lst *envl);
-void	run_unset(char *b_args, t_blt *blt, t_lst *envl);
+void	run_cd(char *b_args, t_blt *blt);
+void	run_env(int xprt_flag);
+void	run_export(char *b_args, t_blt *blt);
+void	run_pwd(void);
+void	run_unset(char *b_args, t_blt *blt);
 
 /*
  *search_env
@@ -209,5 +212,10 @@ t_env	*change_env_value(char *key, char *new_value, t_lst *env);
 
 char	*unclosed_pipe(void);
 char	**ft_double_strjoin(char **dst, char *src);
+
+/*
+ *exit_status
+ */
+void	print_status(int num, t_cmd *proc);
 
 #endif

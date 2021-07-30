@@ -118,7 +118,7 @@ typedef struct			s_conf
 {
 	char				*cmd;
 	char				**envp;
-	int					exit_status; // init -> 0
+	int					exit_status;
 	t_lst				*env;
 	t_lexer				*lexer;
 	t_lst				*token;
