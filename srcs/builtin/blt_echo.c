@@ -99,7 +99,7 @@ void	run_echo(char *b_args, t_blt *blt)
 	if (b_args == NULL)
 	{
 		printf("\n");
-		return ;
+		exit(0);
 	}
 	tmp = ft_split(b_args, ' ');
 	i = is_up_flag(tmp, blt);

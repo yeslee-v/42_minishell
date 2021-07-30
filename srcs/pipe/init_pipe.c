@@ -1,4 +1,5 @@
 #include "../../includes/minishell.h"
+#include <sys/wait.h>
 
 extern t_conf	g_sh;
 
@@ -35,6 +36,8 @@ void	pipe_intro(int cnt)
 		if (g_sh.pipe.pid[i] > 0)
 		{
 			wait(&status);
+			g_sh.exit_status = WEXITSTATUS(status);
+			printf("exit_code is %d\n", g_sh.exit_status);
 			if (!(WIFEXITED(status)))
 				return ;
 			if (i > 0)

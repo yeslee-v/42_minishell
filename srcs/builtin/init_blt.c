@@ -1,4 +1,5 @@
 #include "../../includes/minishell.h"
+#include <sys/wait.h>
 
 extern t_conf	g_sh;
 
@@ -25,8 +26,9 @@ int				is_blt(char *cmd)
 void			run_builtin(t_cmd *proc, t_blt *blt, t_lst *envl)
 {
 	int	num;
+	int	ret;
 
-	printf("cmd pid is %d\n", getpid());
+	ret = 0;
 	redir_init(proc);
 	num = is_blt(proc->cmd);
 	if (num == B_ECHO)
@@ -41,7 +43,9 @@ void			run_builtin(t_cmd *proc, t_blt *blt, t_lst *envl)
 		run_unset(proc->arg, blt, envl);
 	else if (num == B_ENV)
 		run_env(0, envl);
-	exit(0);
+	else
+		ret = 127;
+	exit(ret);
 }
 
 void			not_blt(t_cmd *proc, t_lst *envl)
@@ -55,9 +59,7 @@ void			not_blt(t_cmd *proc, t_lst *envl)
 	if (pid > 0)
 	{
 		wait(&status);
-		if (!(WIFEXITED(status)))
-			exit (1);
-		exit (0);
+		exit(WEXITSTATUS(status));
 	}
 	else if (pid == 0)
 	{
@@ -78,7 +80,6 @@ void	blt_intro(t_process *proc_lst)
 	init_blt(&blt);
 	set_lower(proc->cmd, &blt);
 	ret = is_blt(proc->cmd);
-	printf("ret = %d\n", ret);
 	if (ret)
 		run_builtin(proc, &blt, envl);
 	else if (!ret)

@@ -13,8 +13,10 @@ void	relative_path(char *b_args, char buf[512], t_lst *envl)
 		b_args = abs_pwd;
 	}
 	ret = chdir(b_args);
-	printf("ret = %d\nb_args = %s\n", ret, b_args);
-	printf("getcdwd = %s\n", getcwd(buf, 512));
+	/*
+	 *printf("ret = %d\nb_args = %s\n", ret, b_args);
+	 *printf("getcdwd = %s\n", getcwd(buf, 512));
+	 */
 	if (ret == -1)
 		printf("%s\n", strerror(errno));
 	else if (!(ret))
