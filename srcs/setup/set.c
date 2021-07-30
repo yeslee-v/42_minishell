@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/27 22:27:11 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/30 21:16:29 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	set_prompt(void)
 		exit_shell(1);
 }
 
-void	set_process(void)
+int	set_process(void)
 {
 	t_token	*tmp;
 	int		ret;
@@ -61,19 +61,25 @@ void	set_process(void)
 	tmp = NULL;
 	g_sh.lexer = lexer(g_sh.cmd);
 	if (g_sh.lexer->err == 1)
-		exit_shell(0);
+	{
+		ft_putstr_fd("BraveShell: syntax error unexpected token near `quote\'", 2);
+		ft_putstr_fd("\n", 2);
+		g_sh.exit_status = 258;
+		return (1);
+	}
 	ret = tokenizer(g_sh.lexer->lex);
 	while (ret == 2)
 		ret = set_cmd_after_pipe();
 	add_history(g_sh.cmd);
 	rl_redisplay();
 	if (ret == -1)
-		return ;
+		return (1);
 	tmp = g_sh.token->head;
 	while (tmp)
 		tmp = parser(tmp);
 	if (tmp != NULL)
 		parser(tmp);
+	return (0);
 }
 
 void	set_env(char **envp)

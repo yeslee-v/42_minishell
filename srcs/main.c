@@ -13,6 +13,32 @@ int	set_default_config(char **envp)
 	return (1);
 }
 
+void test_exec(t_process *node)
+{
+	int pid;
+	int status;
+	t_cmd *tmp;
+
+	tmp = node->cmd;
+	pid = fork();
+	if (pid > 0)
+	{
+		wait(&status);
+		if (!(WIFEXITED(status)))
+			exit(1);
+	}
+	if (pid == 0)
+	{
+		execve(tmp->bin, tmp->args, g_sh.envp);
+		if (errno != 0)
+		{
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
+			exit(0);
+		}
+	}
+}
+
 int		main(int ac, char **av, char **envp)
 {
 	int	ret;
@@ -26,20 +52,22 @@ int		main(int ac, char **av, char **envp)
 		set_signal();
 		init_config();
 		set_prompt();
-		set_process();
-		ret = set_redirect(g_sh.process);
+		ret = set_process();
 		if (ret != 1)
 		{
-			analyze_cmd();
-			proc_cnt = get_process_count();
-			if (proc_cnt)
-				pipe_intro(proc_cnt)
-			/*if (proc_cnt)*/
-				/*pipe_intro(proc_cnt);*/
+			ret = set_redirect(g_sh.process);
+			if (ret != 1)
+			{
+				analyze_cmd();
+				proc_cnt = get_process_count();
+				/*[>if (proc_cnt)<]*/
+					/*[>pipe_intro(proc_cnt);<]*/
+				/*[>if (proc_cnt)<]*/
+					/*[>pipe_intro(proc_cnt);<]*/
+				/*test_exec(g_sh.process->head);*/
+			}
 		}
-		/*
-		 *print_system();
-		 */
+		print_system();
 		free_conf(&g_sh);
 	}
 }
