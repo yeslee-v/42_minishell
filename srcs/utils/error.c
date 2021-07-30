@@ -6,7 +6,7 @@
 /*   By: jaekpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 14:53:13 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/28 21:55:46 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/29 22:59:36 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	error_with_message(char *msg, int exit_status)
 
 void	exit_shell(int num)
 {
-	free(g_sh.cmd);
-	free_lexer(g_sh.lexer);
-	free_token(g_sh.token);
-	free_process(g_sh.process);
-	printf("exit\n");
+	/*free(g_sh.cmd);*/
+	/*free_lexer(g_sh.lexer);*/
+	/*free_token(g_sh.token);*/
+	/*free_process(g_sh.process);*/
+	/*printf("exit\n");*/
 	exit(num);
 }
