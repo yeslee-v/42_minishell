@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:17:44 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/31 14:15:09 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/31 17:56:26 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,12 @@ static void	analyze_space(t_lexer *lexer, int i)
 	if (!lexer)
 		return ;
 	if (lexer->s_quote > TRUE)
-		lexer->lex[i] = 'c';
+	{
+		if (lexer->s_quote == 68)
+			lexer->lex[i] = 'd';
+		else if (lexer->s_quote == 81)
+			lexer->lex[i] = 'q';
+	}
 	else if (lexer->s_quote == FALSE)
 		lexer->lex[i] = 's';
 }
@@ -40,8 +45,10 @@ static void	analyze_quote(t_lexer *lexer, char c, int i)
 		lexer->s_quote = 0;
 		lexer->e_quote = 0;
 	}
-	else
-		lexer->lex[i] = 'c';
+	else if (lexer->s_quote == 68)
+		lexer->lex[i] = 'd';
+	else if (lexer->s_quote == 81)
+		lexer->lex[i] = 'q';
 }
 
 static void	analyze_operator(char *lex, int ret, int *i)
@@ -74,7 +81,14 @@ void	analyze_command(t_lexer *lexer, char *cmd, int *i)
 	int	ret;
 
 	if (ft_isalnum(cmd[*i]))
-		lexer->lex[*i] = 'c';
+	{
+		if (lexer->s_quote == 68)
+			lexer->lex[*i] = 'd';
+		else if (lexer->s_quote == 81)
+			lexer->lex[*i] = 'q';
+		else
+			lexer->lex[*i] = 'c';
+	}
 	else if (lexer->s_quote == 0 && ft_isquote(cmd[*i]))
 	{
 		lexer->s_quote = ft_isquote(cmd[*i]);
@@ -95,7 +109,14 @@ void	analyze_command(t_lexer *lexer, char *cmd, int *i)
 		analyze_operator(lexer->lex, ret, i);
 	}	
 	else
-		lexer->lex[*i] = 'c';
+	{
+		if (lexer->s_quote == 68)
+			lexer->lex[*i] = 'd';
+		else if (lexer->s_quote == 81)
+			lexer->lex[*i] = 'q';
+		else
+			lexer->lex[*i] = 'c';
+	}
 }
 
 t_lexer	*lexer(char *cmd)

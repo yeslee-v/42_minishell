@@ -8,6 +8,8 @@ void	free_conf(t_conf *conf)
 		return ;
 	if (conf->cmd)
 		free(conf->cmd);
+	if (conf->env)
+		free_env(conf->env);
 	if (conf->lexer)
 		free_lexer(conf->lexer);
 	if (conf->token)

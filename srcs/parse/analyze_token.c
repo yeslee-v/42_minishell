@@ -53,10 +53,10 @@ void	get_target_pos(char *str, char *target, int *st, int *ed)
 {
 	int i;
 
-	i = -1;
+	i = *st;
 	if (!str || !target)
 		return ;
-	while (str[++i])
+	while (str[i])
 	{
 		if (str[i] == target[0])
 		{
@@ -67,8 +67,11 @@ void	get_target_pos(char *str, char *target, int *st, int *ed)
 				return ;
 			}
 		}
+		i++;
 	}
 }
+
+
 
 char	*ft_strstr(char *str, char *src)
 {
@@ -88,18 +91,13 @@ char	*ft_strstr(char *str, char *src)
 	return (NULL);
 }
 
-char	*ft_str_change(char *str, char *target, char *src)
+char	*ft_str_change(char *str, char *src, int st, int ed)
 {
 	char *ret;
-	int st;
-	int ed;
 
-	if (!str || !target || !src)
+	if (!str || !src || st < 0 || ed < 0)
 		return (NULL);
 	ret = NULL;
-	st = -1;
-	ed = -1;
-	get_target_pos(str, target, &st, &ed);
 	if (st == -1 && ed == -1)
 		return (NULL);
 	if (st == 0)
@@ -117,47 +115,29 @@ char	*ft_str_change(char *str, char *target, char *src)
 	return (ret);
 }
 
-static void	convert_exit_status(t_token *tok)
-{
-	char *exit_status;
+/*static void	convert_exit_status(t_token *tok)*/
+/*{*/
+	/*int i;*/
+	/*t_lexer *tmp;*/
+	/*char *exit_status;*/
 
-	if (!tok)
-		return ;
-	exit_status = ft_itoa(g_sh.exit_status);
-	while (ft_strstr(tok->token, "$?"))
-		tok->token = ft_str_change(tok->token, "$?", exit_status);
-	free(exit_status);
-}
+	/*tmp = lexer(tok->token);*/
+	/*i = -1;*/
+	/*if (!tok)*/
+		/*return ;*/
+	/*exit_status = ft_itoa(g_sh.exit_status);*/
+	/*while (tok->token[++i])*/
+	/*{*/
+		/*if (tok->token[i] == '$' && tmp->lex[i] != 'q')*/
+		/*{*/
+				
+		/*}*/
+	/*}*/
+	/*tok->token = ft_str_change(tok->token, "$?", exit_status);*/
+	/*free(exit_status);*/
+/*}*/
 
-char	*get_env_in_cmd(char *str)
-{
-	char *ret;
-	int st;
-	int i;
-	int j;
 
-	ret = NULL;
-	st = -1;
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '$')
-		{
-			j = i;
-			st = i;
-			while (str[++j])
-			{
-				if ((ft_isalpha(str[j])) == 0)
-					break ;
-			}
-			if (st == j || st == j - 1)
-				return (NULL);
-			else
-				return (ft_strrdup(str, st, j - 1));
-		}
-	}
-	return (NULL);
-}
 
 int	check_env_in_cmd(char *str)
 {
@@ -188,27 +168,36 @@ int	check_env_in_cmd(char *str)
 	}
 	return (0);
 }
-static void	convert_env(t_token *tok)
-{
-	int cnt;
-	t_env *node;
-	char *key;
-	char *value;
+/*static void	convert_env(t_token *tok)*/
+/*{*/
+	/*t_env *node;*/
+	/*[>char *pos;<]*/
+	/*[>char *value;<]*/
 
+	/*node = g_sh.env->head;*/
+	/*set_env_null(g_sh.token);*/
+	/*while (tok)*/
+	/*{*/
+		/*printf("token = %s\n", tok->token);*/
+		/*tok = tok->next;*/
+	/*}*/
+/*}*/
+
+int get_arg_cnt(char *lex)
+{
+	int i;
+	int cnt;
+
+	i = -1;
 	cnt = 0;
-	node = g_sh.env->head;
-	while (node)
+	if (!lex)
+		return (-1);
+	while (lex[++i])
 	{
-		key = ft_strjoin(ft_strdup("$"), node->key);
-		value = node->value;
-		while (ft_strstr(tok->token, key))
-		{
-			tok->token = ft_str_change(tok->token, key, value);
+		if (ft_strchr("dqsc", lex[i]))
 			cnt++;
-		}
-		free(key);
-		node = node->next;
 	}
+	return (cnt);
 }
 
 int get_char_cnt(char *lex)
@@ -222,13 +211,13 @@ int get_char_cnt(char *lex)
 		return (-1);
 	while (lex[++i])
 	{
-		if (lex[i] == 'c')
+		if (ft_strchr("dqc", lex[i]))
 			cnt++;
 	}
 	return (cnt);
 }
 
-char *strdup_only_char(char *lex, t_token *node)
+char *token_dup_only_char(char *lex, t_token *node)
 {
 	char *ret;
 	int i;
@@ -243,7 +232,7 @@ char *strdup_only_char(char *lex, t_token *node)
 	ret = malloc(sizeof(char) * (size + 1));
 	while (lex[++i])
 	{
-		if (lex[i] == 'c')
+		if (ft_strchr("dqc", lex[i]))
 		{
 			ret[j] = node->token[i];
 			j++;
@@ -286,7 +275,7 @@ void remove_quote(t_lst *token)
 		tmp = lexer(node->token);
 		if ((check_quote_exist(tmp->lex)) == 1)
 		{
-			buf = strdup_only_char(tmp->lex, node);
+			buf = token_dup_only_char(tmp->lex, node);
 			free(node->token);
 			node->token = ft_strdup(buf);
 			free(buf);
@@ -297,12 +286,140 @@ void remove_quote(t_lst *token)
 	}
 }
 
+char *strdup_only_char(char *lex, char *str)
+{
+	char *ret;
+	int i;
+	int j;
+	int size;
+
+	i = -1;
+	j = 0;
+	if (!lex || !str)
+		return (NULL);
+	size = get_arg_cnt(lex);
+	ret = malloc(sizeof(char) * (size + 1));
+	while (lex[++i])
+	{
+		if (ft_strchr("dqsc", lex[i]))
+		{
+			ret[j] = str[i];
+			j++;
+		}
+	}
+	ret[size] = '\0';
+	return (ret);
+}
+
+void remove_arg_quote(char **arg)
+{
+	char *buf;
+	t_lexer *tmp;
+
+	tmp = lexer(*arg);
+	buf = NULL;
+	if ((check_quote_exist(tmp->lex)) == 1)
+	{
+		buf = strdup_only_char(tmp->lex, *arg);
+		free(*arg);
+		*arg = ft_strdup(buf);
+		free(buf);
+	}
+	free_lexer(tmp);
+	tmp = NULL;
+}
+
+char	*get_env_in_cmd(char *str, char *lex)
+{
+	char *ret;
+	int st;
+	int i;
+	int j;
+
+	ret = NULL;
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '$' && lex[i] != 'q')
+		{
+			j = i;
+			st = i;
+			while (str[++j])
+			{
+				if ((ft_isalpha(str[j])) == 0)
+					break ;
+			}
+			if (st == j || st == j - 1)
+				return (NULL);
+			else
+				return (ft_strrdup(str, st, j - 1));
+		}
+	}
+	return (NULL);
+}
+
+static int convert_exit_status(t_token *tok, t_lexer *tmp, int i)
+{
+	int st;
+	char *exit_status;
+
+	exit_status = ft_itoa(g_sh.exit_status);
+	st = i;
+	tok->token = ft_str_change(tok->token, exit_status, st, st + 1);
+	free_lexer(tmp);
+	free(exit_status);
+	return (1);
+}
+
+static int	convert_env(t_token *tok, t_lexer *tmp, int i)
+{
+	char *env;
+	char *value;
+	int st;
+
+	st = i;
+	env = get_env_in_cmd(&(tok->token[i]), &(tmp->lex[i]));
+	if (env != NULL)
+	{
+		value = search_env_value(env + 1, g_sh.env);
+		if (value != NULL)
+			tok->token = ft_str_change(tok->token, value, st, st + ft_strlen(env) - 1);
+		else if (value == NULL)
+			tok->token = ft_str_change(tok->token, "", st, st + ft_strlen(env) - 1);
+	}
+	if (env)
+		free(env);
+	free_lexer(tmp);
+	return (1);
+}
+
+static int convert_meta_char(t_token *tok)
+{
+	t_lexer *tmp;
+	int i;
+
+	i = -1;	
+	if (!tok)
+		return (-1);
+	tmp = lexer(tok->token);
+	while (tok->token[++i])
+	{
+		if (tok->token[i] == '$' && tmp->lex[i] != 'q')
+		{
+			if (tok->token[i + 1] != '\0' && tok->token[i + 1] == '?')
+				return (convert_exit_status(tok, tmp, i));
+			else
+				return (convert_env(tok, tmp, i));
+		}
+	}
+	free_lexer(tmp);
+	return (0);
+}
+
 static void	set_meta_character(t_lst *token)
 {
 	t_token *tmp;
-	/*char *exit_status;*/
 
-	/*exit_status = ft_itoa(g_sh.exit_status);*/
 	tmp = token->head;
 	while (tmp)
 	{
@@ -311,36 +428,8 @@ static void	set_meta_character(t_lst *token)
 			free(tmp->token);
 			tmp->token = ft_strdup(search_env_value("HOME", g_sh.env));
 		}
-		else if (ft_strstr(tmp->token, "$?"))
-			convert_exit_status(tmp);
-		else if (ft_strchr(tmp->token, '$'))
-			convert_env(tmp);
+		while ((convert_meta_char(tmp)) == 1);
 		tmp = tmp->next;
-	}
-	/*free(exit_status);*/
-}
-
-void	set_env_null(t_lst *token)
-{
-	t_token *node;
-	char *tmp;
-
-	tmp = NULL;
-	node = token->head;
-	while (node)
-	{
-		while (1)
-		{
-			tmp = get_env_in_cmd(node->token);
-			if (tmp != NULL)
-			{
-				node->token = ft_str_change(node->token, tmp, "");
-				free(tmp);
-			}
-			if (tmp == NULL)
-				break ;
-		}
-		node = node->next;
 	}
 }
 
@@ -349,6 +438,4 @@ void	analyze_token(t_lst *token)
 	set_type(token);
 	set_index(token);
 	set_meta_character(token);
-	set_env_null(token);
-	remove_quote(token);
 }
