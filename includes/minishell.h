@@ -120,7 +120,7 @@ void	init_status(t_status *node);
 char	*ft_strrdup(char *s, int st, int ed);
 char	*ft_strcjoin(char *s1, char *s2, char c);
 char	**split_env(char *env);
-char	*ft_str_change(char *str, char *target, char *src);
+char	*ft_str_change(char *str, char *src, int st, int ed);
 
 /*
  *ft_is
@@ -179,6 +179,7 @@ void	exit_shell(int num);
 int		get_redir_fd(char *cmd);
 void	delete_env_node(char *key, t_lst *env);
 int		get_process_count(void);
+void remove_arg_quote(char **arg);
 
 /*
  *pipe

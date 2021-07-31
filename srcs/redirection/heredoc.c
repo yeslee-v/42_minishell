@@ -82,11 +82,6 @@ int	exec_heredoc(char *delimeter, int hdoc_fd)
 		ret = write_text(fd, hdoc_fd);
 	else if (pid == 0)
 		receive_text(fd, delimeter);
-	else
-	{
-		printf("fork error in second fork\n");
-		exit(0);
-	}
 	g_sh.exit_status = ret;
 	return (ret);
 }

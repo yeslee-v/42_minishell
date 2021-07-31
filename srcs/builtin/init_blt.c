@@ -3,7 +3,7 @@
 
 extern t_conf	g_sh;
 
-int				is_blt(char *cmd)
+int	is_blt(char *cmd)
 {
 	int	ret;
 
@@ -25,7 +25,7 @@ int				is_blt(char *cmd)
 	return (ret);
 }
 
-void			run_builtin(t_cmd *proc, t_blt *blt)
+void	run_builtin(t_cmd *proc, t_blt *blt)
 {
 	int	num;
 
@@ -45,7 +45,7 @@ void			run_builtin(t_cmd *proc, t_blt *blt)
 		run_env(0);
 }
 
-void			not_blt(t_cmd *proc)
+void	not_blt(t_cmd *proc)
 {
 	pid_t	pid;
 	int		status;

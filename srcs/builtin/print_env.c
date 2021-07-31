@@ -16,7 +16,7 @@ t_env	*search_env_node(char *key, t_lst *env)
 	return (NULL);
 }
 
-char *search_env_value(char *key, t_lst *env)
+char	*search_env_value(char *key, t_lst *env)
 {
 	t_env	*node;
 

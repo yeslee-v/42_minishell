@@ -25,11 +25,8 @@ void	append_redir(t_cmd *proc)
 	dup_close(fd, WRITE);
 }
 
-int		redir_init(t_cmd *proc)
+int	redir_init(t_cmd *proc)
 {
-	/*
-	 *printf("redir_init's proc is %s\n", proc->input_redir);
-	 */
 	if (proc->input_redir)
 		in_redir(proc);
 	if (proc->output_redir)

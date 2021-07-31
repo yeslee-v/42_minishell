@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
 void	relative_path(char *b_args, char buf[512])
 {
@@ -42,9 +42,6 @@ void	run_cd(char *b_args, t_blt *blt)
 		if (ret == -1)
 		{
 			printf("here\n");
-			/*
-			 *printf("%s\n", strerror(errno));
-			 */
 		}
 		getcwd(buf, 512);
 		change_env_value("PWD", buf, g_sh.env);

@@ -2,6 +2,7 @@
 
 void	free_env(t_lst *env)
 {
+	t_env	*node;
 	t_env	*tmp;
 
 	if (!env)
@@ -13,7 +14,9 @@ void	free_env(t_lst *env)
 			free(tmp->key);
 		if (tmp->value != NULL)
 			free(tmp->value);
+		node = tmp;
 		tmp = tmp->next;
+		free(node);
 	}
 	free(env);
 }
@@ -71,6 +74,22 @@ void	free_control(t_control *con)
 	free(con);
 }
 
+void	remove_hdoc(int i)
+{
+	char *hdoc;
+	char *num;
+	char *file;
+
+	hdoc = ft_strdup(".hdoc");
+	num = ft_itoa(i);
+	file = ft_strcjoin(hdoc, num, '_');
+	unlink(file);
+	if (num)
+		free(num);
+	if (file)
+		free(file);
+}
+
 void	free_process(t_lst *process)
 {
 	t_process	*node;
@@ -81,6 +100,7 @@ void	free_process(t_lst *process)
 	tmp = process->head;
 	while (tmp)
 	{
+		remove_hdoc(tmp->i);
 		if (tmp->cmd)
 			free_cmd(tmp->cmd);
 		if (tmp->con)

@@ -36,16 +36,7 @@ void	is_env(char *tmp)
 			printf("%s", e_val);
 	}
 	else
-	{
-		t_env *env = g_sh.env->head;
-		while (env)
-		{
-			if (ft_strstr(env->key, tmp))
-				printf("this contains $\n");
-			env = env->next;
-		}
-		printf("|%s|", tmp);
-	}
+		printf("%s", tmp);
 }
 
 void	do_echo(int i, char **tmp, t_blt *blt)

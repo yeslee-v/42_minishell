@@ -31,7 +31,7 @@ J_SRCS				=	main.c \
 						ft_utils/ft_strrdup.c parse/analyze_syntax.c parse/analyze_token.c parse/unclosed_pipe.c \
 						utils/print_utils.c parse/analyze_command.c parse/make_bin.c
 Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
-						builtin/blt_env.c builtin/blt_exit.c builtin/blt_pwd.c \
+						builtin/blt_env.c  builtin/blt_pwd.c \
 						builtin/blt_export.c builtin/blt_unset.c pipe/run.c \
 						builtin/print_env.c pipe/init_pipe.c \
 						utils/blt_utils.c redirection/run_redir.c \
@@ -53,7 +53,7 @@ LIBFT_INCS			=	./libs/includes/libft.h
 #	Compile settings
 CC					=	gcc
 RM					=	rm -rf
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	-Wall -Wextra -Werror# -g -fsanitize=address
 DFLAGS				= 	-Wall -Wextra -Werror -g -fsanitize=address
 HEADER_FLAG			=	-I$(INCS_DIR) -I$(LIBFT_INCS) -I$(READLINE)/include
 LIB_FLAG			= 	-L$(LIBFT_DIR) -lft -L$(READLINE)/lib -lreadline -lncurses

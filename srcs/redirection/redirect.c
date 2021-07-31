@@ -20,7 +20,6 @@ int	print_redir_error(char *file, char *err_msg)
 
 int	set_output_redir_node(t_redirect *out)
 {
-	printf("output\n");
 	if (out->type == 'O')
 		out->fd = open(out->arg, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else if (out->type == 'A')

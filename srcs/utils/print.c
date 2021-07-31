@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 18:54:05 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/31 12:32:45 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/31 15:36:08 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	print_cmd(t_cmd *node)
 	if (!node)
 		printf("커맨드가 존재하지 않습니다.\n");
 	printf(B_PURPLE"> 분할된 커맨드\n"RESET);
-	printf(GREEN"  o [cmd] = %s [arg] = %s\n"RESET, node->cmd, node->arg);
+	printf(GREEN"  o [cmd] = [%s] [arg] = [%s]\n"RESET, node->cmd, node->arg);
 	printf(B_PURPLE"> execve() 함수용 커맨드 배열\n"RESET);
 	printf(BLUE);
 	print_double_str(node->args);
