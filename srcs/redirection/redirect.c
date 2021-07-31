@@ -130,13 +130,13 @@ int	set_redirect(t_lst *process)
 	if (ret.hdoc == 1)
 		return (1);
 	pipe = process->head;
-	while (pipe)
-	{
-		ret.result = set_all_redir_lst(pipe);
-		g_sh.exit_status = ret.result;
-		pipe = pipe->next;
-	}
-	if (ret.result == 1)
-		return (1);
+	/*while (pipe)*/
+	/*{*/
+		/*ret.result = set_all_redir_lst(pipe);*/
+		/*g_sh.exit_status = ret.result;*/
+		/*pipe = pipe->next;*/
+	/*}*/
+	/*if (ret.result == 1)*/
+		/*return (1);*/
 	return (ret.result);
 }
