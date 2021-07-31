@@ -13,11 +13,7 @@ void			set_lower(char *cmd, t_blt *blt)
 	int		i;
 
 	if (cmd == NULL)
-	{
-		printf("cmd is null in set_lower\n");
-		return ;
-
-	}
+		exit (0);
 	i = 0;
 	while (cmd[i])
 	{
