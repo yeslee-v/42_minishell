@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/02 19:37:36 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/29 00:34:07 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/31 13:59:19 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	save_process(t_cmd *cmd, t_control *con)
 	node = malloc(sizeof(t_process));
 	node->cmd = cmd;
 	node->con = con;
+	node->redir_err = 0;
 	node->next = NULL;
 	node->prev = NULL;
 	if (g_sh.process->head == NULL && g_sh.process->tail == NULL)

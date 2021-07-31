@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:28:05 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/27 12:28:35 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/30 17:21:16 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ static int	check_lex(t_tool *tool, char *lex)
 {
 	if (lex[tool->i + 1] == 's' || lex[tool->i + 1] == '\0')
 		return (1);
-	else if (tool->is_quote == 0 && lex[tool->st] != lex[tool->i + 1])
+	else if (ft_strchr("HIOAP", lex[tool->i + 1]))
 		return (1);
+	/*else if (tool->is_quote == 1 && */
+			/*tool->i != tool->st && lex[tool->st] == lex[tool->i])*/
+		/*return (1);*/
 	return (0);
 }
 
@@ -58,6 +61,10 @@ int	tokenizer(char *lex)
 			start(&tool, lex);
 		if (tool.st >= 0 && ft_strchr("AH", lex[tool.st]))
 			append_redir_or_hdoc(&tool);
+		else if (tool.st >= 0 && lex[tool.st] == 'O')
+			pipe_token(&tool);
+		else if (tool.st >= 0 && lex[tool.st] == 'I')
+			pipe_token(&tool);
 		else if (tool.st >= 0 && lex[tool.st] == 'P')
 			pipe_token(&tool);
 		else if (tool.st >= 0)

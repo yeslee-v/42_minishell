@@ -164,7 +164,9 @@ void	print_cmd(t_cmd *node);
  */
 void	set_env(char **envp);
 void	set_prompt(void);
-void	set_process(void);
+int		set_process(void);
+void	set_env_null(t_lst *token);
+void	remove_quote(t_lst *token);
 
 /*
  *exit

@@ -129,20 +129,170 @@ static void	convert_exit_status(t_token *tok)
 	free(exit_status);
 }
 
+char	*get_env_in_cmd(char *str)
+{
+	char *ret;
+	int st;
+	int i;
+	int j;
+
+	ret = NULL;
+	st = -1;
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '$')
+		{
+			j = i;
+			st = i;
+			while (str[++j])
+			{
+				if ((ft_isalpha(str[j])) == 0)
+					break ;
+			}
+			if (st == j || st == j - 1)
+				return (NULL);
+			else
+				return (ft_strrdup(str, st, j - 1));
+		}
+	}
+	return (NULL);
+}
+
+int	check_env_in_cmd(char *str)
+{
+	char *ret;
+	int st;
+	int i;
+	int j;
+
+	ret = NULL;
+	st = -1;
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '$')
+		{
+			j = i;
+			st = i;
+			while (str[++j])
+			{
+				if ((ft_isalpha(str[j])) == 0)
+					break ;
+			}
+			if ((st == j || st == j - 1) && str[j] != '\0')
+				return (0);
+			else
+				return (1);
+		}
+	}
+	return (0);
+}
 static void	convert_env(t_token *tok)
 {
+	int cnt;
 	t_env *node;
 	char *key;
 	char *value;
 
+	cnt = 0;
 	node = g_sh.env->head;
 	while (node)
 	{
 		key = ft_strjoin(ft_strdup("$"), node->key);
 		value = node->value;
 		while (ft_strstr(tok->token, key))
+		{
 			tok->token = ft_str_change(tok->token, key, value);
+			cnt++;
+		}
 		free(key);
+		node = node->next;
+	}
+}
+
+int get_char_cnt(char *lex)
+{
+	int i;
+	int cnt;
+
+	i = -1;
+	cnt = 0;
+	if (!lex)
+		return (-1);
+	while (lex[++i])
+	{
+		if (lex[i] == 'c')
+			cnt++;
+	}
+	return (cnt);
+}
+
+char *strdup_only_char(char *lex, t_token *node)
+{
+	char *ret;
+	int i;
+	int j;
+	int size;
+
+	i = -1;
+	j = 0;
+	if (!lex || !node)
+		return (NULL);
+	size = get_char_cnt(lex);
+	ret = malloc(sizeof(char) * (size + 1));
+	while (lex[++i])
+	{
+		if (lex[i] == 'c')
+		{
+			ret[j] = node->token[i];
+			j++;
+		}
+	}
+	ret[size] = '\0';
+	return (ret);
+}
+
+int	check_quote_exist(char *lex)
+{
+	int i;
+
+	i = 0;
+	if (!lex)
+		return (-1);
+	while (lex[i])
+	{
+		if (ft_strchr("DQ", lex[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void remove_quote(t_lst *token)
+{
+	t_token *node;
+	t_lexer *tmp;
+	char *buf;
+	int i;
+
+	i = -1;
+	buf = NULL;
+	if (!token)
+		return ;
+	node = token->head;
+	while (node)
+	{
+		tmp = lexer(node->token);
+		if ((check_quote_exist(tmp->lex)) == 1)
+		{
+			buf = strdup_only_char(tmp->lex, node);
+			free(node->token);
+			node->token = ft_strdup(buf);
+			free(buf);
+		}
+		free_lexer(tmp);
+		tmp = NULL;
 		node = node->next;
 	}
 }
@@ -170,9 +320,35 @@ static void	set_meta_character(t_lst *token)
 	/*free(exit_status);*/
 }
 
+void	set_env_null(t_lst *token)
+{
+	t_token *node;
+	char *tmp;
+
+	tmp = NULL;
+	node = token->head;
+	while (node)
+	{
+		while (1)
+		{
+			tmp = get_env_in_cmd(node->token);
+			if (tmp != NULL)
+			{
+				node->token = ft_str_change(node->token, tmp, "");
+				free(tmp);
+			}
+			if (tmp == NULL)
+				break ;
+		}
+		node = node->next;
+	}
+}
+
 void	analyze_token(t_lst *token)
 {
 	set_type(token);
 	set_index(token);
 	set_meta_character(token);
+	set_env_null(token);
+	remove_quote(token);
 }
