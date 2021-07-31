@@ -13,6 +13,7 @@ void	out_redir(t_cmd *proc)
 	int	fd;
 
 	fd = open(proc->output_redir, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	printf("fd is %d\n", fd);
 	dup_close(fd, WRITE);
 }
 
@@ -26,6 +27,9 @@ void	append_redir(t_cmd *proc)
 
 int		redir_init(t_cmd *proc)
 {
+	/*
+	 *printf("redir_init's proc is %s\n", proc->input_redir);
+	 */
 	if (proc->input_redir)
 		in_redir(proc);
 	if (proc->output_redir)
