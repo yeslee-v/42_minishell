@@ -329,6 +329,19 @@ void remove_arg_quote(char **arg)
 	tmp = NULL;
 }
 
+int ft_envchar(char c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	else if (c >= 'A' && c <= 'Z')
+		return (1);
+	else if (c == '_')
+		return (1);
+	else if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
 char	*get_env_in_cmd(char *str, char *lex)
 {
 	char *ret;
@@ -346,7 +359,7 @@ char	*get_env_in_cmd(char *str, char *lex)
 			st = i;
 			while (str[++j])
 			{
-				if ((ft_isalpha(str[j])) == 0)
+				if ((ft_envchar(str[j])) == 0)
 					break ;
 			}
 			if (st == j || st == j - 1)
@@ -393,6 +406,16 @@ static int	convert_env(t_token *tok, t_lexer *tmp, int i)
 	return (1);
 }
 
+static int convert_argv(t_token *tok, t_lexer *tmp, int i)
+{
+	int st;
+
+	st = i;
+	tok->token = ft_str_change(tok->token, "", st, st + 1);
+	free_lexer(tmp);
+	return (1);
+}
+
 static int convert_meta_char(t_token *tok)
 {
 	t_lexer *tmp;
@@ -408,6 +431,8 @@ static int convert_meta_char(t_token *tok)
 		{
 			if (tok->token[i + 1] != '\0' && tok->token[i + 1] == '?')
 				return (convert_exit_status(tok, tmp, i));
+			else if (tok->token[i + 1] != '\0' && ((ft_isnum(tok->token[i + 1])) == 1))
+				return (convert_argv(tok, tmp, i));
 			else
 				return (convert_env(tok, tmp, i));
 		}
@@ -418,17 +443,20 @@ static int convert_meta_char(t_token *tok)
 
 static void	set_meta_character(t_lst *token)
 {
+	int ret;
 	t_token *tmp;
 
 	tmp = token->head;
 	while (tmp)
 	{
+		ret = 1;
 		if ((ft_strcmp(tmp->token, "~")) == 0)
 		{
 			free(tmp->token);
 			tmp->token = ft_strdup(search_env_value("HOME", g_sh.env));
 		}
-		while ((convert_meta_char(tmp)) == 1);
+		while (ret == 1)
+			ret = convert_meta_char(tmp);
 		tmp = tmp->next;
 	}
 }
