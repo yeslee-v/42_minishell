@@ -11,26 +11,14 @@ void	get_redirect_file(t_lst *redir, t_cmd *tmp)
 	if (node && node->arg)
 	{
 		if (node->type == 'H')
-		{
 			tmp->input_redir = make_hdoc_file_name(tmp->i);
-			tmp->input_fd = open(tmp->input_redir, O_RDONLY);
-		}
 		else if (node->type == 'I')
-		{
 			tmp->input_redir = ft_strdup(node->arg);
-			tmp->input_fd = open(tmp->input_redir, O_RDONLY);
-		}
 		else if (ft_strchr("OA", node->type))
 		{
 			tmp->output_redir = ft_strdup(node->arg);
-			printf("o redir file name = %s\n", tmp->output_redir);
 			if (node->type == 'A')
-			{
 				tmp->append = 1;
-				/*tmp->output_fd = open(tmp->output_redir, O_RDWR | O_CREAT | O_APPEND, 0644);*/
-			}
-			/*else*/
-				/*tmp->output_fd = open(tmp->output_redir, O_RDWR | O_CREAT | O_TRUNC, 0644);*/
 		}
 	}
 }
@@ -54,6 +42,24 @@ void	parse_cmd(t_process *node, t_lst *env)
 	getcwd(tmp->dir, 2048);
 }
 
+void	remove_cmd_quote(t_cmd *node)
+{
+	int i;
+
+	i = -1;
+	if (!node)
+		return ;
+	if (node->cmd)
+		remove_arg_quote(&(node->cmd));
+	if (node->arg)
+		remove_arg_quote(&(node->arg));
+	if (node->args)
+	{
+		while (node->args[++i])
+			remove_arg_quote(&(node->args[i]));
+	}
+}
+
 void	analyze_cmd(void)
 {
 	t_process	*node;
@@ -64,6 +70,7 @@ void	analyze_cmd(void)
 	node = g_sh.process->head;
 	while (node)
 	{
+		remove_cmd_quote(node->cmd);
 		parse_cmd(node, g_sh.env);
 		node = node->next;
 	}

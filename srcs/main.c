@@ -8,9 +8,22 @@ int		set_default_config(char **envp)
 		return (0);
 	g_sh.envp = envp;
 	g_sh.exit_status = 0;
-	set_env(envp);
 	set_terminal();
 	return (1);
+}
+
+int set_minishell(char **envp)
+{
+	int ret;
+
+	ret = 0;
+	set_env(envp);
+	set_signal();
+	init_config();
+	set_prompt();
+	set_process();
+	ret = set_redirect(g_sh.process);
+	return (ret);
 }
 
 void test_exec(t_process *node)
@@ -43,36 +56,29 @@ int		main(int ac, char **av, char **envp)
 {
 	int			ret;
 	int			proc_cnt;
-	t_blt		blt;
+	/*t_blt		blt;*/
 
 	if (!ac || !av)
 		return (-1);
 	set_default_config(envp);
 	while (1)
 	{
-		/*
-		 *printf("exit_status is %d\n", g_sh.exit_status);
-		 */
-		set_signal();
-		init_config();
-		set_prompt();
-		set_process();
-		ret = set_redirect(g_sh.process);
-		t_process *proc_lst = g_sh.process->head;
-		t_cmd *proc = proc_lst->cmd;
+		ret = set_minishell(envp);
+		/*t_process *proc_lst = g_sh.process->head;*/
+		/*t_cmd *proc = proc_lst->cmd;*/
 		if (ret != 1)
 		{
 			analyze_cmd();
 			proc_cnt = get_process_count();
-			if (proc_cnt == 1 && is_blt(proc->cmd))
-			{
-				init_blt(&blt);
-				run_builtin(proc, &blt);
-				if (g_sh.exit_status)
-					print_status(g_sh.exit_status, proc);
-			}
-			else
-				pipe_intro(proc_cnt);
+			/*if (proc_cnt == 1 && is_blt(proc->cmd))*/
+			/*{*/
+				/*init_blt(&blt);*/
+				/*run_builtin(proc, &blt);*/
+				/*if (g_sh.exit_status)*/
+					/*print_status(g_sh.exit_status, proc);*/
+			/*}*/
+			/*else*/
+				/*pipe_intro(proc_cnt);*/
 		}
 		print_system();
 		free_conf(&g_sh);

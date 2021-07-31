@@ -17,7 +17,7 @@ t_token	*parse_token(t_token *tok, t_cmd *node, t_control *con)
 		node->cmd = ft_strdup(tok->token);
 		node->args = ft_double_strjoin(node->args, tok->token);
 	}
-	else if (tok->type == 'S')
+	else if (tok->type == 'S' && tok->token[0] != '\0')
 	{
 		node->arg = ft_strcjoin(node->arg, tok->token, ' ');
 		node->args = ft_double_strjoin(node->args, tok->token);
