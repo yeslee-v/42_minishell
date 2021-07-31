@@ -3,15 +3,15 @@
 
 extern t_conf	g_sh;
 
-void	dup_close(int fd, int fd_std)
+void			dup_close(int fd, int fd_std)
 {
 	dup2(fd, fd_std);
 	/*
-	 *close(fd);
-	 */
+		*close(fd);
+		*/
 }
 
-void	pipe_intro(int cnt)
+void			pipe_intro(int cnt)
 {
 	int			i;
 	int			status;
@@ -35,8 +35,11 @@ void	pipe_intro(int cnt)
 		g_sh.pipe.pid[i] = fork();
 		if (g_sh.pipe.pid[i] > 0)
 		{
+			printf("parents is %d\n", getpid());
 			wait(&status);
 			g_sh.exit_status = WEXITSTATUS(status);
+			if (g_sh.exit_status)
+				print_status(WEXITSTATUS(status), proc);
 			if (!(WIFEXITED(status)))
 				return ;
 			if (i > 0)
@@ -48,6 +51,7 @@ void	pipe_intro(int cnt)
 		}
 		else if (g_sh.pipe.pid[i] == 0)
 		{
+			printf("child is %d\n", getpid());
 			if (i > 0)
 				dup_close(fd_prev, STDIN);
 			close(g_sh.pipe.fd[0]);
@@ -56,6 +60,7 @@ void	pipe_intro(int cnt)
 			else
 				dup_close(fd_backup[1], STDOUT);
 			blt_intro(proc_lst);
+			exit(0);
 		}
 		else
 			return ;
