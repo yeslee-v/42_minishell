@@ -23,7 +23,6 @@ void	get_redirect_file(t_lst *redir, t_cmd *tmp)
 		else if (ft_strchr("OA", node->type))
 		{
 			tmp->output_redir = ft_strdup(node->arg);
-			printf("o redir file name = %s\n", tmp->output_redir);
 			if (node->type == 'A')
 			{
 				tmp->append = 1;
