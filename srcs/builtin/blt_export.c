@@ -33,7 +33,11 @@ void			run_export(char *b_args, t_blt *blt)
 		run_env(1);
 		return ;
 	}
+	if (!(ft_strchr(b_args, '=')))
+		return ;
 	tmp = ft_split(b_args, '=');
+	if (tmp[1] == 0)
+		tmp[1] = ft_strdup("");
 	xst_key = change_env_value(tmp[0], tmp[1], g_sh.env);
 	if (!xst_key)
 		add_node_back(ft_strdup(tmp[0]), ft_strdup(tmp[1]));
