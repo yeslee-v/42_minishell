@@ -74,7 +74,9 @@ int		main(int ac, char **av, char **envp)
 			else
 				pipe_intro(proc_cnt);
 		}
-		print_system();
+		/*
+		 *print_system();
+		 */
 		free_conf(&g_sh);
 	}
 }

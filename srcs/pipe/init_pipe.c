@@ -38,7 +38,7 @@ void			pipe_intro(int cnt)
 		{
 			wait(&status);
 			g_sh.exit_status = WEXITSTATUS(status);
-			if (g_sh.exit_status)
+			if (g_sh.exit_status && (is_blt(proc->cmd) || (g_sh.exit_status == 127)))
 				print_status(WEXITSTATUS(status), proc);
 			if (!(WIFEXITED(status)))
 				return ;
@@ -68,4 +68,5 @@ void			pipe_intro(int cnt)
 		proc_lst = proc_lst->next;
 	}
 	dup2(fd_backup[0], 0);
+	ft_free_single((void *)g_sh.pipe.pid);
 }

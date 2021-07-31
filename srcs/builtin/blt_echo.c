@@ -26,6 +26,7 @@ void	is_env(char *tmp)
 {
 	char	*e_val;
 
+	printf("tmp is %s\n", tmp);
 	e_val = search_env_value((tmp + 1), g_sh.env);
 	if (ft_strchr(tmp, '$') && !(ft_strchr(tmp, '?')))
 	{
@@ -35,7 +36,16 @@ void	is_env(char *tmp)
 			printf("%s", e_val);
 	}
 	else
-		printf("%s", tmp);
+	{
+		t_env *env = g_sh.env->head;
+		while (env)
+		{
+			if (ft_strstr(env->key, tmp))
+				printf("this contains $\n");
+			env = env->next;
+		}
+		printf("|%s|", tmp);
+	}
 }
 
 void	do_echo(int i, char **tmp, t_blt *blt)

@@ -41,4 +41,10 @@ void			run_export(char *b_args, t_blt *blt)
 	xst_key = change_env_value(tmp[0], tmp[1], g_sh.env);
 	if (!xst_key)
 		add_node_back(ft_strdup(tmp[0]), ft_strdup(tmp[1]));
+	/*
+	 *ft_free_double((void **)tmp);
+	 */
+	free(tmp[0]);
+	free(tmp[1]);
+	free(tmp);
 }
