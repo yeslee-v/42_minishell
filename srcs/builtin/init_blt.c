@@ -55,6 +55,7 @@ void			not_blt(t_cmd *proc)
 	pid = fork();
 	if (pid > 0)
 	{
+		signal(SIGINT, SIG_IGN);
 		wait(&status);
 		exit(WEXITSTATUS(status));
 	}
