@@ -337,6 +337,8 @@ int ft_envchar(char c)
 		return (1);
 	else if (c == '_')
 		return (1);
+	else if (c >= '0' && c <= '9')
+		return (1);
 	return (0);
 }
 
@@ -390,7 +392,6 @@ static int	convert_env(t_token *tok, t_lexer *tmp, int i)
 
 	st = i;
 	env = get_env_in_cmd(&(tok->token[i]), &(tmp->lex[i]));
-	printf("env = %s\n", env);
 	if (env != NULL)
 	{
 		value = search_env_value(env + 1, g_sh.env);
@@ -405,6 +406,16 @@ static int	convert_env(t_token *tok, t_lexer *tmp, int i)
 	return (1);
 }
 
+static int convert_argv(t_token *tok, t_lexer *tmp, int i)
+{
+	int st;
+
+	st = i;
+	tok->token = ft_str_change(tok->token, "", st, st + 1);
+	free_lexer(tmp);
+	return (1);
+}
+
 static int convert_meta_char(t_token *tok)
 {
 	t_lexer *tmp;
@@ -414,15 +425,14 @@ static int convert_meta_char(t_token *tok)
 	if (!tok)
 		return (-1);
 	tmp = lexer(tok->token);
-	printf("tok = %s\n", tok->token);
-	printf("lex = %s\n", tmp->lex);
 	while (tok->token[++i])
 	{
 		if (tok->token[i] == '$' && tmp->lex[i] != 'q')
 		{
-			printf("in meta\n");
 			if (tok->token[i + 1] != '\0' && tok->token[i + 1] == '?')
 				return (convert_exit_status(tok, tmp, i));
+			else if (tok->token[i + 1] != '\0' && ((ft_isnum(tok->token[i + 1])) == 1))
+				return (convert_argv(tok, tmp, i));
 			else
 				return (convert_env(tok, tmp, i));
 		}
