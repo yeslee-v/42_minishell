@@ -110,6 +110,7 @@ typedef struct			s_process
 	int					i;
 	t_cmd				*cmd;
 	t_control			*con;
+	int					redir_err;
 	struct s_process	*next;
 	struct s_process	*prev;
 }						t_process;

@@ -52,7 +52,7 @@ LIBFT_INCS			=	./libs/includes/libft.h
 #	Compile settings
 CC					=	gcc
 RM					=	rm -rf
-CFLAGS				=	-Wall -Wextra -Werror# -g -fsanitize=address
+CFLAGS				=	-Wall -Wextra -Werror -g -fsanitize=address
 DFLAGS				= 	-Wall -Wextra -Werror -g -fsanitize=address
 HEADER_FLAG			=	-I$(INCS_DIR) -I$(LIBFT_INCS) -I$(READLINE)/include
 LIB_FLAG			= 	-L$(LIBFT_DIR) -lft -L$(READLINE)/lib -lreadline -lncurses

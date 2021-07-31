@@ -49,6 +49,7 @@ int		main(int ac, char **av, char **envp)
 	set_default_config(envp);
 	while (1)
 	{
+		printf("\U0001F600");
 		set_signal();
 		init_config();
 		set_prompt();

@@ -20,11 +20,12 @@ int	print_redir_error(char *file, char *err_msg)
 
 int	set_output_redir_node(t_redirect *out)
 {
+	printf("output\n");
 	if (out->type == 'O')
 		out->fd = open(out->arg, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else if (out->type == 'A')
 		out->fd = open(out->arg, O_RDWR | O_CREAT | O_APPEND, 0644);
-	if (errno != 0)
+	if (out->fd == -1)
 		return (print_redir_error(out->arg, strerror(errno)));
 	else
 		close_redir_fd(out);
@@ -34,7 +35,7 @@ int	set_output_redir_node(t_redirect *out)
 int	set_input_redir_node(t_redirect *input)
 {
 	input->fd = open(input->arg, O_RDWR);
-	if (errno != 0)
+	if (input->fd == -1)
 		return (print_redir_error(input->arg, strerror(errno)));
 	if (input->fd > 0)
 		close_redir_fd(input);
@@ -95,8 +96,6 @@ int	set_all_redir_lst(t_process *pipe)
 	ret = 0;
 	con = pipe->con;
 	node = con->redir->head;
-	if (!node)
-		return (0);
 	while (node && ret != 1)
 	{
 		if (ft_strchr("AO", node->type))
@@ -105,6 +104,7 @@ int	set_all_redir_lst(t_process *pipe)
 			ret = set_input_redir_node(node);
 		node = node->next;
 	}
+	pipe->redir_err = 1;
 	return (ret);
 }
 
@@ -130,8 +130,13 @@ int	set_redirect(t_lst *process)
 	g_sh.exit_status = ret.hdoc;
 	if (ret.hdoc == 1)
 		return (1);
-	ret.result = set_all_redir_lst(pipe);
-	g_sh.exit_status = ret.result;
+	pipe = process->head;
+	while (pipe)
+	{
+		ret.result = set_all_redir_lst(pipe);
+		g_sh.exit_status = ret.result;
+		pipe = pipe->next;
+	}
 	if (ret.result == 1)
 		return (1);
 	return (ret.result);

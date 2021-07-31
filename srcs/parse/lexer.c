@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.fr      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 18:17:44 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/26 23:02:01 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/31 14:05:19 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	analyze_command(t_lexer *lexer, char *cmd, int *i)
 {
 	int	ret;
 
-	if (ft_isalnum(cmd[*i]))
+	if (lexer->ft_isalnum(cmd[*i]))
 		lexer->lex[*i] = 'c';
 	else if (lexer->s_quote == 0 && ft_isquote(cmd[*i]))
 	{

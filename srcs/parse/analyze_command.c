@@ -23,13 +23,14 @@ void	get_redirect_file(t_lst *redir, t_cmd *tmp)
 		else if (ft_strchr("OA", node->type))
 		{
 			tmp->output_redir = ft_strdup(node->arg);
+			printf("o redir file name = %s\n", tmp->output_redir);
 			if (node->type == 'A')
 			{
 				tmp->append = 1;
-				tmp->output_fd = open(tmp->output_redir, O_RDWR | O_CREAT | O_APPEND, 0644);
+				/*tmp->output_fd = open(tmp->output_redir, O_RDWR | O_CREAT | O_APPEND, 0644);*/
 			}
-			else
-				tmp->output_fd = open(tmp->output_redir, O_RDWR | O_CREAT | O_TRUNC, 0644);
+			/*else*/
+				/*tmp->output_fd = open(tmp->output_redir, O_RDWR | O_CREAT | O_TRUNC, 0644);*/
 		}
 	}
 }
@@ -44,9 +45,7 @@ void	parse_cmd(t_process *node, t_lst *env)
 	tmp = node->cmd;
 	tmp->i = node->i;
 	ret = check_cmd_contain_path(tmp);
-	if (ret == -1)
-		return ;
-	else if (ret > 0)
+	if (ret > 0)
 		tmp->bin = ft_strdup(tmp->cmd);
 	else
 		tmp->bin = make_bin_with_path(tmp, env);

@@ -293,7 +293,6 @@ void remove_quote(t_lst *token)
 		}
 		free_lexer(tmp);
 		tmp = NULL;
-		printf("token = %s\n", node->token);
 		node = node->next;
 	}
 }

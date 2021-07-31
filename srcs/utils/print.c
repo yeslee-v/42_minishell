@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 18:54:05 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/07/29 21:14:18 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/07/31 12:32:45 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	print_cmd(t_cmd *node)
 	printf("bin = %s\n", node->bin);
 	printf("INPUT file name = %s\nOUTPUT file name = %s\nappend = %d\n", node->input_redir, node->output_redir, node->append);
 	printf("INPUT FD = %d\nOUTPUT FD = %d\n", node->input_fd, node->output_fd);
-	printf("DIRECTORY = %s\n", node->dir);
+	/*printf("DIRECTORY = %s\n", node->dir);*/
 	printf(B_WHITE"----------------------------------------------\n"RESET);
 }
 
