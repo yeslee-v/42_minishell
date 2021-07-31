@@ -311,3 +311,18 @@ int	check_fd_token(t_token *node)
  *}
  */
 
+	if ((node->token[0] == 34 || node->token[0] == 39) && (ft_strlen(node->token)) == 2)
+		{
+			tmp = ft_strdup("");
+			free(node->token);
+			node->token = ft_strdup(tmp);
+			free(tmp);
+			tmp = NULL;
+		}
+		else if ((check_quote_exist(g_sh.lexer->lex, node)) == 1)
+		{
+			tmp = strdup_only_char(g_sh.lexer->lex, node);
+			free(node->token);
+			node->token = ft_strdup(tmp);
+			free(tmp);
+			tmp = NULL;

@@ -7,6 +7,8 @@ void	print_double_str(char **str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return ;
 	while (str[i])
 	{
 		printf("[arg][%d] = %s\n", i, str[i]);
