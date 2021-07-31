@@ -8,18 +8,20 @@ int				is_blt(char *cmd)
 	int	ret;
 
 	ret = 0;
-	if (!(ft_strcmp(cmd, "echo")))
+	if (ft_strcmp(cmd, "echo") == 0)
 		ret = 1;
-	else if (!(ft_strcmp(cmd, "cd")))
+	else if (ft_strcmp(cmd, "cd") == 0)
 		ret = 2;
-	else if (!(ft_strcmp(cmd, "pwd")))
+	else if (ft_strcmp(cmd, "pwd") == 0)
 		ret = 3;
-	else if (!(ft_strcmp(cmd, "export")))
+	else if (ft_strcmp(cmd, "export") == 0)
 		ret = 4;
-	else if (!(ft_strcmp(cmd, "unset")))
+	else if (ft_strcmp(cmd, "unset") == 0)
 		ret = 5;
-	else if (!(ft_strcmp(cmd, "env")))
+	else if (ft_strcmp(cmd, "env") == 0)
 		ret = 6;
+	else if (ft_strcmp(cmd, "exit") == 0)
+		ret = 7;
 	return (ret);
 }
 
@@ -54,7 +56,6 @@ void			not_blt(t_cmd *proc)
 	if (pid > 0)
 	{
 		wait(&status);
-		print_status(WEXITSTATUS(status), proc);
 		exit(WEXITSTATUS(status));
 	}
 	else if (pid == 0)

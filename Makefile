@@ -35,7 +35,7 @@ Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
 						builtin/blt_export.c builtin/blt_unset.c pipe/run.c \
 						builtin/print_env.c pipe/init_pipe.c \
 						utils/blt_utils.c redirection/run_redir.c \
-						utils/print_error.c
+						utils/exit_status.c
 SRCS				=	$(Y_SRCS) $(J_SRCS)
 OBJS				= 	$(patsubst %.c, %.o, $(SRCS_FILE))
 SRCS_DIR			=	./srcs/

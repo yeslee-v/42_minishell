@@ -50,7 +50,9 @@ int		main(int ac, char **av, char **envp)
 	set_default_config(envp);
 	while (1)
 	{
-		printf("exit_status is %d\n", g_sh.exit_status);
+		/*
+		 *printf("exit_status is %d\n", g_sh.exit_status);
+		 */
 		set_signal();
 		init_config();
 		set_prompt();
