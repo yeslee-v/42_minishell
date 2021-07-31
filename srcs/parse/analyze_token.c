@@ -394,12 +394,15 @@ static int	convert_env(t_token *tok, t_lexer *tmp, int i)
 	env = get_env_in_cmd(&(tok->token[i]), &(tmp->lex[i]));
 	if (env != NULL)
 	{
+		printf("env =%s\n", env);
 		value = search_env_value(env + 1, g_sh.env);
 		if (value != NULL)
 			tok->token = ft_str_change(tok->token, value, st, st + ft_strlen(env) - 1);
 		else if (value == NULL)
 			tok->token = ft_str_change(tok->token, "", st, st + ft_strlen(env) - 1);
 	}
+	else if (env == NULL)
+		return (0);
 	if (env)
 		free(env);
 	free_lexer(tmp);
@@ -457,6 +460,7 @@ static void	set_meta_character(t_lst *token)
 		}
 		while (ret == 1)
 			ret = convert_meta_char(tmp);
+		printf("ret = %d\n", ret);
 		tmp = tmp->next;
 	}
 }
