@@ -196,7 +196,7 @@ int		blt_intro(t_process *proc_lst);
 void	init_blt(t_blt *blt);
 void	set_lower(char *cmd, t_blt *blt);
 int		is_blt(char *cmd);
-void	run_builtin(t_cmd *proc, t_blt *blt);
+void	run_builtin(int num, t_cmd *proc, t_blt *blt);
 void	not_blt(t_cmd *proc);
 void	run_echo(char *b_args, t_blt *blt);
 void	run_cd(char *b_args, t_blt *blt);
