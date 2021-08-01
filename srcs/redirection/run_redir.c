@@ -13,7 +13,6 @@ int	in_redir(t_cmd *proc)
 	int	fd;
 
 	fd = open(proc->input_redir, O_RDONLY);
-		printf("fd is %d\n", fd);
 	if (fd == -1)
 	{
 		if (proc->cmd)

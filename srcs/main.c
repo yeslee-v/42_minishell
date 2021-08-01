@@ -70,7 +70,7 @@ int		main(int ac, char **av, char **envp)
 		{
 			analyze_cmd();
 			proc_cnt = get_process_count();
-			if (proc_cnt == 1 && is_blt(proc->cmd))
+			if (proc_cnt == 1 && (is_blt(proc->cmd) > 3))
 			{
 				init_blt(&blt);
 				run_builtin(proc, &blt);

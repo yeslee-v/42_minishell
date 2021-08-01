@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-void	exec_sig_handle(int signum)
+void	exec_sigint(int signum)
 {
 	(void)signum;
 	printf("\n");
@@ -20,8 +20,8 @@ void	exec_sigquit(int signum)
 void	run_in_child(int i, int cnt, int *fd_prev, int fd_backup[2])
 {
 	return_terminal();
-	signal(SIGINT, exec_sig_handle);
-	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, exec_sigint);
+	signal(SIGQUIT, exec_sigquit);
 	if (i > 0)
 	{
 		dup2(*fd_prev, STDIN);
@@ -37,6 +37,8 @@ void	run_in_parents(int i, int cnt, int *fd_prev, t_cmd *proc)
 {
 	int	status;
 
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	wait(&status);
 	g_sh.exit_status = WEXITSTATUS(status);
 	set_terminal();
