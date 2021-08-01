@@ -25,11 +25,12 @@
 # define S_FD 6
 
 # define B_ECHO 1
-# define B_CD 2
+# define B_ENV 2
 # define B_PWD 3
 # define B_EXPORT 4
 # define B_UNSET 5
-# define B_ENV 6
+# define B_CD 6
+# define B_EXIT 7
 
 # define READ 0
 # define WRITE 1
@@ -55,7 +56,7 @@
 # define ERR_TOKEN "BraveShell: syntax error near unexpected token"
 # define ERR_TOKEN_EOF "BraveShell: syntax error: unexpected end of file"
 
-# define BS "Braveshell"
+# define BS "BraveShell"
 # define CNF "command not found"
 # define NFD "No such file or directory"
 

@@ -26,7 +26,6 @@ void	is_env(char *tmp)
 {
 	char	*e_val;
 
-	printf("tmp is %s\n", tmp);
 	e_val = search_env_value((tmp + 1), g_sh.env);
 	if (ft_strchr(tmp, '$') && !(ft_strchr(tmp, '?')))
 	{

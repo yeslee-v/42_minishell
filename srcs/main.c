@@ -70,10 +70,12 @@ int		main(int ac, char **av, char **envp)
 		{
 			analyze_cmd();
 			proc_cnt = get_process_count();
-			if (proc_cnt == 1 && is_blt(proc->cmd))
+			if (proc_cnt == 1 && (is_blt(proc->cmd) > 3))
 			{
+				printf("main cmd is %s\n", proc->cmd);
 				init_blt(&blt);
 				run_builtin(proc, &blt);
+				printf("g_sh is %d\n", g_sh.exit_status);
 				if (g_sh.exit_status)
 					print_status(g_sh.exit_status, proc);
 			}
