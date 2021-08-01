@@ -29,20 +29,23 @@ int				is_blt(char *cmd)
 void			run_builtin(int num, t_cmd *proc, t_blt *blt)
 {
 	int redir = redir_init(proc);
-	printf("redir is %d\n", redir);
-	if ((redir == 1) && (num < 4))
+	/*
+	 *printf("redir is %d\n", redir);
+	 */
+	if (redir == 1)
 	{
 		printf("before blt g_sh is %d\n", g_sh.exit_status);
 		printf("exit cmd is %s\n", proc->cmd);
-		/*
-			*g_sh.exit_status = 1;
-			*/
+		g_sh.exit_status = 1;
 		printf("after blt g_sh is %d\n", g_sh.exit_status);
+		return ;
 		/*
 		 *exit(1);
 		 */
 	}
-	printf("prc is %s\n", proc->cmd);
+	/*
+	 *printf("prc is %s\n", proc->cmd);
+	 */
 	if (num == B_ECHO)
 		run_echo(proc->arg, blt);
 	else if (num == B_CD)
@@ -55,8 +58,10 @@ void			run_builtin(int num, t_cmd *proc, t_blt *blt)
 		run_unset(proc->arg, blt);
 	else if (num == B_ENV)
 		run_env(0);
-	if (redir == 1)
-		g_sh.exit_status = 1;
+	/*
+	 *if (redir == 1)
+	 *    g_sh.exit_status = 1;
+	 */
 }
 
 void			not_blt(t_cmd *proc)
