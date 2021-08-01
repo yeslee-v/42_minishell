@@ -72,7 +72,7 @@ int		check_cmd_contain_path(t_cmd *node);
 char	**split_env_value(char *key, char c, t_lst *env);
 void	make_cmd_with_path(t_cmd *node, char **path);
 char	*find_bin(char **path);
-
+char	*ft_strstr(char *str, char *src);
 
 /*
  *terminal

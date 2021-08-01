@@ -1,9 +1,8 @@
 #include "../../includes/minishell.h"
-#include <string.h>
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
-int		double_strlen(const char **str)
+int	double_strlen(const char **str)
 {
 	int	i;
 

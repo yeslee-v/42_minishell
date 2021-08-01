@@ -1,51 +1,76 @@
 #include "../../includes/minishell.h"
 #include <sys/wait.h>
+#include <unistd.h>
 
 extern t_conf	g_sh;
 
-int				is_blt(char *cmd)
+int	is_blt(char *cmd)
 {
 	int	ret;
 
 	ret = 0;
 	if (ft_strcmp(cmd, "echo") == 0)
-		ret = 1;
+		ret = B_ECHO;
 	else if (ft_strcmp(cmd, "cd") == 0)
-		ret = 2;
+		ret = B_CD;
 	else if (ft_strcmp(cmd, "pwd") == 0)
-		ret = 3;
+		ret = B_PWD;
 	else if (ft_strcmp(cmd, "export") == 0)
-		ret = 4;
+		ret = B_EXPORT;
 	else if (ft_strcmp(cmd, "unset") == 0)
-		ret = 5;
+		ret = B_UNSET;
 	else if (ft_strcmp(cmd, "env") == 0)
-		ret = 6;
+		ret = B_ENV;
 	else if (ft_strcmp(cmd, "exit") == 0)
-		ret = 7;
+		ret = B_EXIT;
 	return (ret);
 }
 
-void			run_builtin(t_cmd *proc, t_blt *blt)
+void	run_builtin(t_cmd *proc, t_blt *blt)
 {
 	int	num;
 
-	redir_init(proc);
-	num = is_blt(proc->cmd);
-	if (num == B_ECHO)
-		run_echo(proc->arg, blt);
-	else if (num == B_CD)
-		run_cd(proc->arg, blt);
-	else if (num == B_PWD)
-		run_pwd();
-	else if (num == B_EXPORT)
-		run_export(proc->arg, blt);
-	else if (num == B_UNSET)
-		run_unset(proc->arg, blt);
-	else if (num == B_ENV)
-		run_env(0);
+	/*
+	 *printf("redir is %d\n", redir_init(proc));
+	 */
+	/*
+	 *if (redir_init(proc) == 0)
+	 *{
+	 */
+		num = is_blt(proc->cmd);
+	printf("is_blt %s = %d\n", proc->cmd, is_blt(proc->cmd));
+		if ((redir_init(proc) == 1) && (num < 4))
+		{
+			printf("before blt g_sh is %d\n", g_sh.exit_status);
+			printf("exit cmd is %s\n", proc->cmd);
+			/*
+			 *g_sh.exit_status = 1;
+			 */
+			printf("after blt g_sh is %d\n", g_sh.exit_status);
+			exit(1);
+		}
+		if (num == B_ECHO)
+			run_echo(proc->arg, blt);
+		else if (num == B_CD)
+			run_cd(proc->arg, blt);
+		else if (num == B_PWD)
+			run_pwd();
+		else if (num == B_EXPORT)
+			run_export(proc->arg, blt);
+		else if (num == B_UNSET)
+			run_unset(proc->arg, blt);
+		else if (num == B_ENV)
+			run_env(0);
+		if (redir_init(proc) == 1)
+			g_sh.exit_status = 1;
+	/*
+	 *}
+	 *else
+	 *    exit (1);
+	 */
 }
 
-void			not_blt(t_cmd *proc)
+void	not_blt(t_cmd *proc)
 {
 	pid_t	pid;
 	int		status;

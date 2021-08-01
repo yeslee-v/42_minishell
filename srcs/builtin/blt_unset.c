@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-void			run_unset(char *b_args, t_blt *blt)
+void	run_unset(char *b_args, t_blt *blt)
 {
 	if ((blt->up_flag == 1) || !(b_args))
 		return ;

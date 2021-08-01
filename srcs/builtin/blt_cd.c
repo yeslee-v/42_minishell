@@ -1,31 +1,39 @@
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
-void	relative_path(char *b_args, char buf[512])
+void			relative_path(char **b_args, char buf[512])
 {
 	int		ret;
 	char	*home_pwd;
 	char	*abs_pwd;
 
-	if ((b_args[0] == '~') && (b_args[1] == '/'))
+	abs_pwd = NULL;
+	if (b_args[0][0] == '~' && b_args[0][1] == '/')
 	{
 		home_pwd = search_env_value("HOME", g_sh.env);
-		abs_pwd = ft_strjoin(home_pwd, (b_args + 1));
-		b_args = abs_pwd;
+		abs_pwd = ft_strdup(home_pwd);
+		abs_pwd = ft_strjoin(abs_pwd, (*b_args + 1));
 	}
-	ret = chdir(b_args);
+	if (abs_pwd == 0)
+		ret = chdir(*b_args);
+	else
+		ret = chdir(abs_pwd);
 	if (ret == -1)
 	{
 		g_sh.exit_status = 1;
+		if (abs_pwd)
+			free(abs_pwd);
 		return ;
 	}
 	else if (!(ret))
 		getcwd(buf, 512);
 	change_env_value("PWD", buf, g_sh.env);
+	if (abs_pwd)
+		free(abs_pwd);
 }
 
-void	run_cd(char *b_args, t_blt *blt)
+void			run_cd(char *b_args, t_blt *blt)
 {
 	int		ret;
 	char	buf[512];
@@ -41,14 +49,12 @@ void	run_cd(char *b_args, t_blt *blt)
 		ret = chdir(home->value);
 		if (ret == -1)
 		{
+			return ;
 			printf("here\n");
-			/*
-			 *printf("%s\n", strerror(errno));
-			 */
 		}
 		getcwd(buf, 512);
 		change_env_value("PWD", buf, g_sh.env);
 	}
 	else
-		relative_path(b_args, buf);
+		relative_path(&b_args, buf);
 }
