@@ -12,9 +12,9 @@ int		set_default_config(char **envp)
 	return (1);
 }
 
-int set_minishell(char **envp)
+int		set_minishell(char **envp)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	set_env(envp);
@@ -26,11 +26,11 @@ int set_minishell(char **envp)
 	return (ret);
 }
 
-void test_exec(t_process *node)
+void	test_exec(t_process *node)
 {
-	int pid;
-	int status;
-	t_cmd *tmp;
+	int		pid;
+	int		status;
+	t_cmd	*tmp;
 
 	tmp = node->cmd;
 	pid = fork();
@@ -56,9 +56,9 @@ int		main(int ac, char **av, char **envp)
 {
 	int			ret;
 	int			proc_cnt;
-	t_process *proc_lst;
-	t_blt		blt;
-	t_cmd *proc;
+	t_process	*proc_lst;
+	t_cmd		*proc;
+	int			num;
 
 	if (!ac || !av)
 		return (-1);
@@ -66,7 +66,6 @@ int		main(int ac, char **av, char **envp)
 	while (1)
 	{
 		ret = set_minishell(envp);
-		/*printf("ret %d\n", ret);*/
 		if (g_sh.process->head != NULL)
 		{
 			proc_lst = g_sh.process->head;
@@ -76,12 +75,17 @@ int		main(int ac, char **av, char **envp)
 		{
 			analyze_cmd();
 			proc_cnt = get_process_count();
-			if (proc_cnt == 1 && (is_blt(proc->cmd) > 3))
+			num = is_blt(proc->cmd);
+			if (proc_cnt == 1 && (num > 3))
 			{
-				init_blt(&blt);
-				run_builtin(proc, &blt);
-				if (g_sh.exit_status)
-					print_status(g_sh.exit_status, proc);
+				blt_intro(proc_lst);
+				/*
+					*printf("g_sh is %d\n", g_sh.exit_status);
+					*/
+				/*
+				 *if (g_sh.exit_status)
+				 *    print_status(g_sh.exit_status, proc);
+				 */
 			}
 			else
 				pipe_intro(proc_cnt);

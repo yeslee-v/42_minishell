@@ -40,12 +40,16 @@ void	run_in_parents(int i, int cnt, int *fd_prev, t_cmd *proc)
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	wait(&status);
-	g_sh.exit_status = WEXITSTATUS(status);
 	set_terminal();
+	g_sh.exit_status = WEXITSTATUS(status);
+	/*
+	 *printf("pa_g is %d\n", g_sh.exit_status);
+	 */
 	if (g_sh.exit_status)
 	{
-		if ((is_blt(proc->cmd) > 3) || (g_sh.exit_status == 127))
+		if (g_sh.exit_status == 127)
 			print_status(WEXITSTATUS(status), proc);
+		return ;
 	}
 	if (!(WIFEXITED(status)))
 		return ;
@@ -71,7 +75,21 @@ void	run_pipe(int cnt, int fd_backup[2])
 		proc = proc_lst->cmd;
 		if (i != (cnt - 1))
 			pipe(g_sh.pipe.fd);
-		set_all_redir_lst(proc_lst);
+		/*
+		 *printf("run pipe\n");
+		 */
+		int redir_prev = set_all_redir_lst(proc_lst);
+		/*
+		 *printf("redir is %d\n", redir_prev);
+		 */
+		if (redir_prev)
+		{
+			g_sh.exit_status = 1;
+			return ;
+		}
+		/*
+		 *printf("redir prev is %d\n", redir_prev);
+		 */
 		g_sh.pipe.pid[i] = fork();
 		if (g_sh.pipe.pid[i] > 0)
 			run_in_parents(i, cnt, &fd_prev, proc);
@@ -79,7 +97,13 @@ void	run_pipe(int cnt, int fd_backup[2])
 		{
 			run_in_child(i, cnt, &fd_prev, fd_backup);
 			blt_intro(proc_lst);
-			exit(0);
+			/*
+			 *printf("g: %d\n", g_sh.exit_status);
+			 */
+			/*
+			 *if (cnt > 1)
+			 */
+				exit (g_sh.exit_status);
 		}
 		else
 			return ;
@@ -96,6 +120,9 @@ void	pipe_intro(int cnt)
 		return ;
 	fd_backup[0] = dup(0);
 	fd_backup[1] = dup(1);
+	/*
+	 *printf("here\n");
+	 */
 	run_pipe(cnt, fd_backup);
 	dup2(fd_backup[0], 0);
 	ft_free_single((void *)g_sh.pipe.pid);
