@@ -12,6 +12,21 @@ void			dup_close(int fd, int fd_std)
 		*/
 }
 
+void	exec_sig_handle(int signum)
+{
+	(void)signum;
+	printf("\n");
+	rl_on_new_line();
+	exit(130);
+}
+
+void	exec_sigquit(int signum)
+{
+	(void)signum;
+	printf("Quit: 3\n");
+	exit(131);
+}
+
 void			pipe_intro(int cnt)
 {
 	int			i;
@@ -36,12 +51,15 @@ void			pipe_intro(int cnt)
 		g_sh.pipe.pid[i] = fork();
 		if (g_sh.pipe.pid[i] > 0)
 		{
+			signal(SIGINT, SIG_IGN);
+			signal(SIGQUIT, SIG_IGN);
 			wait(&status);
 			g_sh.exit_status = WEXITSTATUS(status);
 			if (g_sh.exit_status)
 				print_status(WEXITSTATUS(status), proc);
 			if (!(WIFEXITED(status)))
 				return ;
+			set_terminal();
 			if (i > 0)
 				close(fd_prev);
 			fd_prev = g_sh.pipe.fd[0];
@@ -51,6 +69,9 @@ void			pipe_intro(int cnt)
 		}
 		else if (g_sh.pipe.pid[i] == 0)
 		{
+			return_terminal();
+			signal(SIGINT, exec_sig_handle);
+			signal(SIGQUIT, exec_sigquit);
 			if (i > 0)
 			{
 				dup_close(fd_prev, STDIN);

@@ -56,7 +56,7 @@ int		main(int ac, char **av, char **envp)
 {
 	int			ret;
 	int			proc_cnt;
-	/*t_blt		blt;*/
+	t_blt		blt;
 
 	if (!ac || !av)
 		return (-1);
@@ -64,23 +64,23 @@ int		main(int ac, char **av, char **envp)
 	while (1)
 	{
 		ret = set_minishell(envp);
-		/*t_process *proc_lst = g_sh.process->head;*/
-		/*t_cmd *proc = proc_lst->cmd;*/
+		t_process *proc_lst = g_sh.process->head;
+		t_cmd *proc = proc_lst->cmd;
 		if (ret != 1)
 		{
 			analyze_cmd();
 			proc_cnt = get_process_count();
-			/*if (proc_cnt == 1 && is_blt(proc->cmd))*/
-			/*{*/
-				/*init_blt(&blt);*/
-				/*run_builtin(proc, &blt);*/
-				/*if (g_sh.exit_status)*/
-					/*print_status(g_sh.exit_status, proc);*/
-			/*}*/
-			/*else*/
-				/*pipe_intro(proc_cnt);*/
+			if (proc_cnt == 1 && is_blt(proc->cmd))
+			{
+				init_blt(&blt);
+				run_builtin(proc, &blt);
+				if (g_sh.exit_status)
+					print_status(g_sh.exit_status, proc);
+			}
+			else
+				pipe_intro(proc_cnt);
 		}
-		print_system();
+		/*print_system();*/
 		free_conf(&g_sh);
 	}
 }

@@ -55,6 +55,8 @@ void	receive_text(int fd[2], char *delimeter)
 		{
 			if (!line)
 				move_cursor(NULL, 1, 2);
+			if (line)
+				free(line);
 			close(fd[WRITE]);
 			exit(0);
 		}
@@ -62,9 +64,8 @@ void	receive_text(int fd[2], char *delimeter)
 		{
 			write(fd[WRITE], line, ft_strlen(line));
 			write(fd[WRITE], "\n", 1);
-		}
-		if (line)
 			free(line);
+		}
 	}
 	close(fd[WRITE]);
 }
