@@ -102,6 +102,7 @@ void	make_redir(t_lst *redir, char type, char *arg);
  *cursor
  */
 char	**split_arg(char *arg);
+void	return_terminal(void);
 
 /*
  *init

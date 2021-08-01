@@ -400,6 +400,8 @@ static int	convert_env(t_token *tok, t_lexer *tmp, int i)
 		else if (value == NULL)
 			tok->token = ft_str_change(tok->token, "", st, st + ft_strlen(env) - 1);
 	}
+	else if (env == NULL)
+		return (0);
 	if (env)
 		free(env);
 	free_lexer(tmp);

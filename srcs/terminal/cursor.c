@@ -48,9 +48,9 @@ void	move_cursor(char *msg, int col, int row)
 	ce = tgetstr("ce", NULL);
 	tputs(tgoto(cm, y + col, x - row), 1, print_tc);
 	if (msg)
-		printf("%s\n", msg);
-	free_lexer(g_sh.lexer);
-	free_token(g_sh.token);
-	free_process(g_sh.process);
-	exit(0);
+		printf("%s", msg);
+	/*free_lexer(g_sh.lexer);*/
+	/*free_token(g_sh.token);*/
+	/*free_process(g_sh.process);*/
+	/*exit(0);*/
 }

@@ -26,7 +26,7 @@ INCS_FILE		= 	$(addprefix $(INCS_DIR), $(INCS))
 CC				=	gcc
 AR				=	ar rcs
 RM				=	rm -rf
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -g -fsanitize=address
 DEBUG_FLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 HEADER_FLAG		=	-I$(INCS_DIR)
 

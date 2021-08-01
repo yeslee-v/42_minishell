@@ -76,9 +76,6 @@ int		main(int ac, char **av, char **envp)
 			analyze_cmd();
 			proc_cnt = get_process_count();
 			num = is_blt(proc->cmd);
-			/*
-			 *printf("main: %d:%s\n", num, proc->cmd);
-			 */
 			if (proc_cnt == 1 && (num > 3))
 			{
 				blt_intro(proc_lst);
@@ -93,9 +90,7 @@ int		main(int ac, char **av, char **envp)
 			else
 				pipe_intro(proc_cnt);
 		}
-		/*
-			*print_system();
-			*/
+		/*print_system();*/
 		free_conf(&g_sh);
 	}
 }

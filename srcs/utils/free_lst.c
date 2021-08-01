@@ -100,7 +100,7 @@ void	free_process(t_lst *process)
 	tmp = process->head;
 	while (tmp)
 	{
-		remove_hdoc(tmp->i);
+		/*remove_hdoc(tmp->i);*/
 		if (tmp->cmd)
 			free_cmd(tmp->cmd);
 		if (tmp->con)

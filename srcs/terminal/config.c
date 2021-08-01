@@ -20,6 +20,12 @@ int	set_term_default(int status)
 void	set_terminal(void)
 {
 	tcgetattr(0, &g_sh.term);
+	tcgetattr(0, &g_sh.backup);
 	g_sh.term.c_lflag &= ~ECHOCTL;
 	tcsetattr(0, TCSANOW, &g_sh.term);
+}
+
+void	return_terminal(void)
+{
+	tcsetattr(0, TCSANOW, &g_sh.backup);
 }

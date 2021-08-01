@@ -57,11 +57,6 @@ void			run_builtin(int num, t_cmd *proc, t_blt *blt)
 		run_env(0);
 	if (redir == 1)
 		g_sh.exit_status = 1;
-	/*
-		*}
-		*else
-		*    exit (1);
-		*/
 }
 
 void			not_blt(t_cmd *proc)
