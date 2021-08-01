@@ -56,7 +56,9 @@ int		main(int ac, char **av, char **envp)
 {
 	int			ret;
 	int			proc_cnt;
+	t_process *proc_lst;
 	t_blt		blt;
+	t_cmd *proc;
 
 	if (!ac || !av)
 		return (-1);
@@ -64,8 +66,12 @@ int		main(int ac, char **av, char **envp)
 	while (1)
 	{
 		ret = set_minishell(envp);
-		t_process *proc_lst = g_sh.process->head;
-		t_cmd *proc = proc_lst->cmd;
+		/*printf("ret %d\n", ret);*/
+		if (g_sh.process->head != NULL)
+		{
+			proc_lst = g_sh.process->head;
+			proc = proc_lst->cmd;
+		}
 		if (ret != 1)
 		{
 			analyze_cmd();
@@ -80,9 +86,7 @@ int		main(int ac, char **av, char **envp)
 			else
 				pipe_intro(proc_cnt);
 		}
-		/*
-		 *print_system();
-		 */
+		/*print_system();*/
 		free_conf(&g_sh);
 	}
 }

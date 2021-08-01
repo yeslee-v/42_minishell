@@ -38,7 +38,6 @@ void	run_builtin(t_cmd *proc, t_blt *blt)
 	 *{
 	 */
 		num = is_blt(proc->cmd);
-	printf("is_blt %s = %d\n", proc->cmd, is_blt(proc->cmd));
 		if ((redir_init(proc) == 1) && (num < 4))
 		{
 			printf("before blt g_sh is %d\n", g_sh.exit_status);
