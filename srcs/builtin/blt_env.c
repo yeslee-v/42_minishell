@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-void			run_env(int xprt_flag)
+void	run_env(int xprt_flag)
 {
 	t_env		*env_tmp;
 	t_process	*proc_lst;

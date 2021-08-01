@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-static void		add_node_back(char *new_k, char *new_v)
+static void	add_node_back(char *new_k, char *new_v)
 {
 	t_env	*node;
 	t_env	*new;
@@ -19,10 +19,10 @@ static void		add_node_back(char *new_k, char *new_v)
 	g_sh.env->tail = new;
 }
 
-void			run_export(char *b_args, t_blt *blt)
+void	run_export(char *b_args, t_blt *blt)
 {
-	t_cmd *proc;
 	char	**tmp;
+	t_cmd	*proc;
 	t_env	*xst_key;
 
 	proc = NULL;
@@ -41,4 +41,7 @@ void			run_export(char *b_args, t_blt *blt)
 	xst_key = change_env_value(tmp[0], tmp[1], g_sh.env);
 	if (!xst_key)
 		add_node_back(ft_strdup(tmp[0]), ft_strdup(tmp[1]));
+	free(tmp[0]);
+	free(tmp[1]);
+	free(tmp);
 }
