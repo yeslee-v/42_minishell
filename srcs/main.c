@@ -52,6 +52,13 @@ void	test_exec(t_process *node)
 	}
 }
 
+int		is_proc(t_cmd *proc)
+{
+	if (proc)
+		return (1);
+	else
+		return (0);
+}
 int		main(int ac, char **av, char **envp)
 {
 	int			ret;
@@ -75,19 +82,24 @@ int		main(int ac, char **av, char **envp)
 		{
 			analyze_cmd();
 			proc_cnt = get_process_count();
-			num = is_blt(proc->cmd);
-			if (proc_cnt == 1 && (num > 3))
+			if (is_proc(proc))
 			{
-				blt_intro(proc_lst);
-				if (g_sh.exit_status)
-					print_status(g_sh.exit_status, proc);
-				dup2(g_sh.fd_backup[0], READ);
-				dup2(g_sh.fd_backup[1], WRITE);
+				num = is_blt(proc->cmd);
+				if (proc_cnt == 1 && (num > 3))
+				{
+					blt_intro(proc_lst);
+					if (g_sh.exit_status)
+						print_status(g_sh.exit_status, proc);
+					dup2(g_sh.fd_backup[0], READ);
+					dup2(g_sh.fd_backup[1], WRITE);
+				}
+				else
+					pipe_intro(proc_cnt);
 			}
-			else
-				pipe_intro(proc_cnt);
 		}
-		/*print_system();*/
+		/*
+		 *print_system();
+		 */
 		free_conf(&g_sh);
 	}
 }
