@@ -6,44 +6,13 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 18:54:05 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/08/03 03:00:43 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/08/03 04:30:21 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
 extern t_conf	g_sh;
-
-void	print_token(t_lst *token)
-{
-	t_token	*temp;
-
-	temp = token->head;
-	while (temp)
-	{
-		printf(BLUE);
-		printf("|[토큰] = %-18s| ", temp->token);
-		printf("|타입 = %c| ", temp->type);
-		printf("|순서 = %2d| ", temp->i);
-		printf("|시작점 = %3d| |종료점 = %3d|\n", temp->st, temp->ed);
-		printf(RESET);
-		temp = temp->next;
-	}
-}
-
-void	print_env(t_lst *env)
-{
-	t_env	*tmp;
-
-	tmp = env->head;
-	while (tmp)
-	{
-		printf("==============================\n");
-		printf("key = %s\nvalue = %s\n", tmp->key, tmp->value);
-		printf("==============================\n");
-		tmp = tmp->next;
-	}
-}
 
 void	print_cmd(t_cmd *node)
 {
@@ -57,7 +26,9 @@ void	print_cmd(t_cmd *node)
 	printf(RESET);
 	printf(B_PURPLE"> 리다이렉션 정보\n"RESET);
 	printf("bin = %s\n", node->bin);
-	printf("INPUT file name = %s\nOUTPUT file name = %s\nappend = %d\n", node->input_redir, node->output_redir, node->append);
+	printf("INPUT file name = %s\n", node->input_redir);
+	printf("OUTPUT file name = %s\n", node->output_redir);
+	printf("append = %d\n", node->append);
 	printf("INPUT FD = %d\nOUTPUT FD = %d\n", node->input_fd, node->output_fd);
 	printf("DIRECTORY = %s\n", node->dir);
 	printf(B_WHITE"----------------------------------------------\n"RESET);

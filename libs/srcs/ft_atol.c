@@ -6,13 +6,22 @@
 /*   By: jaekpark <jaekpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 15:01:00 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/05/10 03:01:36 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:36:08 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long long		ft_atol(char *str)
+static void	set_sign(char c, long long *sign, int *i)
+{
+	if (c == '-')
+		*sign = -1;
+	else
+		*sign = 1;
+	*i = *i + 1;
+}
+
+long long	ft_atol(char *str)
 {
 	int			i;
 	long long	sign;
@@ -24,10 +33,7 @@ long long		ft_atol(char *str)
 	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
-	{
-		sign = (str[i] == '-') ? -1 : 1;
-		i++;
-	}
+		set_sign(str[i], &sign, &i);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result *= 10;

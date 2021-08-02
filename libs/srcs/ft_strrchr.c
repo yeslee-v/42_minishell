@@ -6,13 +6,13 @@
 /*   By: jaekpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 15:26:38 by jaekpark          #+#    #+#             */
-/*   Updated: 2020/10/08 15:42:21 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:53:36 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
 	int		len;
 

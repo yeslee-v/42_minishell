@@ -6,13 +6,13 @@
 /*   By: jaekpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 13:04:57 by jaekpark          #+#    #+#             */
-/*   Updated: 2020/10/14 13:35:19 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:54:43 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*result;
@@ -26,8 +26,7 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 		result[0] = '\0';
 		return (result);
 	}
-	if (!(result = malloc(sizeof(char) * (len + 1))))
-		return (NULL);
+	result = malloc(sizeof(char) * (len + 1));
 	while (i < len)
 	{
 		result[i] = s[start + i];

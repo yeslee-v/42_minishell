@@ -6,16 +6,16 @@
 /*   By: jaekpark <jaekpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 14:19:22 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/05/10 02:59:01 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:53:28 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strnrcmp(char *s1, char *s2, int cnt)
+int	ft_strnrcmp(char *s1, char *s2, int cnt)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = ft_strlen(s1) - 1;
 	j = ft_strlen(s2) - 1;

@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 12:43:42 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/02/24 18:52:10 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:54:22 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ static int	arr_size(unsigned long long n)
 	return (count);
 }
 
-char		*ft_utoa(unsigned long long n, char *base_set)
+char	*ft_utoa(unsigned long long n, char *base_set)
 {
 	char	*dst;
 	int		dstsize;
 
 	dstsize = arr_size(n) + 1;
-	if (!(dst = malloc(sizeof(char) * dstsize)))
-		return (NULL);
+	dst = malloc(sizeof(char) * dstsize);
 	dst[--dstsize] = '\0';
 	while (1)
 	{

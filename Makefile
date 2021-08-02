@@ -31,7 +31,7 @@ SRCS_UTILS			=	utils.c error/error.c error/exit_status.c \
 						ft_utils/ft_strcjoin.c ft_utils/ft_strrdup.c ft_utils/ft_strstr.c \
 						init/init_struct.c init/init_tool.c \
 						free/free_lst.c free/free_struct.c \
-						print/print.c print/print_utils.c \
+						print/print.c print/print_utils.c print/print_node.c \
 						struct/delete_env.c struct/make_struct.c struct/split_env.c 
 SRCS_SETUP			=	signal/signal.c terminal/config.c terminal/cursor.c setup.c
 SRCS_PARSE			=	redirection/heredoc.c redirection/redirect.c redirection/redirect_utils.c \

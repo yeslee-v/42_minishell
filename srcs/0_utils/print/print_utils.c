@@ -22,7 +22,10 @@ void	print_system(void)
 	printf(B_CYAN"[입력 커맨드 어휘 분석]\n"RESET);
 	printf(B_PURPLE"> 쉘 프롬포트에서 입력받은 커맨드\n"RESET);
 	if (g_sh.cmd != NULL && g_sh.lexer != NULL)
-		printf(GREEN"  o [커맨드] = %s\n"BLUE"  o [인덱싱] = %s\n"RESET, g_sh.cmd, g_sh.lexer->lex);
+	{
+		printf(GREEN"  o [커맨드] = %s\n", g_sh.cmd);
+		printf(BLUE"  o [인덱싱] = %s\n"RESET, g_sh.lexer->lex);
+	}
 	else
 		printf("  o -\n");
 	printf(B_WHITE"----------------------------------------------\n"RESET);
