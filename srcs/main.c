@@ -79,13 +79,10 @@ int		main(int ac, char **av, char **envp)
 			if (proc_cnt == 1 && (num > 3))
 			{
 				blt_intro(proc_lst);
-				/*
-					*printf("g_sh is %d\n", g_sh.exit_status);
-					*/
-				/*
-				 *if (g_sh.exit_status)
-				 *    print_status(g_sh.exit_status, proc);
-				 */
+				if (g_sh.exit_status)
+					print_status(g_sh.exit_status, proc);
+				dup2(g_sh.fd_backup[0], READ);
+				dup2(g_sh.fd_backup[1], WRITE);
 			}
 			else
 				pipe_intro(proc_cnt);

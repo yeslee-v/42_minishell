@@ -33,7 +33,7 @@ J_SRCS				=	main.c \
 Y_SRCS				=	builtin/init_blt.c builtin/blt_cd.c builtin/blt_echo.c \
 						builtin/blt_env.c  builtin/blt_pwd.c \
 						builtin/blt_export.c builtin/blt_unset.c pipe/run.c \
-						builtin/print_env.c pipe/init_pipe.c \
+						builtin/print_env.c pipe/init_pipe.c pipe/exec_pipe.c \
 						utils/blt_utils.c redirection/run_redir.c \
 						utils/exit_status.c
 SRCS				=	$(Y_SRCS) $(J_SRCS)

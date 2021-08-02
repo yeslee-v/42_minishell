@@ -1,10 +1,8 @@
 #include "../../includes/minishell.h"
-#include <sys/wait.h>
-#include <unistd.h>
 
 extern t_conf	g_sh;
 
-int				is_blt(char *cmd)
+int	is_blt(char *cmd)
 {
 	int	ret;
 
@@ -26,23 +24,16 @@ int				is_blt(char *cmd)
 	return (ret);
 }
 
-void			run_builtin(int num, t_cmd *proc, t_blt *blt)
+void	run_builtin(int num, t_cmd *proc, t_blt *blt)
 {
-	int redir = redir_init(proc);
-	printf("redir is %d\n", redir);
-	if ((redir == 1) && (num < 4))
+	int	redir;
+
+	redir = redir_init(proc);
+	if (redir == 1)
 	{
-		printf("before blt g_sh is %d\n", g_sh.exit_status);
-		printf("exit cmd is %s\n", proc->cmd);
-		/*
-			*g_sh.exit_status = 1;
-			*/
-		printf("after blt g_sh is %d\n", g_sh.exit_status);
-		/*
-		 *exit(1);
-		 */
+		g_sh.exit_status = 1;
+		return ;
 	}
-	printf("prc is %s\n", proc->cmd);
 	if (num == B_ECHO)
 		run_echo(proc->arg, blt);
 	else if (num == B_CD)
@@ -55,11 +46,9 @@ void			run_builtin(int num, t_cmd *proc, t_blt *blt)
 		run_unset(proc->arg, blt);
 	else if (num == B_ENV)
 		run_env(0);
-	if (redir == 1)
-		g_sh.exit_status = 1;
 }
 
-void			not_blt(t_cmd *proc)
+void	not_blt(t_cmd *proc)
 {
 	pid_t	pid;
 	int		status;
@@ -71,13 +60,7 @@ void			not_blt(t_cmd *proc)
 	{
 		wait(&status);
 		g_sh.exit_status = WEXITSTATUS(status);
-		/*
-		 *printf("not g: %d\n", g_sh.exit_status);
-		 */
 		return ;
-		/*
-		 *exit(WEXITSTATUS(status));
-		 */
 	}
 	else if (pid == 0)
 	{
@@ -86,7 +69,7 @@ void			not_blt(t_cmd *proc)
 	}
 }
 
-int				blt_intro(t_process *proc_lst)
+int	blt_intro(t_process *proc_lst)
 {
 	t_blt	blt;
 	t_lst	*envl;
@@ -98,9 +81,6 @@ int				blt_intro(t_process *proc_lst)
 	init_blt(&blt);
 	set_lower(proc->cmd, &blt);
 	ret = is_blt(proc->cmd);
-	/*
-	 *printf("ret is %d\n", ret);
-	 */
 	if (ret)
 		run_builtin(ret, proc, &blt);
 	else if (!ret)
