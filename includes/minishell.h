@@ -189,6 +189,8 @@ void	pipe_intro(int cnt);
 void	dup_close(int fd, int fd_std);
 void	print_error(char *str);
 void	run_execve(t_cmd *proc);
+void	exec_sigint(int signum);
+void	exec_sigquit(int signum);
 
 /*
  * builtin

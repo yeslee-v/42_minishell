@@ -2,7 +2,19 @@
 
 extern t_conf	g_sh;
 
-void			relative_path(char **b_args, char buf[512])
+int	is_chdir(int ret, char *abs_pwd)
+{
+	if (ret == -1)
+	{
+		g_sh.exit_status = 1;
+		if (abs_pwd)
+			free(abs_pwd);
+		return (1);
+	}
+	return (0);
+}
+
+void	relative_path(char **b_args, char buf[512])
 {
 	int		ret;
 	char	*home_pwd;
@@ -19,13 +31,8 @@ void			relative_path(char **b_args, char buf[512])
 		ret = chdir(*b_args);
 	else
 		ret = chdir(abs_pwd);
-	if (ret == -1)
-	{
-		g_sh.exit_status = 1;
-		if (abs_pwd)
-			free(abs_pwd);
+	if (is_chdir(ret, abs_pwd))
 		return ;
-	}
 	else if (!(ret))
 		getcwd(buf, 512);
 	change_env_value("PWD", buf, g_sh.env);
@@ -33,7 +40,7 @@ void			relative_path(char **b_args, char buf[512])
 		free(abs_pwd);
 }
 
-void			run_cd(char *b_args, t_blt *blt)
+void	run_cd(char *b_args, t_blt *blt)
 {
 	int		ret;
 	char	buf[512];

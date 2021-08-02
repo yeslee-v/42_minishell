@@ -3,3 +3,4 @@
 .gitignore
 tags
 .DS_Store
+.idea
