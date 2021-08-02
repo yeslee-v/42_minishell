@@ -31,6 +31,8 @@ int	write_text(int fd[2], int hdoc_fd)
 		eof = get_next_line(fd[READ], &ret);
 		if (eof == -1)
 			return (-1);
+		if (ret[0] == '\0')
+			move_cursor(NULL, 1, 2);
 		ret = ft_strjoin(ret, "\n");
 		if (eof > 0)
 			write(hdoc_fd, ret, ft_strlen(ret));
@@ -53,8 +55,8 @@ void	receive_text(int fd[2], char *delimeter)
 		line = readline("> ");
 		if (!line || ((ft_strcmp(line, delimeter)) == 0))
 		{
-			if (!line)
-				move_cursor(NULL, 1, 2);
+			/*if (!line)*/
+				/*move_cursor(NULL , 1, 2);*/
 			if (line)
 				free(line);
 			close(fd[WRITE]);

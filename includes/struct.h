@@ -126,6 +126,8 @@ typedef struct			s_conf
 	t_lst				*process;
 	struct termios		term;
 	struct termios		backup;
+	int					x;
+	int					y;
 	t_pipe				pipe;
 }						t_conf;
 

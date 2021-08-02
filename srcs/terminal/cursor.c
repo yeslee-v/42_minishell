@@ -38,14 +38,15 @@ void	move_cursor(char *msg, int col, int row)
 	int		x;
 	int		y;
 	char	*cm;
-	char	*ce;
+	/*char	*ce;*/
 
 	x = 0;
 	y = 0;
 	get_cursor_pos(&x, &y);
+	printf("%d %d\n", x, y);
 	tgetent(NULL, "xterm");
 	cm = tgetstr("cm", NULL);
-	ce = tgetstr("ce", NULL);
+	/*ce = tgetstr("ce", NULL);*/
 	tputs(tgoto(cm, y + col, x - row), 1, print_tc);
 	if (msg)
 		printf("%s", msg);

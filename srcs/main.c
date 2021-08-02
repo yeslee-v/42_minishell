@@ -71,7 +71,7 @@ int		main(int ac, char **av, char **envp)
 			proc_lst = g_sh.process->head;
 			proc = proc_lst->cmd;
 		}
-		if (ret != 1)
+		if (ret != 1 || proc != NULL)
 		{
 			analyze_cmd();
 			proc_cnt = get_process_count();
