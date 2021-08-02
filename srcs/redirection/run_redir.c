@@ -16,14 +16,8 @@ int	in_redir(t_cmd *proc)
 	if (fd == -1)
 	{
 		g_sh.exit_status = 1;
-		/*
-		 *print_status(g_sh.exit_status, proc);
-		 */
 		return (-1);
 	}
-	/*
-	 *proc->input_redir = NULL;
-	 */
 	dup_close(fd, READ);
 	return (0);
 }
@@ -41,9 +35,7 @@ void	append_redir(t_cmd *proc)
 	int	fd;
 
 	fd = open(proc->output_redir, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	int num = is_blt(proc->cmd);
-	if (!(num < 4))
-		dup_close(fd, WRITE);
+	dup_close(fd, WRITE);
 }
 
 int	redir_init(t_cmd *proc)
@@ -54,9 +46,6 @@ int	redir_init(t_cmd *proc)
 	{
 		if (in_redir(proc) == -1)
 			return (1);
-		/*
-		 *dup2(g_sh.fd_backup[0], READ);
-		 */
 	}
 	if (proc->output_redir)
 	{
@@ -64,9 +53,6 @@ int	redir_init(t_cmd *proc)
 			out_redir(proc);
 		else if (proc->append)
 			append_redir(proc);
-		/*
-		 *dup2(g_sh.fd_backup[1], WRITE);
-		 */
 	}
 	return (0);
 }

@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-extern t_conf g_sh;
+extern t_conf	g_sh;
 
 void	print_status(int num, t_cmd *proc)
 {
@@ -16,7 +16,7 @@ void	print_status(int num, t_cmd *proc)
 	else if (num == 1)
 	{
 		if (proc->arg)
-			printf("%s: %s: %s: %s\n", BS, proc->cmd, proc->arg, NFD);
+			printf("%s: %s: %s: %s\n", BS, proc->cmd, proc->args[1], NFD); // hmmmmmmm...
 		else
 			printf("%s: %s: %s\n", BS, proc->cmd, NFD);
 	}

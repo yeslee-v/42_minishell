@@ -2,13 +2,13 @@
 
 extern t_conf	g_sh;
 
-void			init_blt(t_blt *blt)
+void	init_blt(t_blt *blt)
 {
 	blt->opt = 0;
 	blt->up_flag = 0;
 }
 
-void			set_lower(char *cmd, t_blt *blt)
+void	set_lower(char *cmd, t_blt *blt)
 {
 	int		i;
 
