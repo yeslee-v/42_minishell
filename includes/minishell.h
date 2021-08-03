@@ -21,207 +21,184 @@
 # include <unistd.h>
 
 /*
- * - lexer
- *	analyze_space
- *	analyze_quote
- *	analyze_operator
+ *- 0_utils
  */
-t_lexer	*lexer(char *cmd);
-
+void	remove_hdoc(int i);
+int		get_process_count(void);
 /*
- * - token
- *   analyze_type
- *   set_index
+ *- 0_utils/error
  */
-int		tokenizer(char *lex);
-void	analyze_token(t_lst *token);
-int		analyze_syntax(t_lst *token);
-char	*unclosed_pipe(void);
-
+void	error_with_message(char *msg, int exit_status);
+void	print_status(int num, t_cmd *proc);
+void	token_error(char *token, int exit_status);
+int		redir_error(char *file, char *err_msg);
 /*
- * - parser
- *   parse syntax
- *   parse redir
- *   parse process
+ *- 0_utils/free
  */
-t_token	*parser(t_token *tok);
-
+void	free_env(t_lst *env);
+void	free_redirect(t_lst *redir);
+void	free_token(t_lst *token);
+void	free_control(t_control *con);
+void	free_process(t_lst *process);
+void	free_conf(t_conf *conf);
+void	free_lexer(t_lexer *lexer);
+void	free_cmd(t_cmd *node);
+void	free_env_node(t_env *env);
 /*
- *redirect
+ *- 0_utils/ft_utils
  */
-int	set_heredoc(t_process *pipe);
-int	set_input_redir_node(t_redirect *input);
-int	set_output_redir_node(t_redirect *out);
-int	print_redir_error(char *file, char *err_msg);
-int	set_redirect(t_lst *process);
-int	exec_heredoc(char *delimiter, int hdoc_fd);
-int	set_all_redir_lst(t_process *pipe);
-void	close_redir_fd(t_redirect *redir);
-char *make_hdoc_file_name(int i);
-
-int	redir_init(t_cmd *proc);
-
-/*
- *analyze_command
- */
-void	analyze_cmd(void);
-void	parse_cmd(t_process *node, t_lst *env);
-void	get_redirect_file(t_lst *redir, t_cmd *tmp);
-char	*make_bin_with_path(t_cmd *node, t_lst *env);
-int		check_cmd_contain_path(t_cmd *node);
-char	**split_env_value(char *key, char c, t_lst *env);
-void	make_cmd_with_path(t_cmd *node, char **path);
-char	*find_bin(char **path);
+char	**ft_double_strjoin(char **dst, char *src);
+int		ft_isspec(char *cmd, int i);
+int		ft_isspace(int c);
+int		ft_isquote(char c);
+char	*ft_str_change(char *str, char *src, int st, int ed);
+char	*ft_strcjoin(char *s1, char *s2, char c);
+char	*ft_strrdup(char *s, int st, int ed);
 char	*ft_strstr(char *str, char *src);
-
 /*
- *terminal
+ *- 0_utils/init
  */
-int		get_cursor_pos(int *x, int *y);
-void	set_terminal(void);
-void	set_term_cursor(void);
-int		set_term_default(int status);
-
+void	init_cmd(t_cmd *node);
+void	init_config(void);
+void	init_lexer(t_lexer *lexer);
+void	init_lst(t_lst *lst);
+void	init_control(t_control *con);
+void	init_tool(t_tool *tool);
 /*
- *signal
+ *- 0_utils/print
  */
-void	move_cursor(char *msg, int col, int row);
-int		print_tc(int tc);
-void	sig_handler(int signum);
-void	set_signal(void);
-
+void	print_token(t_lst *token);
+void	print_env(t_lst *env);
+void	print_cmd(t_cmd *node);
+void	print_redir(t_control *con, t_lst *redir);
+void	print_control(t_control *con);
+void	print_process(t_lst *process);
+void	print_double_str(char **str);
+void	print_system(void);
 /*
- *make_struct
+ *- 0_utils/struct
  */
+void	delete_env_node(char *key, t_lst *env);
 void	save_process(t_cmd *cmd, t_control *con);
 void	make_token(t_lst *lst, int st, int ed);
 void	make_env(t_lst *lst, char *key, char *value);
 void	make_redir(t_lst *redir, char type, char *arg);
-
-/*
- *cursor
- */
-char	**split_arg(char *arg);
-void	return_terminal(void);
-
-/*
- *init
- */
-void	init_lst(t_lst *lst);
-void	init_lexer(t_lexer *lexer);
-void	init_tool(t_tool *tool);
-void	init_config(void);
-void	init_cmd(t_cmd *node);
-void	init_control(t_control *con);
-void	init_status(t_status *node);
-
-/*
- *ft_utils
- */
-char	*ft_strrdup(char *s, int st, int ed);
-char	*ft_strcjoin(char *s1, char *s2, char c);
 char	**split_env(char *env);
-char	*ft_str_change(char *str, char *src, int st, int ed);
-
 /*
- *ft_is
+ *- 1_setup
  */
-int		ft_isspace(int c);
-int		ft_isquote(char c);
-int		ft_isspec(char *cmd, int i);
-
-/*
- *free_list
- */
-void	free_env(t_lst *env);
-void	free_syntax(t_lst *syntax);
-void	free_process(t_lst *process);
-void	free_token(t_lst *token);
-
-/*
- *free_struct
- */
-void	free_env_node(t_env *env);
-void	free_conf(t_conf *conf);
-void	free_lexer(t_lexer *lexer);
-void	free_cmd(t_cmd *node);
-
-/*
- *print_utils
- */
-void	print_syntax(t_lst *syntax);
-void	print_process(t_lst *process);
-void	print_env(t_lst *env);
-void	print_error(char *msg);
-void	print_token(t_lst *token);
-void	print_system(void);
-void	print_double_str(char **str);
-void	print_redir(t_control *con, t_lst *redir);
-void	print_control(t_control *con);
-void	print_cmd(t_cmd *node);
-
-/*
- *set
- */
-void	set_env(char **envp);
 void	set_prompt(void);
 int		set_process(void);
-void	set_env_null(t_lst *token);
-void	remove_quote(t_lst *token);
-
+void	set_env(char **envp);
+int		set_cmd_after_pipe(void);
 /*
- *exit
+ *- 1_setup/signal
  */
-void	exit_shell(int num);
-
-/*
- *utils
- */
-int		get_redir_fd(char *cmd);
-void	delete_env_node(char *key, t_lst *env);
-int		get_process_count(void);
-void remove_arg_quote(char **arg);
-
-/*
- *pipe
- */
-void	pipe_intro(int cnt);
-void	dup_close(int fd, int fd_std);
-void	print_error(char *str);
-void	run_execve(t_cmd *proc);
+void	sigint_handler(int signum);
+void	set_signal(void);
+void	hdoc_sig_handler(int signum);
 void	exec_sigint(int signum);
 void	exec_sigquit(int signum);
-
 /*
- * builtin
+ *- 1_setup/terminal
  */
-int		blt_intro(t_process *proc_lst);
+void	set_term_cursor(void);
+int		set_term_default(int status);
+void	set_terminal(void);
+void	return_terminal(void);
+int		get_cursor_pos(int *x, int *y);
+void	move_cursor(char *msg, int col, int row);
+/*
+ *- 2_parse
+ */
+t_lexer	*lexer(char *cmd);
+int		tokenizer(char *lex);
+t_token	*parser(t_token *token);
+void	seperate_redir(t_control *con, char type, char *token);
+t_token	*parse_token(t_token *tok, t_cmd *node, t_control *con);
+
+void	get_redirect_file(t_lst *redir, t_cmd *tmp);
+void	parse_command(t_process *node, t_lst *env);
+void	remove_arg_quote(char **arg);
+void	remove_cmd_quote(t_cmd *node);
+void	analyze_command(void);
+
+void	analyze_space(t_lexer *lexer, int i);
+void	analyze_quote_pair(t_lexer *lexer, char c, int i);
+void	analyze_operator(char *lex, int ret, int *i);
+void	check_in_quote(t_lexer *lexer, int i);
+void	analyze_lexicon(t_lexer *lexer, char *cmd, int *i);
+
+void	mark_token_type(t_token *tmp, char type, int *find_cmd);
+int		check_unexpected_token(t_token *node);
+int		check_token_type(t_lst *token, t_token *tmp, int find);
+int		analyze_unexpected_token(t_token *tok);
+int		analyze_syntax(t_lst *token);
+void	analyze_token(t_lst *token);
+int		check_valid_char(char c);
+char	*get_env_in_cmd(char *str, char *lex);
+int		get_arg_cnt(char *lex);
+char	*strdup_only_char(char *lex, char *str);
+int		check_quote_exist(char *lex);
+
+char	*find_bin(char **path);
+void	make_cmd_with_path(t_cmd *node, char **path);
+char	**split_env_value(char *key, char c, t_lst *env);
+int		check_cmd_contain_path(t_cmd *node);
+char	*make_bin_with_path(t_cmd *node, t_lst *env);
+void	set_meta_character(t_lst *token);
+char	*unclosed_pipe(void);
+/*
+ *- 2_parse/redirection
+ */
+int		exec_heredoc(char *delimeter, int hdoc_fd);
+int		set_output_redir_node(t_redirect *out);
+int		set_input_redir_node(t_redirect *input);
+int		set_heredoc(t_process *pipe);
+int		set_all_redir_lst(t_process *pipe);
+int		set_redirect(t_lst *process);
+int		exit_hdoc(char **file, int ret);
+char	*make_hdoc_file_name(int i);
+void	close_redir_fd(t_redirect *redir);
+/*
+ *- 3_execute/builtin
+ */
+int		is_chdir(int ret, char *abs_pwd);
+void	relative_path(char **b_args, char buf[512]);
+void	run_cd(char *b_args, t_blt *blt);
+int		exists_opt(int i, char **tmp);
+void	is_env(char *tmp);
+void	do_echo(int i, char **tmp, t_blt *blt);
+int		is_up_flag(char **tmp, t_blt *blt);
+void	run_echo(char *b_args, t_blt *blt);
+void	run_env(int xprt_flag);
+void	run_exit(char **args);
+void	run_export(char *b_args, t_blt *blt);
+void	run_pwd(void);
+void	run_unset(char *b_args, t_blt *blt);
 void	init_blt(t_blt *blt);
 void	set_lower(char *cmd, t_blt *blt);
 int		is_blt(char *cmd);
 void	run_builtin(int num, t_cmd *proc, t_blt *blt);
 void	not_blt(t_cmd *proc);
-void	run_echo(char *b_args, t_blt *blt);
-void	run_cd(char *b_args, t_blt *blt);
-void	run_env(int xprt_flag);
-void	run_export(char *b_args, t_blt *blt);
-void	run_pwd(void);
-void	run_unset(char *b_args, t_blt *blt);
-
-/*
- *search_env
- */
-void	change_env_lst(char *bfore_key, char *after_key, t_lst *env);
+int		blt_intro(t_process *proc_lst);
 t_env	*search_env_node(char *key, t_lst *env);
 char	*search_env_value(char *key, t_lst *env);
 t_env	*change_env_value(char *key, char *new_value, t_lst *env);
-
-char	*unclosed_pipe(void);
-char	**ft_double_strjoin(char **dst, char *src);
-
+void	change_env_lst(char *bfore_key, char *after_key, t_lst *envl);
 /*
- *exit_status
+ *- 3_execute/pipe
  */
-void	print_status(int num, t_cmd *proc);
-
+void	run_in_child(int i, int cnt, int *fd_prev, t_process *proc_lst);
+void	run_in_parents(int i, int cnt, int *fd_prev, t_cmd *proc);
+int		redir_in_pipe(t_process *proc_lst);
+void	run_pipe(int cnt);
+int		double_strlen(const char **str);
+void	run_execve(t_cmd *proc);
+void	pipe_intro(int cnt);
+void	dup_close(int fd, int fd_std);
+int		in_redir(t_cmd *proc);
+void	out_redir(t_cmd *proc);
+void	append_redir(t_cmd *proc);
+int		redir_init(t_cmd *proc);
 #endif

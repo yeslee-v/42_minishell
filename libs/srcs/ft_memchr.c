@@ -6,13 +6,13 @@
 /*   By: jaekpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 18:41:40 by jaekpark          #+#    #+#             */
-/*   Updated: 2020/10/07 18:44:37 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:46:44 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void				*ft_memchr(void *ptr, int val, size_t num)
+void	*ft_memchr(void *ptr, int val, size_t num)
 {
 	unsigned char	*ptr_tmp;
 

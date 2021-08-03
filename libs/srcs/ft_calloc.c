@@ -6,21 +6,20 @@
 /*   By: jaekpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 12:54:31 by jaekpark          #+#    #+#             */
-/*   Updated: 2020/10/14 13:02:28 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:37:17 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	char	*dest;
 	size_t	total;
 	size_t	i;
 
 	total = count * size;
-	if (!(dest = malloc(total)))
-		return (NULL);
+	dest = malloc(total);
 	i = 0;
 	while (total--)
 	{

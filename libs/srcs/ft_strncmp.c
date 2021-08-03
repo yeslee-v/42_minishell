@@ -6,13 +6,13 @@
 /*   By: jaekpark <jaekpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 18:58:55 by jaekpark          #+#    #+#             */
-/*   Updated: 2020/10/25 15:48:08 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:53:03 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strncmp(const char *s1, const char *s2, size_t num)
+size_t	ft_strncmp(const char *s1, const char *s2, size_t num)
 {
 	size_t	i;
 

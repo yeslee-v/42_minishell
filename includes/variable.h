@@ -54,12 +54,17 @@
 # define RESET "\033[0m"
 
 # define ERR_TOKEN "BraveShell: syntax error near unexpected token"
+# define ERR_TOKEN_NL "BraveShell: syntax error near unexpected token `newline'"
 # define ERR_TOKEN_EOF "BraveShell: syntax error: unexpected end of file"
+# define ERR_QUOTE "BraveShell: syntax error: unexpected token `quote\""
 
 # define BS "BraveShell"
 # define CNF "command not found"
 # define NFD "No such file or directory"
 
 # define ERRNO_CMD_NOT_FOUND 127
+# define ERRNO_SIGINT 130
+# define ERRNO_SIGQUIT 131
 # define ERRNO_UNEXPECTED_TOKEN 258
+
 #endif

@@ -6,13 +6,13 @@
 /*   By: jaekpark <jaekpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 17:53:01 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/03 15:41:20 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:47:29 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int		ft_free_single(void *ptr)
+int	ft_free_single(void *ptr)
 {
 	if (!ptr)
 		return (-1);
@@ -21,9 +21,9 @@ int		ft_free_single(void *ptr)
 	return (1);
 }
 
-int		ft_free_double(void **ptr)
+int	ft_free_double(void **ptr)
 {
-	int i;
+	int	i;
 
 	if (!ptr)
 		return (-1);

@@ -6,13 +6,13 @@
 /*   By: jaekpark <jaekpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 12:43:42 by jaekpark          #+#    #+#             */
-/*   Updated: 2020/10/15 14:14:40 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:58:25 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			arr_size(int n)
+int	arr_size(int n)
 {
 	int		count;
 
@@ -27,14 +27,22 @@ int			arr_size(int n)
 	return (count);
 }
 
-char		*ft_itoa(int n)
+void	set_dstsize(int *dstsize, int n)
+{
+	if (n < 0)
+		*dstsize = arr_size(n) + 2;
+	else
+		*dstsize = arr_size(n) + 1;
+}
+
+char	*ft_itoa(int n)
 {
 	char	*dst;
 	int		dstsize;
 
-	dstsize = n < 0 ? arr_size(n) + 2 : arr_size(n) + 1;
-	if (!(dst = malloc(sizeof(char) * dstsize)))
-		return (NULL);
+	dstsize = 0;
+	set_dstsize(&dstsize, n);
+	dst = malloc(sizeof(char) * dstsize);
 	dst[--dstsize] = '\0';
 	if (n < 0)
 	{

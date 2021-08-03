@@ -6,13 +6,13 @@
 /*   By: jaekpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 00:25:58 by jaekpark          #+#    #+#             */
-/*   Updated: 2020/10/07 01:10:15 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:47:13 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		*ft_memmove(void *dst, const void *src, size_t num)
+void	*ft_memmove(void *dst, const void *src, size_t num)
 {
 	size_t	i;
 	char	*dst_tmp;
