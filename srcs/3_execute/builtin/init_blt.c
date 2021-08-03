@@ -35,7 +35,7 @@ void	run_builtin(int num, t_cmd *proc, t_blt *blt)
 		return ;
 	}
 	if (num == B_ECHO)
-		run_echo(proc->arg, blt);
+		run_echo(proc, blt);
 	else if (num == B_CD)
 		run_cd(proc->arg, blt);
 	else if (num == B_PWD)
