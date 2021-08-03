@@ -20,6 +20,7 @@ void	run_env(int xprt_flag)
 			if (arg)
 			{
 				g_sh.exit_status = 127;
+				print_status(g_sh.exit_status, proc_lst->cmd);
 				return ;
 			}
 			else
