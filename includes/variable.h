@@ -61,6 +61,7 @@
 # define BS "BraveShell"
 # define CNF "command not found"
 # define NFD "No such file or directory"
+# define NVI "not a valid identifier"
 
 # define ERRNO_CMD_NOT_FOUND 127
 # define ERRNO_SIGINT 130

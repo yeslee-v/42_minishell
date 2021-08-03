@@ -170,7 +170,7 @@ int		exists_opt(int i, char **tmp);
 void	is_env(char *tmp);
 void	do_echo(int i, char **tmp, t_blt *blt);
 int		is_up_flag(char **tmp, t_blt *blt);
-void	run_echo(char *b_args, t_blt *blt);
+void	run_echo(t_cmd *proc, t_blt *blt);
 void	run_env(int xprt_flag);
 void	run_exit(char **args);
 void	run_export(char *b_args, t_blt *blt);

@@ -16,7 +16,14 @@ void	print_status(int num, t_cmd *proc)
 	else if (num == 1)
 	{
 		if (proc->arg)
-			printf("%s: %s: %s: %s\n", BS, proc->cmd, proc->args[1], NFD);
+		{
+			if ((ft_strcmp(proc->cmd, "export") == 0) ||
+					(ft_strcmp(proc->cmd, "unset") == 0))
+				printf("%s: %s: `%s': %s\n", BS, proc->cmd, proc->args[1], NVI);
+
+			else
+				printf("%s: %s: %s: %s\n", BS, proc->cmd, proc->args[1], NFD);
+		}
 		else
 			printf("%s: %s: %s\n", BS, proc->cmd, NFD);
 	}
