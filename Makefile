@@ -33,7 +33,8 @@ SRCS_UTILS			=	utils.c error/error.c error/exit_status.c \
 						free/free_lst.c free/free_struct.c \
 						print/print.c print/print_utils.c print/print_node.c \
 						struct/delete_env.c struct/make_struct.c struct/split_env.c 
-SRCS_SETUP			=	signal/signal.c terminal/config.c terminal/cursor.c setup.c
+SRCS_SETUP			=	signal/shell_signal.c signal/exec_signal.c \
+						terminal/config.c terminal/cursor.c setup.c
 SRCS_PARSE			=	redirection/heredoc.c redirection/redirect.c redirection/redirect_utils.c \
 						analyze_command.c analyze_lexicon.c analyze_syntax.c analyze_token.c \
 						analyze_utils.c lexer.c tokenizer.c parser.c parse_command.c parse_meta_char.c \

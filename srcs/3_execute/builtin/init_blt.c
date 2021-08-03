@@ -7,6 +7,8 @@ int	is_blt(char *cmd)
 	int	ret;
 
 	ret = 0;
+	if (!cmd)
+		return (-1);
 	if (ft_strcmp(cmd, "echo") == 0)
 		ret = B_ECHO;
 	else if (ft_strcmp(cmd, "env") == 0)

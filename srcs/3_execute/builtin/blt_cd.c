@@ -14,6 +14,17 @@ int	is_chdir(int ret, char *abs_pwd)
 	return (0);
 }
 
+void	check_error(int ret, char **b_args, char *abs_pwd)
+{
+	if (ret == -1)
+	{
+		if (abs_pwd == NULL)
+			cd_error(*b_args, strerror(errno));
+		else if (abs_pwd)
+			cd_error(abs_pwd, strerror(errno));
+	}
+}
+
 void	relative_path(char **b_args, char buf[512])
 {
 	int		ret;
@@ -31,6 +42,7 @@ void	relative_path(char **b_args, char buf[512])
 		ret = chdir(*b_args);
 	else
 		ret = chdir(abs_pwd);
+	check_error(ret, b_args, abs_pwd);
 	if (is_chdir(ret, abs_pwd))
 		return ;
 	else if (!(ret))

@@ -32,6 +32,7 @@ void	error_with_message(char *msg, int exit_status);
 void	print_status(int num, t_cmd *proc);
 void	token_error(char *token, int exit_status);
 int		redir_error(char *file, char *err_msg);
+void	cd_error(char *dir, char *err_msg);
 /*
  *- 0_utils/free
  */
