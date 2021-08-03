@@ -6,6 +6,7 @@ void	sigint_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
+		printf("%d\n", rl_point);
 		g_sh.exit_status = 1;
 		printf("\n");
 		rl_on_new_line();
@@ -14,10 +15,31 @@ void	sigint_handler(int signum)
 	}
 }
 
+void	sigquit_handler(int signum)
+{
+	/*int size;*/
+
+	/*if (signum == SIGQUIT)*/
+	/*{*/
+		/*size = ft_strlen(rl_line_buffer);*/
+		/*rl_on_new_line();*/
+	/*}*/
+	if (signum == SIGQUIT)
+	{
+		printf("\nQuit: 3\n");
+		exit(131);
+	}
+}
+
 void	set_signal(void)
 {
+	int size;
+
+	size = ft_strlen(rl_line_buffer);
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
+	if (size > 0)
+		signal(SIGQUIT, sigquit_handler);
 }
 
 void	hdoc_sig_handler(int signum)
