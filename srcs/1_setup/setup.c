@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/08/03 03:11:56 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/08/03 16:54:43 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	set_prompt(void)
 	g_sh.cmd = readline(PROMPT);
 	if (g_sh.cmd == NULL)
 	{
-		move_cursor("exit", 11, 2);
+		move_cursor("exit\n", 11, 2);
+		free_conf(&g_sh);
+		free_env(g_sh.env);
 		exit(0);
 	}
 }

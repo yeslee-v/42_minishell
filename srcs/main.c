@@ -26,13 +26,30 @@ int	set_minishell(void)
 	return (ret);
 }
 
+void	execute_command(t_process *node)
+{
+	int	process;
+	int	builtin;
+
+	builtin = 0;
+	if (!node || !node->cmd)
+		return ;
+	process = get_process_count();
+	if (process == 1)
+		builtin = is_blt(node->cmd->cmd);
+	if (builtin > 3)
+	{
+		blt_intro(node);
+		dup2(g_sh.fd_backup[0], READ);
+		dup2(g_sh.fd_backup[1], WRITE);
+	}
+	else
+		pipe_intro(process);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	int			ret;
-	int			proc_cnt;
-	t_process	*proc_lst;
-	t_cmd		*proc;
-	int			num;
 
 	if (!ac || !av)
 		return (-1);
@@ -40,30 +57,11 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		ret = set_minishell();
-		if (g_sh.process->head != NULL)
-		{
-			proc_lst = g_sh.process->head;
-			proc = proc_lst->cmd;
-		}
-		if (ret != 1 && proc != NULL)
+		if (ret != 1)
 		{
 			analyze_command();
-			proc_cnt = get_process_count();
-			num = is_blt(proc->cmd);
-			if (proc_cnt == 1 && (num > 3))
-			{
-				blt_intro(proc_lst);
-				if (g_sh.exit_status)
-					print_status(g_sh.exit_status, proc);
-				dup2(g_sh.fd_backup[0], READ);
-				dup2(g_sh.fd_backup[1], WRITE);
-			}
-			else
-				pipe_intro(proc_cnt);
+			execute_command(g_sh.process->head);
 		}
-		/*
-		 *print_system();
-		 */
 		free_conf(&g_sh);
 	}
 	free_env(g_sh.env);

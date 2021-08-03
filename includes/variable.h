@@ -55,7 +55,7 @@
 
 # define ERR_TOKEN "BraveShell: syntax error near unexpected token"
 # define ERR_TOKEN_NL "BraveShell: syntax error near unexpected token `newline'"
-# define ERR_TOKEN_EOF "BraveShell: syntax error: unexpected end of file"
+# define ERR_TOKEN_EOF "BraveShell: syntax error: unexpected end of file\n"
 # define ERR_QUOTE "BraveShell: syntax error: unexpected token `quote\""
 
 # define BS "BraveShell"

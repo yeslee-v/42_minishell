@@ -6,7 +6,7 @@
 /*   By: jaekpark <jaekpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 20:58:26 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/07/03 15:44:26 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 16:08:53 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,32 @@
 #  define OPEN_MAX 50
 # endif
 
-typedef struct		s_node
+typedef struct s_node
 {
 	int				val;
 	int				idx;
 	int				is_sorted;
 	struct s_node	*prev;
 	struct s_node	*next;
-}					t_node;
+}	t_node;
 
-typedef struct		s_stack
+typedef struct s_stack
 {
 	t_node			*bot;
 	t_node			*cur;
 	t_node			*top;
 }					t_stack;
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}					t_list;
+}	t_list;
 
 void				*ft_memset(void *ptr, int value, size_t num);
 void				ft_bzero(void *ptr, size_t num);
 void				*ft_memcpy(void *dst, const void *src, size_t num);
-void				*ft_memccpy(void *dst, const void *src,\
-int val, size_t num);
+void				*ft_memccpy(void *dst, void *src, int val, size_t num);
 void				*ft_memmove(void *dst, const void *src, size_t num);
 void				*ft_memchr(void *ptr, int val, size_t num);
 int					ft_memcmp(const void *ptr1, const void *ptr2, size_t num);
