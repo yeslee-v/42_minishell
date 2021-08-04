@@ -32,7 +32,7 @@ void	run_in_parents(int i, int cnt, int *fd_prev, t_cmd *proc)
 	if (g_sh.exit_status)
 	{
 		if (g_sh.exit_status == 127)
-			print_status(WEXITSTATUS(status), proc);
+			print_status(g_sh.exit_status, proc);
 		return ;
 	}
 	if (!(WIFEXITED(status)))
