@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/08/04 16:55:03 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/08/04 17:14:18 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,6 @@ int	set_cmd_after_pipe(void)
 
 void	set_prompt(void)
 {
-	int x;
-	int y;
-	int a;
-	char buf[521];
-
 	g_sh.cmd = readline(PROMPT);
 	if (g_sh.cmd == NULL)
 	{

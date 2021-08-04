@@ -30,7 +30,6 @@ void	execute_command(t_process *node)
 {
 	int	process;
 	int	builtin;
-	int cnt;
 
 	builtin = 0;
 	if (!node || !node->cmd)

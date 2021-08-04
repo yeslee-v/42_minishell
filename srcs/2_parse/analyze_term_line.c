@@ -22,7 +22,7 @@ int	find_opt(int i, char **tmp)
 	return (j);
 }
 
-int	do_calc(int i, char **tmp, t_blt *blt, char *arg)
+int	do_calc(int i, char **tmp, t_blt *blt)
 {
 	int ret;
 
@@ -73,7 +73,7 @@ int	calc_echo(t_cmd *proc, t_blt *blt)
 		return (0);
 	tmp = ft_split(proc->arg, ' ');
 	i = set_up_flag(tmp, blt);
-	ret = do_calc(i, tmp, blt, proc->arg);
+	ret = do_calc(i, tmp, blt);
 	ft_free_double((void **)tmp);
 	return (ret);
 }
