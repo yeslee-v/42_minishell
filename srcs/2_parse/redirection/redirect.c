@@ -70,8 +70,9 @@ int	set_all_redir_lst(t_process *pipe)
 		else if (node->type == 'I')
 			ret = set_input_redir_node(node);
 		node = node->next;
+		if (ret == 1)
+			pipe->redir_err = 1;
 	}
-	pipe->redir_err = 1;
 	return (ret);
 }
 

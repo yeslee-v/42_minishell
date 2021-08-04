@@ -7,6 +7,8 @@ void	run_in_child(int i, int cnt, int *fd_prev, t_process *proc_lst)
 	return_terminal();
 	signal(SIGINT, exec_sigint);
 	signal(SIGQUIT, exec_sigquit);
+	if (proc_lst->redir_err == 1)
+		exit(1);
 	if (i > 0)
 	{
 		dup2(*fd_prev, STDIN);
@@ -30,8 +32,6 @@ void	run_in_parents(int i, int cnt, int *fd_prev, t_cmd *proc)
 	wait(&status);
 	set_terminal();
 	g_sh.exit_status = WEXITSTATUS(status);
-	if (g_sh.exit_status)
-		return ;
 	if (!(WIFEXITED(status)))
 		return ;
 	if (i > 0)
@@ -69,8 +69,7 @@ void	run_pipe(int cnt)
 		proc = proc_lst->cmd;
 		if (i != (cnt - 1))
 			pipe(g_sh.pipe.fd);
-		if (redir_in_pipe(proc_lst))
-			return ;
+		redir_in_pipe(proc_lst);
 		g_sh.pipe.pid[i] = fork();
 		if (g_sh.pipe.pid[i] > 0)
 			run_in_parents(i, cnt, &fd_prev, proc);

@@ -26,51 +26,38 @@ int	is_blt(char *cmd)
 	return (ret);
 }
 
-void	run_builtin(int num, t_cmd *proc, t_blt *blt)
+void	run_builtin(int num, t_process *proc_lst, t_blt *blt)
 {
 	int	redir;
 
-	redir = redir_init(proc);
+	if (proc_lst->redir_err == 1)
+		return ;
+	redir = redir_init(proc_lst->cmd);
 	if (redir == 1)
 	{
 		g_sh.exit_status = 1;
 		return ;
 	}
 	if (num == B_ECHO)
-		run_echo(proc, blt);
+		run_echo(proc_lst->cmd, blt);
 	else if (num == B_CD)
-		run_cd(proc->arg, blt);
+		run_cd(proc_lst->cmd->arg, blt);
 	else if (num == B_PWD)
 		run_pwd();
 	else if (num == B_EXPORT)
-		run_export(proc, blt);
+		run_export(proc_lst->cmd, blt);
 	else if (num == B_UNSET)
-		run_unset(proc->args, blt);
+		run_unset(proc_lst->cmd->args, blt);
 	else if (num == B_ENV)
-		run_env(0, proc);
+		run_env(0, proc_lst->cmd);
 	else if (num == B_EXIT)
-		run_exit(proc->args);
+		run_exit(proc_lst->cmd->args);
 }
 
 void	not_blt(t_cmd *proc)
 {
-	pid_t	pid;
-	int		status;
-	char	*path;
-
-	path = search_env_value("PATH", g_sh.env);
-	pid = fork();
-	if (pid > 0)
-	{
-		wait(&status);
-		g_sh.exit_status = WEXITSTATUS(status);
-		return ;
-	}
-	else if (pid == 0)
-	{
-		redir_init(proc);
-		run_execve(proc);
-	}
+	redir_init(proc);
+	run_execve(proc);
 }
 
 int	blt_intro(t_process *proc_lst)
@@ -84,9 +71,10 @@ int	blt_intro(t_process *proc_lst)
 	proc = proc_lst->cmd;
 	init_blt(&blt);
 	set_lower(proc->cmd, &blt);
+	redir_in_pipe(proc_lst);
 	ret = is_blt(proc->cmd);
 	if (ret)
-		run_builtin(ret, proc, &blt);
+		run_builtin(ret, proc_lst, &blt);
 	else if (!ret)
 		not_blt(proc);
 	return (ret);

@@ -17,7 +17,7 @@ int	double_strlen(const char **str)
 
 void	run_execve(t_cmd *proc)
 {
-	if (!(proc->bin))
+	if (!(proc->bin) || (proc->cmd && proc->cmd[0] == '\0'))
 	{
 		ft_putstr_fd("BraveShell: ", 2);
 		ft_putstr_fd(proc->cmd, 2);
@@ -25,4 +25,13 @@ void	run_execve(t_cmd *proc)
 		exit(127);
 	}
 	execve(proc->bin, (char *const *)proc->args, g_sh.envp);
+	if (errno != 0)
+	{
+		ft_putstr_fd("BraveShell: ", 2);
+		ft_putstr_fd(proc->bin, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
+	}
 }

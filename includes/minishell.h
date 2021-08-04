@@ -182,7 +182,7 @@ int		check_args(char *b_args, t_cmd *proc);
 void	init_blt(t_blt *blt);
 void	set_lower(char *cmd, t_blt *blt);
 int		is_blt(char *cmd);
-void	run_builtin(int num, t_cmd *proc, t_blt *blt);
+void	run_builtin(int num, t_process *proc_lst, t_blt *blt);
 void	not_blt(t_cmd *proc);
 int		blt_intro(t_process *proc_lst);
 t_env	*search_env_node(char *key, t_lst *env);
