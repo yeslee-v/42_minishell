@@ -10,7 +10,7 @@ static void	init_pos(int *x, int *y)
 
 static int	print_tc(int tc)
 {
-	write(1, &tc, 1);
+	write(0, &tc, 1);
 	return (1);
 }
 
@@ -48,9 +48,9 @@ void	move_cursor(char *msg, int col, int row)
 	x = 0;
 	y = 0;
 	get_cursor_pos(&x, &y);
-	tgetent(NULL, "xterm");
+	tgetent(NULL, getenv("TERM"));
 	cm = tgetstr("cm", NULL);
-	tputs(tgoto(cm, y + col, x - row), 1, print_tc);
+	tputs(tgoto(cm, y + col, x - row), 0, print_tc);
 	if (msg)
 		printf("%s", msg);
 }

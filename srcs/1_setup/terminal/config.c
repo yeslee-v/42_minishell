@@ -7,7 +7,8 @@ void	set_term_cursor(void)
 	struct termios	cursor;
 
 	tcgetattr(0, &cursor);
-	cursor.c_lflag &= ~(ICANON | ECHO);
+	cursor.c_lflag &= ~ICANON;
+	cursor.c_lflag &= ~ECHO;
 	tcsetattr(0, TCSANOW, &cursor);
 }
 

@@ -38,7 +38,7 @@ SRCS_SETUP			=	signal/shell_signal.c signal/exec_signal.c \
 SRCS_PARSE			=	redirection/heredoc.c redirection/redirect.c redirection/redirect_utils.c \
 						analyze_command.c analyze_lexicon.c analyze_syntax.c analyze_token.c \
 						analyze_utils.c lexer.c tokenizer.c parser.c parse_command.c parse_meta_char.c \
-						parse_unclosed_pipe.c
+						parse_unclosed_pipe.c analyze_term_line.c
 SRCS_EXEC			=	builtin/blt_cd.c builtin/blt_echo.c builtin/blt_env.c builtin/blt_exit.c \
 						builtin/blt_export.c builtin/blt_pwd.c builtin/blt_unset.c builtin/blt_utils.c \
 						builtin/init_blt.c builtin/print_env.c builtin/check_value.c \

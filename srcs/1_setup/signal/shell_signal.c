@@ -29,7 +29,6 @@ void	sigquit_handler(int signum)
 		if (size != 0)
 		{
 			printf("\nQuit: 3\n");
-			free_conf(&g_sh);
 			free_env(g_sh.env);
 			exit(131);
 		}

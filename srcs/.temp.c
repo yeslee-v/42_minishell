@@ -1,7 +1,169 @@
 /*
  *exeve test
  */
+static void	unset_error(char *arg)
+{
+	ft_putstr_fd("BraveShell: unset: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd("not a valid identifier\n", 1);
+}
 
+static int	env_char(char c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	else if (c >= 'A' && c <= 'Z')
+		return (1);
+	else if (c == '_')
+		return (1);
+	else if (c >= '0' && c <= '9')
+		return (2);
+	return (0);
+}
+
+static int	check_valid_arg(char *arg)
+{
+	int	ret;
+	int	i;
+
+	ret = 0;
+	i = 0;
+	if (!arg)
+		return (-1);
+	ret = check_valid_char(arg[0]);
+	if (ret != 1)
+		return (-1);
+	while (arg[++i])
+	{
+		if ((env_char(arg[i])) == 0)
+			return (-1);
+	}
+	return (1);
+}
+
+static int	check_args(char **args)
+{
+	int	i;
+	int	valid;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	valid = 1;
+	if (!args)
+		return (-1);
+	while (args[++i])
+	{
+		valid = check_valid_arg(args[i]);
+		if (valid == -1)
+		{
+			unset_error(args[i]);
+			ret = -1;
+		}
+		else
+			delete_env_node(args[i], g_sh.env);
+	}
+	return (ret);
+}
+
+void	run_unset(char **args, t_blt *blt)
+{
+	int	size;
+	int	ret;
+
+	ret = 0;
+	if (!args)
+		return ;
+	size = ft_double_strlen((const char **)args);
+	if (size <= 1 || (blt->up_flag == 1))
+		return ;
+	ret = check_args(args);
+	if (ret == -1)
+		g_sh.exit_status = 1;
+}int	check_echo_opt(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (!arg)
+		return (0);
+	while (arg[i])
+	{
+		if (arg[0] == '-')
+			i++;
+		if (arg[i] != 'n')
+			return (0);
+	}
+	return (1);
+}
+
+int	check_echo_arg_lower(char **args)
+{
+	int i;
+	int	opt;
+	int size;
+	int	ret;
+
+	i = -1;
+	opt = 0;
+	ret = 0;
+	if (!args)
+		return (0);
+	size = ft_double_strlen((const char **)args);
+	if (size <= 2)
+		return (0);
+	while (args[++i])
+	{
+		while (opt == 0 && args[i])
+		{
+			if ((check_echo_opt(args[i])) != 1)
+			{
+				opt = -1;
+				break ;
+			}
+		}
+		ret += ft_strlen(args[i]) + 1;
+	}
+	ret--;
+	return (ret);
+}
+
+int	check_uppercase(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			return (0);
+	}
+	return (1);
+}
+
+int	check_echo(t_process *node)
+{
+	int	ret;
+	t_cmd *target;
+	t_control *tmp;
+
+	if (!node)
+		return (0);
+	tmp = node->con;
+	target = node->cmd;
+	if (!target)
+		return (0);
+	if (tmp || tmp->o_redir || tmp->o_redir->head)
+		return (0);
+	if (!target->cmd)
+		return (0);
+	if (check_uppercase(target->cmd))
+		ret = check_echo_arg_lower(target->args);
+	else
+		ret = check_echo_arg_upper(target->args);
+	return (ret);
+}
 	t_process *p;
 	t_redirect *i;
 	t_redirect *o;
@@ -140,6 +302,89 @@ int	check_precede_fd(char *cmd, int i)
 		}
 		else
 			break ;
+int	check_echo_opt(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (!arg)
+		return (0);
+	while (arg[i])
+	{
+		if (arg[0] == '-')
+			i++;
+		if (arg[i] != 'n')
+			return (0);
+	}
+	return (1);
+}
+
+int	check_echo_arg_lower(char **args)
+{
+	int i;
+	int	opt;
+	int size;
+	int	ret;
+
+	i = -1;
+	opt = 0;
+	ret = 0;
+	if (!args)
+		return (0);
+	size = ft_double_strlen((const char **)args);
+	if (size <= 2)
+		return (0);
+	while (args[++i])
+	{
+		while (opt == 0 && args[i])
+		{
+			if ((check_echo_opt(args[i])) != 1)
+			{
+				opt = -1;
+				break ;
+			}
+		}
+		ret += ft_strlen(args[i]) + 1;
+	}
+	ret--;
+	return (ret);
+}
+
+int	check_uppercase(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			return (0);
+	}
+	return (1);
+}
+
+int	check_echo(t_process *node)
+{
+	int	ret;
+	t_cmd *target;
+	t_control *tmp;
+
+	if (!node)
+		return (0);
+	tmp = node->con;
+	target = node->cmd;
+	if (!target)
+		return (0);
+	if (tmp || tmp->o_redir || tmp->o_redir->head)
+		return (0);
+	if (!target->cmd)
+		return (0);
+	if (check_uppercase(target->cmd))
+		ret = check_echo_arg_lower(target->args);
+	else
+		ret = check_echo_arg_upper(target->args);
+	return (ret);
+}
 	}
 	if (start == 1 && i == -1)
 		return (1);
