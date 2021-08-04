@@ -26,7 +26,7 @@ DIR_UTILS			=	0_utils/
 DIR_SETUP			=	1_setup/
 DIR_PARSE			=	2_parse/
 DIR_EXEC			=	3_execute/
-SRCS_UTILS			=	utils.c error/error.c error/exit_status.c \
+SRCS_UTILS			=	utils.c error/error.c \
 						ft_utils/ft_double_strjoin.c ft_utils/ft_is.c ft_utils/ft_str_change.c \
 						ft_utils/ft_strcjoin.c ft_utils/ft_strrdup.c ft_utils/ft_strstr.c \
 						init/init_struct.c init/init_tool.c \
@@ -41,7 +41,7 @@ SRCS_PARSE			=	redirection/heredoc.c redirection/redirect.c redirection/redirect
 						parse_unclosed_pipe.c
 SRCS_EXEC			=	builtin/blt_cd.c builtin/blt_echo.c builtin/blt_env.c builtin/blt_exit.c \
 						builtin/blt_export.c builtin/blt_pwd.c builtin/blt_unset.c builtin/blt_utils.c \
-						builtin/init_blt.c builtin/print_env.c \
+						builtin/init_blt.c builtin/print_env.c builtin/check_value.c \
 						pipe/init_pipe.c pipe/run.c pipe/run_redir.c
 SRCS				=	$(addprefix $(DIR_UTILS), $(SRCS_UTILS)) $(addprefix $(DIR_SETUP), $(SRCS_SETUP)) \
 						$(addprefix $(DIR_PARSE), $(SRCS_PARSE)) $(addprefix $(DIR_EXEC), $(SRCS_EXEC)) main.c

@@ -29,7 +29,6 @@ int		get_process_count(void);
  *- 0_utils/error
  */
 void	error_with_message(char *msg, int exit_status);
-void	print_status(int num, t_cmd *proc);
 void	token_error(char *token, int exit_status);
 int		redir_error(char *file, char *err_msg);
 void	cd_error(char *dir, char *err_msg);
@@ -172,11 +171,11 @@ void	is_env(char *tmp);
 void	do_echo(int i, char **tmp, t_blt *blt);
 int		is_up_flag(char **tmp, t_blt *blt);
 void	run_echo(t_cmd *proc, t_blt *blt);
-void	run_env(int xprt_flag);
+void	run_env(int xprt_flag, t_cmd *proc);
 void	run_exit(char **args);
 void	run_export(t_cmd *proc, t_blt *blt);
 void	run_pwd(void);
-void	run_unset(char *b_args, t_cmd *proc, t_blt *blt);
+void	run_unset(char **args, t_blt *blt);
 int		check_args(char *b_args, t_cmd *proc);
 void	init_blt(t_blt *blt);
 void	set_lower(char *cmd, t_blt *blt);

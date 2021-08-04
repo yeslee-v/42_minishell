@@ -24,17 +24,14 @@ void	run_in_parents(int i, int cnt, int *fd_prev, t_cmd *proc)
 {
 	int	status;
 
+	(void)proc;
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	wait(&status);
 	set_terminal();
 	g_sh.exit_status = WEXITSTATUS(status);
 	if (g_sh.exit_status)
-	{
-		if (g_sh.exit_status == 127)
-			print_status(WEXITSTATUS(status), proc);
 		return ;
-	}
 	if (!(WIFEXITED(status)))
 		return ;
 	if (i > 0)

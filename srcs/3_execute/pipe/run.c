@@ -18,6 +18,11 @@ int	double_strlen(const char **str)
 void	run_execve(t_cmd *proc)
 {
 	if (!(proc->bin))
+	{
+		ft_putstr_fd("BraveShell: ", 2);
+		ft_putstr_fd(proc->cmd, 2);
+		ft_putstr_fd(": command not found\n", 2);
 		exit(127);
+	}
 	execve(proc->bin, (char *const *)proc->args, g_sh.envp);
 }
