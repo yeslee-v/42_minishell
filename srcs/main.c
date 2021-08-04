@@ -30,6 +30,7 @@ void	execute_command(t_process *node)
 {
 	int	process;
 	int	builtin;
+	int cnt;
 
 	builtin = 0;
 	if (!node || !node->cmd)
@@ -39,6 +40,7 @@ void	execute_command(t_process *node)
 		builtin = is_blt(node->cmd->cmd);
 	if (builtin > 3)
 	{
+		g_sh.col = 12;
 		blt_intro(node);
 		dup2(g_sh.fd_backup[0], READ);
 		dup2(g_sh.fd_backup[1], WRITE);
@@ -47,19 +49,40 @@ void	execute_command(t_process *node)
 		pipe_intro(process);
 }
 
+void	calc_cursor(t_process *node)
+{
+	int	builtin;
+	t_blt blt;
+	int ret;
+
+	ret = 0;
+	if (!node || !node->cmd || !node->cmd->cmd)
+		return ;
+	builtin = 0;
+	init_blt(&blt);
+	builtin = is_blt(node->cmd->cmd);
+	if (builtin == B_ECHO)
+		ret = calc_echo(node->cmd, &blt);
+	g_sh.col = 12 + ret;
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	int			ret;
+	t_process	*node;
 
 	if (!ac || !av)
 		return (-1);
 	set_default_config(envp);
+	g_sh.col = 12;
 	while (1)
 	{
 		ret = set_minishell();
 		if (ret != 1)
 		{
 			analyze_command();
+			node = g_sh.process->tail;
+			calc_cursor(node);
 			execute_command(g_sh.process->head);
 		}
 		free_conf(&g_sh);

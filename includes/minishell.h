@@ -123,6 +123,7 @@ void	parse_command(t_process *node, t_lst *env);
 void	remove_arg_quote(char **arg);
 void	remove_cmd_quote(t_cmd *node);
 void	analyze_command(void);
+int		calc_echo(t_cmd *proc, t_blt *blt);
 
 void	analyze_space(t_lexer *lexer, int i);
 void	analyze_quote_pair(t_lexer *lexer, char c, int i);
@@ -176,7 +177,7 @@ void	run_env(int xprt_flag);
 void	run_exit(char **args);
 void	run_export(char *b_args, t_blt *blt);
 void	run_pwd(void);
-void	run_unset(char *b_args, t_blt *blt);
+void	run_unset(char **args, t_blt *blt);
 void	init_blt(t_blt *blt);
 void	set_lower(char *cmd, t_blt *blt);
 int		is_blt(char *cmd);

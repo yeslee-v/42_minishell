@@ -10,6 +10,7 @@ static int	write_text(int fd[2], int hdoc_fd)
 
 	eof = -1;
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	close(fd[WRITE]);
 	wait(&status);
 	if (!(WIFEXITED(status)))
@@ -40,6 +41,7 @@ static void	receive_text(int fd[2], char *delimeter)
 	while (1)
 	{
 		signal(SIGINT, hdoc_sig_handler);
+		signal(SIGQUIT, SIG_IGN);
 		line = readline("> ");
 		if (!line || ((ft_strcmp(line, delimeter)) == 0))
 		{

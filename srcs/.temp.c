@@ -2,6 +2,89 @@
  *exeve test
  */
 
+int	check_echo_opt(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (!arg)
+		return (0);
+	while (arg[i])
+	{
+		if (arg[0] == '-')
+			i++;
+		if (arg[i] != 'n')
+			return (0);
+	}
+	return (1);
+}
+
+int	check_echo_arg_lower(char **args)
+{
+	int i;
+	int	opt;
+	int size;
+	int	ret;
+
+	i = -1;
+	opt = 0;
+	ret = 0;
+	if (!args)
+		return (0);
+	size = ft_double_strlen((const char **)args);
+	if (size <= 2)
+		return (0);
+	while (args[++i])
+	{
+		while (opt == 0 && args[i])
+		{
+			if ((check_echo_opt(args[i])) != 1)
+			{
+				opt = -1;
+				break ;
+			}
+		}
+		ret += ft_strlen(args[i]) + 1;
+	}
+	ret--;
+	return (ret);
+}
+
+int	check_uppercase(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			return (0);
+	}
+	return (1);
+}
+
+int	check_echo(t_process *node)
+{
+	int	ret;
+	t_cmd *target;
+	t_control *tmp;
+
+	if (!node)
+		return (0);
+	tmp = node->con;
+	target = node->cmd;
+	if (!target)
+		return (0);
+	if (tmp || tmp->o_redir || tmp->o_redir->head)
+		return (0);
+	if (!target->cmd)
+		return (0);
+	if (check_uppercase(target->cmd))
+		ret = check_echo_arg_lower(target->args);
+	else
+		ret = check_echo_arg_upper(target->args);
+	return (ret);
+}
 	t_process *p;
 	t_redirect *i;
 	t_redirect *o;
@@ -140,6 +223,89 @@ int	check_precede_fd(char *cmd, int i)
 		}
 		else
 			break ;
+int	check_echo_opt(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (!arg)
+		return (0);
+	while (arg[i])
+	{
+		if (arg[0] == '-')
+			i++;
+		if (arg[i] != 'n')
+			return (0);
+	}
+	return (1);
+}
+
+int	check_echo_arg_lower(char **args)
+{
+	int i;
+	int	opt;
+	int size;
+	int	ret;
+
+	i = -1;
+	opt = 0;
+	ret = 0;
+	if (!args)
+		return (0);
+	size = ft_double_strlen((const char **)args);
+	if (size <= 2)
+		return (0);
+	while (args[++i])
+	{
+		while (opt == 0 && args[i])
+		{
+			if ((check_echo_opt(args[i])) != 1)
+			{
+				opt = -1;
+				break ;
+			}
+		}
+		ret += ft_strlen(args[i]) + 1;
+	}
+	ret--;
+	return (ret);
+}
+
+int	check_uppercase(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			return (0);
+	}
+	return (1);
+}
+
+int	check_echo(t_process *node)
+{
+	int	ret;
+	t_cmd *target;
+	t_control *tmp;
+
+	if (!node)
+		return (0);
+	tmp = node->con;
+	target = node->cmd;
+	if (!target)
+		return (0);
+	if (tmp || tmp->o_redir || tmp->o_redir->head)
+		return (0);
+	if (!target->cmd)
+		return (0);
+	if (check_uppercase(target->cmd))
+		ret = check_echo_arg_lower(target->args);
+	else
+		ret = check_echo_arg_upper(target->args);
+	return (ret);
+}
 	}
 	if (start == 1 && i == -1)
 		return (1);

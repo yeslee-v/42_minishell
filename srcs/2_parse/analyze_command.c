@@ -81,11 +81,13 @@ void	remove_cmd_quote(t_cmd *node)
 void	analyze_command(void)
 {
 	t_process	*node;
+	t_process	*last;
 
 	node = NULL;
 	if (!g_sh.process)
 		return ;
 	node = g_sh.process->head;
+	node = g_sh.process->tail;
 	while (node)
 	{
 		remove_cmd_quote(node->cmd);

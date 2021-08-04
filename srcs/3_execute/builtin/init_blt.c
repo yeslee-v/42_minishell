@@ -45,7 +45,7 @@ void	run_builtin(int num, t_cmd *proc, t_blt *blt)
 	else if (num == B_EXPORT)
 		run_export(proc->arg, blt);
 	else if (num == B_UNSET)
-		run_unset(proc->arg, blt);
+		run_unset(proc->args, blt);
 	else if (num == B_ENV)
 		run_env(0);
 	else if (num == B_EXIT)
