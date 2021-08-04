@@ -62,6 +62,7 @@
 # define CNF "command not found"
 # define NFD "No such file or directory"
 # define NVI "not a valid identifier"
+# define ENF "event not found"
 
 # define ERRNO_CMD_NOT_FOUND 127
 # define ERRNO_SIGINT 130

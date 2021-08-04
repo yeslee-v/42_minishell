@@ -32,7 +32,7 @@ char	**split_args(char *b_args, t_cmd *proc)
 	if (i == 0)
 	{
 		g_sh.exit_status = 1;
-		print_status(g_sh.exit_status, proc);
+		printf("%s: %s: `%s': %s\n", BS, proc->cmd, b_args, NVI);
 		return (NULL);
 	}
 	tmp = malloc(sizeof(char *) * 3);
@@ -79,7 +79,7 @@ void	run_export(t_cmd *proc, t_blt *blt)
 		return ;
 	if (!(proc->arg))
 	{
-		run_env(1);
+		run_env(1, proc);
 		return ;
 	}
 	i = 0;

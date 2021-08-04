@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-void	run_env(int xprt_flag)
+void	run_env(int xprt_flag, t_cmd *proc)
 {
 	t_env		*env_tmp;
 	t_process	*proc_lst;
@@ -20,6 +20,7 @@ void	run_env(int xprt_flag)
 			if (arg)
 			{
 				g_sh.exit_status = 127;
+				printf("%s: %s: %s\n", proc->cmd, proc->args[1], NFD);
 				return ;
 			}
 			else

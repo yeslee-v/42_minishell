@@ -2,35 +2,84 @@
 
 extern t_conf	g_sh;
 
-int	check_args(char *b_args, t_cmd *proc)
+static void	unset_error(char *arg)
 {
-	int	i;
+	ft_putstr_fd("BraveShell: unset: `", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd("': ", 2);
+	ft_putstr_fd("not a valid identifier\n", 1);
+}
 
-	if (!(ft_isalpha(b_args[0]) || (b_args[0] == '_')))
-	{
-		g_sh.exit_status = 1;
-		print_status(g_sh.exit_status, proc);
+static int	env_char(char c)
+{
+	if (c >= 'a' && c <= 'z')
 		return (1);
-	}
-	i = 0;
-	while (b_args[++i])
-	{
-		if (!(ft_isalpha(b_args[i]) || (b_args[i] == '_') || \
-					ft_isdigit(b_args[i])))
-		{
-			g_sh.exit_status = 1;
-			print_status(g_sh.exit_status, proc);
-			return (1);
-		}
-	}
+	else if (c >= 'A' && c <= 'Z')
+		return (1);
+	else if (c == '_')
+		return (1);
+	else if (c >= '0' && c <= '9')
+		return (2);
 	return (0);
 }
 
-void	run_unset(char *b_args, t_cmd *proc, t_blt *blt)
+static int	check_valid_arg(char *arg)
 {
-	if ((blt->up_flag == 1) || !(b_args))
+	int	ret;
+	int	i;
+
+	ret = 0;
+	i = 0;
+	if (!arg)
+		return (-1);
+	ret = env_char(arg[0]);
+	if (ret != 1)
+		return (-1);
+	while (arg[++i])
+	{
+		if ((env_char(arg[i])) == 0)
+			return (-1);
+	}
+	return (1);
+}
+
+static int	check_unset_args(char **args)
+{
+	int	i;
+	int	valid;
+	int	ret;
+
+	i = 0;
+	ret = 0;
+	valid = 1;
+	if (!args)
+		return (-1);
+	while (args[++i])
+	{
+		valid = check_valid_arg(args[i]);
+		if (valid == -1)
+		{
+			unset_error(args[i]);
+			ret = -1;
+		}
+		else
+			delete_env_node(args[i], g_sh.env);
+	}
+	return (ret);
+}
+
+void	run_unset(char **args, t_blt *blt)
+{
+	int	size;
+	int	ret;
+
+	ret = 0;
+	if (!args)
 		return ;
-	if (check_args(proc->arg, proc))
+	size = ft_double_strlen((const char **)args);
+	if (size <= 1 || (blt->up_flag == 1))
 		return ;
-	delete_env_node(b_args, g_sh.env);
+	ret = check_unset_args(args);
+	if (ret == -1)
+		g_sh.exit_status = 1;
 }
