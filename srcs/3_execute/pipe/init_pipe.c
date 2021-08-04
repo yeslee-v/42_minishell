@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-void			run_in_child(int i, int cnt, int *fd_prev, t_process *proc_lst)
+void	run_in_child(int i, int cnt, int *fd_prev, t_process *proc_lst)
 {
 	return_terminal();
 	signal(SIGINT, exec_sigint);
@@ -20,7 +20,7 @@ void			run_in_child(int i, int cnt, int *fd_prev, t_process *proc_lst)
 	exit(g_sh.exit_status);
 }
 
-void			run_in_parents(int i, int cnt, int *fd_prev, t_cmd *proc)
+void	run_in_parents(int i, int cnt, int *fd_prev, t_cmd *proc)
 {
 	int	status;
 
@@ -45,7 +45,7 @@ void			run_in_parents(int i, int cnt, int *fd_prev, t_cmd *proc)
 	close(g_sh.pipe.fd[1]);
 }
 
-int				redir_in_pipe(t_process *proc_lst)
+int	redir_in_pipe(t_process *proc_lst)
 {
 	int	redir_prev;
 
@@ -58,7 +58,7 @@ int				redir_in_pipe(t_process *proc_lst)
 	return (0);
 }
 
-void			run_pipe(int cnt)
+void	run_pipe(int cnt)
 {
 	int			i;
 	int			fd_prev;
@@ -85,7 +85,7 @@ void			run_pipe(int cnt)
 	}
 }
 
-void			pipe_intro(int cnt)
+void	pipe_intro(int cnt)
 {
 	g_sh.pipe.pid = malloc(sizeof(pid_t) * cnt);
 	if (!(g_sh.pipe.pid))
