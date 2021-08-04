@@ -6,7 +6,7 @@
 /*   By: parkjaekwang <marvin@42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 19:26:58 by parkjaekw         #+#    #+#             */
-/*   Updated: 2021/08/04 17:14:18 by parkjaekw        ###   ########.fr       */
+/*   Updated: 2021/08/04 20:24:49 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	set_prompt(void)
 	g_sh.cmd = readline(PROMPT);
 	if (g_sh.cmd == NULL)
 	{
-		move_cursor("exit\n", g_sh.col - 1 , 2);
+		move_cursor("exit\n", g_sh.col - 1, 2);
 		free_conf(&g_sh);
 		free_env(g_sh.env);
 		exit(0);
@@ -59,8 +59,6 @@ int	set_process(void)
 
 	ret = 0;
 	tmp = NULL;
-	if (!g_sh.cmd)
-		return (1);
 	g_sh.lexer = lexer(g_sh.cmd);
 	if (g_sh.lexer->err == 1)
 	{

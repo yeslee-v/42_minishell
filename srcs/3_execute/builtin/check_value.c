@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-int		check_args(char *b_args, t_cmd *proc)
+int	check_args(char *b_args, t_cmd *proc)
 {
 	int	i;
 

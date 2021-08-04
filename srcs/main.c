@@ -50,9 +50,9 @@ void	execute_command(t_process *node)
 
 void	calc_cursor(t_process *node)
 {
-	int	builtin;
-	t_blt blt;
-	int ret;
+	int		builtin;
+	t_blt	blt;
+	int		ret;
 
 	ret = 0;
 	if (!node || !node->cmd || !node->cmd->cmd)

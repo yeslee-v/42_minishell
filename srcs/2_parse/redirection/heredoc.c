@@ -2,6 +2,18 @@
 
 extern t_conf	g_sh;
 
+static void	set_parent_signal(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+static void	set_child_singal(void)
+{
+	signal(SIGINT, hdoc_sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
 static int	write_text(int fd[2], int hdoc_fd)
 {
 	char	*ret;
@@ -9,8 +21,7 @@ static int	write_text(int fd[2], int hdoc_fd)
 	int		status;
 
 	eof = -1;
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	set_parent_signal();
 	close(fd[WRITE]);
 	wait(&status);
 	if (!(WIFEXITED(status)))
@@ -40,8 +51,7 @@ static void	receive_text(int fd[2], char *delimeter)
 	close(fd[READ]);
 	while (1)
 	{
-		signal(SIGINT, hdoc_sig_handler);
-		signal(SIGQUIT, SIG_IGN);
+		set_child_singal();
 		line = readline("> ");
 		if (!line || ((ft_strcmp(line, delimeter)) == 0))
 		{

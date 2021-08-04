@@ -24,7 +24,7 @@ int	find_opt(int i, char **tmp)
 
 int	do_calc(int i, char **tmp, t_blt *blt)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	while (tmp[i])
