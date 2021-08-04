@@ -1,33 +1,33 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#include <unistd.h>
-#include <termios.h>
+# include <termios.h>
+# include <unistd.h>
 
-typedef struct			s_status
+typedef struct s_status
 {
-	int hdoc;
-	int	input;
-	int output;
-	int	result;
+	int					hdoc;
+	int					input;
+	int					output;
+	int					result;
 }	t_status;
 
-typedef struct			s_lst
+typedef struct s_lst
 {
 	void				*head;
 	void				*tail;
-}						t_lst;
+}	t_lst;
 
-typedef struct			s_lexer
+typedef struct s_lexer
 {
 	char				*lex;
 	int					s_quote;
 	int					e_quote;
 	int					is_quote;
 	int					err;
-}						t_lexer;
+}	t_lexer;
 
-typedef struct			s_token
+typedef struct s_token
 {
 	char				*token;
 	char				type;
@@ -37,26 +37,26 @@ typedef struct			s_token
 	int					ed;
 	struct s_token		*next;
 	struct s_token		*prev;
-}						t_token;
+}	t_token;
 
-typedef struct			s_env
+typedef struct s_env
 {
 	char				*key;
 	char				*value;
 	struct s_env		*next;
 	struct s_env		*prev;
-}						t_env;
+}	t_env;
 
-typedef struct			s_redirect
+typedef struct s_redirect
 {
 	char				type;
 	char				*arg;
 	int					fd;
 	struct s_redirect	*next;
 	struct s_redirect	*prev;
-}						t_redirect;
+}	t_redirect;
 
-typedef struct			s_cmd
+typedef struct s_cmd
 {
 	int					i;
 	char				*cmd;
@@ -66,12 +66,12 @@ typedef struct			s_cmd
 	int					input_fd;
 	int					output_fd;
 	char				*input_redir;
-	char				*output_redir; 
+	char				*output_redir;
 	int					append;
 	char				dir[2048];
 }	t_cmd;
 
-typedef struct			s_tool
+typedef struct s_tool
 {
 	int					i;
 	int					is_quote;
@@ -81,31 +81,31 @@ typedef struct			s_tool
 	int					redir;
 	int					a_redir;
 	int					heredoc;
-}						t_tool;
+}	t_tool;
 
-typedef struct			s_blt
+typedef struct s_blt
 {
 	char				*p_cmd;
 	int					opt;
 	int					up_flag;
 	char				*args;
-}						t_blt;
+}	t_blt;
 
-typedef struct			s_pipe
+typedef struct s_pipe
 {
-	int fd[2]; /// multi_pipe
+	int					fd[2];
 	pid_t				*pid;
 	t_env				env;
-}						t_pipe;
+}	t_pipe;
 
-typedef struct			s_control
+typedef struct s_control
 {
-	t_lst *redir;
-	t_lst *i_redir;
-	t_lst *o_redir;
-}						t_control;
+	t_lst				*redir;
+	t_lst				*i_redir;
+	t_lst				*o_redir;
+}	t_control;
 
-typedef struct			s_process
+typedef struct s_process
 {
 	int					i;
 	t_cmd				*cmd;
@@ -113,9 +113,9 @@ typedef struct			s_process
 	int					redir_err;
 	struct s_process	*next;
 	struct s_process	*prev;
-}						t_process;
+}	t_process;
 
-typedef struct			s_conf
+typedef struct s_conf
 {
 	char				*cmd;
 	char				**envp;
@@ -128,6 +128,6 @@ typedef struct			s_conf
 	struct termios		term;
 	struct termios		backup;
 	t_pipe				pipe;
-}						t_conf;
+}	t_conf;
 
 #endif

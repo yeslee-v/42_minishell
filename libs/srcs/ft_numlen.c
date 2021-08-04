@@ -6,13 +6,13 @@
 /*   By: jaekpark <jaekpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 16:14:11 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/05/10 03:01:57 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:47:53 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_numlen(char *str)
+int	ft_numlen(char *str)
 {
 	int	i;
 

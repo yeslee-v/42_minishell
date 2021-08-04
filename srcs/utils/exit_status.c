@@ -2,7 +2,7 @@
 
 extern t_conf	g_sh;
 
-void			print_status(int num, t_cmd *proc)
+void	print_status(int num, t_cmd *proc)
 {
 	if (!(proc->cmd))
 		return ;

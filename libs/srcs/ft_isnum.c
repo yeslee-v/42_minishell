@@ -6,20 +6,20 @@
 /*   By: jaekpark <jaekpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 18:06:46 by jaekpark          #+#    #+#             */
-/*   Updated: 2021/05/10 03:00:29 by jaekpark         ###   ########.fr       */
+/*   Updated: 2021/08/03 04:41:23 by parkjaekw        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isnum(char c)
+int	ft_isnum(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (-1);
 }
 
-int		ft_strnum(char *str)
+int	ft_strnum(char *str)
 {
 	if (!str)
 		return (-1);
