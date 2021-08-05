@@ -35,7 +35,7 @@ void	run_exit(char **args)
 		return ;
 	exit_status = 0;
 	size = ft_double_strlen((const char **)args);
-	ft_putstr_fd("exit\n", 1);
+	ft_putstr_fd("exit\n", 2);
 	if (size == 2)
 	{
 		if ((ft_strnum(args[1])) == 1)

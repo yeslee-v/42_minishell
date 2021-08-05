@@ -77,6 +77,6 @@ char	*unclosed_pipe(void)
 	else if (pid == 0)
 		child(fd);
 	else
-		printf("fork error\n");
+		ft_putstr_fd("Fork error\n", 2);
 	return (line);
 }
