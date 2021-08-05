@@ -6,7 +6,7 @@ void	print_error(char *b_args, t_cmd *proc)
 {
 	ft_putstr_fd("BraveShell: ", 2);
 	ft_putstr_fd(proc->cmd, 2);
-	ft_putstr_fd("`", 2);
+	ft_putstr_fd(": `", 2);
 	ft_putstr_fd(b_args, 2);
 	ft_putstr_fd("': not a valid identifier\n", 2);
 }
