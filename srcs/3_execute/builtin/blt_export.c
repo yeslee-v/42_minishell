@@ -32,7 +32,11 @@ char	**split_args(char *b_args, t_cmd *proc)
 	if (i == 0)
 	{
 		g_sh.exit_status = 1;
-		printf("%s: %s: `%s': %s\n", BS, proc->cmd, b_args, NVI);
+		ft_putstr_fd("BraveShell: ", 2);
+		ft_putstr_fd(proc->cmd, 2);
+		ft_putstr_fd("`", 2);
+		ft_putstr_fd(b_args, 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		return (NULL);
 	}
 	tmp = malloc(sizeof(char *) * 3);
