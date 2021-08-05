@@ -55,9 +55,22 @@ void	run_builtin(int num, t_process *proc_lst, t_blt *blt)
 }
 
 void	not_blt(t_cmd *proc)
-{
-	redir_init(proc);
-	run_execve(proc);
+{	
+	pid_t	pid;
+	int		status;
+
+	pid = fork();
+	if (pid > 0)
+	{
+		wait(&status);
+		g_sh.exit_status = WEXITSTATUS(status);
+		return ;
+	}
+	else if (pid == 0)
+	{
+		redir_init(proc);
+		run_execve(proc);
+	}
 }
 
 int	blt_intro(t_process *proc_lst)
